@@ -1,4 +1,4 @@
-package kosta.mapda.domain;
+package kosta.mapda.domain.map;
 
 import java.time.LocalDateTime;
 
@@ -9,6 +9,7 @@ import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import kosta.mapda.domain.member.Member;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

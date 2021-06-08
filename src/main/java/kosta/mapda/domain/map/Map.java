@@ -1,19 +1,18 @@
-package kosta.mapda.domain;
+package kosta.mapda.domain.map;
 
 import java.time.LocalDateTime;
 
-
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import kosta.mapda.domain.Management;
+import kosta.mapda.domain.member.Member;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

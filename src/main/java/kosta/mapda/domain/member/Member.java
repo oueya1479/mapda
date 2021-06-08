@@ -1,4 +1,4 @@
-package kosta.mapda.domain;
+package kosta.mapda.domain.member;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

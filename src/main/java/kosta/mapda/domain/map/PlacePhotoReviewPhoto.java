@@ -1,4 +1,4 @@
-package kosta.mapda.domain;
+package kosta.mapda.domain.map;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,21 +13,20 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Setter
 @Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class NearbyBoardImg {
-
+public class PlacePhotoReviewPhoto {	//Place Photo Review Photo
+	
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "nbimg_fno_seq")
-	@SequenceGenerator(sequenceName = "nbimg_fno_seq", initialValue = 1, name = "nbimg_fno_seq")
-	private Long nbimgFno;
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PPRP_PPRPNo_seq")
+	@SequenceGenerator(sequenceName = "PPRP_PPRPNo_seq", allocationSize = 1, name = "PPRP_PPRPNo_seq")
+	private Long pprpNo;
+	private String pprpPath;
 	
 	@ManyToOne
-	@JoinColumn(name = "nb_no")
-	private NearbyBoard nearbyBoard;
-	private String nbimgFname;
-	private String nbimgSrc;
+	@JoinColumn(name = "ppr_no")
+	private PlacePhotoReview ppr;
 	
 }

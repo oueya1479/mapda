@@ -1,4 +1,4 @@
-package kosta.mapda.domain;
+package kosta.mapda.domain.service;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

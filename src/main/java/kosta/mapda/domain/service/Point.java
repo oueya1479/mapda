@@ -1,4 +1,4 @@
-package kosta.mapda.domain;
+package kosta.mapda.domain.service;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,6 +8,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 
+import kosta.mapda.domain.Management;
+import kosta.mapda.domain.member.Member;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

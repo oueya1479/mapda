@@ -1,10 +1,11 @@
-package kosta.mapda.domain;
+package kosta.mapda.domain.enterprise;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+import kosta.mapda.domain.member.Member;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

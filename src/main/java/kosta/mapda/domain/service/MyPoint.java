@@ -1,8 +1,7 @@
-package kosta.mapda.domain;
+package kosta.mapda.domain.service;
 
 import java.time.LocalDateTime;
 
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -13,6 +12,7 @@ import javax.persistence.SequenceGenerator;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import kosta.mapda.domain.member.Member;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,27 +22,24 @@ import lombok.Setter;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class MyCoupon {
+public class MyPoint {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "mycp_no_seq")
-	@SequenceGenerator(sequenceName = "mycp_no_seq", allocationSize = 1, name = "mycp_no_seq")
-	private Long mycpNo; //내쿠폰번호
-	
-	private String barcoImg; //바코드이미지
-	private String barcoImgPath; //바코드 이미지 경로
-	private int barcoNo; //바코드번호
+	@GeneratedValue(strategy = GenerationType.SEQUENCE , generator = "mypt_no_seq")
+	@SequenceGenerator(sequenceName = "mypt_no_seq", allocationSize = 1, name = "mypt_no_seq")
+	private Long myptNo; // 내포인트 번호
+	private int myptRem; // 잔여포인트
+	private int myptPlus; // 누적포인트
+	private int myptMinus; // 소멸포인트
 	
 	@CreationTimestamp
-	private LocalDateTime mycpDate; //쿠폰 발급날짜
-	private int mycpState; //내쿠폰상태
-	
-	@OneToOne
-	@JoinColumn(name = "cp_no")//쿠폰번호
-	private Coupon coupon;
+	private LocalDateTime myptDate; //포인트 적립 날짜
 	
 	@ManyToOne
 	@JoinColumn(name = "mem_no") //회원번호
 	private Member member;
 	
+	@OneToOne
+	@JoinColumn(name = "pt_no") //포인트번호
+	private Point point;
 }
