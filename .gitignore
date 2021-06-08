@@ -12,7 +12,7 @@
 target/
 
 #Eclipse files
-**/.project
+
 **/.classpath
 **/.settings/
 blog/bin/
