@@ -2,6 +2,7 @@ package kosta.mapda.domain.enterprise;
 
 import java.time.LocalDateTime;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,6 +19,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+@Entity
 @Getter
 @Setter
 @AllArgsConstructor
@@ -35,12 +37,12 @@ public class EnterprisePost {
 	private int epHits;
 	
 	@CreationTimestamp
-	private LocalDateTime epRegDate;
+	private LocalDateTime epRegdate;
 	private String epLogo;
 	
 	@ManyToOne
 	@JoinColumn(name = "mem_no")
-	private Member member;
+	private Enterprise enterprise;
 	
 	@ManyToOne
 	@JoinColumn(name = "cg_no")
