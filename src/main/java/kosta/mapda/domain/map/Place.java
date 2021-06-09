@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -21,6 +22,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+@Entity
 @Getter
 @Setter
 @AllArgsConstructor
@@ -38,7 +40,7 @@ public class Place {
 	private String placeContent;
 	
 	@CreationTimestamp
-	private LocalDateTime placeRegDate;
+	private LocalDateTime placeRegdate;
 	
 	private String placeTag;
 	private int placeLike;
@@ -64,13 +66,13 @@ public class Place {
 	private Map map;
 	
 	
-	@OneToMany(mappedBy = "place", cascade = CascadeType.ALL)
-	private List<PlacePhoto> ppList;		// place photo
-	
-	@OneToMany(mappedBy = "place", cascade = CascadeType.ALL)
-	private List<PlaceReview> prList;		// place reply
-	
-	@OneToMany(mappedBy = "place", cascade = CascadeType.ALL)
-	private List<PlacePhotoReview> pprList;		// place photo review
+//	@OneToMany(mappedBy = "place", cascade = CascadeType.ALL)
+//	private List<PlacePhoto> ppList;		// place photo
+//	
+//	@OneToMany(mappedBy = "place", cascade = CascadeType.ALL)
+//	private List<PlaceReview> prList;		// place reply
+//	
+//	@OneToMany(mappedBy = "place", cascade = CascadeType.ALL)
+//	private List<PlacePhotoReview> pprList;		// place photo review
 	
 }

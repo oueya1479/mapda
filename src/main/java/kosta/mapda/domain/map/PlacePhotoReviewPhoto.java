@@ -13,11 +13,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+@Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class PlacePhotoReviewPhoto {	//Place Photo Review Photo
+public class PlacePhotoReviewPhoto {	//Place_Photo_Review_Photo
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PPRP_PPRPNo_seq")
