@@ -30,12 +30,12 @@ public class Member {
 	@SequenceGenerator(sequenceName = "mem_no_seq", allocationSize = 1, name = "mem_no_seq" )
 	private Long memNo;
 	private String memId;
-	private int memPw;
+	private String memPw;
 	private String memName;
 	private String memAddr;
 	private int memAge;
-	private int memGrade;
-	private int memAccount;
+	private String memGrade;
+	private String memAccount;
 	private int memStatus;
 	private int memFollower;
 	private int memFollowing;
