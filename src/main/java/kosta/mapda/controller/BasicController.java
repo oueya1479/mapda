@@ -21,9 +21,9 @@ public class BasicController {
 		return "main/blog";
 	}
 	
-	@RequestMapping("/blog-detail")
+	@RequestMapping("/blog-details")
 	public String blogDetails() {
-		return "main/blog-detail";
+		return "main/blog-details";
 	}
 	
 	@RequestMapping("/contact")
