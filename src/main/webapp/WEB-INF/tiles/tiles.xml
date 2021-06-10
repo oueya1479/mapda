@@ -25,4 +25,7 @@
         <definition name="place/*" extends="layout-tiles">
     	 <put-attribute name="body" value="/WEB-INF/views/place/{1}.jsp" />     
     </definition>
+      <definition name="coupon/*" extends="layout-tiles">
+    	 <put-attribute name="body" value="/WEB-INF/views/coupon/{1}.jsp" />     
+    </definition>
 </tiles-definitions>
