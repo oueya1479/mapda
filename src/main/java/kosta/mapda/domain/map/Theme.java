@@ -9,8 +9,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.web.multipart.MultipartFile;
 
 import kosta.mapda.domain.Management;
 import kosta.mapda.domain.member.Member;
@@ -20,18 +23,24 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
+@Table(name="Map")
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter
 @Getter
-public class Map {
+public class Theme{
+	
+	
+	@Transient//테이블에 컬럼으로 생성되지 않게 하기 위한 어노테이션
+	private MultipartFile file; 
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "map_mapno_seq")
 	@SequenceGenerator(sequenceName = "map_mapno_seq", allocationSize = 1, name = "map_mapno_seq")
 	private Long mapNo;
 	
 	private String mapTitle;
-	private String mapContent;
+	private String mapContent; 
 	private String mapImg;
 	private String mapImgPath;
 	private int mapSubQty;

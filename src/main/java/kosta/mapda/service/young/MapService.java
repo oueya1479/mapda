@@ -1,25 +1,30 @@
 package kosta.mapda.service.young;
 
-import javax.transaction.Transactional;
+
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Service;
 
-import kosta.mapda.domain.map.Map;
 
-@Service
-@Transactional
-public class MapService {
+import kosta.mapda.domain.map.Theme;
 
-	public void insertMap(Map map) {
-		
-		
-	}
+public interface MapService {
 
-	public Page<Map> selectAll(Pageable pageable) {
-		
-		return null;
-	}
+	/**
+	 * 등록
+	 */
+	void insertMap(Theme theme);
 
+	/**
+	 * 전체검색
+	 */
+	Page<Theme> selectAll();
+
+	/**
+	 * 전체검색 - 페이징처리
+	 */
+	Page<Theme> selectAll(Pageable pageable);
+	
 }

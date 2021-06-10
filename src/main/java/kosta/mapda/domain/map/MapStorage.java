@@ -32,7 +32,7 @@ public class MapStorage {
 	
 	@ManyToOne
 	@JoinColumn(name="map_no")
-	private Map map;
+	private Theme theme;
 	
 	@CreationTimestamp
 	private LocalDateTime mapStorageRegdate;
