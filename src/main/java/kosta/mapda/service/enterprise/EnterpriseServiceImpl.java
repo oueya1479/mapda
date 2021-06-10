@@ -1,4 +1,4 @@
-package kosta.mapda.service;
+package kosta.mapda.service.enterprise;
 
 import javax.transaction.Transactional;
 
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import kosta.mapda.domain.enterprise.Enterprise;
 import kosta.mapda.domain.enterprise.EnterprisePost;
-import kosta.mapda.repository.EnterpriseRepository;
+import kosta.mapda.repository.enterprise.EnterpriseRepository;
 
 @Service
 @Transactional

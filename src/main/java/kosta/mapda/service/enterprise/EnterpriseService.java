@@ -1,4 +1,4 @@
-package kosta.mapda.service;
+package kosta.mapda.service.enterprise;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

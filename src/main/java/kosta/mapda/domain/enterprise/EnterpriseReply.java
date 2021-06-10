@@ -34,7 +34,7 @@ public class EnterpriseReply {
 	private String erContent;
 	
 	@UpdateTimestamp
-	private LocalDateTime erRegDate;
+	private LocalDateTime erRegdate;
 	private int erState;
 	
 	@ManyToOne

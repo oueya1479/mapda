@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -23,12 +24,13 @@ import lombok.Setter;
 public class MapStorage {
 	
 	@Id
-	@OneToMany
+	private Long psNo;
+	
+	@ManyToOne
 	@JoinColumn(name="mem_no")
 	private Member member;
 	
-	@Id
-	@OneToMany
+	@ManyToOne
 	@JoinColumn(name="map_no")
 	private Map map;
 	

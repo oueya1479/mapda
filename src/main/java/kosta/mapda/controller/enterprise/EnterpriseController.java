@@ -1,4 +1,4 @@
-package kosta.mapda.controller;
+package kosta.mapda.controller.enterprise;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -7,9 +7,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import kosta.mapda.domain.enterprise.Enterprise;
-import kosta.mapda.service.EnterpriseService;
+import kosta.mapda.domain.enterprise.EnterprisePost;
+import kosta.mapda.service.enterprise.EnterpriseService;
 
 @Controller
+@RequestMapping("/enterprise")
 public class EnterpriseController {
 	
 	@Autowired
@@ -28,7 +30,7 @@ public class EnterpriseController {
 	/**
 	 * 엔터프라이즈 프로필 출력 메소드
 	 */
-	@RequestMapping("/profileForm/{memNo}")
+	@RequestMapping("/profile/{memNo}")
 	public ModelAndView selectEnterprise(@PathVariable Long memNo) {
 		Enterprise enterprise = service.selectEnterprise(memNo);
 		ModelAndView mv = new ModelAndView("enterprise/profile", "enterprise", enterprise);

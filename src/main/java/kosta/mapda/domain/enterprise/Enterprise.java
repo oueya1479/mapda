@@ -38,6 +38,6 @@ public class Enterprise {
 	@JoinColumn(name = "mem_no")
 	private Member member;
 	
-	@OneToMany(mappedBy = "epNo")
-	private List<EnterprisePost> enterprisePostList = new ArrayList<EnterprisePost>();
+	@OneToMany(mappedBy = "enterprise")
+	private List<EnterprisePost> enterprisePostList = new ArrayList<>();
 }

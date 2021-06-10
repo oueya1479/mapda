@@ -37,7 +37,7 @@ public class Map {
 	private int mapLike;
 	
 	@CreationTimestamp
-	private LocalDateTime mapRegDate;
+	private LocalDateTime mapRegdate;
 	
 	private int mapStatus;
 	private int mapIsOpen;
