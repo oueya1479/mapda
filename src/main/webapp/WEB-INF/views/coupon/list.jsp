@@ -34,17 +34,19 @@
                 <div class="col-lg-8">
                     <div class="row">
                     <c:choose>
-							<c:when test="${empty requestScope.couponList}">
-								<!--  requesScope에 저장해야 하는 이름이 list -->
+							<c:when test="${empty requestScope.couponList.content}">
+								
 								<p align="center">
 									<b><span style="font-size: 9pt;">등록된 상품이 없습니다.</span></b>
 								</p>
 							</c:when>
 							<c:otherwise>
-                    	<c:forEach items="${requestScope.couponList}" var="coup">
+                    	<c:forEach items="${requestScope.couponList.content}" var="coup">
 	                        <div class="col-lg-6 col-md-6">
 	                            <div class="blog__item">
 	                                <div class="blog__item__pic set-bg" data-setbg="${coup.cpImgpath}"></div>
+	                                
+	                                
 	                                <div class="blog__item__text">
 	                                    <ul class="blog__item__tags">
 	                                        <li><i class="fa fa-tags"></i> Travel</li>
@@ -52,7 +54,7 @@
 	                                    </ul>
 	                                    <h5><a href="#">${coup.cpName}</a></h5>
 	                                    <ul class="blog__item__widget">
-	                                        <li><i class="fa fa-money"></i>가격 : ${coup.cpPrice}원</li>
+	                                        <li><i class="fa fa-money"></i>가격 :  ${coup.cpPrice}원</li>
 	                                        <li><i class="fa fa-user"></i>이용매장 : ${coup.cpPlace}</li>
 	                                    </ul>
 	                                </div>
