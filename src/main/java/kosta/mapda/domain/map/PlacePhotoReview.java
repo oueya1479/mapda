@@ -40,15 +40,15 @@ public class PlacePhotoReview {	// Place_Photo_Review
 	private int pprStatus;
 	
 	@ManyToOne
-	@JoinColumn(name = "place_no")
+	@JoinColumn(name = "placeNo")
 	private Place place;
 	
 	@ManyToOne
-	@JoinColumn(name = "mem_no")
+	@JoinColumn(name = "memNo")
 	private Member member;
 	
 	@ManyToOne
-	@JoinColumn(name = "mng_no")
+	@JoinColumn(name = "mngNo")
 	private Management mng;
 	
 //	@OneToMany(mappedBy = "ppr", cascade = CascadeType.ALL)

@@ -3,71 +3,16 @@
 <!DOCTYPE html>
 <html lang="zxx">
 <head>
-<!-- 
- <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
- -->
-<%-- 
-  <link href="${pageContext.request.contextPath}/css/jquery.bxslider.css" rel="stylesheet" />
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> 
- <script src="${pageContext.request.contextPath}/js/jquery.bxslider.js"></script>
-  --%>
- 
- 
- <%--
-   <link rel="StyleSheet" href="${pageContext.request.contextPath}/css/pgwslideshow.min.css">
- <script type="text/javascript" src="${pageContext.request.contextPath}/js/pgwslideshow.min.js"></script>
-  --%>
- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
 <script type="text/javascript">
-$(function(){
-// 이미지 설정
-//$("img").attr("src","data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAMSURBVBhXY/j//z8ABf4C/qc1gYQAAAAASUVORK5CYII=");
-// 이미지 슬라이드 설정
-$('#carousel-example-generic').carousel({
-// 순환 설정
-interval: 1000
-// 순환을 정지시킨다.
-}).carousel('pause');
-});
-// 이미지 슬라이드 순환을 개시
-$("#carousel_cycle").on("click", function() {
-$('#carousel-example-generic').carousel('cycle');
-});
-// 이미지 슬라이드 순환을 정지
-$("#carousel_pause").on("click", function() {
-$('#carousel-example-generic').carousel('pause');
-});
-// 이미지 슬라이드 이동
-$("#carousel_move").on("click", function() {
-var num = Number($("#carousel_number").val()) - 1;
-$('#carousel-example-generic').carousel(num);
-});
-// 이미지 슬라이드 전 페이지 이동
-$("#carousel_prev").on("click", function() {
-$('#carousel-example-generic').carousel('prev');
-});
-// 이미지 슬라이드 다음 페이지 이동
-$("#carousel_next").on("click", function() {
-$('#carousel-example-generic').carousel('next');
-});
-$('#carousel-example-generic').on('slide.bs.carousel', function () {
-// 슬라이드 인스턴스 메서드가 호출되면 호출된다.
-});
-$('#carousel-example-generic').on('slid.bs.carousel', function () {
-// 회전식 슬라이드가 완료되면 호출된다.
-});
- 
+
   </script>
 
 <style type="text/css">
-
+.mySlides {display:none;}
 </style>
 
 
@@ -125,126 +70,51 @@ $('#carousel-example-generic').on('slid.bs.carousel', function () {
                         <div class="listing__details__gallery">
                             <h4>Gallery</h4>
                             <!-- ============================================================ -->
-                     
-<%-- 
-							        <img src="${pageContext.request.contextPath}/img/placeimges/test1.png" alt="" style="height: 400px; width: 640px;">
-							        <img src="${pageContext.request.contextPath}/img/placeimges/test2.png" alt="" style="height: 400px; width: 640px;">
-							        <img src="${pageContext.request.contextPath}/img/placeimges/test3.png" alt="" style="height: 400px; width: 640px;">
-
-									 <img src="${pageContext.request.contextPath}/img/placeimges/test1.png" alt="" >
-				      				  <img src="${pageContext.request.contextPath}/img/placeimges/test2.png" alt="" >
-				       				 <img src="${pageContext.request.contextPath}/img/placeimges/test3.png" alt="">
-										     --%>
-<%-- 
-	                      <ul  class = "pgwSlideshow"> 
-						  <li><img src="${pageContext.request.contextPath}/img/placeimges/test1.png" alt="" ></li > 
-						  <li><img src="${pageContext.request.contextPath}/img/placeimges/test2.png" alt="" ></li > 
-						  <li><img src="${pageContext.request.contextPath}/img/placeimges/test3.png" alt="" ></li > 
-						</ul> --%>
-						
-<%-- 						<div id="slider">
-							<c:forEach items="${ppList}" var="ppList">
-								<div><img src="${pageContext.request.contextPath}/${ppList.ppPath}" alt="" ></div> 
-							</c:forEach>
-						</div> --%>
-<%-- 	
- 				  <div id="slider">
-							<div><img src="${pageContext.request.contextPath}/img/placeimges/test1.png" alt="" ></div> 
-						  <div><img src="${pageContext.request.contextPath}/img/placeimges/test2.png" alt="" ></div> 
-						  <div><img src="${pageContext.request.contextPath}/img/placeimges/test3.png" alt="" ></div> 
- 						 </div>
- 	 --%>					 
-<%-- 							<c:forEach items="${ppList}" var="ppList">
-								<div><img src="${pageContext.request.contextPath}/${ppList.ppPath}" alt="" ></div> 
-							</c:forEach> --%>
-	
-<%-- 	<div style="width: 60%; margin: 50px; ">
-			<div id="carousel-example-generic" class="carousel slide" >
-						<ol class="carousel-indicators">
-									<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-									<li data-target="#carousel-example-generic" data-slide-to="1"></li>
-									<li data-target="#carousel-example-generic" data-slide-to="2"></li>
-									<li data-target="#carousel-example-generic" data-slide-to="3"></li>
-								</ol>
-							<div class="carousel-inner">
-							<!-- 이미지의 개수만큼 item을 만든다. 중요한 포인트는 carousel-indicators의 li 태그 개수와 item의 개수는 일치해야 한다. -->
-								<div class="item active">
-									<img style="width:100%" src="${pageContext.request.contextPath}/img/footer-logo.png">
-									<div class="carousel-caption" style="color:black;"></div>
-								</div>
+						<div class="w3-content w3-display-container">
 								<c:forEach items="${ppList}" var="ppList">
-									<div class="item">
-										<img style="width:100%" src="${pageContext.request.contextPath}/${ppList.ppPath">
-										<div class="carousel-caption" style="color:black;"></div>
-									</div>
-								</c:forEach>
-							</div>
-						
-									<a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-										<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-									</a>
-									<a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-										<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-									</a>
-			</div>
-	</div> --%>
+								  	<img class="mySlides" src="${pageContext.request.contextPath}/${ppList.ppPath}" style="height: 400px; width: 100%;">
+								  </c:forEach>
+							 <button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
+							  <button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">&#10095;</button>
+						</div>
 
+											<script>
+											var slideIndex = 1;
+											showDivs(slideIndex);
+											
+											function plusDivs(n) {
+											  showDivs(slideIndex += n);
+											}
+											
+											function showDivs(n) {
+											  var i;
+											  var x = document.getElementsByClassName("mySlides");
+											  if (n > x.length) {slideIndex = 1}
+											  if (n < 1) {slideIndex = x.length}
+											  for (i = 0; i < x.length; i++) {
+											    x[i].style.display = "none";  
+											  }
+											  x[slideIndex-1].style.display = "block";  
+											}
+											</script>
 	<!-- ========================================================================================= -->
                         </div>
-                        
+                
                         <div class="listing__details__amenities">
-                            <h4>Amenities</h4>
+                            <h4>HashTag</h4>
+                            
                             <div class="row">
-                                <div class="col-lg-3 col-md-3 col-6">
-                                    <div class="listing__details__amenities__item">
-                                        <img src="${pageContext.request.contextPath}/img/listing/details/amenities/ame-1.png" alt="">
-                                        <h6>Accept Credit Card</h6>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-md-3 col-6">
-                                    <div class="listing__details__amenities__item">
-                                        <img src="${pageContext.request.contextPath}/img/listing/details/amenities/ame-2.png" alt="">
-                                        <h6>Free Wifi</h6>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-md-3 col-6">
-                                    <div class="listing__details__amenities__item">
-                                        <img src="${pageContext.request.contextPath}/img/listing/details/amenities/ame-3.png" alt="">
-                                        <h6>Smoking Area</h6>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-md-3 col-6">
-                                    <div class="listing__details__amenities__item">
-                                        <img src="${pageContext.request.contextPath}/img/listing/details/amenities/ame-4.png" alt="">
-                                        <h6>Free Parking</h6>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-md-3 col-6">
-                                    <div class="listing__details__amenities__item">
-                                        <img src="${pageContext.request.contextPath}/img/listing/details/amenities/ame-5.png" alt="">
-                                        <h6>Family Friendly</h6>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-md-3 col-6">
-                                    <div class="listing__details__amenities__item">
-                                        <img src="${pageContext.request.contextPath}/img/listing/details/amenities/ame-6.png" alt="">
-                                        <h6>Coffee</h6>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-md-3 col-6">
-                                    <div class="listing__details__amenities__item">
-                                        <img src="${pageContext.request.contextPath}/img/listing/details/amenities/ame-7.png" alt="">
-                                        <h6>Massage</h6>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-md-3 col-6">
-                                    <div class="listing__details__amenities__item">
-                                        <img src="${pageContext.request.contextPath}/img/listing/details/amenities/ame-8.png" alt="">
-                                        <h6>Coupons</h6>
-                                    </div>
-                                </div>
+                            	<c:forEach items="${tagStr}" var="tagStr">
+	                                <div class="col-lg-3 col-md-3 col-6">
+	                                    <div class="listing__details__amenities__item">
+	                                        <img src="${pageContext.request.contextPath}/img/placeimges/hashtag.png" alt="" style="width: 30px; height: 30px;">
+	                                        <h6 style="font-weight: bolder; font-size: 20px;">${tagStr}</h6>
+	                                    </div>
+	                                </div>
+                         		 </c:forEach>
                             </div>
                         </div>
+                        
                         <div class="listing__details__rating">
                             <h4>Rate</h4>
                             <div class="listing__details__rating__overall">
@@ -296,75 +166,58 @@ $('#carousel-example-generic').on('slid.bs.carousel', function () {
                                 </div>
                             </div>
                         </div>
-                        <div class="listing__details__comment">
+                        
+                        <div class="listing__details__comment" style="float: left; margin-right: 150px;">
                             <h4>Comment</h4>
+   				 <c:forEach items="\${prList}" var="prList">       
                             <div class="listing__details__comment__item">
                                 <div class="listing__details__comment__item__pic">
                                     <img src="${pageContext.request.contextPath}/img/listing/details/comment.png" alt="">
                                 </div>
                                 <div class="listing__details__comment__item__text">
-                                    <div class="listing__details__comment__item__rating">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                    </div>
-                                    <span>March 22, 2019</span>
+                                    <span>\${prList.}</span>
                                     <h5>Marry Jane</h5>
-                                    <p>From ships to airports, museums to burger vans, from revered Michelin star
-                                        establish to the fleeting dynamism of pop-ups.</p>
+                                    <p>\${placeReview.prContent}</p>
+                                    
                                     <ul>
                                         <li><i class="fa fa-hand-o-right"></i> Like</li>
                                         <li><i class="fa fa-share-square-o"></i> Reply</li>
                                     </ul>
                                 </div>
                             </div>
-                            <div class="listing__details__comment__item">
-                                <div class="listing__details__comment__item__pic">
-                                    <img src="${pageContext.request.contextPath}/img/listing/details/comment.png" alt="">
-                                </div>
-                                <div class="listing__details__comment__item__text">
-                                    <div class="listing__details__comment__item__rating">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                    </div>
-                                    <span>March 22, 2019</span>
-                                    <h5>Marry Jane</h5>
-                                    <p>From ships to airports, museums to burger vans, from revered Michelin star
-                                        establish to the fleeting dynamism of pop-ups.</p>
-                                    <ul>
-                                        <li><i class="fa fa-hand-o-right"></i> Like</li>
-                                        <li><i class="fa fa-share-square-o"></i> Reply</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="listing__details__comment__item">
-                                <div class="listing__details__comment__item__pic">
-                                    <img src="${pageContext.request.contextPath}/img/listing/details/comment.png" alt="">
-                                </div>
-                                <div class="listing__details__comment__item__text">
-                                    <div class="listing__details__comment__item__rating">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                    </div>
-                                    <span>March 22, 2019</span>
-                                    <h5>Marry Jane</h5>
-                                    <p>From ships to airports, museums to burger vans, from revered Michelin star
-                                        establish to the fleeting dynamism of pop-ups.</p>
-                                    <ul>
-                                        <li><i class="fa fa-hand-o-right"></i> Like</li>
-                                        <li><i class="fa fa-share-square-o"></i> Reply</li>
-                                    </ul>
-                                </div>
-                            </div>
+        			 </c:forEach>                 
                         </div>
+                        
+<%--                             <div class="listing__details__comment" style="float: right;">
+                            <h4>Comment</h4>
+   				 <c:forEach items="\${place.pprList}" var="photoReview">       
+                            <div class="listing__details__comment__item">
+                                <div class="listing__details__comment__item__pic">
+                                    <img src="${pageContext.request.contextPath}/img/listing/details/comment.png" alt="">
+                                </div>
+                                <div class="listing__details__comment__item__text">
+                                    <div class="listing__details__comment__item__rating">
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                    </div>
+                                    <span>\${photoReview.pprRegdate}</span>
+                                    <h5>Marry Jane</h5>
+                                    <p>\${photoReview.pprContent}</p>
+                                    
+                                    <ul>
+                                        <li><i class="fa fa-hand-o-right"></i> Like</li>
+                                        <li><i class="fa fa-share-square-o"></i> Reply</li>
+                                    </ul>
+                                </div>
+                            </div>
+        			 </c:forEach>                 
+                        </div> --%>
+                        
+<!--                                <div class="listing__details__comment"></div>
+ -->
                         <div class="listing__details__review">
                             <h4>Add Review</h4>
                             <form action="#">

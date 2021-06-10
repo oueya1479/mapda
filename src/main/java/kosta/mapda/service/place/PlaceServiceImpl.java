@@ -60,9 +60,9 @@ public class PlaceServiceImpl implements PlaceService {
 	}
 
 	@Override
-	public List<PlacePhoto> selectAllPlacePhoto() {
+	public List<PlacePhoto> selectAllPlacePhoto(Long placeNo) {
 		
-		return placePhotoRepository.findAll();
+		return placePhotoRepository.selectPlacePhotoByPlaceNo(placeNo);
 	}
 
 }
