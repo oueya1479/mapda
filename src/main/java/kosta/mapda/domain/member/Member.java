@@ -43,7 +43,7 @@ public class Member {
 	private String memImage;
 	
 	@CreationTimestamp
-	private LocalDateTime memRegDate;
+	private LocalDateTime memRegdate;
 	
 //	@OneToMany(mappedBy = "member")
 //	private List<Map> list = new ArrayList<Map>();
