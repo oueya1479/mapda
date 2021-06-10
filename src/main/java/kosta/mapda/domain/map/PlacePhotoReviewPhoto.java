@@ -27,7 +27,7 @@ public class PlacePhotoReviewPhoto {	//Place_Photo_Review_Photo
 	private String pprpPath;
 	
 	@ManyToOne
-	@JoinColumn(name = "ppr_no")
+	@JoinColumn(name = "pprNo")
 	private PlacePhotoReview ppr;
 	
 }

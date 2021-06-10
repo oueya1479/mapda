@@ -26,12 +26,12 @@ public class PlaceStorage {
 	private Long psNo;
 	
 	@ManyToOne
-	@JoinColumn(name="mem_no")
+	@JoinColumn(name="memNo")
 	private Member member;
 	
 	
 	@ManyToOne
-	@JoinColumn(name="place_no")
+	@JoinColumn(name="placeNo")
 	private Place place;
 	
 	@CreationTimestamp
