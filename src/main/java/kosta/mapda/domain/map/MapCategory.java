@@ -20,7 +20,7 @@ public class MapCategory {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "mapcategory_ctgrno_seq")
 	@SequenceGenerator(sequenceName = "mapcategory_ctgrno_seq", allocationSize = 1, name = "mapcategory_ctgrno_seq")
-	private Long CategoryNo;
-	private String CategoryName;
+	private Long categoryNo;
+	private String categoryName;
 
 }

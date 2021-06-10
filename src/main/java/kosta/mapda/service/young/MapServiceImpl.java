@@ -39,8 +39,18 @@ public class MapServiceImpl implements MapService {
 	 */
 	@Override
 	public Page<Theme> selectAll(Pageable pageable) {
-		// TODO Auto-generated method stub
-		return null;
+		return maprepository.findAll(pageable);
+	}
+	
+	/**
+	 * 상세보기
+	 */
+	@Override
+	public Theme selectBy(Long mapNo, boolean state) {
+		if(state) {
+			maprepository.readnumUpdate(mapNo);
+		}
+		return maprepository.findById(mapNo).orElse(null);
 	}
 
 }

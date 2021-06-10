@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -15,11 +16,7 @@
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <div class="breadcrumb__text">
-                        <h2>Our Blog</h2>
-                        <div class="breadcrumb__option">
-                            <a href="#"><i class="fa fa-home"></i> Home</a>
-                            <span>Our Blog</span>
-                        </div>
+                        <h2>Our All Maps</h2>
                     </div>
                 </div>
             </div>
@@ -31,123 +28,33 @@
     <section class="blog-section spad">
         <div class="container">
             <div class="row">
+              <c:forEach items="${mapList.content}" var="map">
                 <div class="col-lg-8">
                     <div class="blog__item__large">
                         <div class="blog__item__pic set-bg" data-setbg="img/blog/blog-large.jpg">
-                            <a href="https://www.youtube.com/watch?v=8EJ3zbKTWQ8" class="play-btn video-popup"><i class="fa fa-play"></i></a>
+                           
                         </div>
                         <div class="blog__item__text">
                             <ul class="blog__item__tags">
-                                <li><i class="fa fa-tags"></i> Travel</li>
-                                <li>Videos</li>
+                            
+                                <li><i class="fa fa-tags"></i> ${map.mapCategory.categoryName}</li>
+                                
                             </ul>
-                            <h3><a href="#">Internet Banner Advertising Most Reliable</a></h3>
+                            <h3><a href="#">${map.mapTitle}</a></h3>
                             <ul class="blog__item__widget">
-                                <li><i class="fa fa-clock-o"></i> 19th March, 2019</li>
-                                <li><i class="fa fa-user"></i> John Smith</li>
+                                <li><i class="fa fa-clock-o"></i> ${map.mapRegdate}</li>
+                                <li><i class="fa fa-user"></i> ${map.member.memId}</li>
                             </ul>
-                            <p>One of my favourite things I like to watch is the bloopers and outtakes that are shown of
-                                mistakes made during the making of a movie.</p>
+                            <p>${map.mapContent}</p>
                         </div>
+                        </div>
+                        </div>
+                        </c:forEach>
                     </div>
-                    <div class="row">
-                        <div class="col-lg-6 col-md-6">
-                            <div class="blog__item">
-                                <div class="blog__item__pic set-bg" data-setbg="img/blog/bp-1.jpg"></div>
-                                <div class="blog__item__text">
-                                    <ul class="blog__item__tags">
-                                        <li><i class="fa fa-tags"></i> Travel</li>
-                                        <li>Videos</li>
-                                    </ul>
-                                    <h5><a href="#">Florida for 20 YEARS swims in the Gulf for the FIRST</a></h5>
-                                    <ul class="blog__item__widget">
-                                        <li><i class="fa fa-clock-o"></i> 19th March, 2019</li>
-                                        <li><i class="fa fa-user"></i> John Smith</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-md-6">
-                            <div class="blog__item">
-                                <div class="blog__item__pic set-bg" data-setbg="img/blog/bp-2.jpg">
-                                    <a href="https://www.youtube.com/watch?v=8EJ3zbKTWQ8" class="play-btn video-popup"><i class="fa fa-play"></i></a>
-                                </div>
-                                <div class="blog__item__text">
-                                    <ul class="blog__item__tags">
-                                        <li><i class="fa fa-tags"></i> Videos</li>
-                                        <li>Restaurant</li>
-                                    </ul>
-                                    <h5><a href="#">Florida Bar Removes Famous Dollar Bill Decor</a></h5>
-                                    <ul class="blog__item__widget">
-                                        <li><i class="fa fa-clock-o"></i> 19th March, 2019</li>
-                                        <li><i class="fa fa-user"></i> John Smith</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-md-6">
-                            <div class="blog__item">
-                                <div class="blog__item__pic set-bg" data-setbg="img/blog/bp-3.jpg"></div>
-                                <div class="blog__item__text">
-                                    <ul class="blog__item__tags">
-                                        <li><i class="fa fa-tags"></i> Hotel</li>
-                                    </ul>
-                                    <h5><a href="#">'Junior detectives' help Roseville, Calif police</a></h5>
-                                    <ul class="blog__item__widget">
-                                        <li><i class="fa fa-clock-o"></i> 19th March, 2019</li>
-                                        <li><i class="fa fa-user"></i> John Smith</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-md-6">
-                            <div class="blog__item">
-                                <div class="blog__item__pic set-bg" data-setbg="img/blog/bp-4.jpg">
-                                    <a href="https://www.youtube.com/watch?v=8EJ3zbKTWQ8" class="play-btn video-popup"><i class="fa fa-play"></i></a>
-                                </div>
-                                <div class="blog__item__text">
-                                    <ul class="blog__item__tags">
-                                        <li><i class="fa fa-tags"></i> Restaurant</li>
-                                    </ul>
-                                    <h5><a href="#">Dog Rescues Florida Woman After Her iPad Catches</a></h5>
-                                    <ul class="blog__item__widget">
-                                        <li><i class="fa fa-clock-o"></i> 19th March, 2019</li>
-                                        <li><i class="fa fa-user"></i> John Smith</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-md-6">
-                            <div class="blog__item">
-                                <div class="blog__item__pic set-bg" data-setbg="img/blog/bp-5.jpg"></div>
-                                <div class="blog__item__text">
-                                    <ul class="blog__item__tags">
-                                        <li><i class="fa fa-tags"></i> Videos</li>
-                                    </ul>
-                                    <h5><a href="#">Citrus Heights Snack Man Helps Feed The Homeless</a></h5>
-                                    <ul class="blog__item__widget">
-                                        <li><i class="fa fa-clock-o"></i> 19th March, 2019</li>
-                                        <li><i class="fa fa-user"></i> John Smith</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-md-6">
-                            <div class="blog__item">
-                                <div class="blog__item__pic set-bg" data-setbg="img/blog/bp-6.jpg"></div>
-                                <div class="blog__item__text">
-                                    <ul class="blog__item__tags">
-                                        <li><i class="fa fa-tags"></i> Travel</li>
-                                    </ul>
-                                    <h5><a href="#">Homeless woman’s viral subway opera performance</a></h5>
-                                    <ul class="blog__item__widget">
-                                        <li><i class="fa fa-clock-o"></i> 19th March, 2019</li>
-                                        <li><i class="fa fa-user"></i> John Smith</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    
+                        
+                       
+                        
                     <div class="blog__pagination">
                         <a href="#"><i class="fa fa-long-arrow-left"></i> Pre</a>
                         <a href="#">1</a>
@@ -242,8 +149,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
+            
     </section>
     <!-- Blog Section End -->
 

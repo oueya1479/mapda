@@ -26,5 +26,10 @@ public interface MapService {
 	 * 전체검색 - 페이징처리
 	 */
 	Page<Theme> selectAll(Pageable pageable);
+
+	/**
+	 * 상세보기
+	 */
+	Theme selectBy(Long mapNo, boolean b);
 	
 }

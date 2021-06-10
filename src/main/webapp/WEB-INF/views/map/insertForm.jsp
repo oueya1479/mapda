@@ -88,15 +88,30 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="col-lg-12 col-md-8">
-						<form action="map/insertMap" class="contact__form" method="post"
+						<form action="/map/insertMap" class="contact__form" method="post"
 							enctype="multipart/form-data">
 							<div class="row">
 								<div class="col-lg-12 col-md-6">
-									Theme Name<input type="text" name="mapTitle"
-										placeholder="Theme Name"> Description
-									<textarea name="mapContent"
-										placeholder="Description of this Map"></textarea>
+									Theme Name<input type="text" name="mapTitle" placeholder="Theme Name"> 
+									Description<textarea name="mapContent" placeholder="Description of this Map"></textarea>
 									Cover Image <input type="file" name="file" />
+									Category <p><select name="categoryNo">
+											    <option value="1">맛집</option>
+											    <option value="2">여행</option>
+											    <option value="3">카페</option>
+											    <option value="4">힐링</option>
+											    <option value="5">자연</option>
+											    <option value="6">액티비티</option>
+											    <option value="7">쇼핑</option>
+											    <option value="8">문화</option>
+											    <option value="9">산책</option>
+											    <option value="10">야경</option>
+											    <option value="11">명소</option>
+											    <option value="12">반려동물</option>
+											    <option value="13">데이트</option>
+											    <option value="14">드라이브</option>
+											</select>
+									
 								</div>
 							</div>
 							<input type="submit" class="site-btn" id="submitbt" value="Create Map" />
