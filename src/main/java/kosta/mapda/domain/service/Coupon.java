@@ -32,7 +32,6 @@ public class Coupon {
 	
 	private String cpName; //쿠폰명
 	private String cpPlace; //쿠폰이용매장
-	private String cpImg; //쿠폰이미지
 	private String cpImgpath; //쿠폰이미지 경로
 	private int cpPrice; //쿠폰가격
 	private String cpDetail; //쿠폰설명
