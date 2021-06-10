@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 
 import kosta.mapda.domain.member.Member;
@@ -42,7 +43,7 @@ public class Coupon {
 	@JoinColumn(name = "mem_no") //회원번호
 	private Member member;
 	
-	@ManyToOne
+	@OneToOne
 	@JoinColumn(name = "cpca_no") //카테고리번호
 	private CouponCategory couponCategory;
 	

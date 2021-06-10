@@ -29,4 +29,11 @@ public class CouponServiceImpl implements CouponService {
 		return couponRepository.findById(couponNo).orElse(null);
 	}
 
+	@Override
+	public Page<Coupon> selectBySerch(String keyword) {
+		couponRepository.findBycpNameContaining(keyword);
+		
+		return null;
+	}
+
 }

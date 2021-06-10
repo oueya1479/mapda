@@ -44,15 +44,18 @@
                     	<c:forEach items="${requestScope.couponList.content}" var="coup">
 	                        <div class="col-lg-6 col-md-6">
 	                            <div class="blog__item">
-	                                <div class="blog__item__pic set-bg" data-setbg="${coup.cpImgpath}"></div>
-	                                
+	                                <div class="blog__item__pic set-bg">
+	                                	<img src="${coup.cpImgpath}" alt="" style="width: 200px; height: 200px;">
+	                                </div>
+	                               
 	                                
 	                                <div class="blog__item__text">
 	                                    <ul class="blog__item__tags">
 	                                        <li><i class="fa fa-tags"></i> Travel</li>
 	                                        <li>Videos</li>
 	                                    </ul>
-	                                    <h5><a href="#">${coup.cpName}</a></h5>
+	                                    <h5><a href="${pageContext.request.contextPath}/coupon/couponDetail/${coup.cpNo}">${coup.cpName}</a></h5>
+	                                    
 	                                    <ul class="blog__item__widget">
 	                                        <li><i class="fa fa-money"></i>가격 :  ${coup.cpPrice}원</li>
 	                                        <li><i class="fa fa-user"></i>이용매장 : ${coup.cpPlace}</li>
@@ -80,59 +83,7 @@
                                 <button type="submit"><i class="fa fa-search"></i></button>
                             </form>
                         </div>
-                        <div class="blog__sidebar__recent">
-                            <h5>Recent Post</h5>
-                            <a href="#" class="blog__sidebar__recent__item">
-                                <div class="blog__sidebar__recent__item__pic">
-                                    <img src="img/blog/recent-1.jpg" alt="">
-                                </div>
-                                <div class="blog__sidebar__recent__item__text">
-                                    <span><i class="fa fa-tags"></i> Shopping</span>
-                                    <h6>Tortoise grilled on salt</h6>
-                                    <p><i class="fa fa-clock-o"></i> 19th March, 2019</p>
-                                </div>
-                            </a>
-                            <a href="#" class="blog__sidebar__recent__item">
-                                <div class="blog__sidebar__recent__item__pic">
-                                    <img src="img/blog/recent-2.jpg" alt="">
-                                </div>
-                                <div class="blog__sidebar__recent__item__text">
-                                    <span><i class="fa fa-tags"></i> Hotels</span>
-                                    <h6>Shrimp floured and fried</h6>
-                                    <p><i class="fa fa-clock-o"></i> 22th March, 2019</p>
-                                </div>
-                            </a>
-                            <a href="#" class="blog__sidebar__recent__item">
-                                <div class="blog__sidebar__recent__item__pic">
-                                    <img src="img/blog/recent-3.jpg" alt="">
-                                </div>
-                                <div class="blog__sidebar__recent__item__text">
-                                    <span><i class="fa fa-tags"></i> Restaurant</span>
-                                    <h6>Sweet and sour pork ribs</h6>
-                                    <p><i class="fa fa-clock-o"></i> 25th March, 2019</p>
-                                </div>
-                            </a>
-                            <a href="#" class="blog__sidebar__recent__item">
-                                <div class="blog__sidebar__recent__item__pic">
-                                    <img src="img/blog/recent-4.jpg" alt="">
-                                </div>
-                                <div class="blog__sidebar__recent__item__text">
-                                    <span><i class="fa fa-tags"></i> Videos</span>
-                                    <h6>Crab fried with tamarind</h6>
-                                    <p><i class="fa fa-clock-o"></i> 19th March, 2019</p>
-                                </div>
-                            </a>
-                            <a href="#" class="blog__sidebar__recent__item">
-                                <div class="blog__sidebar__recent__item__pic">
-                                    <img src="img/blog/recent-5.jpg" alt="">
-                                </div>
-                                <div class="blog__sidebar__recent__item__text">
-                                    <span><i class="fa fa-tags"></i> Travel</span>
-                                    <h6>Tortoise grilled on salt</h6>
-                                    <p><i class="fa fa-clock-o"></i> 19th March, 2019</p>
-                                </div>
-                            </a>
-                        </div>
+                        
                         <div class="blog__sidebar__categories">
                             <h5>Categories</h5>
                             <ul>
