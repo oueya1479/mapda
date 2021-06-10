@@ -31,9 +31,8 @@ public class BasicController {
 		return "main/contact";
 	}
 	
-	@RequestMapping("/index")
-	public String index() {
-		return "main/index";
+	@RequestMapping("/main/index")
+	public void index() {
 	}
 	
 	@RequestMapping("/listing")

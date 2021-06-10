@@ -2,6 +2,7 @@ package kosta.mapda.domain.enterprise;
 
 import java.time.LocalDateTime;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,6 +19,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+@Entity
 @Getter
 @Setter
 @AllArgsConstructor
@@ -32,7 +34,7 @@ public class EnterpriseReply {
 	private String erContent;
 	
 	@UpdateTimestamp
-	private LocalDateTime erRegDate;
+	private LocalDateTime erRegdate;
 	private int erState;
 	
 	@ManyToOne
