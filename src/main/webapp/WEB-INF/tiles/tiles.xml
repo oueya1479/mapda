@@ -19,4 +19,10 @@
 	<definition name="enterprise/*" extends="layout-tiles">
         <put-attribute name="body" value="/WEB-INF/views/enterprise/{1}.jsp" />
     </definition>
+    <definition name="map/*" extends="layout-tiles">
+        <put-attribute name="body" value="/WEB-INF/views/map/{1}.jsp" />
+    </definition>
+        <definition name="place/*" extends="layout-tiles">
+    	 <put-attribute name="body" value="/WEB-INF/views/place/{1}.jsp" />     
+    </definition>
 </tiles-definitions>

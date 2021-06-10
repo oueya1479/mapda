@@ -1,15 +1,13 @@
 package kosta.mapda.domain.map;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
-import javax.persistence.CascadeType;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -21,6 +19,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+@Entity
 @Getter
 @Setter
 @AllArgsConstructor
@@ -38,7 +37,7 @@ public class Place {
 	private String placeContent;
 	
 	@CreationTimestamp
-	private LocalDateTime placeRegDate;
+	private LocalDateTime placeRegdate;
 	
 	private String placeTag;
 	private int placeLike;
@@ -61,16 +60,16 @@ public class Place {
 	
 	@ManyToOne
 	@JoinColumn(name = "map_no")
-	private Map map;
+	private Theme theme;
 	
 	
-	@OneToMany(mappedBy = "place", cascade = CascadeType.ALL)
-	private List<PlacePhoto> ppList;		// place photo
-	
-	@OneToMany(mappedBy = "place", cascade = CascadeType.ALL)
-	private List<PlaceReview> prList;		// place reply
-	
-	@OneToMany(mappedBy = "place", cascade = CascadeType.ALL)
-	private List<PlacePhotoReview> pprList;		// place photo review
+//	@OneToMany(mappedBy = "place", cascade = CascadeType.ALL)
+//	private List<PlacePhoto> ppList;		// place photo
+//	
+//	@OneToMany(mappedBy = "place", cascade = CascadeType.ALL)
+//	private List<PlaceReview> prList;		// place reply
+//	
+//	@OneToMany(mappedBy = "place", cascade = CascadeType.ALL)
+//	private List<PlacePhotoReview> pprList;		// place photo review
 	
 }

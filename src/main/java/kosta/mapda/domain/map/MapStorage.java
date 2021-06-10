@@ -17,6 +17,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+@Entity
 @Getter
 @Setter
 @AllArgsConstructor
@@ -24,7 +25,7 @@ import lombok.Setter;
 public class MapStorage {
 	
 	@Id
-	private Long psNo;
+	private Long msNo;
 	
 	@ManyToOne
 	@JoinColumn(name="mem_no")
@@ -32,7 +33,7 @@ public class MapStorage {
 	
 	@ManyToOne
 	@JoinColumn(name="map_no")
-	private Map map;
+	private Theme theme;
 	
 	@CreationTimestamp
 	private LocalDateTime mapStorageRegdate;
