@@ -60,7 +60,7 @@ public class Place {
 	
 	@ManyToOne
 	@JoinColumn(name = "map_no")
-	private Map map;
+	private Theme theme;
 	
 	
 //	@OneToMany(mappedBy = "place", cascade = CascadeType.ALL)

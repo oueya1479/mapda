@@ -44,14 +44,14 @@ public class Theme{
 	private String mapImg;
 	private String mapImgPath;
 	private int mapSubQty;
-	private int mapReadNum;
+	private int mapReadnum;
 	private int mapLike;
 	
 	@CreationTimestamp
-	private LocalDateTime mapRegDate;
+	private LocalDateTime mapRegdate;
 	
 	private int mapStatus;
-	private int mapIsOpen;
+	private int mapIsopen;
 	
 	@ManyToOne
 	@JoinColumn(name="mng_no")
