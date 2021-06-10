@@ -42,5 +42,5 @@ public interface PlaceService {
 	/**
 	 * 	 플레이스 사진 전체 검색
 	 * */
-	List<PlacePhoto> selectAllPlacePhoto();
+	List<PlacePhoto> selectAllPlacePhoto(Long placeNo);
 }

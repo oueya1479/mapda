@@ -37,14 +37,14 @@ public class PlaceReview {	// Place Review
 	private int prStatus;
 	
 	@ManyToOne
-	@JoinColumn(name="place_no")
+	@JoinColumn(name="placeNo")
 	private Place place;
 	
 	@ManyToOne
-	@JoinColumn(name = "mem_no")
+	@JoinColumn(name = "memNo")
 	private Member member;
 	
 	@ManyToOne
-	@JoinColumn(name = "mng_no")
+	@JoinColumn(name = "mngNo")
 	private Management mng;
 }
