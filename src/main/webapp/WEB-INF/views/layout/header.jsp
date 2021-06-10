@@ -17,7 +17,8 @@
                         <nav class="header__menu mobile-menu">
                             <ul>
                                 <li class="active"><a href="/index">Home</a></li>
-                                <li><a href="listing">Listing</a></li>
+                                <li><a href="/listing">Listing</a></li>
+
                                 <li><a href="#">Categories</a></li>
                                 <li><a href="#">Pages</a>
                                     <ul class="dropdown">
