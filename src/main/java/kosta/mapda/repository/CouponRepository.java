@@ -11,5 +11,5 @@ import kosta.mapda.domain.service.Coupon;
 public interface CouponRepository extends JpaRepository<Coupon, Long> {
 	Page<Coupon> findBycpNameContaining(Pageable pageable, String keyword);
 	
-
+	Page<Coupon> findByCouponCategory(Pageable pageable, Long cpcaNo);
 }

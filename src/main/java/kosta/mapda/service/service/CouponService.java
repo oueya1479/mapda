@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import kosta.mapda.domain.service.Coupon;
+import kosta.mapda.domain.service.CouponCategory;
 
 public interface CouponService {
 
@@ -25,6 +26,16 @@ public interface CouponService {
 	 * 쿠폰 검색해서 가져오기
 	 * */
 	Page<Coupon> selectByName(Pageable pageable, String couponName);
+	
+	/**
+	 * 쿠폰 카테고리로 목록 가져오기
+	 * */
+	Page<Coupon> selectByCategory(Pageable pageable, Long category);
+	
+	/**
+	 * 쿠폰 카테고리 목록 가져오기
+	 * */
+	List<CouponCategory> couponCategory();
 	
 	List<Coupon> viewAll();
 }

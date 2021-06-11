@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -72,6 +73,7 @@
 	                                    <ul class="blog__item__widget">
 	                                        <li><i class="fa fa-money"></i>포인트 :  ${coup.cpPrice}point</li>
 	                                        <li><i class="fa fa-user"></i>이용매장 : ${coup.cpPlace}</li>
+	                                        
 	                                    </ul>
 	                                </div>
 	                            </div>
@@ -127,11 +129,11 @@
                         <div class="blog__sidebar__categories">
                             <h5>Categories</h5>
                             <ul>
-                                <li><a href="/coupon/list">전체 <span>18</span></a></li>
-                                <li><a href="#">Business <span>20</span></a></li>
-                                <li><a href="#">Loan <span>07</span></a></li>
-                                <li><a href="#">Consulting <span>22</span></a></li>
-                                <li><a href="#">Credit <span>19</span></a></li>
+                                <li><a href="/coupon/list">전체</a></li>
+                                <c:forEach items="${requestScope.categoryList}" var="cate">
+                                <li><a href="/coupon/list/${cate.cpcaNo-1}">${cate.cpcaName}<span></span></a></li>
+                                </c:forEach>
+                                
                             </ul>
                         </div>
                        

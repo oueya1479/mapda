@@ -1,5 +1,7 @@
 package kosta.mapda.controller.coupon;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import kosta.mapda.domain.service.Coupon;
+import kosta.mapda.domain.service.CouponCategory;
 import kosta.mapda.service.service.CouponService;
 
 @Controller
@@ -27,7 +30,8 @@ public class CouponController {
 	 */
 	@RequestMapping("/list")
 	public String couponList(Model model, @RequestParam(defaultValue = "0") int nowPage, 
-			@RequestParam(required = false, defaultValue = "") String keyword) {
+			@RequestParam(required = false, defaultValue = "") String keyword)
+			 {
 	
 		Pageable pageable = PageRequest.of(nowPage, 10, Direction.ASC, "cpNo");
 		Page<Coupon> couponList = service.selectAll(pageable);
@@ -36,8 +40,15 @@ public class CouponController {
 			couponList = service.selectByName(pageable, keyword);
 		}
 		
+		/*if(categoryNo.isEmpty()==false || categoryNo!=null) { 
+			Long category = Long.parseLong(categoryNo); 
+			couponList = service.selectByCategory(pageable,category); 
+		}*/
+		 
+		List<CouponCategory> categoryList = service.couponCategory();
 		
 		model.addAttribute("couponList", couponList);
+		model.addAttribute("categoryList", categoryList);
 		return "coupon/list";
 	}
 	
@@ -58,5 +69,7 @@ public class CouponController {
 		model.addAttribute("couponList", service.viewAll());
 		return "coupon/couponManage";
 	}
+	
+	
 	
 }

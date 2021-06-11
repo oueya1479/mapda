@@ -10,6 +10,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import kosta.mapda.domain.service.Coupon;
+import kosta.mapda.domain.service.CouponCategory;
+import kosta.mapda.repository.CouponCategoryRepository;
 import kosta.mapda.repository.CouponRepository;
 
 @Service
@@ -18,6 +20,9 @@ public class CouponServiceImpl implements CouponService {
 
 	@Autowired
 	private CouponRepository couponRepository;
+	
+	@Autowired
+	private CouponCategoryRepository couponCategoryRepository;
 	
 	@Override
 	public Page<Coupon> selectAll(Pageable pageable) {
@@ -51,6 +56,19 @@ public class CouponServiceImpl implements CouponService {
 			
 		}
 		return list;
+	}
+
+	@Override
+	public Page<Coupon> selectByCategory(Pageable pageable, Long category) {
+		
+		return couponRepository.findByCouponCategory(pageable, category);
+		
+	}
+
+	@Override
+	public List<CouponCategory> couponCategory() {
+		
+		return couponCategoryRepository.findAll();
 	}
 	
 }
