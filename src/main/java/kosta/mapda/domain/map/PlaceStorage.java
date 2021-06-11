@@ -3,9 +3,9 @@ package kosta.mapda.domain.map;
 import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -15,18 +15,23 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+@Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class PlaceStorage {
 	
-	@OneToOne
-	@JoinColumn(name="mem_no")
+	@Id
+	private Long psNo;
+	
+	@ManyToOne
+	@JoinColumn(name="memNo")
 	private Member member;
 	
-	@OneToMany
-	@JoinColumn(name="place_no")
+	
+	@ManyToOne
+	@JoinColumn(name="placeNo")
 	private Place place;
 	
 	@CreationTimestamp

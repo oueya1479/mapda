@@ -13,11 +13,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+@Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class PlacePhoto {	//Place Photo
+public class PlacePhoto {	//Place_Photo
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PP_PPNo_seq")
@@ -26,7 +27,7 @@ public class PlacePhoto {	//Place Photo
 	private String ppPath;
 	
 	@ManyToOne
-	@JoinColumn(name = "place_no")
+	@JoinColumn(name = "placeNo")
 	private Place place;
 	
 }

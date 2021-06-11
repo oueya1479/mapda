@@ -2,6 +2,7 @@ package kosta.mapda.domain.map;
 
 import java.time.LocalDateTime;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,6 +19,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+@Entity
 @Getter
 @Setter
 @AllArgsConstructor
@@ -31,18 +33,18 @@ public class PlaceReview {	// Place Review
 	private String prContent;
 	
 	@CreationTimestamp
-	private LocalDateTime prRegDate;
+	private LocalDateTime prRegdate;
 	private int prStatus;
 	
 	@ManyToOne
-	@JoinColumn(name="place_no")
+	@JoinColumn(name="placeNo")
 	private Place place;
 	
 	@ManyToOne
-	@JoinColumn(name = "mem_no")
+	@JoinColumn(name = "memNo")
 	private Member member;
 	
 	@ManyToOne
-	@JoinColumn(name = "mng_no")
+	@JoinColumn(name = "mngNo")
 	private Management mng;
 }

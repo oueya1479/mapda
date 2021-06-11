@@ -8,7 +8,7 @@
 <body>
 
     <!-- Hero Section Begin -->
-    <section class="hero set-bg" data-setbg="img/hero/hero-bg.jpg">
+    <section class="hero set-bg" data-setbg="${pageContext.request.contextPath}/img/hero/hero-bg.jpg">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
