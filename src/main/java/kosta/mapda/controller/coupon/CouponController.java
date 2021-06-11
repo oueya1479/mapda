@@ -26,9 +26,10 @@ public class CouponController {
 	 * 쿠폰 리스트를 가져오는 메소드
 	 */
 	@RequestMapping("/list")
-	public String couponList(Model model, @RequestParam(defaultValue = "0") int nowpage, @RequestParam(required = false, defaultValue = "") String keyword) {
+	public String couponList(Model model, @RequestParam(defaultValue = "0") int nowPage, 
+			@RequestParam(required = false, defaultValue = "") String keyword) {
 	
-		Pageable pageable = PageRequest.of(nowpage, 10, Direction.ASC, "cpNo");
+		Pageable pageable = PageRequest.of(nowPage, 10, Direction.ASC, "cpNo");
 		Page<Coupon> couponList = service.selectAll(pageable);
 		
 		if(keyword.isEmpty()==false || keyword!=null) {

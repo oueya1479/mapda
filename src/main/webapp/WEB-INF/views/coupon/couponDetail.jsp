@@ -9,7 +9,7 @@
 </head>
 <body>
 	<!-- Blog Hero Begin -->
-	
+		 <div class="blog-details-hero set-bg" data-setbg="../img/blog/details/blog-hero.jpg">
 		<div class="container">
 			<div class="row">
 				
@@ -23,12 +23,17 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-8">
+				<div class="col-lg-6 col-md-6">
 					<div class="blog__details__text">
-						<div class="blog__details__video set-bg"
-							data-setbg="${coupon.cpImgpath}"></div>
+					<div class="blog__item" style="width: 300px; height: 400px; text-align: center;" >
+						 <div class="blog__item__pic set-bg" >
+	                                	<img src="${coupon.cpImgpath}" alt="" style="width: 200px; height: 200px;">
+	                                </div>
+	                                </div>
 						${coupon.cpDetail}
 						<hr>
 						${coupon.cpUsingdetail}
+					</div>
 					</div>
 					<div class="blog__details__tags">
 						<span>Tags</span> <a href="#">Ideas</a> <a href="#">Unique</a> <a
@@ -46,7 +51,7 @@
 								</div>
 							</div>
 							<textarea placeholder="Message"></textarea>
-							<button type="submit" class="site-btn">SEND MESSAGE</button>
+							<button type="submit" class="site-btn">발급</button>
 						</form>
 					</div>
 					<div class="blog__details__new__post">
