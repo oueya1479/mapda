@@ -38,7 +38,7 @@
                             <li><a href="#"><img src="img/hero/cat-2.png" alt=""> Food & Drink</a></li>
                             <li><a href="#"><img src="img/hero/cat-3.png" alt=""> Shopping</a></li>
                             <li><a href="#"><img src="img/hero/cat-4.png" alt=""> Beauty</a></li>
-                            <li><a href="#"><img src="img/hero/cat-5.png" alt=""> Hotels</a></li>
+                            <li><a href="/pay"><img src="img/hero/cat-5.png" alt=""> Hotels</a></li>
                             <li><a href="#"><img src="img/hero/cat-6.png" alt=""> All Categories</a></li>
                         </ul>
                     </div>

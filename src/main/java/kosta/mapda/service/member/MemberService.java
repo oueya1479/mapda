@@ -24,4 +24,6 @@ public interface MemberService {
 	
 //	List<AuthorityVO> selectAuthorityByUsername(String username);
 
+	void start(Long memNo);
+
 }
