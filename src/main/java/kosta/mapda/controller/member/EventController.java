@@ -18,9 +18,9 @@ public class EventController {
 	 *  이벤트 목록 출력
 	 * */
 	@RequestMapping("/list")
-	public void list() {
+	public String list() {
 		
-		
+		return "member/event";
 	}
 	
 	/**
@@ -33,7 +33,7 @@ public class EventController {
 	
 	
 	/**
-	 * 이벤트 게시무 수정
+	 * 이벤트 게시물 수정
 	 * */
 	@RequestMapping("/update")
 	public void update() {
@@ -49,7 +49,6 @@ public class EventController {
 	@RequestMapping("/delete")
 	public void delete() {
 		
-	
 	}
 	
 }
