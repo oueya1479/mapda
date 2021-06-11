@@ -52,5 +52,11 @@ public class CouponController {
 		return mv;
 	}
 	
-
+	@RequestMapping("/admin")
+	public String allcouponList(Model model) {
+		
+		model.addAttribute("couponList", service.viewAll());
+		return "coupon/couponManage";
+	}
+	
 }

@@ -1,5 +1,7 @@
 package kosta.mapda.service.service;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,4 +38,19 @@ public class CouponServiceImpl implements CouponService {
 		
 	}
 
+	@Override
+	public List<Coupon> viewAll() {
+		List<Coupon> list =  couponRepository.findAll();
+		for(Coupon cp : list) {
+			int state = cp.getCpState();
+			String strState;
+			switch(state) {
+//				case 0 : (String)state = cp.setCpState("발급중단"); break;
+//				case 1 : cp.setCpState("발급가능"); break;
+			}
+			
+		}
+		return list;
+	}
+	
 }
