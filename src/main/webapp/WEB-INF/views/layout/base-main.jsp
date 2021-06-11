@@ -4,7 +4,7 @@
 <html lang="ko">
 <head>
 <tiles:insertAttribute name="include" />
-	<tiles:insertAttribute name="bootstrapjs" />
+<tiles:insertAttribute name="bootstrapjs" />
 </head>
 <body>
 	<tiles:insertAttribute name="header" />
