@@ -23,8 +23,8 @@ public class PlaceController {
 	@Autowired
 	private PlaceService placeService;
 	
-	//@Autowired
-	//private PlaceReviewService prService;
+	@Autowired
+	private PlaceReviewService prService;
 	
 	/**
 	 * 		상세보기
@@ -33,8 +33,8 @@ public class PlaceController {
 	public ModelAndView read(@PathVariable Long placeNo) {
 		Place place = placeService.selectBy(placeNo);
 		List<PlacePhoto> ppList = placeService.selectAllPlacePhoto(placeNo);
-		//List<PlaceReview> prList = prService.selectAllPlaceReview(placeNo);
-		//List<PlacePhotoReview> pprList = prService.selectAllPhotoReview(placeNo);
+		List<PlaceReview> prList = prService.selectAllPlaceReview(placeNo);
+		List<PlacePhotoReview> pprList = prService.selectAllPhotoReview(placeNo);
 		
 		// 해쉬태그 #기준으로 나눔
 		List<String> tagStr=new ArrayList<String>();
@@ -50,8 +50,8 @@ public class PlaceController {
 		mv.addObject("ppList", ppList);
 		mv.addObject("place", place);
 		mv.addObject("tagStr",tagStr);
-		//mv.addObject("prList", prList);
-		//mv.addObject("pprList", pprList);
+		mv.addObject("prList", prList);
+		mv.addObject("pprList", pprList);
 		
 		return mv;
 	}

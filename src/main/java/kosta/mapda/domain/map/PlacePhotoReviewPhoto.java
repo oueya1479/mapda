@@ -8,6 +8,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,8 +26,10 @@ public class PlacePhotoReviewPhoto {	//Place_Photo_Review_Photo
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PPRP_PPRPNo_seq")
 	@SequenceGenerator(sequenceName = "PPRP_PPRPNo_seq", allocationSize = 1, name = "PPRP_PPRPNo_seq")
 	private Long pprpNo;
+	
 	private String pprpPath;
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "pprNo")
 	private PlacePhotoReview ppr;

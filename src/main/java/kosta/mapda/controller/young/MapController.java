@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import kosta.mapda.domain.map.Place;
 import kosta.mapda.domain.map.Theme;
 import kosta.mapda.domain.member.Member;
 import kosta.mapda.service.young.MapService;
@@ -74,20 +75,42 @@ public class MapController {
 	 * 상세보기
 	 */
 	@RequestMapping("/mapRead/{mapNo}")
-	public ModelAndView mapRead(@PathVariable Long mapNo, String flag) {
+	public ModelAndView mapRead(@PathVariable Long mapNo, String flag, Place place) {
+		//조회수
 		boolean state = flag==null?true : false;
 		Theme theme = mapService.selectBy(mapNo, true);
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("map/mapRead");
 		mv.addObject("themeMap", theme);
+		
 		return mv;
 	}
 	
 	/**
 	 * 수정 폼
 	 */
+	@RequestMapping("/modifyForm/{mapNo}")
+	public ModelAndView modifyMap(@PathVariable Long mapNo) {
+		Theme theme= mapService.selectBy(mapNo, false);
+		return new ModelAndView("map/modifyMap", "theme", theme);
+	}
 	
 	/**
 	 * 수정 완료
 	 */
+	@RequestMapping("/modifyMap")
+	public ModelAndView modifyMap(Theme theme) {
+		Theme mapInfo = mapService.modifyMap(theme);
+		
+		return new ModelAndView("map/mapList", "theme", mapInfo);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
