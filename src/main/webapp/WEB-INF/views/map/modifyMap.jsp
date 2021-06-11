@@ -20,7 +20,7 @@
 			<div class="row">
 				<div class="col-lg-12 text-center">
 					<div class="breadcrumb__text">
-						<h2>Make new Map!</h2>
+						<h2>Update your Map </h2>
 					</div>
 				</div>
 			</div>
@@ -88,14 +88,12 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="col-lg-12 col-md-8">
-						<form action="/map/insertMap" class="contact__form" method="post"
-							enctype="multipart/form-data">
+						<form name=updateForm class="contact__form" method=post enctype="multipart/form-data" action="${pageContext.request.contextPath}/map/modifyMap" >
 							<div class="row">
 								<div class="col-lg-12 col-md-6">
-									Theme Name<input type="text" name="mapTitle" placeholder="Theme Name"> 
-									Description<textarea name="mapContent" placeholder="Description of this Map"></textarea>
+									Theme Name<input type="text" name="mapTitle" value="${map.mapTitle}"> 
+									Description<textarea name="mapContent" >${map.mapContent}</textarea>
 									Cover Image <input type="file" name="file" />
-									
 									Category <p><select name="categoryNo">
 											    <option value="1">맛집</option>
 											    <option value="2">여행</option>
@@ -112,17 +110,8 @@
 											    <option value="13">데이트</option>
 											    <option value="14">드라이브</option>
 											</select>
-								
-									
-									
 									
 								</div>
-							</div><p><p>
-							<div>
-							Accessibility<p><p></div>
-							<div class="col-lg-3">
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public<input type="checkbox" value="0" name="mapIsopen" style="widgh:20px; height:20px">
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;private<input type="checkbox" value="1" name="mapIsopen" style="widgh:20px; height:20px">
 							</div>
 							<input type="submit" class="site-btn" id="submitbt" value="Create Map" />
 						</form>

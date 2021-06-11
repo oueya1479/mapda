@@ -53,4 +53,24 @@ public class MapServiceImpl implements MapService {
 		return maprepository.findById(mapNo).orElse(null);
 	}
 
+	/**
+	 * 수정폼
+	 */
+	@Override
+	public Theme modifyMap(Theme theme) {
+		Theme themeInfo = maprepository.findById(theme.getMapNo()).orElse(null);
+		if(themeInfo==null)
+		{
+			throw new RuntimeException("테마지도 수정오류.");
+		}
+		themeInfo.setMapContent(theme.getMapContent());
+		themeInfo.setMapTitle(theme.getMapTitle());
+		
+		return themeInfo;
+	}
+
+	
+	/**
+	 * 삭제
+	 */
 }

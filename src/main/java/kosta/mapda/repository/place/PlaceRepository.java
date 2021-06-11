@@ -6,4 +6,5 @@ import kosta.mapda.domain.map.Place;
 
 public interface PlaceRepository extends JpaRepository<Place, Long> {
 	
+	//List<PlaceReview> selectByPlaceNo(Long placeNo);
 }

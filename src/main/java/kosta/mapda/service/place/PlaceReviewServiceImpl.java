@@ -53,6 +53,19 @@ public class PlaceReviewServiceImpl implements PlaceReviewService {
 	public List<PlacePhotoReviewPhoto> selectAllPhotoReviewPhoto(Long pprNo) {
 		return pprpRepository.selectBypprNo(pprNo);
 	}
+
+	@Override
+	public int selectStarScore(Long placeNo) {
+		 List<PlacePhotoReview> pprList= pprRepository.selectStarScore(placeNo);
+		 
+		 for(PlacePhotoReview ppr : pprList) {
+			// Integer.parseInt(ppr);
+		 }
+		return 0;
+	}
+	
+
+
 	
 	
 	

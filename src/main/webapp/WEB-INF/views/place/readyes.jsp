@@ -7,108 +7,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
+<script type="text/javascript">
+
+  </script>
+
 <style type="text/css">
 .mySlides {display:none;}
 </style>
-<script type="text/javascript">
-    	$(function(){
-        	 $(document).on("click","#photoReview",function(){
-      			$.ajax({
-      				  url: "${pageContext.request.contextPath}/place/reviewAjax/${placeNo}", //서버주소
-      				  type: "post", //요청방식(get,post, put,delete)
-      				  dataType: "json", //서버가 보내오는 데이터타입(응답 - text ,html, xml, json)
-      				 // data:{placeNo:1} , //서버에게 보낼 parameter정보
-      				  success: function(result){ //item 데이터 ==> ["name":값, subject:값, ... ,customer:{id:값, name:값....}]
-      				  		console.log(result);
-      				  		var str="";
-      				  		
-      				  		if(result==""){
-      				  			str+="<p>등록된 포토리뷰가 없습니다.</p>";
-      				  		}else{
-	      				  		for(var i =0; i<result.length; i++){
-	      				  		//alert(result[i].pprpList[i].pprpPath);
-	      				  		str+="<div class='listing__details__comment__item__pic'>";
-	      				  		str+="<img src='${pageContext.request.contextPath}/img/listing/details/comment.png'>";
-	      				  		str+="</div>";
-	      				  		str+="<div class='listing__details__comment__item__text'>";
-	      				  		str+="<span>" + result[i].pprRegdate+"</span>";
-	      				  		str+="<h5>"+ result[i].member.memName+"</h5>";
-	      				  		str+="<p>"+result[i].pprContent+"</p>";
-	      				  		
 
-	      				  		if(Number(result[i].pprStar)/2<=1){
-	      				  		str+="<p> 별점 : <span class='icon_star'></span></p>";
-	      				  		}else if(Number(result[i].pprStar)/2<=2){
-	      				  		str+="<p> 별점 : <span class='icon_star'></span><span class='icon_star'></span></p>";
-	      				  		}else if(Number(result[i].pprStar)/2<=3){
-	      				  		str+="<p> 별점 : <span class='icon_star'></span><span class='icon_star'></span><span class='icon_star'></span></p>";
-	      				  		}else if(Number(result[i].pprStar)/2<=4){
-	      				  		str+="<p> 별점 : <span class='icon_star'></span><span class='icon_star'></span><span class='icon_star'></span><span class='icon_star'></span></p>";
-	      				  		}else{
-	      				  		str+="<p> 별점 : <span class='icon_star'></span><span class='icon_star'></span><span class='icon_star'></span><span class='icon_star'></span><span class='icon_star'></span></p>";
-	      				  		}
-	      				  		
-	      				  			for(var j=0; j<result[i].pprpList.length; j++){
-	      				  				str+="<img src='${pageContext.request.contextPath}/"+result[i].pprpList[j].pprpPath+"' style='width: 200px; height: 200px;'>";
-	      				  			};
-	      				  		str+="<ul>";
-	      				  		str+=" <li><i class='fa fa-hand-o-right'></i> Like</li>";
-	      				  		str+="<li><i class='fa fa-share-square-o'></i> Reply</li>";
-	      				  		str+="</ul>";
-	      				  		str+="</div>";
-	      				  		str+="</div>";
-	      				  		
-	      				    	};
-      				  		};
-
-      				    	$(".listing__details__comment").html(str);
-      				}, 
-      				  error : function(err){
-      					  console.log(err+" 에러 발생.")
-      				  }
-      			  });
-      		});
-        	 
-        	 $(document).on("click","#replyReview",function(){
-       			$.ajax({
-       				  url: "${pageContext.request.contextPath}/place/replyAjax/${placeNo}", //서버주소
-       				  type: "post", //요청방식(get,post, put,delete)
-       				  dataType: "json", //서버가 보내오는 데이터타입(응답 - text ,html, xml, json)
-       				 // data:{placeNo:1} , //서버에게 보낼 parameter정보
-       				  success: function(result){ //item 데이터 ==> ["name":값, subject:값, ... ,customer:{id:값, name:값....}]
- //   				       		alert(result);
-  //     				  			console.log(result);
- 							
-       				  		var str="";
-       				  	if(result==""){
-  				  			str+="<p>등록된 댓글이 없습니다.</p>";
-  				  		}else{
-       				  		for(var i =0; i<result.length; i++){
-       				  		str+="<div class='listing__details__comment__item__pic'>";
-       				  		str+="<img src='${pageContext.request.contextPath}/img/listing/details/comment.png'>";
-       				  		str+="</div>";
-       				  		str+="<div class='listing__details__comment__item__text'>";
-       				  		str+="<span>" + result[i].prRegdate+"</span>";
-       				  		str+="<h5>"+ result[i].member.memName+"</h5>";
-       				  		str+="<p>"+result[i].prContent+"</p>";
-      				  		str+="<ul>";
-      				  		str+=" <li><i class='fa fa-hand-o-right'></i> Like</li>";
-      				  		str+="<li><i class='fa fa-share-square-o'></i> Reply</li>";
-      				  		str+="</ul>";
-      				  		str+="</div>";
-      				  		str+="</div>";
-       				    	};
-  				  		};
-       				    	$(".listing__details__comment").html(str);
-       				}, 
-       				  error : function(err){
-       					  console.log(err+" 에러 발생.")
-       				  }
-       			  });
-       		});
-        	 
-      	});  
-  </script>
 
 </head>
 
@@ -122,7 +28,7 @@
                 <div class="col-lg-8">
                     <div class="listing__hero__option">
                         <div class="listing__hero__icon">
-                            <img src="${pageContext.request.contextPath}" alt="" ><!-- 아이콘 모양? user프로필? -->
+                            <img src="${pageContext.request.contextPath}" alt=""><!-- 아이콘 모양? user프로필? -->
                         </div>
                         <div class="listing__hero__text">
                             <h2>${requestScope.place.placeTitle}</h2>
@@ -172,25 +78,25 @@
 							  <button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">&#10095;</button>
 						</div>
 
-					<script>
-					var slideIndex = 1;
-					showDivs(slideIndex);
-					
-					function plusDivs(n) {
-					  showDivs(slideIndex += n);
-					}
-					
-					function showDivs(n) {
-					  var i;
-					  var x = document.getElementsByClassName("mySlides");
-					  if (n > x.length) {slideIndex = 1}
-					  if (n < 1) {slideIndex = x.length}
-					  for (i = 0; i < x.length; i++) {
-					    x[i].style.display = "none";  
-					  }
-					  x[slideIndex-1].style.display = "block";  
-					}
-					</script>
+											<script>
+											var slideIndex = 1;
+											showDivs(slideIndex);
+											
+											function plusDivs(n) {
+											  showDivs(slideIndex += n);
+											}
+											
+											function showDivs(n) {
+											  var i;
+											  var x = document.getElementsByClassName("mySlides");
+											  if (n > x.length) {slideIndex = 1}
+											  if (n < 1) {slideIndex = x.length}
+											  for (i = 0; i < x.length; i++) {
+											    x[i].style.display = "none";  
+											  }
+											  x[slideIndex-1].style.display = "block";  
+											}
+											</script>
 	<!-- ========================================================================================= -->
                         </div>
                 
@@ -260,10 +166,9 @@
                                 </div>
                             </div>
                         </div>
-                        <hr>
-                        <h4><a href="javascript:;" class="btn" id="replyReview" style="text-decoration: none; color: black;">Reply</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        	<a href="javascript:;" class="btn" id="photoReview" style="text-decoration: none; color: black;">PhotoReview</a></h4>
-                        <div class="listing__details__comment">
+                        
+                        <div class="listing__details__comment" style="float: left; margin-right: 150px;">
+                            <h4>Reply</h4>
    				 <c:forEach items="${prList}" var="prList">       
                             <div class="listing__details__comment__item">
                                 <div class="listing__details__comment__item__pic">
@@ -282,7 +187,47 @@
                             </div>
         			 </c:forEach>                 
                         </div>
+                        <!--  -->
+                        
+  					<div class="listing__details__comment" style="float: right;">
+                            <h4>PhotoReview</h4>
+   				 <c:forEach items="${pprList}" var="pprList">       
+                            <div class="listing__details__comment__item">
+                                <div class="listing__details__comment__item__pic">
+                                    <img src="${pageContext.request.contextPath}/img/listing/details/comment.png" alt="">
+                                </div>
+                                <div class="listing__details__comment__item__text">
+	                                    <span>${pprList.pprRegdate}</span>
+	                                    <h5>Marry Jane</h5>
+	                                    <p>${pprList.pprContent}</p>
+                                    <ul>
+                                        <li><i class="fa fa-hand-o-right"></i> Like</li>
+                                        <li><i class="fa fa-share-square-o"></i> Reply</li>
+                                    </ul>
+                                    <!--  <div class="listing__details__comment__item__rating">
+	                                        <i class="fa fa-star"></i>
+	                                        <i class="fa fa-star"></i>
+	                                        <i class="fa fa-star"></i>
+	                                        <i class="fa fa-star"></i>
+	                                        <i class="fa fa-star"></i>
+	                                    </div> -->
+                                </div>
+                            </div>
+        			 </c:forEach>                 
+                        </div>
+                        
 
+                        
+                        <!--  -->
+<!--                         <div class="listing__details__review">
+                            <h4>Add Review</h4>
+                            <form action="#">
+                                <input type="text" placeholder="Name">
+                                <input type="text" placeholder="Email">
+                                <textarea placeholder="Review"></textarea>
+                                <button type="submit" class="site-btn">Submit Now</button>
+                            </form>
+                        </div> -->
                     </div>
                 </div>
                 <div class="col-lg-4">
@@ -353,4 +298,5 @@
     <!-- Newslatter Section End -->
 
 </body>
+
 </html>

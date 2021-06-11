@@ -1,9 +1,5 @@
 package kosta.mapda.service.young;
 
-
-
-import javax.servlet.http.HttpSession;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -31,5 +27,10 @@ public interface MapService {
 	 * 상세보기
 	 */
 	Theme selectBy(Long mapNo, boolean b);
+
+	/**
+	 * 수정폼
+	 */
+	Theme modifyMap(Theme theme);
 	
 }
