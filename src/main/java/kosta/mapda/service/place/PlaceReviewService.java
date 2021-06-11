@@ -33,10 +33,8 @@ public interface PlaceReviewService {
 	 * */
 	List<PlacePhotoReviewPhoto> selectAllPhotoReviewPhoto(Long pprNo);
 	
-//	List<ReplyAndReview> mergedList(Long placeNo);
-	
 	/**
 	 * 		포토리뷰 별점 가져오기
 	 * */
-	int selectStarScore(Long placeNo);
+	List<PlacePhotoReview> selectStarScore(Long placeNo);
 }

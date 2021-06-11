@@ -11,6 +11,6 @@ public interface PlacePhotoReviewRepository extends JpaRepository<PlacePhotoRevi
 	@Query("select ppr from PlacePhotoReview ppr where ppr.place.placeNo=?1")
 	List<PlacePhotoReview> selectByPlaceNo(Long placeNo);
 	
-	@Query("select ppr.pprStar from PlacePhotoReview ppr where ppr.place.placeNo=?1")
+	@Query("select ppr from PlacePhotoReview ppr where ppr.place.placeNo=?1")
 	List<PlacePhotoReview> selectStarScore(Long placeNo);
 }

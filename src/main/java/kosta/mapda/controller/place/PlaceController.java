@@ -31,10 +31,24 @@ public class PlaceController {
 	 * */
 	@RequestMapping("/read/{placeNo}")
 	public ModelAndView read(@PathVariable Long placeNo) {
+		int starAvg=0;
+		int starAvgPer=0;
+		
 		Place place = placeService.selectBy(placeNo);
 		List<PlacePhoto> ppList = placeService.selectAllPlacePhoto(placeNo);
 		List<PlaceReview> prList = prService.selectAllPlaceReview(placeNo);
 		List<PlacePhotoReview> pprList = prService.selectAllPhotoReview(placeNo);
+		
+		//포토리뷰 평점 구하기
+		for(PlacePhotoReview ppr : pprList) {
+			System.out.println("ppr.getPprStar() = " + ppr.getPprStar());
+			starAvg+=ppr.getPprStar();
+		}
+		
+		
+		starAvg=starAvg/pprList.size();
+		starAvgPer=starAvg*10;
+				
 		
 		// 해쉬태그 #기준으로 나눔
 		List<String> tagStr=new ArrayList<String>();
@@ -52,6 +66,8 @@ public class PlaceController {
 		mv.addObject("tagStr",tagStr);
 		mv.addObject("prList", prList);
 		mv.addObject("pprList", pprList);
+		mv.addObject("starAvg", starAvg);
+		mv.addObject("starAvgPer", starAvgPer);
 		
 		return mv;
 	}

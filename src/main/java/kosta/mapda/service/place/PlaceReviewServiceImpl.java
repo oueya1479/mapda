@@ -55,13 +55,15 @@ public class PlaceReviewServiceImpl implements PlaceReviewService {
 	}
 
 	@Override
-	public int selectStarScore(Long placeNo) {
-		 List<PlacePhotoReview> pprList= pprRepository.selectStarScore(placeNo);
-		 
-		 for(PlacePhotoReview ppr : pprList) {
-			// Integer.parseInt(ppr);
-		 }
-		return 0;
+	public List<PlacePhotoReview> selectStarScore(Long placeNo) {
+		
+//		List<PlacePhotoReview> pprList = pprRepository.selectStarScore(placeNo);
+//		for(PlacePhotoReview ppr : pprList) {
+//			System.out.println(ppr.getPprStar());
+//		}
+		
+		
+		return pprRepository.selectStarScore(placeNo);
 	}
 	
 
