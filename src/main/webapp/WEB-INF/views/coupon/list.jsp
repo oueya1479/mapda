@@ -4,6 +4,19 @@
 <html lang="zxx">
 
 <head>
+
+<SCRIPT>
+	function checkValid() {
+		var f = window.document.searchForm;
+		if (f.keyword.value == "") {
+			alert("검색어를 입력해 주세요.");
+			f.keyword.focus();
+			return false;
+		}
+		return true;
+	}
+</SCRIPT>
+
 </head>
 
 <body>
@@ -43,7 +56,7 @@
 							<c:otherwise>
                     	<c:forEach items="${requestScope.couponList.content}" var="coup">
 	                        <div class="col-lg-6 col-md-6">
-	                            <div class="blog__item">
+	                            <div class="blog__item" style="width: 300px; height: 400px; ">
 	                                <div class="blog__item__pic set-bg">
 	                                	<img src="${coup.cpImgpath}" alt="" style="width: 200px; height: 200px;">
 	                                </div>
@@ -78,8 +91,8 @@
                 <div class="col-lg-4">
                     <div class="blog__sidebar">
                         <div class="blog__sidebar__search">
-                            <form action="#">
-                                <input type="text" placeholder="Searching...">
+                            <form name="searchForm" action="/coupon/list" method="post" onSubmit='return checkValid()'>
+                                <input type="text"  id="keyword" name="keyword" placeholder="쿠폰명 검색...">
                                 <button type="submit"><i class="fa fa-search"></i></button>
                             </form>
                         </div>
@@ -94,19 +107,7 @@
                                 <li><a href="#">Credit <span>19</span></a></li>
                             </ul>
                         </div>
-                        <div class="blog__sidebar__tags">
-                            <h5>Popular Tag</h5>
-                            <a href="#">Business</a>
-                            <a href="#">Marketing</a>
-                            <a href="#">Payment</a>
-                            <a href="#">Travel</a>
-                            <a href="#">Finance</a>
-                            <a href="#">Videos</a>
-                            <a href="#">Ideas</a>
-                            <a href="#">Unique</a>
-                            <a href="#">Music</a>
-                            <a href="#">Key</a>
-                        </div>
+                       
                     </div>
                 </div>
             </div>

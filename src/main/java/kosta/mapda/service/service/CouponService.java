@@ -22,5 +22,5 @@ public interface CouponService {
 	/**
 	 * 쿠폰 검색해서 가져오기
 	 * */
-	Page<Coupon> selectBySerch(String couponName);
+	Page<Coupon> selectByName(Pageable pageable, String couponName);
 }

@@ -26,10 +26,16 @@ public class CouponController {
 	 * 쿠폰 리스트를 가져오는 메소드
 	 */
 	@RequestMapping("/list")
-	public String couponList(Model model, @RequestParam(defaultValue = "0") int nowpage) {
-		
+	public String couponList(Model model, @RequestParam(defaultValue = "0") int nowpage, @RequestParam(required = false, defaultValue = "") String keyword) {
+	
 		Pageable pageable = PageRequest.of(nowpage, 10, Direction.ASC, "cpNo");
 		Page<Coupon> couponList = service.selectAll(pageable);
+		
+		if(keyword.isEmpty()==false || keyword!=null) {
+			couponList = service.selectByName(pageable, keyword);
+		}
+		
+		
 		model.addAttribute("couponList", couponList);
 		return "coupon/list";
 	}
@@ -45,4 +51,5 @@ public class CouponController {
 		return mv;
 	}
 	
+
 }

@@ -30,10 +30,10 @@ public class CouponServiceImpl implements CouponService {
 	}
 
 	@Override
-	public Page<Coupon> selectBySerch(String keyword) {
-		couponRepository.findBycpNameContaining(keyword);
+	public Page<Coupon> selectByName(Pageable pageable, String couponName) {
 		
-		return null;
+		return couponRepository.findBycpNameContaining(pageable, couponName);
+		
 	}
 
 }
