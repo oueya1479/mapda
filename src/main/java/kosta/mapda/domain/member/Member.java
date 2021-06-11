@@ -33,6 +33,7 @@ public class Member {
 	private int memAge;
 	private String memGrade;
 	private String memAccount;
+	private int memPaystatus;
 	private int memStatus;
 	private int memFollower;
 	private int memFollowing;
@@ -41,7 +42,5 @@ public class Member {
 	@CreationTimestamp
 	private LocalDateTime memRegdate;
 	
-//	@OneToMany(mappedBy = "member")
-//	private List<Map> list = new ArrayList<Map>();
 
 }
