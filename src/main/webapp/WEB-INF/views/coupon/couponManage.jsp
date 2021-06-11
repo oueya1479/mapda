@@ -40,31 +40,20 @@
 	<script>
 	$(function(){
 		
-		$(document).ready(function(){
-
-			$.ajax({
-				async : false(비동기식데이터처리),
-				type: 'POST',
-				url: '',
-				data: 전달 될 데이터,
-				error : function(response, status, request){
-				에러시 처리해줄 부분
-				},
-				success: function(resHtml){
-				데이터를 잘 전달해서 잘 받아오면 처리해야할 부분
-				}
-			});
-
-		
-		
 		$(document).on("click","#stop", function() {
 			$.ajax({
 				async: false,
 				type: 'POST',
-				url: '',
-				data:
-				error:
-				success:
+				url: '${pageContext.request.contextPath}/coupon/stop',
+				data: '0',
+				error: function( {
+					alert("실패");	
+				
+				})
+				success: function({
+					alert($(this))	
+					
+				})
 				
 			})
 		})

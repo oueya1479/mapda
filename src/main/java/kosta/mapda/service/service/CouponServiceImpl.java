@@ -44,18 +44,15 @@ public class CouponServiceImpl implements CouponService {
 	}
 
 	@Override
-	public List<Coupon> viewAll() {
-		List<Coupon> list =  couponRepository.findAll();
-		for(Coupon cp : list) {
-			int state = cp.getCpState();
-			String strState;
-			switch(state) {
-//				case 0 : (String)state = cp.setCpState("발급중단"); break;
-//				case 1 : cp.setCpState("발급가능"); break;
-			}
-			
-		}
-		return list;
+	public Page<Coupon> viewAll(Pageable pageable) {
+		return couponRepository.findAll(pageable);
+	}
+	/**
+	 * 발급상태 변경하는 ajax 메소드
+	 */
+	@Override
+	public int stop(Long cpNo) {
+		return couponRepository.stop(cpNo);
 	}
 
 	@Override
