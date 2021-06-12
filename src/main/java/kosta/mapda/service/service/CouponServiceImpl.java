@@ -25,9 +25,20 @@ public class CouponServiceImpl implements CouponService {
 	private CouponCategoryRepository couponCategoryRepository;
 	
 	@Override
-	public Page<Coupon> selectAll(Pageable pageable) {
-		
-		return couponRepository.findAll(pageable);
+	public Page<Coupon> selectAll(Pageable pageable, String couponName, Long category) {
+		Page<Coupon> couponResult;
+		if(couponName==null && category==null) {
+			couponResult = couponRepository.findAll(pageable);
+		}else if(couponName!=null && category==null){
+			couponResult = this.selectByName(pageable, couponName);
+		}else if(couponName==null && category!=null) {
+			couponResult = this.selectByCategory(pageable, category);
+		}else {
+			CouponCategory couponCategory = couponCategoryRepository.findById(category).orElse(null);
+			couponResult = couponRepository.findAllBycpNameContainingAndcouponCategory(pageable, couponName, couponCategory);
+		}
+			
+		return couponResult;
 	}
 
 	@Override
@@ -45,8 +56,10 @@ public class CouponServiceImpl implements CouponService {
 
 	@Override
 	public Page<Coupon> viewAll(Pageable pageable) {
+		
 		return couponRepository.findAll(pageable);
 	}
+	
 	/**
 	 * 발급상태 변경하는 ajax 메소드
 	 */
@@ -58,7 +71,9 @@ public class CouponServiceImpl implements CouponService {
 	@Override
 	public Page<Coupon> selectByCategory(Pageable pageable, Long category) {
 		
-		return couponRepository.findByCouponCategory(pageable, category);
+		CouponCategory couponCategory = couponCategoryRepository.findById(category).orElse(null);
+		
+		return couponRepository.findBycouponCategory(pageable, couponCategory);
 		
 	}
 

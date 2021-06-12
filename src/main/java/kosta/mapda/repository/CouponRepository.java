@@ -9,11 +9,14 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 import kosta.mapda.domain.service.Coupon;
+import kosta.mapda.domain.service.CouponCategory;
 
 public interface CouponRepository extends JpaRepository<Coupon, Long> {
 	Page<Coupon> findBycpNameContaining(Pageable pageable, String keyword);
 	
-	Page<Coupon> findByCouponCategory(Pageable pageable, Long cpcaNo);
+	Page<Coupon> findBycouponCategory(Pageable pageable, CouponCategory cpcaNo);
+	
+	Page<Coupon> findAllBycpNameContainingAndcouponCategory(Pageable pageable, String couponName, CouponCategory cpcaNo);
 
 //	Page<Coupon> findAllCoupon();
 	

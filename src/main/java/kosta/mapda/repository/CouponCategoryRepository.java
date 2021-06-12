@@ -7,4 +7,5 @@ import kosta.mapda.domain.service.CouponCategory;
 public interface CouponCategoryRepository extends JpaRepository<CouponCategory, Long>{
 
 	
+	
 }

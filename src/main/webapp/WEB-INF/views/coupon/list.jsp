@@ -72,8 +72,7 @@
 	                                    
 	                                    <ul class="blog__item__widget">
 	                                        <li><i class="fa fa-money"></i>포인트 :  ${coup.cpPrice}point</li>
-	                                        <li><i class="fa fa-user"></i>이용매장 : ${coup.cpPlace}</li>
-	                                        
+	                                        <li><i class="fa fa-user"></i>이용매장 : ${coup.cpPlace}</li>                 
 	                                    </ul>
 	                                </div>
 	                            </div>
@@ -82,6 +81,7 @@
                         </c:otherwise>
 						</c:choose>
                     </div>
+                    
                     <!-- 페이징처리 -->
             
                     <div class="blog__pagination" style="text-align: center">
@@ -91,7 +91,7 @@
                         <c:when test="${couponList.first}">
                         </c:when> 
                         <c:otherwise> 
-                        <a href="/coupon/list/?keyword=${param.keyword}&nowPage=${couponList.number-1}"><i class="fa fa-long-arrow-left"></i>Pre</a> 
+                        <a href="/coupon/list/?keyword=${param.keyword}&cetegory=${param.category}&nowPage=${couponList.number-1}"><i class="fa fa-long-arrow-left"></i>Pre</a> 
                         </c:otherwise> 
                         </c:choose>
 
@@ -111,7 +111,7 @@
                         <c:when test="${couponList.last}">
                         </c:when> 
                         <c:otherwise> 
-                        <a href="/coupon/list/?keyword=${param.keyword}&nowPage=${couponList.number+1}"><i class="fa fa-long-arrow-right"></i>Next</a> 
+                        <a href="/coupon/list/?keyword=${param.keyword}&cetegory=${param.category}&nowPage=${couponList.number+1}"><i class="fa fa-long-arrow-right"></i>Next</a> 
                         </c:otherwise> 
                         </c:choose>
                         
@@ -131,7 +131,7 @@
                             <ul>
                                 <li><a href="/coupon/list">전체</a></li>
                                 <c:forEach items="${requestScope.categoryList}" var="cate">
-                                <li><a href="/coupon/list/${cate.cpcaNo-1}">${cate.cpcaName}<span></span></a></li>
+                                <li><a href="/coupon/list/?cetegory=${cate.cpcaNo}">${cate.cpcaName}<span></span></a></li>
                                 </c:forEach>
                                 
                             </ul>

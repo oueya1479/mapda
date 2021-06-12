@@ -14,7 +14,7 @@ public interface CouponService {
 	/**
 	 * 쿠폰목록 가져오기
 	 * */
-	Page<Coupon> selectAll(Pageable pageable);
+	Page<Coupon> selectAll(Pageable pageable, String couponName, Long category);
 	
 	/**
 	 * 쿠폰 상세보기

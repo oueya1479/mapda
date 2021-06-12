@@ -43,7 +43,7 @@ public class Coupon {
 	@JoinColumn(name = "mem_no") //회원번호
 	private Member member;
 	
-	@OneToOne 
+	@ManyToOne
 	@JoinColumn(name = "cpca_no") //카테고리번호
 	private CouponCategory couponCategory;
 	
