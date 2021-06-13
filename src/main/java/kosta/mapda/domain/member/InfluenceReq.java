@@ -19,7 +19,7 @@ import lombok.Setter;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Influencer {
+public class InfluenceReq {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "influencer_irno_seq")

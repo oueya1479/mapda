@@ -48,8 +48,8 @@
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                                <li class="active">
-                                    <a href="${pageContext.request.contextPath}/admin/influencer" class="waves-effect waves-dark">
+                                <li>
+                                    <a href="${pageContext.request.contextPath}/admin/influence" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">인플루언서</span>
                                         <span class="pcoded-mcaret"></span>
