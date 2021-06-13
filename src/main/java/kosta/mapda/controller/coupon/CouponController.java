@@ -80,7 +80,7 @@ public class CouponController {
 	public String allcouponList(Model model, @RequestParam(defaultValue = "0") int nowPage) {
 		
 		Pageable pageable = PageRequest.of(nowPage, 10, Direction.ASC, "cpNo");
-		Page<Coupon> couponList = service.selectAll(pageable);
+		Page<Coupon> couponList = service.viewAll(pageable);
 		
 		
 		model.addAttribute("couponList", couponList);

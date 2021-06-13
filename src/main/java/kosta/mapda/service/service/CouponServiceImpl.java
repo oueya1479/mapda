@@ -54,6 +54,12 @@ public class CouponServiceImpl implements CouponService {
 		
 	}
 
+	@Override
+	public Page<Coupon> viewAll(Pageable pageable) {
+		
+		return couponRepository.findAll(pageable);
+	}
+	
 	/**
 	 * 발급상태 변경하는 ajax 메소드
 	 */
