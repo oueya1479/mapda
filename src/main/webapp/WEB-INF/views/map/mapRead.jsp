@@ -110,49 +110,29 @@
 										src="${pageContext.request.contextPath}/img/listing/list_icon-2.png"
 										alt="">
 									<div class="listing__item__pic__tag top_rate">See Details</div>
-									<div class="listing__item__pic__btns">
-										<a href="#"><span class="icon_zoom-in_alt"></span></a> <a
-											href="#"><span class="icon_heart_alt"></span></a>
-									</div>
+									
 								</div>
 								<div class="listing__item__text">
 									<div class="listing__item__text__inside">
-										<h5> ${place.placeTitle}</h5>
+										<h5> ${place.placeTitle}</h5><br>
+										<a href="#"><img src="${pageContext.request.contextPath}/img/map/star.png"alt="" 
+											style="height:20px; width:20px;" ></a>&nbsp;&nbsp;&nbsp;${place.placeStar}
 										<div class="listing__item__text__rating">
-											<div class="listing__item__rating__star">
-												<span class="icon_star"></span> <span class="icon_star"></span>
-												<span class="icon_star"></span> <span class="icon_star"></span>
-												<span class="icon_star-half_alt"></span>
-											</div>
-
 										</div>
 										<ul>
-											<li><span ><img src="${pageContext.request.contextPath}/img/map/loupe.png"alt="" 
-											style="height:14px; width:14px;" ></span>
+											<li><span class="icon_zoom-in_alt"></span>
 												 ${place.placeContent}</li>
 											<li><span class="icon_pin_alt"></span> ${place.placeAddr}</li>
 										</ul>
-										<h6 style="text-align: right">
-											<a href="#"><img src="${pageContext.request.contextPath}/img/map/star.png"alt="" 
-											style="height:20px; width:20px;" ></a>
-										${place.placeStar}
-										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-										&nbsp;&nbsp;&nbsp;&nbsp;
-											<a href="#"><img src="${pageContext.request.contextPath}/img/map/heart.png"alt="" 
-											style="height:20px; width:20px; " ></a>
-										${place.placeLike}</h6>
 									</div><p>
 									<div class="listing__item__text__info">
 										<div class="listing__item__text__info__left">
-											<img
-												src="${pageContext.request.contextPath}/img/listing/list_small_icon-2.png"
-												alt=""> <span>Food & Drink</span>
+											<a href=""><img src="${pageContext.request.contextPath}/img/map/heart.png"style="height:20px; width:20px; 
+												alt=""> </a><span>${place.placeLike}</span>
 
 										</div>
-										<div class="listing__item__text__info__right closed">Closed</div>
+										<div class="listing__item__text__info__right closed"><img src="${pageContext.request.contextPath}/img/map/ribbon.png"style="height:20px; width:20px; 
+												alt=""></div>
 									</div>
 								</div>
 							</div>

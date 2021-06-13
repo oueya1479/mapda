@@ -89,8 +89,8 @@ public class MapController {
 	/**
 	 * 수정 폼
 	 */
-	@RequestMapping("/modifyForm/{mapNo}")
-	public ModelAndView modifyMap(@PathVariable Long mapNo) {
+	@RequestMapping("/modifyForm")
+	public ModelAndView modifyMap(Long mapNo) {
 		Theme theme= mapService.selectBy(mapNo, false);
 		return new ModelAndView("map/modifyMap", "theme", theme);
 	}
@@ -105,12 +105,23 @@ public class MapController {
 		return new ModelAndView("map/mapList", "theme", mapInfo);
 	}
 	
+	/**
+	 * 삭제
+	 */
+	@RequestMapping("/deleteMap")
+	public String delete(Long mapNo, String password) {
+		mapService.deleteMap(mapNo, password);
+		return "redirect:/map/mapList";
+	}
 	
-	
-	
-	
-	
-	
+	/**
+	 * 좋아요
+	 */
+	@RequestMapping("/likeMap{mapNo}")
+	public ModelAndView like(Long mapNo) {
+		//Ajax를 이용해서 좋아요 눌리게 하자
+		return null;
+	}
 	
 	
 }

@@ -68,9 +68,17 @@ public class MapServiceImpl implements MapService {
 		
 		return themeInfo;
 	}
-
 	
 	/**
 	 * 삭제
 	 */
+	@Override
+	public void deleteMap(Long mapNo, String password) {
+		Theme themeMap = maprepository.findById(mapNo).orElse(null);
+		if(themeMap==null) {
+			throw new RuntimeException("지도 삭제 오류. 다시 시도해주세요");
+		}
+		maprepository.deleteById(mapNo);
+	}
+	
 }

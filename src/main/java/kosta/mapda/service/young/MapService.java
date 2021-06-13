@@ -32,5 +32,10 @@ public interface MapService {
 	 * 수정폼
 	 */
 	Theme modifyMap(Theme theme);
+
+	/**
+	 * 삭제
+	 */
+	void deleteMap(Long mapNo, String password);
 	
 }
