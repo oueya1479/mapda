@@ -38,7 +38,7 @@ public class CouponController {
 			 {
 	
 		Pageable pageable = PageRequest.of(nowPage, 10, Direction.ASC, "cpNo");
-		Page<Coupon> couponList = service.selectAll(pageable, keyword, cetegory);
+		Page<Coupon> couponList; 
 		
 		/*if(keyword.isEmpty()==false || keyword!=null) {
 			couponList = service.selectByName(pageable, keyword);
@@ -47,6 +47,8 @@ public class CouponController {
 		}else {
 			couponList = service.selectAll(pageable);
 		}*/
+		
+		couponList = service.selectAll(pageable,keyword,cetegory);
 		
 		/*
 		 * int size = couponList.getContent().size(); for(int i = 0; i < size; i++) {

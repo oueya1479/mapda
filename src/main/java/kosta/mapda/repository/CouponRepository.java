@@ -16,7 +16,7 @@ public interface CouponRepository extends JpaRepository<Coupon, Long> {
 	
 	Page<Coupon> findBycouponCategory(Pageable pageable, CouponCategory cpcaNo);
 	
-	Page<Coupon> findAllBycpNameContainingAndcouponCategory(Pageable pageable, String couponName, CouponCategory cpcaNo);
+	//Page<Coupon> findAllBycpNameContainingAndcouponCategory(Pageable pageable, String couponName, CouponCategory cpcaNo);
 
 //	Page<Coupon> findAllCoupon();
 	

@@ -27,6 +27,22 @@ public class CouponServiceImpl implements CouponService {
 	@Override
 	public Page<Coupon> selectAll(Pageable pageable, String couponName, Long category) {
 		Page<Coupon> couponResult;
+		if(couponName.isEmpty()==true && category==null) {
+			couponResult = couponRepository.findAll(pageable);
+		}else if(couponName.isEmpty()!=true && category==null){
+			couponResult = this.selectByName(pageable, couponName);
+		}else if(couponName.isEmpty()==true && category!=null) {
+			couponResult = this.selectByCategory(pageable, category);
+		}else {
+			couponResult = couponRepository.findAll(pageable);
+		}
+			
+		return couponResult;
+	}
+	
+	/*@Override
+	public Page<Coupon> selectAll(Pageable pageable, String couponName, Long category) {
+		Page<Coupon> couponResult;
 		if(couponName==null && category==null) {
 			couponResult = couponRepository.findAll(pageable);
 		}else if(couponName!=null && category==null){
@@ -39,7 +55,7 @@ public class CouponServiceImpl implements CouponService {
 		}
 			
 		return couponResult;
-	}
+	}*/
 
 	@Override
 	public Coupon selectCoupon(Long couponNo) {
@@ -48,9 +64,9 @@ public class CouponServiceImpl implements CouponService {
 	}
 
 	@Override
-	public Page<Coupon> selectByName(Pageable pageable, String couponName) {
+	public Page<Coupon> selectByName(Pageable pageable, String keyword) {
 		
-		return couponRepository.findBycpNameContaining(pageable, couponName);
+		return couponRepository.findBycpNameContaining(pageable, keyword);
 		
 	}
 

@@ -13,6 +13,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 
+import kosta.mapda.domain.enterprise.Enterprise;
 import kosta.mapda.domain.member.Member;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -41,7 +42,7 @@ public class Coupon {
 	
 	@ManyToOne
 	@JoinColumn(name = "mem_no") //회원번호
-	private Member member;
+	private Enterprise member;
 	
 	@ManyToOne
 	@JoinColumn(name = "cpca_no") //카테고리번호

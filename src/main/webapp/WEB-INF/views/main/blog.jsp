@@ -15,10 +15,10 @@
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <div class="breadcrumb__text">
-                        <h2>Our Blog</h2>
+                        <h2>Coupon</h2>
                         <div class="breadcrumb__option">
                             <a href="#"><i class="fa fa-home"></i> Home</a>
-                            <span>Our Blog</span>
+                            <span>Coupon Detail</span>
                         </div>
                     </div>
                 </div>
@@ -34,7 +34,7 @@
                 <div class="col-lg-8">
                     <div class="blog__item__large">
                         <div class="blog__item__pic set-bg" data-setbg="img/blog/blog-large.jpg">
-                            <a href="https://www.youtube.com/watch?v=8EJ3zbKTWQ8" class="play-btn video-popup"><i class="fa fa-play"></i></a>
+                            
                         </div>
                         <div class="blog__item__text">
                             <ul class="blog__item__tags">

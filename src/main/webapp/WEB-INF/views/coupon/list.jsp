@@ -65,8 +65,8 @@
 	                                
 	                                <div class="blog__item__text">
 	                                    <ul class="blog__item__tags">
-	                                        <li><i class="fa fa-tags"></i> Travel</li>
-	                                        <li>Videos</li>
+	                                        <li><i class="fa fa-tags"></i> ${coup.couponCategory.cpcaName}</li>
+	                         
 	                                    </ul>
 	                                    <h5><a href="${pageContext.request.contextPath}/coupon/couponDetail/${coup.cpNo}">${coup.cpName}</a></h5>
 	                                    
@@ -83,7 +83,9 @@
                     </div>
                     
                     <!-- 페이징처리 -->
-            
+            		<c:if test="${not empty requestScope.couponList.content}">
+								
+							
                     <div class="blog__pagination" style="text-align: center">
                  
                         <!-- 이전 -->
@@ -115,12 +117,18 @@
                         </c:otherwise> 
                         </c:choose>
                         
+                       
                     </div>
+                    </c:if>
+                     
+                     
                 </div>
+                
+                
                 <div class="col-lg-4">
                     <div class="blog__sidebar">
                         <div class="blog__sidebar__search">
-                            <form name="searchForm" action="/coupon/list" method="post" onSubmit='return checkValid()'>
+                            <form name="searchForm" action="/coupon/list" method="get" onSubmit='return checkValid()'>
                                 <input type="text"  id="keyword" name="keyword" placeholder="쿠폰명 검색...">
                                 <button type="submit"><i class="fa fa-search"></i></button>
                             </form>
