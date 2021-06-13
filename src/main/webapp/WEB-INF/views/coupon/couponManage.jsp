@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -36,12 +36,24 @@
 	}
 
 </style>
+
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.3.1.min.js"></script>
 	<script>
+	function checkValid() {
+		var f = window.document.searchForm;
+		if (f.keyword.value == "") {
+			alert("검색어를 입력해 주세요.");
+			f.keyword.focus();
+			return false;
+		}
+		return true;
+	}
 	$(function(){
 		
 		$(document).on("click","#stop", function() {
-			$.ajax({
+			
+			alert(1)
+			/* $.ajax({
 				async: false,
 				type: 'POST',
 				url: '${pageContext.request.contextPath}/coupon/stop',
@@ -53,7 +65,7 @@
 				success: function({
 					alert($(this))	
 					
-				})
+				}) */
 				
 			})
 		})
@@ -64,7 +76,25 @@
 </head>
 
 <body>
-<h1>제휴 관리</h1>
+  
+
+    <!-- Breadcrumb Begin -->
+    <div class="breadcrumb-area set-bg" data-setbg="../img/breadcrumb/breadcrumb-blog.jpg">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="breadcrumb__text">
+                        <h2>Coupon</h2>
+                        <div class="breadcrumb__option">
+                            <a href="#"><i class="fa fa-home"></i> Home</a>
+                            <span>Coupon</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Breadcrumb End -->
 
     <!-- Most Search Section Begin -->
     <section class="most-search spad">
@@ -141,21 +171,34 @@
 						</tr>
 						</thead>
 						<tbody>
-						<c:forEach var="coupon" items="${couponList}" var="state" items="${stateList}">
+						<c:forEach items="${couponList.content}" var="coupon">
 						<tr>
 							<td>${coupon.cpName}</td>
-							<td>${state}</td>
+							<td>
+							<c:choose>
+								<c:when test="${coupon.cpState eq 1}">
+									발급 가능
+								</c:when>
+								<c:otherwise>
+									발급 중단	
+								</c:otherwise>
+							</c:choose>
+							</td>
 							<td>${coupon.cpPlace}</td>
 							<td><fmt:formatNumber value="${coupon.cpPrice}"/></td>
 						    <td>${coupon.cpState}</td>
 							<td><button id="stop"> - </button></td>
 						</tr>
 						</c:forEach>
+						
 						</tbody>
                     </table>
                     </div>
-                    
-                     <div class="blog__pagination" style="text-align: center">
+    				
+                    <!-- 페이징처리 -->
+            
+                    <div class="blog__pagination" style="text-align: center">
+                 
                         <!-- 이전 -->
                         <c:choose> 
                         <c:when test="${couponList.first}">
@@ -174,8 +217,8 @@
          						<a href="${pageContext.request.contextPath}/coupon/admin?nowPage=${i}">  ${i+1}  </a>
      						</c:otherwise>
    							</c:choose>
+   
  						</c:forEach>
- 						
                         <!-- 다음 -->
                         <c:choose> 
                         <c:when test="${couponList.last}">
@@ -185,12 +228,55 @@
                         </c:otherwise> 
                         </c:choose>
                         
-                   	 </div>
                     </div>
-                  </div>
                 </div>
-               </div>
-             </div>
-        </section>
-</body>
+                <div class="col-lg-4">
+                    <div class="blog__sidebar">
+                        <div class="blog__sidebar__search">
+                            <form name="searchForm" action="/coupon/list" method="post" onSubmit='return checkValid()'>
+                                <input type="text"  id="keyword" name="keyword" placeholder="쿠폰명 검색...">
+                                <button type="submit"><i class="fa fa-search"></i></button>
+                            </form>
+                        </div>
+                        
+                       <%--  <div class="blog__sidebar__categories">
+                            <h5>Categories</h5>
+                            <ul>
+                                <li><a href="/coupon/list">전체</a></li>
+                                <c:forEach items="${requestScope.categoryList}" var="cate">
+                                <li><a href="/coupon/list/${cate.cpcaNo-1}">${cate.cpcaName}<span></span></a></li>
+                                </c:forEach>
+                                
+                            </ul>
+                        </div> --%>
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Blog Section End -->
+
+    <!-- Newslatter Section Begin -->
+    <section class="newslatter">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6">
+                    <div class="newslatter__text">
+                        <h3>Subscribe Newsletter</h3>
+                        <p>Subscribe to our newsletter and don’t miss anything</p>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <form action="#" class="newslatter__form">
+                        <input type="text" placeholder="Your email">
+                        <button type="submit">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Newslatter Section End -->
+
+
 </html>

@@ -84,9 +84,8 @@ public class CouponController {
 		Pageable pageable = PageRequest.of(nowPage, 10, Direction.ASC, "cpNo");
 		Page<Coupon> couponList = service.viewAll(pageable);
 		
-		
 		model.addAttribute("couponList", couponList);
-		return "coupon/list2";
+		return "coupon/couponManage";
 	}
 	
 	/**

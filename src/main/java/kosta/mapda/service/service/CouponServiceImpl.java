@@ -51,7 +51,7 @@ public class CouponServiceImpl implements CouponService {
 			couponResult = this.selectByCategory(pageable, category);
 		}else {
 			CouponCategory couponCategory = couponCategoryRepository.findById(category).orElse(null);
-			couponResult = couponRepository.findAllBycpNameContainingAndcouponCategory(pageable, couponName, couponCategory);
+//			couponResult = couponRepository.findAllBycpNameContainingAndcouponCategory(pageable, couponName, couponCategory);
 		}
 			
 		return couponResult;
