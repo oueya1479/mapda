@@ -1,5 +1,6 @@
 package kosta.mapda.controller.coupon;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,26 +76,26 @@ public class CouponController {
 //	/**
 //	 * 관리자 전체 쿠폰 조회
 //	 */
-//	@RequestMapping("/admin")
-//	public String allcouponList(Model model, @RequestParam(defaultValue = "0") int nowPage) {
-//		
-//		Pageable pageable = PageRequest.of(nowPage, 10, Direction.ASC, "cpNo");
-//		Page<Coupon> couponList = service.viewAll(pageable);
-//		
-//		
-//		model.addAttribute("couponList", couponList);
-//		return "coupon/couponManage";
-//	}
+	@RequestMapping("/admin")
+	public String allcouponList(Model model, @RequestParam(defaultValue = "0") int nowPage) {
+		
+		Pageable pageable = PageRequest.of(nowPage, 10, Direction.ASC, "cpNo");
+		Page<Coupon> couponList = service.selectAll(pageable);
+		
+		
+		model.addAttribute("couponList", couponList);
+		return "coupon/list2";
+	}
 	
 	/**
 	 * 관리자 전체 쿠폰 조회
 	 */
-	@RequestMapping("/admin")
-	public String allcouponList(Model model, @PageableDefault(size = 10, sort = "id", direction = Sort.Direction.DESC) Pageable pageable ) {
-		
-		Page<Coupon> couponList = service.viewAll(pageable);
-		model.addAttribute("couponList", couponList);
-		return "coupon/couponManage";
-	}
+//	@RequestMapping("/admin")
+//	public String allcouponList(Model model, @PageableDefault(size = 10, sort = "id", direction = Sort.Direction.DESC) Pageable pageable ) {
+//		
+//		Page<Coupon> couponList = service.viewAll(pageable);
+//		model.addAttribute("couponList", couponList);
+//		return "coupon/couponManage";
+//	}
 	
 }
