@@ -29,9 +29,8 @@ public class MapStorage {
 	@JoinColumn(name="mem_no")
 	private Member member;
 	
-	@ManyToOne
-	@JoinColumn(name="map_no")
-	private Theme theme;
+//	@OneToMany(mappedBy="mapStorage")
+//	private Theme theme;
 	
 	@CreationTimestamp
 	private LocalDateTime mapStorageRegdate;

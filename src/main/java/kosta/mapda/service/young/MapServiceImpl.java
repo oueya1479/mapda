@@ -80,5 +80,5 @@ public class MapServiceImpl implements MapService {
 		}
 		maprepository.deleteById(mapNo);
 	}
-	
+
 }

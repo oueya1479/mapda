@@ -18,15 +18,40 @@
 		$("input[value=Delete]").click(function() {
 							var mapNo = $(this).attr("id")
 							var pwd = prompt("비밀번호를 입력하세요.");
-							if (pwd) {
-								$("#memPw").val(pwd);
+							if (pwd==$("#memPw").val()) {
 								$("#requestForm")
 										.attr("action",
 												"${pageContext.request.contextPath}/map/deleteMap");
 								$("#requestForm").submit();
+							}else{
+								alert("비밀번호오류입니다")
 							}
 						})
 	});
+</script>
+
+<script type="text/javascript">
+	/* $(function(){
+		$("#like").click(function(){
+			var mapNo = $(this).attr("id")
+			alert(mapNo);
+		})
+	}); */
+	$(function subscribe(){
+		$.ajax({
+			url:"${pageContext.request.contextPath}/map/subscribe",
+			type:"get",
+			dataType:"json"
+			data:{mapNo : '${map.mapNo}'}
+			success: function(data){
+			}
+			error : function(err){
+				  console.log(err+" 에러 발생.")
+			  }
+		})
+	})
+
+
 </script>
 </head>
 
@@ -119,6 +144,27 @@
 												</div>
 											</div>
 											<div class="listing__item__text">
+												&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+												&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+												&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+												&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+												<%-- <c:choose>
+													<c:when test="${map.mapStorage.mapNo ne map.mapNo}">
+														<a href='javascript: subscribe();'><img
+															src='${pageContext.request.contextPath}/img/map/bookmark-tag.png' id='like_img'></a>
+													</c:when>
+													<c:otherwise>
+														<a href='javascript: unsubscribe()'><img
+															src='${pageContext.request.contextPath}/img/map/ribbon.png'></a>
+													</c:otherwise>
+												</c:choose> --%>
+
+
+												<img
+													src="${pageContext.request.contextPath}/img/map/ribbon.png"
+													alt="" style="height: 20px; width: 20px; cursor: pointer;"
+													id="subscribe"
+													onclick="javascript:location.href='${pageContext.request.contextPath}/map/mapRead/${map.mapNo}'"><br>
 												<div class="listing__item__text__inside">
 
 													<h5>
@@ -126,7 +172,10 @@
 														<a
 															href="${pageContext.request.contextPath}/map/mapRead/${map.mapNo}">${map.mapTitle}</a>
 													</h5>
+
 													<div class="listing__item__text__rating">
+
+
 														<div class="listing__item__rating__star">
 															<p>${map.mapContent}</p>
 														</div>

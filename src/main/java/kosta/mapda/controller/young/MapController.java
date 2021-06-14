@@ -114,14 +114,6 @@ public class MapController {
 		return "redirect:/map/mapList";
 	}
 	
-	/**
-	 * 좋아요
-	 */
-	@RequestMapping("/likeMap{mapNo}")
-	public ModelAndView like(Long mapNo) {
-		//Ajax를 이용해서 좋아요 눌리게 하자
-		return null;
-	}
 	
 	
 }
