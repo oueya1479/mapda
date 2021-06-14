@@ -5,8 +5,9 @@
 <html lang="zxx">
 
 <head>
-
 <SCRIPT>
+
+
 	function checkValid() {
 		var f = window.document.searchForm;
 		if (f.keyword.value == "") {
@@ -24,7 +25,7 @@
   
 
     <!-- Breadcrumb Begin -->
-    <div class="breadcrumb-area set-bg" data-setbg="../img/breadcrumb/breadcrumb-blog.jpg">
+    <div class="breadcrumb-area set-bg" data-setbg="/img/breadcrumb/breadcrumb-blog.jpg">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
