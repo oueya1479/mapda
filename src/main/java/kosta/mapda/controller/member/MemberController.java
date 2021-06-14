@@ -137,7 +137,12 @@ public class MemberController {
 	public void pay() {
 
 	}
-
+	
+	@RequestMapping("/iamport")
+	public void iamport() {
+		
+	}
+	
 	@RequestMapping("/start")
 	public String start() {
 		Long memNo = 2L;
