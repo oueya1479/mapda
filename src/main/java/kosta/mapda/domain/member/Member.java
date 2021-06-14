@@ -1,15 +1,18 @@
 package kosta.mapda.domain.member;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import kosta.mapda.domain.map.Theme;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -42,5 +45,7 @@ public class Member {
 	@CreationTimestamp
 	private LocalDateTime memRegdate;
 	
+	@OneToMany(mappedBy = "mapNo")
+	private List<Theme> mapList;
 
 }
