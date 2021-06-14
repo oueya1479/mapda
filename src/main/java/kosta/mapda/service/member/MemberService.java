@@ -26,4 +26,5 @@ public interface MemberService {
 
 	void start(Long memNo);
 
+
 }

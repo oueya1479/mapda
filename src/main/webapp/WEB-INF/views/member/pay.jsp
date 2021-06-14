@@ -3,6 +3,24 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script>
+	$(function() {
+		$(document).on("click", "#iamport", function(event) { //버튼을 클릭 했을시 popupOpen 함수 출력 
+			popupOpen();
+		});
+		
+		
+
+	function popupOpen() {
+		var url = "${pageContext.request.contextPath}/member/iamport";
+		var winWidth = 700;
+		var winHeight = 600;
+		var popupOption = "width=" + winWidth + ", height=" + winHeight; //팝업창 옵션(optoin)
+		var myWindow = window.open(url, "결제창", popupOption);
+	}
+	
+	})
+</script>
 <style type="text/css">
 #mu-pricing {
 	background-color: #f8f8f8;
@@ -188,7 +206,7 @@
 											</ul>
 											
 											<div class="mu-pricing-single-footer">
-												<a href="#" class="mu-order-btn">Order Now!</a>
+												<a href="#" class="mu-order-btn" id="iamport">Order Now!</a>
 											</div>
 											
 

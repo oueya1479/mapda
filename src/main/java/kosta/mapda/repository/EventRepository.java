@@ -8,5 +8,4 @@ import kosta.mapda.domain.service.Event;
 
 public interface EventRepository extends JpaRepository<Event, Long> {
 
-
 }

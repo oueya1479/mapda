@@ -9,6 +9,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Transient;
+
+import org.springframework.web.multipart.MultipartFile;
 
 import kosta.mapda.domain.Management;
 import lombok.AllArgsConstructor;
@@ -22,6 +25,9 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Event {
+	
+	@Transient
+	private MultipartFile file; 
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "event_emno_seq")
