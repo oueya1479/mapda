@@ -163,6 +163,7 @@
                         </ul>
                     </div>
                     <div class="tab-content">
+                    <a href="${pageContext.request.contextPath}/coupon/couponAdd" style="font-style: normal;">쿠폰등록</a>
                     <div align="center">
                     <table>
                     	<thead>

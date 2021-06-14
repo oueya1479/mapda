@@ -89,6 +89,15 @@ public class CouponController {
 	}
 	
 	/**
+	 * 
+	 */
+	@RequestMapping("/couponAdd")
+	public String couponAdd() {
+		
+		return "coupon/couponAdd";
+	}
+	
+	/**
 	 * 관리자 전체 쿠폰 조회
 	 */
 //	@RequestMapping("/admin")
