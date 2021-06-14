@@ -54,6 +54,12 @@ public class EventServiceImpl implements EventService {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public List<Event> list() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	
 }
