@@ -22,4 +22,5 @@ public interface CouponRepository extends JpaRepository<Coupon, Long> {
 	@Modifying
 	int stop(Long cpNo);
 	
+	
 }

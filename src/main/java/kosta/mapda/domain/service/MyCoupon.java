@@ -31,7 +31,6 @@ public class MyCoupon {
 	@SequenceGenerator(sequenceName = "mycp_no_seq", allocationSize = 1, name = "mycp_no_seq")
 	private Long mycpNo; //내쿠폰번호
 	
-	private String barcoImg; //바코드이미지
 	private String barcoImgPath; //바코드 이미지 경로
 	private int barcoNo; //바코드번호
 	

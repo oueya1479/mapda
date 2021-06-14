@@ -9,10 +9,14 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import kosta.mapda.domain.member.Member;
 import kosta.mapda.domain.service.Coupon;
 import kosta.mapda.domain.service.CouponCategory;
+import kosta.mapda.domain.service.MyCoupon;
 import kosta.mapda.repository.CouponCategoryRepository;
 import kosta.mapda.repository.CouponRepository;
+import kosta.mapda.repository.MyCouponRepository;
+import kosta.mapda.repository.member.MemberRepository;
 
 @Service
 @Transactional
@@ -23,6 +27,12 @@ public class CouponServiceImpl implements CouponService {
 	
 	@Autowired
 	private CouponCategoryRepository couponCategoryRepository;
+	
+	@Autowired
+	private MyCouponRepository myCouponRepository;
+	
+	@Autowired
+	private MemberRepository memberRepository;
 	
 	@Override
 	public Page<Coupon> selectAll(Pageable pageable, String couponName, Long category) {
@@ -97,6 +107,14 @@ public class CouponServiceImpl implements CouponService {
 	public List<CouponCategory> couponCategory() {
 		
 		return couponCategoryRepository.findAll();
+	}
+
+	@Override
+	public Page<MyCoupon> selectByMyCoupon(Pageable pageable, Long memNo) {
+		
+		Member member = memberRepository.findById(memNo).orElse(null);
+		
+		return myCouponRepository.findBymember(pageable, member);
 	}
 	
 }

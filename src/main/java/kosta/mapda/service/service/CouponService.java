@@ -7,6 +7,7 @@ import org.springframework.data.domain.Pageable;
 
 import kosta.mapda.domain.service.Coupon;
 import kosta.mapda.domain.service.CouponCategory;
+import kosta.mapda.domain.service.MyCoupon;
 
 public interface CouponService {
 
@@ -46,4 +47,9 @@ public interface CouponService {
 	 * 쿠폰 발급상태 변경하기
 	 */
 	int stop(Long cpNo);
+	
+	/**
+	 * 마이페이지 - 마이쿠폰 가져오기
+	 * */
+	Page<MyCoupon> selectByMyCoupon(Pageable pageable, Long memNo);
 }
