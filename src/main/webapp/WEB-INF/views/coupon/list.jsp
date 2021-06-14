@@ -5,8 +5,9 @@
 <html lang="zxx">
 
 <head>
-
 <SCRIPT>
+
+
 	function checkValid() {
 		var f = window.document.searchForm;
 		if (f.keyword.value == "") {
@@ -24,7 +25,7 @@
   
 
     <!-- Breadcrumb Begin -->
-    <div class="breadcrumb-area set-bg" data-setbg="../img/breadcrumb/breadcrumb-blog.jpg">
+    <div class="breadcrumb-area set-bg" data-setbg="/img/breadcrumb/breadcrumb-blog.jpg">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
@@ -65,15 +66,14 @@
 	                                
 	                                <div class="blog__item__text">
 	                                    <ul class="blog__item__tags">
-	                                        <li><i class="fa fa-tags"></i> Travel</li>
-	                                        <li>Videos</li>
+	                                        <li><i class="fa fa-tags"></i> ${coup.couponCategory.cpcaName}</li>
+	                         
 	                                    </ul>
 	                                    <h5><a href="${pageContext.request.contextPath}/coupon/couponDetail/${coup.cpNo}">${coup.cpName}</a></h5>
 	                                    
 	                                    <ul class="blog__item__widget">
 	                                        <li><i class="fa fa-money"></i>포인트 :  ${coup.cpPrice}point</li>
-	                                        <li><i class="fa fa-user"></i>이용매장 : ${coup.cpPlace}</li>
-	                                        
+	                                        <li><i class="fa fa-user"></i>이용매장 : ${coup.cpPlace}</li>                 
 	                                    </ul>
 	                                </div>
 	                            </div>
@@ -82,8 +82,11 @@
                         </c:otherwise>
 						</c:choose>
                     </div>
+                    
                     <!-- 페이징처리 -->
-            
+            		<c:if test="${not empty requestScope.couponList.content}">
+								
+							
                     <div class="blog__pagination" style="text-align: center">
                  
                         <!-- 이전 -->
@@ -91,7 +94,7 @@
                         <c:when test="${couponList.first}">
                         </c:when> 
                         <c:otherwise> 
-                        <a href="/coupon/list/?keyword=${param.keyword}&nowPage=${couponList.number-1}"><i class="fa fa-long-arrow-left"></i>Pre</a> 
+                        <a href="/coupon/list/?keyword=${param.keyword}&cetegory=${param.category}&nowPage=${couponList.number-1}"><i class="fa fa-long-arrow-left"></i>Pre</a> 
                         </c:otherwise> 
                         </c:choose>
 
@@ -111,16 +114,22 @@
                         <c:when test="${couponList.last}">
                         </c:when> 
                         <c:otherwise> 
-                        <a href="/coupon/list/?keyword=${param.keyword}&nowPage=${couponList.number+1}"><i class="fa fa-long-arrow-right"></i>Next</a> 
+                        <a href="/coupon/list/?keyword=${param.keyword}&cetegory=${param.category}&nowPage=${couponList.number+1}"><i class="fa fa-long-arrow-right"></i>Next</a> 
                         </c:otherwise> 
                         </c:choose>
                         
+                       
                     </div>
+                    </c:if>
+                     
+                     
                 </div>
+                
+                
                 <div class="col-lg-4">
                     <div class="blog__sidebar">
                         <div class="blog__sidebar__search">
-                            <form name="searchForm" action="/coupon/list" method="post" onSubmit='return checkValid()'>
+                            <form name="searchForm" action="/coupon/list" method="get" onSubmit='return checkValid()'>
                                 <input type="text"  id="keyword" name="keyword" placeholder="쿠폰명 검색...">
                                 <button type="submit"><i class="fa fa-search"></i></button>
                             </form>
@@ -131,7 +140,7 @@
                             <ul>
                                 <li><a href="/coupon/list">전체</a></li>
                                 <c:forEach items="${requestScope.categoryList}" var="cate">
-                                <li><a href="/coupon/list/${cate.cpcaNo-1}">${cate.cpcaName}<span></span></a></li>
+                                <li><a href="/coupon/list/?cetegory=${cate.cpcaNo}">${cate.cpcaName}<span></span></a></li>
                                 </c:forEach>
                                 
                             </ul>

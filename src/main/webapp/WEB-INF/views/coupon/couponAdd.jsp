@@ -3,7 +3,7 @@
 <html lang="zxx">
 
 <head>
- 
+  	
 </head>
 
 <body>
@@ -37,19 +37,13 @@
                            <img src="${coupon.cpImgpath}">
                         </div>
                         <div class="blog__item__text" style = "text-align : center;">
-                            <ul class="blog__item__tags">
-                                <li><i class="fa fa-tags"></i> ${coupon.couponCategory.cpcaName}</li>
+                            	
+                 				쿠폰이름 : <input type="text" id="cpName"/> <br>
+                 				사용처 : <input type="text" id="cpPlace"/> <br>
+                 				쿠폰가격 : <input type="text" id="cpPrice"/> <br>
+                 				쿠폰설명 : <input type="text" id="cpDetail"/>
                             
-                            </ul>
-                            <h3>${coupon.cpName}</h3>&nbsp;
-                            
-                               <h5><i class="fa fa-money"></i>포인트 :  ${coupon.cpPrice}point</h5>
-                 
-	                           <h5><i class="fa fa-user"></i>이용매장 : ${coupon.cpPlace}</h5>  
-                           
-                           		<h5><i class="fa fa-user"></i>교환처 : ${coupon.member.entName}</h5>  
-                            
-                                <hr><button type="submit" class="site-btn">발급</button>
+                                <hr><button type="submit" class="site-btn">등록</button>
                         </div>
                     </div>
                     <div class="blog__item__large">

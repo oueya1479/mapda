@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -36,12 +36,24 @@
 	}
 
 </style>
+
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.3.1.min.js"></script>
 	<script>
+	function checkValid() {
+		var f = window.document.searchForm;
+		if (f.keyword.value == "") {
+			alert("검색어를 입력해 주세요.");
+			f.keyword.focus();
+			return false;
+		}
+		return true;
+	}
 	$(function(){
 		
 		$(document).on("click","#stop", function() {
-			$.ajax({
+			
+			alert(1)
+			/* $.ajax({
 				async: false,
 				type: 'POST',
 				url: '${pageContext.request.contextPath}/coupon/stop',
@@ -53,7 +65,7 @@
 				success: function({
 					alert($(this))	
 					
-				})
+				}) */
 				
 			})
 		})
@@ -64,91 +76,25 @@
 </head>
 
 <body>
-<h1>제휴 관리</h1>
-    <!-- Hero Section Begin -->
-<%--     <section class="hero set-bg" data-setbg="${pageContext.request.contextPath}/img/hero/hero-bg.jpg">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="hero__text">
-                        <div class="section-title">
-                            <h2>Discover The Best Services Near You</h2>
-                            <p>1.118.940.376 The best service package is waiting for you</p>
-                        </div>
-                        <div class="hero__search__form">
-                            <form action="#">
-                                <input type="text" placeholder="Search...">
-                                <div class="select__option">
-                                    <select>
-                                        <option value="">Choose Categories</option>
-                                    </select>
-                                </div>
-                                <div class="select__option">
-                                    <select>
-                                        <option value="">Choose Location</option>
-                                    </select>
-                                </div>
-                                <button type="submit">Explore Now</button>
-                            </form>
-                        </div>
-                        <ul class="hero__categories__tags">
-                            <li><a href="#"><img src="img/hero/cat-1.png" alt=""> 전체 </a></li>
-                            <li><a href="#"><img src="img/hero/cat-2.png" alt=""> 카페 </a></li>
-                            <li><a href="#"><img src="img/hero/cat-3.png" alt=""> 문화 </a></li>
-                            <li><a href="#"><img src="img/hero/cat-4.png" alt=""> 식품 </a></li>
-                            <li><a href="#"><img src="img/hero/cat-5.png" alt=""> 패션</a></li>
-                            <li><a href="#"><img src="img/hero/cat-5.png" alt=""> 건강</a></li>
-                            <li><a href="#"><img src="img/hero/cat-5.png" alt=""> 스포츠</a></li>
-                            <li><a href="#"><img src="img/hero/cat-5.png" alt=""> 미용</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section> --%>
-    <!-- Hero Section End -->
+  
 
-    <!-- Categories Section Begin -->
-    <!-- <section class="categories spad">
+    <!-- Breadcrumb Begin -->
+    <div class="breadcrumb-area set-bg" data-setbg="../img/breadcrumb/breadcrumb-blog.jpg">
         <div class="container">
             <div class="row">
-                <div class="col-lg-12">
-                    <div class="section-title">
-                        <h2>Most Popular Categories</h2>
-                        <p>Travelocity empowers travelers who are giving back on their trips in ways big and small</p>
-                    </div>
-                    <div class="categories__item__list">
-                        <div class="categories__item">
-                            <img src="img/categories/cat-1.png" alt="">
-                            <h5>Food & Drink</h5>
-                            <span>78 Listings</span>
-                        </div>
-                        <div class="categories__item">
-                            <img src="img/categories/cat-2.png" alt="">
-                            <h5>Restaurent</h5>
-                            <span>32 Listings</span>
-                        </div>
-                        <div class="categories__item">
-                            <img src="img/categories/cat-3.png" alt="">
-                            <h5>Hotels</h5>
-                            <span>16 Listings</span>
-                        </div>
-                        <div class="categories__item">
-                            <img src="img/categories/cat-4.png" alt="">
-                            <h5>Beauty & Spa</h5>
-                            <span>55 Listings</span>
-                        </div>
-                        <div class="categories__item">
-                            <img src="img/categories/cat-5.png" alt="">
-                            <h5>Shopping</h5>
-                            <span>23 Listings</span>
+                <div class="col-lg-12 text-center">
+                    <div class="breadcrumb__text">
+                        <h2>Coupon</h2>
+                        <div class="breadcrumb__option">
+                            <a href="#"><i class="fa fa-home"></i> Home</a>
+                            <span>Coupon</span>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section> -->
-    <!-- Categories Section End -->
+    </div>
+    <!-- Breadcrumb End -->
 
     <!-- Most Search Section Begin -->
     <section class="most-search spad">
@@ -217,6 +163,7 @@
                         </ul>
                     </div>
                     <div class="tab-content">
+                    <a href="${pageContext.request.contextPath}/coupon/couponAdd" style="font-style: normal;">쿠폰등록</a>
                     <div align="center">
                     <table>
                     	<thead>
@@ -225,22 +172,112 @@
 						</tr>
 						</thead>
 						<tbody>
-						<c:forEach items="${couponList}" var="coupon" varStatus="count">
+						<c:forEach items="${couponList.content}" var="coupon">
 						<tr>
 							<td>${coupon.cpName}</td>
-							<td>${coupon.cpState}</td>
+							<td>
+							<c:choose>
+								<c:when test="${coupon.cpState eq 1}">
+									발급 가능
+								</c:when>
+								<c:otherwise>
+									발급 중단	
+								</c:otherwise>
+							</c:choose>
+							</td>
 							<td>${coupon.cpPlace}</td>
 							<td><fmt:formatNumber value="${coupon.cpPrice}"/></td>
-							<td>${coupon.cpState}</td>
+						    <td>${coupon.cpState}</td>
 							<td><button id="stop"> - </button></td>
 						</tr>
 						</c:forEach>
+						
 						</tbody>
                     </table>
                     </div>
+    				
+                    <!-- 페이징처리 -->
+            
+                    <div class="blog__pagination" style="text-align: center">
+                 
+                        <!-- 이전 -->
+                        <c:choose> 
+                        <c:when test="${couponList.first}">
+                        </c:when> 
+                        <c:otherwise> 
+                        <a href="/coupon/admin/?nowPage=${couponList.number-1}"><i class="fa fa-long-arrow-left"></i>Pre</a> 
+                        </c:otherwise> 
+                        </c:choose>
+
+                        <c:forEach begin="0" end="${couponList.totalPages-1}" var="i"> <!-- pageList.getTotalPages() 호출 -->
+   							<c:choose>
+     							<c:when test="${couponList.number==i}"> <!-- pageList.getNumver() 호출 -->
+         							<a href="${pageContext.request.contextPath}/coupon/admin?nowPage=${i}" style="color:red">  ${i+1}  </a>
+     							</c:when>
+    						<c:otherwise>
+         						<a href="${pageContext.request.contextPath}/coupon/admin?nowPage=${i}">  ${i+1}  </a>
+     						</c:otherwise>
+   							</c:choose>
+   
+ 						</c:forEach>
+                        <!-- 다음 -->
+                        <c:choose> 
+                        <c:when test="${couponList.last}">
+                        </c:when> 
+                        <c:otherwise> 
+                        <a href="/coupon/admin/?nowPage=${couponList.number+1}"><i class="fa fa-long-arrow-right"></i>Next</a> 
+                        </c:otherwise> 
+                        </c:choose>
+                        
                     </div>
-                  </div>
                 </div>
-             </div>
-</body>
+                <div class="col-lg-4">
+                    <div class="blog__sidebar">
+                        <div class="blog__sidebar__search">
+                            <form name="searchForm" action="/coupon/list" method="post" onSubmit='return checkValid()'>
+                                <input type="text"  id="keyword" name="keyword" placeholder="쿠폰명 검색...">
+                                <button type="submit"><i class="fa fa-search"></i></button>
+                            </form>
+                        </div>
+                        
+                       <%--  <div class="blog__sidebar__categories">
+                            <h5>Categories</h5>
+                            <ul>
+                                <li><a href="/coupon/list">전체</a></li>
+                                <c:forEach items="${requestScope.categoryList}" var="cate">
+                                <li><a href="/coupon/list/${cate.cpcaNo-1}">${cate.cpcaName}<span></span></a></li>
+                                </c:forEach>
+                                
+                            </ul>
+                        </div> --%>
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Blog Section End -->
+
+    <!-- Newslatter Section Begin -->
+    <section class="newslatter">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6">
+                    <div class="newslatter__text">
+                        <h3>Subscribe Newsletter</h3>
+                        <p>Subscribe to our newsletter and don’t miss anything</p>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <form action="#" class="newslatter__form">
+                        <input type="text" placeholder="Your email">
+                        <button type="submit">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Newslatter Section End -->
+
+
 </html>

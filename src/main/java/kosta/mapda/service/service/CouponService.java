@@ -14,7 +14,7 @@ public interface CouponService {
 	/**
 	 * 쿠폰목록 가져오기
 	 * */
-	Page<Coupon> selectAll(Pageable pageable);
+	Page<Coupon> selectAll(Pageable pageable, String couponName, Long category);
 	
 	/**
 	 * 쿠폰 상세보기
@@ -23,13 +23,14 @@ public interface CouponService {
 	
 	
 	/**
+	 * 관리자 전체 쿠폰 목록 보기
+	 */
+	Page<Coupon> viewAll(Pageable pageable);
+	
+	/**
 	 * 쿠폰 검색해서 가져오기
 	 * */
 	Page<Coupon> selectByName(Pageable pageable, String couponName);
-	/**
-	 * 관리자 쿠폰 전체 조회하기
-	 */
-	Page<Coupon> viewAll(Pageable pageable);
 	
 	/**
 	 * 쿠폰 카테고리로 목록 가져오기
