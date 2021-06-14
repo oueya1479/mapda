@@ -67,4 +67,9 @@ public interface PlaceReviewService {
 	 * 		플레이스 리뷰 수정하기
 	 * */
 	PlaceReview prUpdate(PlaceReview placeReview);
+	
+	/**
+	 * 		플레이스 포토리뷰 수정하기
+	 * */
+	PlacePhotoReview prrUpdate(PlacePhotoReview placePhotoReview);
 }

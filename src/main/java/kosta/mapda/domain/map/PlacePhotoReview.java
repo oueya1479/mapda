@@ -14,6 +14,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import kosta.mapda.domain.Management;
 import kosta.mapda.domain.member.Member;
@@ -37,6 +38,7 @@ public class PlacePhotoReview {	// Place_Photo_Review
 	private String pprContent;
 	
 	@CreationTimestamp
+	@DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
 	private LocalDateTime pprRegdate;
 	
 	private int pprStar;

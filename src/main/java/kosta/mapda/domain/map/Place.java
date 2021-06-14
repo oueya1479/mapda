@@ -11,6 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import kosta.mapda.domain.Management;
 import kosta.mapda.domain.member.Member;
@@ -31,12 +32,13 @@ public class Place {
 	private Long placeNo;
 	
 	private String placeTitle;
-	private int placeLatitude;
-	private int placeLongitude;
+	private float placeLatitude;
+	private float placeLongitude;
 	private String placeAddr;
 	private String placeContent;
 	
 	@CreationTimestamp
+	@DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
 	private LocalDateTime placeRegdate;
 	
 	private String placeTag;

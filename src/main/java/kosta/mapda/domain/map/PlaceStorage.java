@@ -8,6 +8,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import kosta.mapda.domain.member.Member;
 import lombok.AllArgsConstructor;
@@ -35,5 +36,6 @@ public class PlaceStorage {
 	private Place place;
 	
 	@CreationTimestamp
+	@DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
 	private LocalDateTime placeStorageRegdate;
 }
