@@ -1,10 +1,12 @@
 package kosta.mapda.service.young;
 
 
+import java.util.Map;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-
+import kosta.mapda.domain.map.MapStorage;
 import kosta.mapda.domain.map.Theme;
 
 public interface MapService {
@@ -38,5 +40,22 @@ public interface MapService {
 	 * 삭제
 	 */
 	void deleteMap(Long mapNo, String password);
+
+	/**
+	 * 구독 상태 체크
+	 */
+	MapStorage subcheck(Long memNo, Long mapNo);
+	
+	/**
+	 * 구독 테이블에 인서트
+	 */
+	void insertSubscribe(Long memNo, Long MapNo);
+
+	/**
+	 * 구독 테이블에 삭제
+	 */
+	void deleteSubscribe(Long memNo, Long MapNo);
+
+	
 
 }

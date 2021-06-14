@@ -1,11 +1,13 @@
 package kosta.mapda.domain.map;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -23,16 +25,21 @@ import lombok.Setter;
 public class MapStorage {
 	
 	@Id
+    
 	private Long msNo;
 	
 	@ManyToOne
 	@JoinColumn(name="mem_no")
 	private Member member;
 	
-//	@OneToMany(mappedBy="mapStorage")
-//	private Theme theme;
+	@ManyToOne
+	@JoinColumn(name="map_no")
+	private Theme theme;
 	
 	@CreationTimestamp
 	private LocalDateTime mapStorageRegdate;
-	
+//	
+//	@OneToMany(mappedBy="mapStorage")
+//	private List<Theme> theme;
+//	
 }

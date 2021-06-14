@@ -1,5 +1,6 @@
 package kosta.mapda.service.place;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -76,16 +77,28 @@ public class PlaceReviewServiceImpl implements PlaceReviewService {
 	@Override
 	public void prDelete(Long id) {
 		//pprpRepository.deletePprp(id);
-		pprRepository.deleteById(id);
+		PlacePhotoReview ppr =pprRepository.findById(id).orElse(null);
+		LocalDateTime validRegdate =ppr.getPprRegdate().plusDays(30);
+		LocalDateTime nowRegdate = ppr.getPprRegdate();
+		if(nowRegdate.isBefore(validRegdate)) {//nowRegdate <validRegdate
+			throw new RuntimeException("30일 이후에 삭제가 가능합니다.");
+		}else {
+			pprRepository.deleteById(id);	
+		}
 	}
 
 	@Override
 	public PlaceReview prUpdate(PlaceReview placeReview) {
 		PlaceReview dbPlaceReview = prRepository.findById(placeReview.getPrNo()).orElse(null);
-		
 		dbPlaceReview.setPrContent(placeReview.getPrContent().replace("<", "&lt;"));
-		
 		return dbPlaceReview;
+	}
+
+	@Override
+	public PlacePhotoReview prrUpdate(PlacePhotoReview placePhotoReview) {
+		PlacePhotoReview dbPpr = pprRepository.findById(placePhotoReview.getPprNo()).orElse(null);
+		dbPpr.setPprContent(placePhotoReview.getPprContent().replace("<", "&lt;"));
+		return dbPpr;
 	}
 
 //	@Override

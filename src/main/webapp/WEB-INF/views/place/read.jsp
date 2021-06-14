@@ -136,21 +136,6 @@
       		}
       		return true;
       	}
-      	
-      	
-      	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-      	    mapOption = { 
-      	        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-      	        level: 3 // 지도의 확대 레벨
-      	    };
-
-      	// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
-      	var map = new kakao.maps.Map(mapContainer, mapOption); 
-      	
-      	
-      	
-      	
-      	
   </script>
 
 
@@ -158,10 +143,6 @@
 
 
 <body>
-
-    <div id="map" style="width:100%;height:350px;"></div>
-
-
     <!-- Listing Section Begin -->
     <section class="listing-hero set-bg" data-setbg="${pageContext.request.contextPath}/img/placeimges/test1.png"><!-- 무슨 사진 넣을지 고민 -->
         <div class="container">
@@ -174,14 +155,9 @@
                         <div class="listing__hero__text">
                             <h2>${requestScope.place.placeTitle}</h2>
                             <div class="listing__hero__widget">
-                                <div class="listing__hero__widget__rating">
-                                    <span class="icon_star"></span>
-                                    <span class="icon_star"></span>
-                                    <span class="icon_star"></span>
-                                    <span class="icon_star"></span>
-                                    <span class="icon_star-half_alt"></span>
-                                </div>
-                                <div>120 Review</div>
+                                <div class="listing__details__rating__star"></div>
+                                <div>&nbsp;&nbsp; Rate : ${starAvg}</div>
+                                <br> <div>${totalReviewCount} Review</div>
                             </div>
                             <p><span class="icon_pin_alt"></span> ${requestScope.place.placeAddr}</p>
                         </div>
@@ -189,8 +165,7 @@
                 </div>
                 <div class="col-lg-4">
                     <div class="listing__hero__btns">
-                        <a href="#" class="primary-btn share-btn"><i class="fa fa-mail-reply"></i> Share</a>
-                        <a href="#" class="primary-btn"><i class="fa fa-bookmark"></i> Bookmark</a>
+                        <a href="#" class="primary-btn"><i class="fa fa-heart-o"></i> Like</a><i class="fa fa-heart"></i>
                     </div>
                 </div>
             </div>
@@ -349,36 +324,47 @@
                     <div class="listing__sidebar">
                         <div class="listing__sidebar__contact">
                             <div class="listing__sidebar__contact__map">
-                                <div id="kakaoMap">
-                                 <!--    src=""
-                                    height="200px" style="border:0;" allowfullscreen="" aria-hidden="false"
-                                    tabindex="0" --></div>
-                                <%-- <img src="${pageContext.request.contextPath}/img/listing/details/map-icon.png" alt=""> --%>
+                               <!-- <div id="kakaoMap" style="width:100%;height:350px;"></div> -->
+                                <div id="staticMap" style="width:100%;height:350px;"></div>  
+                                <div><h4>주소 : ${place.placeAddr }</h4></div>
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=dedf9592b51a78be2b5d3ec39a2a2199"></script>                              
+    <script type="text/javascript">
+			var mapContainer = document.getElementById('staticMap'), // 지도를 표시할 div 
+		    mapOption = {
+		        center: new kakao.maps.LatLng(${place.placeLatitude},${place.placeLongitude}), // 지도의 중심좌표
+		        level: 3, // 지도의 확대 레벨
+		        mapTypeId : kakao.maps.MapTypeId.ROADMAP // 지도종류
+		    }; 
+		
+		// 지도를 생성한다 
+		var map = new kakao.maps.Map(mapContainer, mapOption); 
+		
+		// 지도에 마커를 생성하고 표시한다
+		var marker = new kakao.maps.Marker({
+		    position: new kakao.maps.LatLng(${place.placeLatitude},${place.placeLongitude}), // 마커의 좌표
+		    map: map // 마커를 표시할 지도 객체
+		});
+		
+		// 마커 위에 표시할 인포윈도우를 생성한다
+		var infowindow = new kakao.maps.InfoWindow({
+		    content : '<div>${place.placeTitle}</div>', // 인포윈도우에 표시할 내용
+		    removable : true
+		});
+		
+		// 인포윈도우를 지도에 표시한다
+		infowindow.open(map, marker);
+		
+		// 아래 코드는 지도 위의 마커를 제거하는 코드입니다
+		// marker.setMap(null);    
+     </script>                           
+                                <img src="img/listing/details/map-icon.png" alt="">
                             </div>
-
-                            
-                            <!-- sidebar -->
-                            <div class="listing__sidebar__contact__text">
-  
-                            </div>
-                            <!-- sidebar -->
-                            
                         </div>
-                        
-                        <!-- sidebar -->
-                        <div class="listing__sidebar__working__hours">
- 
-                        </div>
-                        <!-- sidebar -->
-                        
-                    </div>
-                </div>
-
-                
+                      </div>
+                  </div>
             </div>
         </div>
     </section>
-    <!-- Listing Details Section End -->
 
     <!-- Newslatter Section Begin -->
     <section class="newslatter">

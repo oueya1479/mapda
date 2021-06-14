@@ -11,7 +11,7 @@
 }
 
 /* The popup form - hidden by default */
-.listing__details__review {
+.form-container {
   display: none;
   bottom: 0;
   right: 100px;
@@ -25,19 +25,8 @@
 }
 
 /* Set a style for the submit/login button */
-.form-container .btnedit {
+.btnedit {
   background-color: #04AA6D;
-  color: white;
-  border: none;
-  cursor: pointer;
-  width: 100%;
-  margin-bottom:10px;
-  opacity: 0.8;
-}
-
-/* Add a red background color to the cancel button */
-.form-container .btncancel {
-  background-color: red;
   color: white;
   border: none;
   cursor: pointer;
@@ -55,10 +44,7 @@
 	function openForm() {
 		  document.getElementById("myForm").style.display = "block";
 		}	
-	function closeForm() {
-		  document.getElementById("myForm").style.display = "none";
-		}
-	
+		
 </script>
 </head>
 
@@ -110,15 +96,16 @@
 			                                    <p>${prList.prContent}</p>
 			                                    <ul>
 			                                        <li><i class="fa fa-pencil" aria-hidden="true"></i>
+			                                        	<form class="form-container" name="updateForm" method="post"  
+														action="${pageContext.request.contextPath}/place/placeReplyUpdate/placeNo=${prList.place.placeNo}&memId=${prList.member.memId}/${prList.prNo}">
+														<input type='hidden' name='prNo' value="${prList.prNo}">
 			                                        	<a href="javascript:;" class="btn" id="editBtn" style="color: blue; text-decoration: none;" onclick="openForm()" >수정하기</a></li>
 														<div class="listing__details__review" id="myForm" style="text-align: center;">
-														  <form class="form-container" name="updateForm" method="post"  action="${pageContext.request.contextPath}/place/placeReplyUpdate/placeNo=${prList.place.placeNo}&memId=${prList.member.memId}/${prList.prNo}">
-														    <h4>Edit Review</h4>
-														     <textarea name="prContent" placeholder="Review"></textarea>
+														    <h5>Edit Review</h5>
+														     <textarea name="prContent" placeholder="Review" style="width: 650px;"></textarea>
 														    <button type="submit" class="btnedit" id="editNow" name="editNow">Edit Now</button>
-														    <button type="button" class="btncancel" onclick="closeForm()">Close</button>
-														  </form>
 														</div>
+														    </form>
 			                                        <li><i class="fa fa-window-close" aria-hidden="true"></i>
 														 <a href="${pageContext.request.contextPath}/place/placeReplyDelete/placeNo=${prList.place.placeNo}&memId=${prList.member.memId}/${prList.prNo}" style="color: blue; text-decoration: none;" >삭제하기</a>
 													</li>
@@ -156,9 +143,18 @@
 	      				  						</c:forEach>
 		                                    <ul>
 		                                        <li><i class="fa fa-pencil" aria-hidden="true"></i>
-		                                        	<a href="#" style="color: blue; text-decoration: none;" >수정하기</a></li>
+		                                        	<form class="form-container" name="updatePhotoReview" method="post"  
+														action="${pageContext.request.contextPath}/place/placePhotoReviewUpdate/placeNo=${pprList.place.placeNo}&memId=${pprList.member.memId}/${pprList.pprNo}">
+														<input type='hidden' name='pprNo' value="${pprList.pprNo}">
+			                                        	<a href="javascript:;" class="btn" id="editBtn" style="color: blue; text-decoration: none;" onclick="openForm()" >수정하기</a></li>
+														<div class="listing__details__review" id="myForm" style="text-align: center;">
+														    <h5>Edit Review</h5>
+														     <textarea name="pprContent" placeholder="Review" style="width: 650px;"></textarea>
+														    <button type="submit" class="btnedit" id="editNow" name="editNow">Edit Now</button>
+														</div>
+														    </form>
 		                                        <li><i class="fa fa-trash" aria-hidden="true"></i>
-		                                        	<a href="${pageContext.request.contextPath}/place/photoReviewDelete/placeNo=	${pprList.place.placeNo}&memId=${pprList.member.memId}/${pprList.pprNo}" style="color: blue; text-decoration: none;" >삭제하기</a></li>
+		                                        	<a href="${pageContext.request.contextPath}/place/photoReviewDelete/placeNo=	${pprList.place.placeNo}&memId=${pprList.member.memId}/${pprList.pprNo}" style="color: blue; text-decoration: none;">삭제하기</a></li>
 		                                    </ul>
 		                                </div>
 		                            </div>

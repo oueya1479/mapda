@@ -26,6 +26,8 @@ public class PlaceController {
 	@Autowired
 	private PlaceReviewService prService;
 	
+	private final String SAVE_PATH = "C:\\KostaEdu\\thirdProject\\fileSave";
+	
 	/**
 	 * 		상세보기
 	 * */
@@ -62,6 +64,9 @@ public class PlaceController {
 			tagStr.add(hashStr[i]);
 		}
 		
+		//총 리뷰수
+		int totalReviewCount=(prList.size() + pprList.size());
+		
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("place/read");
 		
@@ -72,6 +77,7 @@ public class PlaceController {
 		mv.addObject("pprList", pprList);
 		mv.addObject("starAvg", starAvg);
 		mv.addObject("starAvgPer", starAvgPer);
+		mv.addObject("totalReviewCount", totalReviewCount);
 		
 		return mv;
 	}
@@ -131,7 +137,32 @@ public class PlaceController {
 	@RequestMapping("/placeReplyUpdate/placeNo={placeNo}&memId={memId}/{prNo}")
 	public String placeReplyUpdate(@PathVariable Long placeNo, @PathVariable String memId,@PathVariable Long prNo, PlaceReview placeReview) {
 		PlaceReview dbPlaceReview = prService.prUpdate(placeReview);
+//		System.out.println("placeReview = " + placeReview.getPrNo());
+//		System.out.println("dbPlaceReview.getPrNo() = " +dbPlaceReview.getPrNo());
+//		System.out.println("dbPlaceReview.getPrContent() = "+dbPlaceReview.getPrContent());
 		return "redirect:/place/myReplyReview/placeNo="+placeNo+"&memId="+memId;
 	}
+	
+	/**
+	 * 		내 포토후기 수정하기
+	 * */
+	@RequestMapping("/placePhotoReviewUpdate/placeNo={placeNo}&memId={memId}/{pprNo}")
+	public String placePhotoReviewUpdate(@PathVariable Long placeNo, @PathVariable String memId,@PathVariable Long pprNo, PlacePhotoReview placePhotoReview) {
+		PlacePhotoReview dbPpr = prService.prrUpdate(placePhotoReview);
+//		System.out.println("placePhotoReview = " + placePhotoReview.getPprNo());
+//		System.out.println("dbPpr.getPprNo() = " +dbPpr.getPprNo());
+//		System.out.println("dbPpr.getPprContent() = "+dbPpr.getPprContent());
+		return "redirect:/place/myReplyReview/placeNo="+placeNo+"&memId="+memId;
+	}
+	
+	/**
+	 * 		플레이스 등록하기 폼
+	 * */
+	@RequestMapping("/placeInsertForm")
+	public String placeInsertForm() {
+		return "place/placeInsertForm";
+	}
+	
+
 	
 }
