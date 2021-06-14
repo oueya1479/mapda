@@ -70,6 +70,9 @@ public class Theme{
 	@OneToMany(mappedBy="theme")
 	private List<Place> place;
 	
+//	@ManyToOne
+//	@JoinColumn(name="mapNo")
+//	private MapStorage mapStorage;
 	
 
 }

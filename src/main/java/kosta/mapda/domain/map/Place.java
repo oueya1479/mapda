@@ -56,7 +56,7 @@ public class Place {
 	
 	@ManyToOne
 	@JoinColumn(name = "mngNo")
-	private Management mng;
+	private Management management;
 	
 	@ManyToOne
 	@JoinColumn(name = "mapNo")
@@ -72,4 +72,8 @@ public class Place {
 //	@OneToMany(mappedBy = "place", cascade = CascadeType.ALL)
 //	private List<PlacePhotoReview> pprList;		// place photo review
 //	
+	
+	public Place(Long placeNo) {
+		this.placeNo = placeNo;
+	}
 }

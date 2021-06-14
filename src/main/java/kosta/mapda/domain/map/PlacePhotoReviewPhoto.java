@@ -29,7 +29,7 @@ public class PlacePhotoReviewPhoto {	//Place_Photo_Review_Photo
 	
 	private String pprpPath;
 	
-	@JsonIgnore
+	@JsonIgnore	//이거
 	@ManyToOne
 	@JoinColumn(name = "pprNo")
 	private PlacePhotoReview ppr;

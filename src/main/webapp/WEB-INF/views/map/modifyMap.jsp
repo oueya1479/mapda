@@ -67,7 +67,7 @@
 
 										var resultDiv = document
 												.getElementById('result');
-										resultDiv.innerHTML = message;
+										//resultDiv.innerHTML = message;
 
 									});
 						</script>
@@ -85,15 +85,18 @@
 
 
 
+
+
 	<section>
+	
 		<form action="${pageContext.request.contextPath}/map/modifyMap" class="contact__form" method="post"
 			enctype="multipart/form-data" name=updateForm>
-			<input type='hidden' name='mapNo' value="${map.mapNo}">
+			<input type='hidden' name='mapNo' value="${theme.mapNo}">
 			<div class="container">
 				<div class="row">
 
-					Theme Name<input type="text" name="mapTitle" value="${requestScope.map.mapTitle}">
-					Description<textarea name="mapContent" >${requestScope.map.mapContent}</textarea>
+					Theme Name<input type="text" name="mapTitle" value="${theme.mapTitle}">
+					Description<textarea name="mapContent" >${theme.mapContent}</textarea>
 					Cover Image <input type="file" name="file" /> 
 					Category
 					&nbsp;&nbsp;&nbsp;

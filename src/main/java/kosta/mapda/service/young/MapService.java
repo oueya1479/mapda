@@ -1,5 +1,6 @@
 package kosta.mapda.service.young;
 
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -37,5 +38,5 @@ public interface MapService {
 	 * 삭제
 	 */
 	void deleteMap(Long mapNo, String password);
-	
+
 }

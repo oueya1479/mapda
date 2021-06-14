@@ -45,8 +45,12 @@ public class PlaceController {
 			starAvg+=ppr.getPprStar();
 		}
 		
+		if(pprList.size()==0) {
+			starAvg=0;
+		}else {
+			starAvg=starAvg/pprList.size();
+		}
 		
-		starAvg=starAvg/pprList.size();
 		starAvgPer=starAvg*10;
 				
 		
@@ -71,4 +75,63 @@ public class PlaceController {
 		
 		return mv;
 	}
+	
+	/**
+	 * 		댓글 등록하기
+	 * */
+	@RequestMapping("/replyWrite")
+	public String insert(PlaceReview placeReview, Long placeNo) {
+		placeReview.setPlace(new Place(placeNo));
+		
+		// 임시용
+		
+		//
+		prService.insert(placeReview);
+		return "redirect:/place/read/"+placeNo;
+	}
+	
+	/**
+	 * 		내가 작성한 댓글 / 포토후기
+	 * */
+	@RequestMapping("/myReplyReview/placeNo={placeNo}&memId={memId}")
+	public ModelAndView myReplyReview(@PathVariable Long placeNo, @PathVariable String memId) {
+		 List<PlaceReview> prList= prService.selectByPlaceNoMemId(placeNo, memId);
+		 List<PlacePhotoReview> pprList = prService.selectByMemIdPlaceNo(placeNo, memId);
+		 Place place = placeService.selectBy(placeNo);
+		 
+		 ModelAndView mv = new ModelAndView();
+		mv.setViewName("place/myReplyReview");
+		mv.addObject("prList", prList);
+		mv.addObject("pprList", pprList);
+		mv.addObject("place", place);
+		
+		return mv;
+	}
+	
+	/**
+	 * 	 내 댓글 삭제하기
+	 * */
+	@RequestMapping("/placeReplyDelete/placeNo={placeNo}&memId={memId}/{prNo}")
+	public String placeReplyDelete(@PathVariable Long placeNo, @PathVariable String memId,@PathVariable Long prNo) {
+		prService.delete(prNo);
+		return "redirect:/place/myReplyReview/placeNo="+placeNo+"&memId="+memId;
+	}
+	/**
+	 * 		내 포토후기 삭제하기
+	 * */
+	@RequestMapping("/photoReviewDelete/placeNo={placeNo}&memId={memId}/{pprNo}")
+	public String photoReviewDelete(@PathVariable Long placeNo, @PathVariable String memId, @PathVariable Long pprNo) {
+		prService.prDelete(pprNo);
+		return "redirect:/place/myReplyReview/placeNo="+placeNo+"&memId="+memId;
+	}
+	
+	/**
+	 * 		내 댓글 수정하기
+	 * */
+	@RequestMapping("/placeReplyUpdate/placeNo={placeNo}&memId={memId}/{prNo}")
+	public String placeReplyUpdate(@PathVariable Long placeNo, @PathVariable String memId,@PathVariable Long prNo, PlaceReview placeReview) {
+		PlaceReview dbPlaceReview = prService.prUpdate(placeReview);
+		return "redirect:/place/myReplyReview/placeNo="+placeNo+"&memId="+memId;
+	}
+	
 }
