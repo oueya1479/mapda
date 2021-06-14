@@ -30,6 +30,7 @@ public class Member {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "mem_no_seq")
 	@SequenceGenerator(sequenceName = "mem_no_seq", allocationSize = 1, name = "mem_no_seq" )
 	private Long memNo;
+	
 	private String memId;
 	private String memPw;
 	private String memName;

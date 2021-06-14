@@ -20,7 +20,7 @@
 	<span style="color:red">${requestScope.errorMessage}</span>
 </c:if>
 <!--j_spring_security_check의 기본값은 login  -->
-<form action="${pageContext.request.contextPath}/j_spring_security_check" method="post">
+<form action="${pageContext.request.contextPath}/login" method="post">
 	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 	<table style="width:350px">
 		<tr>
