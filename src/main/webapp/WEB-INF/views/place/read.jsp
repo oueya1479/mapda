@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=dedf9592b51a78be2b5d3ec39a2a2199"></script>
 <style type="text/css">
 .mySlides {display:none;}
 </style>
@@ -19,49 +19,46 @@
       				  dataType: "json", //서버가 보내오는 데이터타입(응답 - text ,html, xml, json)
       				 // data:{placeNo:1} , //서버에게 보낼 parameter정보
       				  success: function(result){ //item 데이터 ==> ["name":값, subject:값, ... ,customer:{id:값, name:값....}]
-      				  		console.log(result);
-      				  		var str="";
+      				  		//console.log(result);      				  	       				  		
+								var str="";
+  				  		if(result==""){
+  				  			str+="<p>등록된 포토리뷰가 없습니다.</p>";
+  				  		}else{
+      				  		for(var i =0; i<result.length; i++){
+      				  		//alert(result[i].pprpList[i].pprpPath);
+      				  		str+="<div class='listing__details__comment__item__pic'>";
+      				  		str+="<img src='${pageContext.request.contextPath}/img/listing/details/comment.png'>";
+      				  		str+="</div>";
+      				  		str+="<div class='listing__details__comment__item__text'>";
+      				  		str+="<span>" + result[i].regDate+"</span>";
+      				  		str+="<h5>"+ result[i].name+"</h5>";
+      				  		str+="<p>"+result[i].content+"</p>";
       				  		
-      				  		if(result==""){
-      				  			str+="<p>등록된 포토리뷰가 없습니다.</p>";
+							if(Number(result[i].star)/2==0){
+							str+="<p> 별점 : <span class='icon_star_alt'></span></p>";
+      				  		}else if(Number(result[i].star)/2<=1){
+      				  		str+="<p> 별점 : <span class='icon_star-half_alt'></span></p>";
+      				  		}else if(Number(result[i].star)/2<=2){
+      				  		str+="<p> 별점 : <span class='icon_star'></span><span class='icon_star'></span></p>";
+      				  		}else if(Number(result[i].star)/2<=3){
+      				  		str+="<p> 별점 : <span class='icon_star'></span><span class='icon_star'></span><span class='icon_star'></span></p>";
+      				  		}else if(Number(result[i].star)/2<=4){
+      				  		str+="<p> 별점 : <span class='icon_star'></span><span class='icon_star'></span><span class='icon_star'></span><span class='icon_star'></span></p>";
       				  		}else{
-	      				  		for(var i =0; i<result.length; i++){
-	      				  		//alert(result[i].pprpList[i].pprpPath);
-	      				  		str+="<div class='listing__details__comment__item__pic'>";
-	      				  		str+="<img src='${pageContext.request.contextPath}/img/listing/details/comment.png'>";
-	      				  		str+="</div>";
-	      				  		str+="<div class='listing__details__comment__item__text'>";
-	      				  		str+="<span>" + result[i].pprRegdate+"</span>";
-	      				  		str+="<h5>"+ result[i].member.memName+"</h5>";
-	      				  		str+="<p>"+result[i].pprContent+"</p>";
-	      				  		
-
-	      				  		if(Number(result[i].pprStar)/2<=1){
-	      				  		str+="<p> 별점 : <span class='icon_star'></span></p>";
-	      				  		}else if(Number(result[i].pprStar)/2<=2){
-	      				  		str+="<p> 별점 : <span class='icon_star'></span><span class='icon_star'></span></p>";
-	      				  		}else if(Number(result[i].pprStar)/2<=3){
-	      				  		str+="<p> 별점 : <span class='icon_star'></span><span class='icon_star'></span><span class='icon_star'></span></p>";
-	      				  		}else if(Number(result[i].pprStar)/2<=4){
-	      				  		str+="<p> 별점 : <span class='icon_star'></span><span class='icon_star'></span><span class='icon_star'></span><span class='icon_star'></span></p>";
-	      				  		}else{
-	      				  		str+="<p> 별점 : <span class='icon_star'></span><span class='icon_star'></span><span class='icon_star'></span><span class='icon_star'></span><span class='icon_star'></span></p>";
-	      				  		}
-	      				  		
-	      				  			for(var j=0; j<result[i].pprpList.length; j++){
-	      				  				str+="<img src='${pageContext.request.contextPath}/"+result[i].pprpList[j].pprpPath+"' style='width: 200px; height: 200px;'>";
-	      				  			};
-	      				  		str+="<ul>";
-	      				  		str+=" <li><i class='fa fa-hand-o-right'></i> Like</li>";
-	      				  		str+="<li><i class='fa fa-share-square-o'></i> Reply</li>";
-	      				  		str+="</ul>";
-	      				  		str+="</div>";
-	      				  		str+="</div>";
-	      				  		
-	      				    	};
-      				  		};
-
-      				    	$(".listing__details__comment").html(str);
+      				  		str+="<p> 별점 : <span class='icon_star'></span><span class='icon_star'></span><span class='icon_star'></span><span class='icon_star'></span><span class='icon_star'></span></p>";
+      				  		}
+      				  			for(var j=0; j<result[i].pathList.length; j++){
+      				  				str+="<img src='${pageContext.request.contextPath}/"+result[i].pathList[j].pprpPath+"' style='width: 200px; height: 200px;'>";
+      				  			};
+      				  		str+="<ul>";
+      				  		str+=" <li><i class='fa fa-ellipsis-h'></i><i class='fa fa-ellipsis-h'></i><i class='fa fa-ellipsis-h'></i><i class='fa fa-ellipsis-h'></i></li>";
+      				  		str+="<li><i class='fa fa-ellipsis-h'></i><i class='fa fa-ellipsis-h'></i><i class='fa fa-ellipsis-h'></i><i class='fa fa-ellipsis-h'></i></li>";
+      				  		str+="</ul>";
+      				  		str+="</div>";
+      				  		str+="</div>";
+      				    	};
+  				  		};
+  				    	$(".listing__details__comment").html(str);
       				}, 
       				  error : function(err){
       					  console.log(err+" 에러 발생.")
@@ -76,30 +73,28 @@
        				  dataType: "json", //서버가 보내오는 데이터타입(응답 - text ,html, xml, json)
        				 // data:{placeNo:1} , //서버에게 보낼 parameter정보
        				  success: function(result){ //item 데이터 ==> ["name":값, subject:값, ... ,customer:{id:값, name:값....}]
- //   				       		alert(result);
-  //     				  			console.log(result);
- 							
-       				  		var str="";
-       				  	if(result==""){
-  				  			str+="<p>등록된 댓글이 없습니다.</p>";
-  				  		}else{
-       				  		for(var i =0; i<result.length; i++){
-       				  		str+="<div class='listing__details__comment__item__pic'>";
-       				  		str+="<img src='${pageContext.request.contextPath}/img/listing/details/comment.png'>";
-       				  		str+="</div>";
-       				  		str+="<div class='listing__details__comment__item__text'>";
-       				  		str+="<span>" + result[i].prRegdate+"</span>";
-       				  		str+="<h5>"+ result[i].member.memName+"</h5>";
-       				  		str+="<p>"+result[i].prContent+"</p>";
-      				  		str+="<ul>";
-      				  		str+=" <li><i class='fa fa-hand-o-right'></i> Like</li>";
-      				  		str+="<li><i class='fa fa-share-square-o'></i> Reply</li>";
-      				  		str+="</ul>";
-      				  		str+="</div>";
-      				  		str+="</div>";
-       				    	};
-  				  		};
-       				    	$(".listing__details__comment").html(str);
+       				  			//console.log(result);
+           				  		var str="";
+           				  	if(result==""){
+      				  			str+="<p>등록된 댓글이 없습니다.</p>";
+      				  		}else{
+           				  		for(var i =0; i<result.length; i++){
+           				  		str+="<div class='listing__details__comment__item__pic'>";
+           				  		str+="<img src='${pageContext.request.contextPath}/img/listing/details/comment.png'>";
+           				  		str+="</div>";
+           				  		str+="<div class='listing__details__comment__item__text'>";
+           				  		str+="<span>" + result[i].regDate+"</span>";
+           				  		str+="<h5>"+ result[i].name+"</h5>";
+           				  		str+="<p>"+result[i].content+"</p>";
+          				  		str+="<ul>";
+          				  		str+=" <li><i class='fa fa-ellipsis-h'></i><i class='fa fa-ellipsis-h'></i><i class='fa fa-ellipsis-h'></i><i class='fa fa-ellipsis-h'></i></li>";
+          				  		str+="<li><i class='fa fa-ellipsis-h'></i><i class='fa fa-ellipsis-h'></i><i class='fa fa-ellipsis-h'></i><i class='fa fa-ellipsis-h'></i></li>";
+          				  		str+="</ul>";
+          				  		str+="</div>";
+          				  		str+="</div>";
+           				    	};
+      				  		};
+           				    	$(".listing__details__comment").html(str);
        				}, 
        				  error : function(err){
        					  console.log(err+" 에러 발생.")
@@ -107,7 +102,9 @@
        			  });
        		});
         	 
-        	if(${starAvg}/2<=1){
+        	 if(${starAvg}/2==0){
+        	 $(".listing__details__rating__star").html("<span class='icon_star_alt'></span>");
+        	 }else if(${starAvg}/2<=1){
         		$(".listing__details__rating__star").html("<span class='icon_star'></span>");
         	}else if(${starAvg}/2<=2){
         		$(".listing__details__rating__star").html("<span class='icon_star'></span><span class='icon_star'></span>");
@@ -119,14 +116,51 @@
         		$(".listing__details__rating__star").html("<span class='icon_star'></span><span class='icon_star'></span><span class='icon_star'></span><span class='icon_star'></span><span class='icon_star'></span>");
         	}	
         	 
-        	 
-      	});  
+/*         	$('#deleteReplyReview').click(function(){
+      		 	var placeNo = ${placeNo};
+      		 	var userId = "testuserid";
+      		 	var url = "${pageContext.request.contextPath}/place/myReplyReview?placeNo="+placeNo+"&memId="+userId;
+      		 	$(location).attr('href', url);
+      	 	});  
+*/
+/* session에 저장된 아이디 불러오기 */
+        
+      	}); 
+    	
+      	function checkValid(){
+      		var f = window.document.replyForm;
+      		if(f.prContent.value=""){
+      			alert("내용을 입력해 주세요");
+      			f.prContent.focus();
+      			return false;
+      		}
+      		return true;
+      	}
+      	
+      	
+      	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+      	    mapOption = { 
+      	        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+      	        level: 3 // 지도의 확대 레벨
+      	    };
+
+      	// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
+      	var map = new kakao.maps.Map(mapContainer, mapOption); 
+      	
+      	
+      	
+      	
+      	
   </script>
+
 
 </head>
 
 
 <body>
+
+    <div id="map" style="width:100%;height:350px;"></div>
+
 
     <!-- Listing Section Begin -->
     <section class="listing-hero set-bg" data-setbg="${pageContext.request.contextPath}/img/placeimges/test1.png"><!-- 무슨 사진 넣을지 고민 -->
@@ -227,11 +261,6 @@
                             <div class="listing__details__rating__overall">
                                 <h2>${starAvg}</h2>
                                  <div class="listing__details__rating__star">
-                                   <!--  <span class="icon_star"></span>
-                                    <span class="icon_star"></span>
-                                    <span class="icon_star"></span>
-                                    <span class="icon_star"></span>
-                                    <span class="icon_star"></span> -->
                                 </div>
                                 <span>${pprList.size()}&nbsp;reviews</span>
                             </div>
@@ -242,17 +271,45 @@
                                     <span></span>
                                     <div id="bar3" class="barfiller">
                                         <span class="fill"  data-percentage="${starAvgPer}"></span>
+                                        <p><h4><span class="arrow_right_alt"></span>PhotoReview 사진 모아보기<span class="arrow_left_alt"></span></h4>
                                     </div>
-                                    <span class="right">Space</span>
-                                </div>
-
-                              
+                                    <span class="right"></span>
+                                </div> 
+                                	<table border="1">
+                                	<tr>
+                                		<td></td>
+                                		<td></td>
+                                		<td></td>
+                                	</tr>
+                                <c:forEach items="${pprList}" var="pp">
+                                	<tr>
+                                	<c:forEach items="${pp.pprpList}" var="ppp">
+											<td style="color: black;">
+												 <img src="${pageContext.request.contextPath}/${ppp.pprpPath}" style="width: 50px; height: 50px;">
+											</td>
+									</c:forEach>
+									</tr>
+									</c:forEach>
+									</table>
+          
                             </div>
                         </div>
                       
-      					<section class="listing-details spad">                  
+      					<section class="listing-details spad">        
                         <h4><a href="javascript:;" class="btn" id="replyReview" style="text-decoration: none; color: black;">Reply</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        	<a href="javascript:;" class="btn" id="photoReview" style="text-decoration: none; color: black;">PhotoReview</a></h4>
+                        	<a href="javascript:;" class="btn" id="photoReview" style="text-decoration: none; color: black;">PhotoReview</a>
+                        	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;
+                        	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        	 <a href="${pageContext.request.contextPath}/place/myReplyReview/placeNo=${placeNo}&memId=testuserid" 
+                        	 class="btn" id="deleteReplyReview" style="text-decoration: none; color: black; ">My Reply, PhotoReview Edit</a>
+                   <%--      	 <form name="requestReviewForm" method="post" id="requestReviewForm">
+                        	 	<input type="hidden" name="placeNo" value="${placeNo}" id="placeNo">
+                        	 	<input type="hidden" name="memId" value="\${sessionId}" id="memId">
+                        	 </form> --%>
+ <!-- memId 부분에 세션 아이디 받아오기 -->
+                        	 
+                        </h4>
                         <div class="listing__details__comment">
    				 <c:forEach items="${prList}" var="prList">       
                             <div class="listing__details__comment__item">
@@ -261,31 +318,44 @@
                                 </div>
                                 <div class="listing__details__comment__item__text">
                                     <span>${prList.prRegdate}</span>
-                                    <h5>Marry Jane</h5>
+                                    <h5>${prList.member.memName}</h5>
                                     <p>${prList.prContent}</p>
                                     
                                     <ul>
-                                        <li><i class="fa fa-hand-o-right"></i> Like</li>
-                                        <li><i class="fa fa-share-square-o"></i> Reply</li>
+                                        <li><i class='fa fa-ellipsis-h'></i><i class='fa fa-ellipsis-h'></i><i class='fa fa-ellipsis-h'></i><i class='fa fa-ellipsis-h'></i></li>
+                                        <li><i class='fa fa-ellipsis-h'></i><i class='fa fa-ellipsis-h'></i><i class='fa fa-ellipsis-h'></i><i class='fa fa-ellipsis-h'></i></li>
                                     </ul>
                                 </div>
                             </div>
         			 </c:forEach>                 
                         </div>
-           			 </section>        
+           		 </section>  
+
+           		<div class="listing__details__review">
+                            <h4>Add Review</h4>
+                            <form name="replyForm" method="post" action="${pageContext.request.contextPath}/place/replyWrite" onSubmit='return checkValid()' >
+                            <input type="hidden" name="placeNo" value="${placeNo}"/>
                         
+  <!-- 아이디 가져와서 placeholder 하기 -->  <input type="text" placeholder="Name\${place.member.memId}" readonly="readonly">
+  						
+                                <textarea name="prContent" placeholder="Review"></textarea>
+                                <button type="submit" class="site-btn" id="replySubmit">Submit Now</button>
+                            </form>
+                        </div>
+
                     </div>
                 </div>
                 <div class="col-lg-4">
                     <div class="listing__sidebar">
                         <div class="listing__sidebar__contact">
                             <div class="listing__sidebar__contact__map">
-                                <iframe
-                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d24168.833995532765!2d-74.79633710628465!3d40.78172222265886!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c384de7a5300b9%3A0x8afc61979217d49d!2sLong%20Valley%2C%20NJ%2007853%2C%20USA!5e0!3m2!1sen!2sbd!4v1586852528126!5m2!1sen!2sbd"
-                                    height="200" style="border:0;" allowfullscreen="" aria-hidden="false"
-                                    tabindex="0"></iframe>
-                                <img src="${pageContext.request.contextPath}/img/listing/details/map-icon.png" alt="">
+                                <div id="kakaoMap">
+                                 <!--    src=""
+                                    height="200px" style="border:0;" allowfullscreen="" aria-hidden="false"
+                                    tabindex="0" --></div>
+                                <%-- <img src="${pageContext.request.contextPath}/img/listing/details/map-icon.png" alt=""> --%>
                             </div>
+
                             
                             <!-- sidebar -->
                             <div class="listing__sidebar__contact__text">
@@ -303,6 +373,8 @@
                         
                     </div>
                 </div>
+
+                
             </div>
         </div>
     </section>

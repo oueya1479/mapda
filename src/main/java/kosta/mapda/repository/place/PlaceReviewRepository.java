@@ -11,4 +11,6 @@ public interface PlaceReviewRepository extends JpaRepository<PlaceReview, Long> 
 	@Query("select pr from PlaceReview pr where pr.place.placeNo=?1")
 	List<PlaceReview> selectByPlaceNo(Long placeNo);
 	
+	@Query("select pr from PlaceReview pr where pr.place.placeNo=?1 and pr.member.memId=?2")
+	List<PlaceReview> selectByPlaceNoMemId(Long placeNo, String memId);
 }
