@@ -37,20 +37,35 @@
 			alert(mapNo);
 		})
 	}); */
-	$(function subscribe(){
+	var subButton = document.getElementById("#subButton");
+	subButton.onclick = function(){ subscribe(); }
+	function subscribe(){ 
 		$.ajax({
-			url:"${pageContext.request.contextPath}/map/subscribe",
+			url:"/map/subscribe",
 			type:"get",
 			dataType:"json"
-			data:{mapNo : '${map.mapNo}'}
+			data:{mapNo : '${map.mapNo}', memNo : '${requestScope.member.memNo}'}
 			success: function(data){
-			}
+				
+				 if(data == -1){
+                    alert("구독 오류","error","확인",function(){});
+                }
+                else if(data==1){
+					 $("#subButton").attr("/img/map/bookmark-tag.png")
+					 /* $("#subcnt").empty();
+					 $("#subcnt").append(data.subcnt);  */
+				 }else if(data==0){
+					 $("#subButton").attr("/img/map/ribbon.png")
+					/*  $("#subcnt").empty();
+					 $("#subcnt").append(data.subcnt);  */
+				 }
+					 
+			},
 			error : function(err){
 				  console.log(err+" 에러 발생.")
 			  }
 		})
-	})
-
+	}
 
 </script>
 </head>
@@ -149,21 +164,27 @@
 												&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
 												&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
 												<%-- <c:choose>
-													<c:when test="${map.mapStorage.mapNo ne map.mapNo}">
-														<a href='javascript: subscribe();'><img
-															src='${pageContext.request.contextPath}/img/map/bookmark-tag.png' id='like_img'></a>
+													<c:when test="${map.mapNo ne map.mapNo and map.mapStorage.memNo eq member.memNo}">
+														<img
+													src="${pageContext.request.contextPath}/img/map/bookmark-tag.png"
+													alt="" style="height: 20px; width: 20px; cursor: pointer;"
+													id="subButton"
+													onclick="javascript:location.href='${pageContext.request.contextPath}/map/mapRead/${map.mapNo}'"><br>
 													</c:when>
 													<c:otherwise>
-														<a href='javascript: unsubscribe()'><img
-															src='${pageContext.request.contextPath}/img/map/ribbon.png'></a>
+														<img
+													src="${pageContext.request.contextPath}/img/map/ribbon.png"
+													alt="" style="height: 20px; width: 20px; cursor: pointer;"
+													id="subButton"
+													onclick="javascript:location.href='${pageContext.request.contextPath}/map/mapRead/${map.mapNo}'"><br>
 													</c:otherwise>
-												</c:choose> --%>
-
-
+												</c:choose>
+ --%>
+												
 												<img
 													src="${pageContext.request.contextPath}/img/map/ribbon.png"
 													alt="" style="height: 20px; width: 20px; cursor: pointer;"
-													id="subscribe"
+													id="subButton"
 													onclick="javascript:location.href='${pageContext.request.contextPath}/map/mapRead/${map.mapNo}'"><br>
 												<div class="listing__item__text__inside">
 

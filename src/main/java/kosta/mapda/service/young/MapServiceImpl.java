@@ -6,8 +6,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import kosta.mapda.domain.map.MapStorage;
 import kosta.mapda.domain.map.Theme;
+import kosta.mapda.domain.member.Member;
 import kosta.mapda.repository.young.MapRepository;
+import kosta.mapda.repository.young.MapStorageRepository;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -16,6 +19,8 @@ import lombok.RequiredArgsConstructor;
 public class MapServiceImpl implements MapService {
 	
 	private final MapRepository maprepository;
+	
+	private final MapStorageRepository mapStorageRepository;
 
 	/**
 	 * 등록
@@ -80,5 +85,47 @@ public class MapServiceImpl implements MapService {
 		}
 		maprepository.deleteById(mapNo);
 	}
+
+	/**
+	 * 구독 체크
+	 */
+	@Override
+	public MapStorage subcheck(Long memNo, Long mapNo) {
+		Member member = new Member();
+		Theme theme = new Theme();
+		member.setMemNo(memNo);
+		theme.setMapNo(mapNo);
+		return mapStorageRepository.findByMemberAndTheme(member, theme);
+	}
+	
+	/**
+	 * 구독 insert
+	 */
+	@Override
+	public void insertSubscribe(Long memNo, Long mapNo) {
+		Member member = new Member();
+		Theme theme = new Theme();
+		
+		member.setMemNo(memNo);
+		theme.setMapNo(mapNo);
+		MapStorage mapStorage = new MapStorage();
+		
+		mapStorage.setMember(member);
+		mapStorage.setTheme(theme);
+		
+		
+		mapStorageRepository.save(mapStorage);
+		
+	}
+
+	/**
+	 * 구독 delete
+	 */
+	@Override
+	public void deleteSubscribe(Long memNo, Long mapNo) {
+//		mapStorageRepository.deleteSubscribe(memNo, mapNo);
+	}
+
+	
 
 }

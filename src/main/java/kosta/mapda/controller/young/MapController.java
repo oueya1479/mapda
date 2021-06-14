@@ -3,6 +3,9 @@ package kosta.mapda.controller.young;
 import java.io.File;
 import java.io.IOException;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -65,10 +68,17 @@ public class MapController {
 	 * 테마지도 전체 목록 가져오기
 	 */
 	@RequestMapping("/mapList")
-	public void list(Model model, @RequestParam(defaultValue = "0") int nowPage) {
+	public void list(HttpServletRequest request, Model model, @RequestParam(defaultValue = "0") int nowPage) {
 		Pageable pageable = PageRequest.of(nowPage, 10, Direction.DESC, "mapNo");
 		Page<Theme> mapList = mapService.selectAll(pageable);
 		model.addAttribute("mapList", mapList);
+		
+		//나중에 제거하세요
+		HttpSession session = request.getSession();
+		Member member = new Member();
+		member.setMemNo(1L);
+		session.setAttribute("member", member);
+		//
 		
 	}
 	/**
