@@ -6,8 +6,6 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -31,9 +29,8 @@ public class MapStorage {
 	@JoinColumn(name="mem_no")
 	private Member member;
 	
-	@ManyToOne
-	@JoinColumn(name="map_no")
-	private Theme theme;
+//	@OneToMany(mappedBy="mapStorage")
+//	private Theme theme;
 	
 	@CreationTimestamp
 	private LocalDateTime mapStorageRegdate;

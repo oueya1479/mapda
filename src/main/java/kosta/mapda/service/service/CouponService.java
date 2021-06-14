@@ -1,9 +1,12 @@
 package kosta.mapda.service.service;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import kosta.mapda.domain.service.Coupon;
+import kosta.mapda.domain.service.CouponCategory;
 
 public interface CouponService {
 
@@ -11,7 +14,7 @@ public interface CouponService {
 	/**
 	 * 쿠폰목록 가져오기
 	 * */
-	Page<Coupon> selectAll(Pageable pageable);
+	Page<Coupon> selectAll(Pageable pageable, String couponName, Long category);
 	
 	/**
 	 * 쿠폰 상세보기
@@ -20,7 +23,27 @@ public interface CouponService {
 	
 	
 	/**
+	 * 관리자 전체 쿠폰 목록 보기
+	 */
+	Page<Coupon> viewAll(Pageable pageable);
+	
+	/**
 	 * 쿠폰 검색해서 가져오기
 	 * */
-	Page<Coupon> selectBySerch(String couponName);
+	Page<Coupon> selectByName(Pageable pageable, String couponName);
+	
+	/**
+	 * 쿠폰 카테고리로 목록 가져오기
+	 * */
+	Page<Coupon> selectByCategory(Pageable pageable, Long category);
+	
+	/**
+	 * 쿠폰 카테고리 목록 가져오기
+	 * */
+	List<CouponCategory> couponCategory();
+	
+	/** 
+	 * 쿠폰 발급상태 변경하기
+	 */
+	int stop(Long cpNo);
 }

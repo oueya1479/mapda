@@ -6,20 +6,161 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-
-<script type="text/javascript">
-
-  </script>
-
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=dedf9592b51a78be2b5d3ec39a2a2199"></script>
 <style type="text/css">
 .mySlides {display:none;}
 </style>
+<script type="text/javascript">
+    	$(function(){
+        	 $(document).on("click","#photoReview",function(){
+      			$.ajax({
+      				  url: "${pageContext.request.contextPath}/place/reviewAjax/${placeNo}", //서버주소
+      				  type: "post", //요청방식(get,post, put,delete)
+      				  dataType: "json", //서버가 보내오는 데이터타입(응답 - text ,html, xml, json)
+      				 // data:{placeNo:1} , //서버에게 보낼 parameter정보
+      				  success: function(result){ //item 데이터 ==> ["name":값, subject:값, ... ,customer:{id:값, name:값....}]
+      				  		//console.log(result);      				  	       				  		
+								var str="";
+  				  		if(result==""){
+  				  			str+="<p>등록된 포토리뷰가 없습니다.</p>";
+  				  		}else{
+      				  		for(var i =0; i<result.length; i++){
+      				  		//alert(result[i].pprpList[i].pprpPath);
+      				  		str+="<div class='listing__details__comment__item__pic'>";
+      				  		str+="<img src='${pageContext.request.contextPath}/img/listing/details/comment.png'>";
+      				  		str+="</div>";
+      				  		str+="<div class='listing__details__comment__item__text'>";
+      				  		str+="<span>" + result[i].regDate+"</span>";
+      				  		str+="<h5>"+ result[i].name+"</h5>";
+      				  		str+="<p>"+result[i].content+"</p>";
+      				  		
+							if(Number(result[i].star)/2==0){
+							str+="<p> 별점 : <span class='icon_star_alt'></span></p>";
+      				  		}else if(Number(result[i].star)/2<=1){
+      				  		str+="<p> 별점 : <span class='icon_star-half_alt'></span></p>";
+      				  		}else if(Number(result[i].star)/2<=2){
+      				  		str+="<p> 별점 : <span class='icon_star'></span><span class='icon_star'></span></p>";
+      				  		}else if(Number(result[i].star)/2<=3){
+      				  		str+="<p> 별점 : <span class='icon_star'></span><span class='icon_star'></span><span class='icon_star'></span></p>";
+      				  		}else if(Number(result[i].star)/2<=4){
+      				  		str+="<p> 별점 : <span class='icon_star'></span><span class='icon_star'></span><span class='icon_star'></span><span class='icon_star'></span></p>";
+      				  		}else{
+      				  		str+="<p> 별점 : <span class='icon_star'></span><span class='icon_star'></span><span class='icon_star'></span><span class='icon_star'></span><span class='icon_star'></span></p>";
+      				  		}
+      				  			for(var j=0; j<result[i].pathList.length; j++){
+      				  				str+="<img src='${pageContext.request.contextPath}/"+result[i].pathList[j].pprpPath+"' style='width: 200px; height: 200px;'>";
+      				  			};
+      				  		str+="<ul>";
+      				  		str+=" <li><i class='fa fa-ellipsis-h'></i><i class='fa fa-ellipsis-h'></i><i class='fa fa-ellipsis-h'></i><i class='fa fa-ellipsis-h'></i></li>";
+      				  		str+="<li><i class='fa fa-ellipsis-h'></i><i class='fa fa-ellipsis-h'></i><i class='fa fa-ellipsis-h'></i><i class='fa fa-ellipsis-h'></i></li>";
+      				  		str+="</ul>";
+      				  		str+="</div>";
+      				  		str+="</div>";
+      				    	};
+  				  		};
+  				    	$(".listing__details__comment").html(str);
+      				}, 
+      				  error : function(err){
+      					  console.log(err+" 에러 발생.")
+      				  }
+      			  });
+      		});
+        	 
+        	 $(document).on("click","#replyReview",function(){
+       			$.ajax({
+       				  url: "${pageContext.request.contextPath}/place/replyAjax/${placeNo}", //서버주소
+       				  type: "post", //요청방식(get,post, put,delete)
+       				  dataType: "json", //서버가 보내오는 데이터타입(응답 - text ,html, xml, json)
+       				 // data:{placeNo:1} , //서버에게 보낼 parameter정보
+       				  success: function(result){ //item 데이터 ==> ["name":값, subject:값, ... ,customer:{id:값, name:값....}]
+       				  			//console.log(result);
+           				  		var str="";
+           				  	if(result==""){
+      				  			str+="<p>등록된 댓글이 없습니다.</p>";
+      				  		}else{
+           				  		for(var i =0; i<result.length; i++){
+           				  		str+="<div class='listing__details__comment__item__pic'>";
+           				  		str+="<img src='${pageContext.request.contextPath}/img/listing/details/comment.png'>";
+           				  		str+="</div>";
+           				  		str+="<div class='listing__details__comment__item__text'>";
+           				  		str+="<span>" + result[i].regDate+"</span>";
+           				  		str+="<h5>"+ result[i].name+"</h5>";
+           				  		str+="<p>"+result[i].content+"</p>";
+          				  		str+="<ul>";
+          				  		str+=" <li><i class='fa fa-ellipsis-h'></i><i class='fa fa-ellipsis-h'></i><i class='fa fa-ellipsis-h'></i><i class='fa fa-ellipsis-h'></i></li>";
+          				  		str+="<li><i class='fa fa-ellipsis-h'></i><i class='fa fa-ellipsis-h'></i><i class='fa fa-ellipsis-h'></i><i class='fa fa-ellipsis-h'></i></li>";
+          				  		str+="</ul>";
+          				  		str+="</div>";
+          				  		str+="</div>";
+           				    	};
+      				  		};
+           				    	$(".listing__details__comment").html(str);
+       				}, 
+       				  error : function(err){
+       					  console.log(err+" 에러 발생.")
+       				  }
+       			  });
+       		});
+        	 
+        	 if(${starAvg}/2==0){
+        	 $(".listing__details__rating__star").html("<span class='icon_star_alt'></span>");
+        	 }else if(${starAvg}/2<=1){
+        		$(".listing__details__rating__star").html("<span class='icon_star'></span>");
+        	}else if(${starAvg}/2<=2){
+        		$(".listing__details__rating__star").html("<span class='icon_star'></span><span class='icon_star'></span>");
+        	}else if(${starAvg}/2<=3){
+        		$(".listing__details__rating__star").html("<span class='icon_star'></span><span class='icon_star'></span><span class='icon_star'></span>");
+        	}else if(${starAvg}/2<=4){
+        		$(".listing__details__rating__star").html("<span class='icon_star'></span><span class='icon_star'></span><span class='icon_star'></span><span class='icon_star'></span>");
+        	}else{
+        		$(".listing__details__rating__star").html("<span class='icon_star'></span><span class='icon_star'></span><span class='icon_star'></span><span class='icon_star'></span><span class='icon_star'></span>");
+        	}	
+        	 
+/*         	$('#deleteReplyReview').click(function(){
+      		 	var placeNo = ${placeNo};
+      		 	var userId = "testuserid";
+      		 	var url = "${pageContext.request.contextPath}/place/myReplyReview?placeNo="+placeNo+"&memId="+userId;
+      		 	$(location).attr('href', url);
+      	 	});  
+*/
+/* session에 저장된 아이디 불러오기 */
+        
+      	}); 
+    	
+      	function checkValid(){
+      		var f = window.document.replyForm;
+      		if(f.prContent.value=""){
+      			alert("내용을 입력해 주세요");
+      			f.prContent.focus();
+      			return false;
+      		}
+      		return true;
+      	}
+      	
+      	
+      	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+      	    mapOption = { 
+      	        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+      	        level: 3 // 지도의 확대 레벨
+      	    };
+
+      	// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
+      	var map = new kakao.maps.Map(mapContainer, mapOption); 
+      	
+      	
+      	
+      	
+      	
+  </script>
 
 
 </head>
 
 
 <body>
+
+    <div id="map" style="width:100%;height:350px;"></div>
+
 
     <!-- Listing Section Begin -->
     <section class="listing-hero set-bg" data-setbg="${pageContext.request.contextPath}/img/placeimges/test1.png"><!-- 무슨 사진 넣을지 고민 -->
@@ -28,7 +169,7 @@
                 <div class="col-lg-8">
                     <div class="listing__hero__option">
                         <div class="listing__hero__icon">
-                            <img src="${pageContext.request.contextPath}" alt=""><!-- 아이콘 모양? user프로필? -->
+                            <img src="${pageContext.request.contextPath}" alt="" ><!-- 아이콘 모양? user프로필? -->
                         </div>
                         <div class="listing__hero__text">
                             <h2>${requestScope.place.placeTitle}</h2>
@@ -78,25 +219,25 @@
 							  <button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">&#10095;</button>
 						</div>
 
-											<script>
-											var slideIndex = 1;
-											showDivs(slideIndex);
-											
-											function plusDivs(n) {
-											  showDivs(slideIndex += n);
-											}
-											
-											function showDivs(n) {
-											  var i;
-											  var x = document.getElementsByClassName("mySlides");
-											  if (n > x.length) {slideIndex = 1}
-											  if (n < 1) {slideIndex = x.length}
-											  for (i = 0; i < x.length; i++) {
-											    x[i].style.display = "none";  
-											  }
-											  x[slideIndex-1].style.display = "block";  
-											}
-											</script>
+					<script>
+					var slideIndex = 1;
+					showDivs(slideIndex);
+					
+					function plusDivs(n) {
+					  showDivs(slideIndex += n);
+					}
+					
+					function showDivs(n) {
+					  var i;
+					  var x = document.getElementsByClassName("mySlides");
+					  if (n > x.length) {slideIndex = 1}
+					  if (n < 1) {slideIndex = x.length}
+					  for (i = 0; i < x.length; i++) {
+					    x[i].style.display = "none";  
+					  }
+					  x[slideIndex-1].style.display = "block";  
+					}
+					</script>
 	<!-- ========================================================================================= -->
                         </div>
                 
@@ -118,158 +259,122 @@
                         <div class="listing__details__rating">
                             <h4>Rate</h4>
                             <div class="listing__details__rating__overall">
-                                <h2>4.7</h2>
-                                <div class="listing__details__rating__star">
-                                    <span class="icon_star"></span>
-                                    <span class="icon_star"></span>
-                                    <span class="icon_star"></span>
-                                    <span class="icon_star"></span>
-                                    <span class="icon_star"></span>
+                                <h2>${starAvg}</h2>
+                                 <div class="listing__details__rating__star">
                                 </div>
-                                <span>(120 Rating)</span>
+                                <span>${pprList.size()}&nbsp;reviews</span>
                             </div>
+                            
                             <div class="listing__details__rating__bar">
+   
                                 <div class="listing__details__rating__bar__item">
-                                    <span>4.4</span>
-                                    <div id="bar1" class="barfiller">
-                                        <span class="fill" data-percentage="100"></span>
-                                    </div>
-                                    <span class="right">Quality</span>
-                                </div>
-                                <div class="listing__details__rating__bar__item">
-                                    <span>3.9</span>
-                                    <div id="bar2" class="barfiller">
-                                        <span class="fill" data-percentage="75"></span>
-                                    </div>
-                                    <span class="right">Price</span>
-                                </div>
-                                <div class="listing__details__rating__bar__item">
-                                    <span>4.2</span>
+                                    <span></span>
                                     <div id="bar3" class="barfiller">
-                                        <span class="fill" data-percentage="80"></span>
+                                        <span class="fill"  data-percentage="${starAvgPer}"></span>
+                                        <p><h4><span class="arrow_right_alt"></span>PhotoReview 사진 모아보기<span class="arrow_left_alt"></span></h4>
                                     </div>
-                                    <span class="right">Space</span>
-                                </div>
-                                <div class="listing__details__rating__bar__item">
-                                    <span>4.8</span>
-                                    <div id="bar4" class="barfiller">
-                                        <span class="fill" data-percentage="80"></span>
-                                    </div>
-                                    <span class="right">Service</span>
-                                </div>
-                                <div class="listing__details__rating__bar__item">
-                                    <span>4.0</span>
-                                    <div id="bar5" class="barfiller">
-                                        <span class="fill" data-percentage="85"></span>
-                                    </div>
-                                    <span class="right">Location</span>
-                                </div>
+                                    <span class="right"></span>
+                                </div> 
+                                	<table border="1">
+                                	<tr>
+                                		<td></td>
+                                		<td></td>
+                                		<td></td>
+                                	</tr>
+                                <c:forEach items="${pprList}" var="pp">
+                                	<tr>
+                                	<c:forEach items="${pp.pprpList}" var="ppp">
+											<td style="color: black;">
+												 <img src="${pageContext.request.contextPath}/${ppp.pprpPath}" style="width: 50px; height: 50px;">
+											</td>
+									</c:forEach>
+									</tr>
+									</c:forEach>
+									</table>
+          
                             </div>
                         </div>
-                        
-                        <div class="listing__details__comment" style="float: left; margin-right: 150px;">
-                            <h4>Comment</h4>
-   				 <c:forEach items="\${prList}" var="prList">       
+                      
+      					<section class="listing-details spad">        
+                        <h4><a href="javascript:;" class="btn" id="replyReview" style="text-decoration: none; color: black;">Reply</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        	<a href="javascript:;" class="btn" id="photoReview" style="text-decoration: none; color: black;">PhotoReview</a>
+                        	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;
+                        	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        	 <a href="${pageContext.request.contextPath}/place/myReplyReview/placeNo=${placeNo}&memId=testuserid" 
+                        	 class="btn" id="deleteReplyReview" style="text-decoration: none; color: black; ">My Reply, PhotoReview Edit</a>
+                   <%--      	 <form name="requestReviewForm" method="post" id="requestReviewForm">
+                        	 	<input type="hidden" name="placeNo" value="${placeNo}" id="placeNo">
+                        	 	<input type="hidden" name="memId" value="\${sessionId}" id="memId">
+                        	 </form> --%>
+ <!-- memId 부분에 세션 아이디 받아오기 -->
+                        	 
+                        </h4>
+                        <div class="listing__details__comment">
+   				 <c:forEach items="${prList}" var="prList">       
                             <div class="listing__details__comment__item">
                                 <div class="listing__details__comment__item__pic">
                                     <img src="${pageContext.request.contextPath}/img/listing/details/comment.png" alt="">
                                 </div>
                                 <div class="listing__details__comment__item__text">
-                                    <span>\${prList.}</span>
-                                    <h5>Marry Jane</h5>
-                                    <p>\${placeReview.prContent}</p>
+                                    <span>${prList.prRegdate}</span>
+                                    <h5>${prList.member.memName}</h5>
+                                    <p>${prList.prContent}</p>
                                     
                                     <ul>
-                                        <li><i class="fa fa-hand-o-right"></i> Like</li>
-                                        <li><i class="fa fa-share-square-o"></i> Reply</li>
+                                        <li><i class='fa fa-ellipsis-h'></i><i class='fa fa-ellipsis-h'></i><i class='fa fa-ellipsis-h'></i><i class='fa fa-ellipsis-h'></i></li>
+                                        <li><i class='fa fa-ellipsis-h'></i><i class='fa fa-ellipsis-h'></i><i class='fa fa-ellipsis-h'></i><i class='fa fa-ellipsis-h'></i></li>
                                     </ul>
                                 </div>
                             </div>
         			 </c:forEach>                 
                         </div>
-                        
-<%--                             <div class="listing__details__comment" style="float: right;">
-                            <h4>Comment</h4>
-   				 <c:forEach items="\${place.pprList}" var="photoReview">       
-                            <div class="listing__details__comment__item">
-                                <div class="listing__details__comment__item__pic">
-                                    <img src="${pageContext.request.contextPath}/img/listing/details/comment.png" alt="">
-                                </div>
-                                <div class="listing__details__comment__item__text">
-                                    <div class="listing__details__comment__item__rating">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                    </div>
-                                    <span>\${photoReview.pprRegdate}</span>
-                                    <h5>Marry Jane</h5>
-                                    <p>\${photoReview.pprContent}</p>
-                                    
-                                    <ul>
-                                        <li><i class="fa fa-hand-o-right"></i> Like</li>
-                                        <li><i class="fa fa-share-square-o"></i> Reply</li>
-                                    </ul>
-                                </div>
-                            </div>
-        			 </c:forEach>                 
-                        </div> --%>
-                        
-<!--                                <div class="listing__details__comment"></div>
- -->
-                        <div class="listing__details__review">
+           		 </section>  
+
+           		<div class="listing__details__review">
                             <h4>Add Review</h4>
-                            <form action="#">
-                                <input type="text" placeholder="Name">
-                                <input type="text" placeholder="Email">
-                                <textarea placeholder="Review"></textarea>
-                                <button type="submit" class="site-btn">Submit Now</button>
+                            <form name="replyForm" method="post" action="${pageContext.request.contextPath}/place/replyWrite" onSubmit='return checkValid()' >
+                            <input type="hidden" name="placeNo" value="${placeNo}"/>
+                        
+  <!-- 아이디 가져와서 placeholder 하기 -->  <input type="text" placeholder="Name\${place.member.memId}" readonly="readonly">
+  						
+                                <textarea name="prContent" placeholder="Review"></textarea>
+                                <button type="submit" class="site-btn" id="replySubmit">Submit Now</button>
                             </form>
                         </div>
+
                     </div>
                 </div>
                 <div class="col-lg-4">
                     <div class="listing__sidebar">
                         <div class="listing__sidebar__contact">
                             <div class="listing__sidebar__contact__map">
-                                <iframe
-                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d24168.833995532765!2d-74.79633710628465!3d40.78172222265886!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c384de7a5300b9%3A0x8afc61979217d49d!2sLong%20Valley%2C%20NJ%2007853%2C%20USA!5e0!3m2!1sen!2sbd!4v1586852528126!5m2!1sen!2sbd"
-                                    height="200" style="border:0;" allowfullscreen="" aria-hidden="false"
-                                    tabindex="0"></iframe>
-                                <img src="${pageContext.request.contextPath}/img/listing/details/map-icon.png" alt="">
+                                <div id="kakaoMap">
+                                 <!--    src=""
+                                    height="200px" style="border:0;" allowfullscreen="" aria-hidden="false"
+                                    tabindex="0" --></div>
+                                <%-- <img src="${pageContext.request.contextPath}/img/listing/details/map-icon.png" alt=""> --%>
                             </div>
+
+                            
+                            <!-- sidebar -->
                             <div class="listing__sidebar__contact__text">
-                                <h4>Contacts</h4>
-                                <ul>
-                                    <li><span class="icon_pin_alt"></span> 236 Littleton St. New Philadelphia, Ohio,
-                                        United States</li>
-                                    <li><span class="icon_phone"></span> (+12) 345-678-910</li>
-                                    <li><span class="icon_mail_alt"></span> Info.colorlib@gmail.com</li>
-                                    <li><span class="icon_globe-2"></span> https://colorlib.com</li>
-                                </ul>
-                                <div class="listing__sidebar__contact__social">
-                                    <a href="#"><i class="fa fa-facebook"></i></a>
-                                    <a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a>
-                                    <a href="#" class="twitter"><i class="fa fa-twitter"></i></a>
-                                    <a href="#" class="google"><i class="fa fa-google"></i></a>
-                                </div>
+  
                             </div>
+                            <!-- sidebar -->
+                            
                         </div>
+                        
+                        <!-- sidebar -->
                         <div class="listing__sidebar__working__hours">
-                            <h4>Working Hours</h4>
-                            <ul>
-                                <li>Monday <span>09:00 AM - 20:00 PM</span></li>
-                                <li>Tuesday <span>09:00 AM - 20:00 PM</span></li>
-                                <li>Wednesday <span>09:00 AM - 20:00 PM</span></li>
-                                <li>Thursday <span>09:00 AM - 20:00 PM</span></li>
-                                <li>Friday <span class="opening">Opening</span></li>
-                                <li>Saturday <span>09:00 AM - 20:00 PM</span></li>
-                                <li>Saturday <span class="closed">Closed</span></li>
-                            </ul>
+ 
                         </div>
+                        <!-- sidebar -->
+                        
                     </div>
                 </div>
+
+                
             </div>
         </div>
     </section>
@@ -297,5 +402,4 @@
     <!-- Newslatter Section End -->
 
 </body>
-
 </html>

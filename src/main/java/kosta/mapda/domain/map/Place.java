@@ -1,16 +1,13 @@
 package kosta.mapda.domain.map;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -59,7 +56,7 @@ public class Place {
 	
 	@ManyToOne
 	@JoinColumn(name = "mngNo")
-	private Management mng;
+	private Management management;
 	
 	@ManyToOne
 	@JoinColumn(name = "mapNo")
@@ -75,4 +72,8 @@ public class Place {
 //	@OneToMany(mappedBy = "place", cascade = CascadeType.ALL)
 //	private List<PlacePhotoReview> pprList;		// place photo review
 //	
+	
+	public Place(Long placeNo) {
+		this.placeNo = placeNo;
+	}
 }

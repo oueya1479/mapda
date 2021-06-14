@@ -29,14 +29,12 @@ public class PlaceReviewServiceImpl implements PlaceReviewService {
 	
 	@Override
 	public void insert(PlaceReview placeReview) {
-		// TODO Auto-generated method stub
-
+		prRepository.save(placeReview);
 	}
-
+	
 	@Override
 	public void delete(Long id) {
-		// TODO Auto-generated method stub
-
+		prRepository.deleteById(id);
 	}
 
 	@Override
@@ -53,6 +51,47 @@ public class PlaceReviewServiceImpl implements PlaceReviewService {
 	public List<PlacePhotoReviewPhoto> selectAllPhotoReviewPhoto(Long pprNo) {
 		return pprpRepository.selectBypprNo(pprNo);
 	}
+
+	@Override
+	public List<PlacePhotoReview> selectStarScore(Long placeNo) {	
+		return pprRepository.selectStarScore(placeNo);
+	}
+
+	@Override
+	public List<PlaceReview> selectByPlaceNoMemId(Long placeNo, String memId) {
+		return prRepository.selectByPlaceNoMemId(placeNo, memId);
+	}
+
+	@Override
+	public List<PlacePhotoReview> selectByMemIdPlaceNo(Long placeNo, String memId) {
+		return pprRepository.selectByPlaceNoMemId(placeNo, memId);
+	}
+
+	@Override
+	public void prInsert(PlacePhotoReview placePhotoReview) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void prDelete(Long id) {
+		//pprpRepository.deletePprp(id);
+		pprRepository.deleteById(id);
+	}
+
+	@Override
+	public PlaceReview prUpdate(PlaceReview placeReview) {
+		PlaceReview dbPlaceReview = prRepository.findById(placeReview.getPrNo()).orElse(null);
+		
+		dbPlaceReview.setPrContent(placeReview.getPrContent().replace("<", "&lt;"));
+		
+		return dbPlaceReview;
+	}
+
+//	@Override
+//	public List<PlacePhotoReviewPhoto> selectAllPhotoReviewPhotoPlaceNo(Long placeNo) {
+//		return null;
+//	}
 	
 	
 	
