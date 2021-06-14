@@ -29,7 +29,14 @@
                                     </ul>
                                 </li>
                                 <li><a href="/blog">Blog</a></li>
-                                <li><a href="#">Shop</a></li>
+                                <li><a href="#">My Page</a>
+                                	<ul class="dropdown">
+                                        <li><a href="/about">My Info</a></li>
+                                        <li><a href="/listing-details">My Post</a></li>
+                                        <li><a href="/blog-details">My Point</a></li>
+                                        <li><a href="/myPage/myCoupon">My Coupon</a></li>
+                                    </ul>
+                                </li>
                             </ul>
                         </nav>
                         <div class="header__menu__right">

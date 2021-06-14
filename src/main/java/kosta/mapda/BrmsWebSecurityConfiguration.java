@@ -1,3 +1,4 @@
+
 package kosta.mapda;
 
 import org.springframework.context.annotation.Bean;

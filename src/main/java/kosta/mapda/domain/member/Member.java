@@ -13,6 +13,7 @@ import javax.persistence.SequenceGenerator;
 import org.hibernate.annotations.CreationTimestamp;
 
 import kosta.mapda.domain.map.Theme;
+import kosta.mapda.domain.service.MyCoupon;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -49,4 +50,6 @@ public class Member {
 	@OneToMany(mappedBy = "mapNo")
 	private List<Theme> mapList;
 
+	@OneToMany(mappedBy = "member")
+	private List<MyCoupon> myCouponList;
 }

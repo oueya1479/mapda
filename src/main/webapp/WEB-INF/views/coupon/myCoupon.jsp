@@ -5,19 +5,7 @@
 <html lang="zxx">
 
 <head>
-<SCRIPT>
 
-
-	function checkValid() {
-		var f = window.document.searchForm;
-		if (f.keyword.value == "") {
-			alert("검색어를 입력해 주세요.");
-			f.keyword.focus();
-			return false;
-		}
-		return true;
-	}
-</SCRIPT>
 
 </head>
 
@@ -32,7 +20,7 @@
                     <div class="breadcrumb__text">
                         <h2>Coupon</h2>
                         <div class="breadcrumb__option">
-                            <a href="#"><i class="fa fa-home"></i> Home</a>
+                            <a href="#"><i class="fa fa-home"></i> My Page</a>
                             <span>Coupon</span>
                         </div>
                     </div>
@@ -44,37 +32,45 @@
 
     <!-- Blog Section Begin -->
     <section class="blog-section spad">
-    <h3 style="font-weight: bold">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;쿠폰 목록</h3>&nbsp;
+    <h3 style="font-weight: bold">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;나의 쿠폰</h3>&nbsp;
         <div class="container">
             <div class="row">
                 <div class="col-lg-8">
                     <div class="row">
                     <c:choose>
-							<c:when test="${empty requestScope.couponList.content}">
+							<c:when test="${empty requestScope.myCouponList.content}">
 								
 								<p align="center">
 									<b><span style="font-size: 9pt;">등록된 상품이 없습니다.</span></b>
 								</p>
 							</c:when>
 							<c:otherwise>
-                    	<c:forEach items="${requestScope.couponList.content}" var="coup">
+                    	<c:forEach items="${requestScope.myCouponList.content}" var="myCoup">
 	                        <div class="col-lg-6 col-md-6">
 	                            <div class="blog__item" style="width: 300px; height: 400px; ">
 	                                <div class="blog__item__pic set-bg">
-	                                	<img src="${coup.cpImgpath}" alt="" style="width: 200px; height: 200px;">
+	                                	<img src="${myCoup.coupon.cpImgpath}" alt="" style="width: 200px; height: 200px;">
 	                                </div>
 	                               
 	                                
 	                                <div class="blog__item__text">
 	                                    <ul class="blog__item__tags">
-	                                        <li><i class="fa fa-tags"></i> ${coup.couponCategory.cpcaName}</li>
+	                                        <li><i class="fa fa-tags"></i> ${myCoup.coupon.couponCategory.cpcaName}</li>
 	                         
 	                                    </ul>
-	                                    <h3><a href="${pageContext.request.contextPath}/coupon/couponDetail/${coup.cpNo}">${coup.cpName}</a></h3>
+	                                    <h3><a href="#">${myCoup.coupon.cpName}</a>&nbsp; 발급날짜 : ${myCoup.mycpDate}</h3>
 	                                    
 	                                    <ul class="blog__item__widget">
-	                                        <li><i class="fa fa-money"></i>포인트 :  ${coup.cpPrice}point</li>
-	                                        <li><i class="fa fa-user"></i>이용매장 : ${coup.cpPlace}</li>                
+	                                    <c:choose>
+											<c:when test="${myCoup.mycpState eq 1}">
+											<li><i class="fa fa-money"></i>쿠폰상태 :  사용가능 </li>
+											</c:when>
+											<c:otherwise>
+												<li><i class="fa fa-money"></i>쿠폰상태 :  사용완료 </li>	
+											</c:otherwise>
+										</c:choose>
+	                                        
+	                                        <li><i class="fa fa-user"></i>사용처 : ${myCoup.coupon.member.entName}</li>                
 	                                    </ul>
 	                                </div>
 	                            </div>
@@ -85,37 +81,37 @@
                     </div>
                     
                     <!-- 페이징처리 -->
-            		<c:if test="${not empty requestScope.couponList.content}">
+            		<c:if test="${not empty requestScope.myCouponList.content}">
 								
 							
                     <div class="blog__pagination" style="text-align: center">
                  
                         <!-- 이전 -->
                         <c:choose> 
-                        <c:when test="${couponList.first}">
+                        <c:when test="${myCouponList.first}">
                         </c:when> 
                         <c:otherwise> 
-                        <a href="/coupon/list/?keyword=${param.keyword}&cetegory=${param.category}&nowPage=${couponList.number-1}"><i class="fa fa-long-arrow-left"></i>Pre</a> 
+                        <a href="/myPage/myCoupon/?nowPage=${myCouponList.number-1}"><i class="fa fa-long-arrow-left"></i>Pre</a> 
                         </c:otherwise> 
                         </c:choose>
 
-                        <c:forEach begin="0" end="${couponList.totalPages-1}" var="i"> <!-- pageList.getTotalPages() 호출 -->
+                        <c:forEach begin="0" end="${myCouponList.totalPages-1}" var="i"> <!-- pageList.getTotalPages() 호출 -->
    							<c:choose>
-     							<c:when test="${couponList.number==i}"> <!-- pageList.getNumver() 호출 -->
-         							<a href="${pageContext.request.contextPath}/coupon/list?nowPage=${i}" style="color:red">  ${i+1}  </a>
+     							<c:when test="${myCouponList.number==i}"> <!-- pageList.getNumver() 호출 -->
+         							<a href="${pageContext.request.contextPath}/myPage/myCoupon?nowPage=${i}" style="color:red">  ${i+1}  </a>
      							</c:when>
     						<c:otherwise>
-         						<a href="${pageContext.request.contextPath}/coupon/list?nowPage=${i}">  ${i+1}  </a>
+         						<a href="${pageContext.request.contextPath}/myPage/myCoupon?nowPage=${i}">  ${i+1}  </a>
      						</c:otherwise>
    							</c:choose>
    
  						</c:forEach>
                         <!-- 다음 -->
                         <c:choose> 
-                        <c:when test="${couponList.last}">
+                        <c:when test="${myCouponList.last}">
                         </c:when> 
                         <c:otherwise> 
-                        <a href="/coupon/list/?keyword=${param.keyword}&cetegory=${param.category}&nowPage=${couponList.number+1}"><i class="fa fa-long-arrow-right"></i>Next</a> 
+                        <a href="/myPage/myCoupon/?nowPage=${myCouponList.number+1}"><i class="fa fa-long-arrow-right"></i>Next</a> 
                         </c:otherwise> 
                         </c:choose>
                         
@@ -130,32 +126,11 @@
                 <div class="col-lg-4">
                     <div class="blog__sidebar">
                         <div class="blog__sidebar__search">
-                            <form name="searchForm" action="/coupon/list" method="get" onSubmit='return checkValid()'>
-                                <input type="text"  id="keyword" name="keyword" placeholder="쿠폰명 검색...">
-                                <button type="submit"><i class="fa fa-search"></i></button>
-                            </form>
-                        </div>
-                        
-                        <div class="blog__sidebar__categories" style =" width : 250px; text-align: center;">
-                            <h4>Categories</h4>&nbsp;
-                            <ul style="font-size: 25px;">
-                                <li><a href="/coupon/list">전체</a></li>
-                                <c:forEach items="${requestScope.categoryList}" var="cate">
-                                <li><a href="/coupon/list/?cetegory=${cate.cpcaNo}">${cate.cpcaName}<span></span></a></li>
-                                </c:forEach>
-                                
-                            </ul>
-                        </div>
-                        
-                        <div class="blog__sidebar__categories" style =" width : 250px; text-align: center;">
-                            <h4>My Point</h4>&nbsp;
                             
-                            <h4><i class="fa fa-money"></i> My Point</h4>
-                            <ul>
-                           
-                                
-                                
-                            </ul>
+                        </div>
+                        
+                        <div class="blog__sidebar__categories">
+                          
                         </div>
                        
                     </div>
