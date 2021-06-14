@@ -10,6 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import kosta.mapda.domain.member.Member;
+import kosta.mapda.domain.enterprise.Enterprise;
 import kosta.mapda.domain.service.Coupon;
 import kosta.mapda.domain.service.CouponCategory;
 import kosta.mapda.domain.service.MyCoupon;
@@ -115,6 +116,14 @@ public class CouponServiceImpl implements CouponService {
 		Member member = memberRepository.findById(memNo).orElse(null);
 		
 		return myCouponRepository.findBymember(pageable, member);
+	}
+	
+	@Override
+	public void insertCoupon(Coupon coupon) {
+		Enterprise member = new Enterprise();
+		member.setMemNo(1L);
+		coupon.setMember(member);
+		couponRepository.insert(coupon);
 	}
 	
 }

@@ -1,9 +1,9 @@
 package kosta.mapda.controller.coupon;
 
 import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.swing.filechooser.FileSystemView;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -13,9 +13,12 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import kosta.mapda.domain.member.Member;
@@ -120,6 +123,21 @@ public class CouponController {
 //		model.addAttribute("couponList", couponList);
 //		return "coupon/couponManage";
 //	}
+	/**
+	 * 관리자 쿠폰 등록
+	 */
+	@PostMapping("/insert")
+	public String insertCoupon(@RequestParam("file") MultipartFile file, Coupon coupon) {
+		
+		String rootPath = FileSystemView.getFileSystemView().getHomeDirectory().toString();
+		String basePath = rootPath + "/" + "single";
+		
+		String filePath = basePath + "/" + file.getOriginalFilename();
+		
+		service.insertCoupon(coupon);
+		
+		return "/coupon/couponAdd";
+	}
 	
 	/**
 	 * 마이페이지- 마이 쿠폰 조회
@@ -138,6 +156,14 @@ public class CouponController {
 		model.addAttribute("myCouponList", myCouponList);
 		
 		return "coupon/myCoupon";
+	}
+		
 	
+	@ExceptionHandler(Exception.class)
+	public String exception(Exception e) {
+		
+		e.printStackTrace();
+		
+		return"error";
 	}
 }
