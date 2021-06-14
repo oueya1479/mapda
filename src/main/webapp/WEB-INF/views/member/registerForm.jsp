@@ -10,7 +10,7 @@
 <meta charset="utf-8">
 <meta name="viewport"
    content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>OriAuction</title>
+<title>MapDa</title>
 <link rel="icon" href="<%=request.getContextPath()%>/img/favicon.png">
 <!-- Bootstrap CSS -->
 <link rel="stylesheet"
@@ -75,6 +75,9 @@
 			#bb{font-family: ITC Grouch; background-color: gray; border:0; outline:0; padding:6px 17px; font-size: 15px; color:black;}
 			#oti{font-family:ITC Grouch; font-size: 100px; text-align: center; color:white;}
 	
+	
+	
+	
 		</style>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.js"></script>
 		<script type="text/javascript" src="../js/jquery-3.6.0.min.js">
@@ -114,7 +117,7 @@
 						data:{pwc:$(this).val(),pw:$("#pw").val()},
 						success:function(result){$("#pwCheck").text(result)},
 						error:function(err){
-							alert(err+"비밀번 조회 에러.")
+							alert(err+"비밀번호 조회 에러.")
 						}
 					}	
 					)
@@ -143,15 +146,15 @@
     	 
     	 <script>
 	    	 function validate() {
-	    	       var id = document.getElementById("id");
-	    	       var pw = document.getElementById("pw");
-	    	       var pwc = document.getElementById("pwc");
-	    	       var name = document.getElementById("name");
-	    	       var accounNum = document.getElementById("accounNum");
-	    	       var addr1 = document.getElementById("addr1");
-	    	       var contact=document.getElementById("contact");
-	    	       var email1 = document.getElementById("email1");
-	    	       var email2 = document.getElementById("email2");
+	    	       var id = document.getElementById("memId");
+	    	       var pw = document.getElementById("memPw");
+	    	       /* var pwc = document.getElementById("pwc"); */
+	    	       var name = document.getElementById("memName");
+	    	       var accounNum = document.getElementById("memAccount");
+	    	       var addr = document.getElementById("memAddr");
+	    	       var age = document.getElementById("memAge");
+	    	       var user = document.getElementById("memGrade");
+	    	   
 	    	       
 	    	       if(id.value=="") {
 	    	           alert("아이디를 입력해주세요");
@@ -177,7 +180,7 @@
 	    	           alert("계좌 정보를 입력해주세요");
 	    	           accountNum.focus();
 	    	           return false;
-	    	       }else if(con1.value=="") {
+	    	       /* }else if(con1.value=="") {
 	    	           alert("올바른 연락처 형식이 아닙니다.");
 	    	           con1.focus();
 	    	           return false;
@@ -197,7 +200,7 @@
 	    	           alert("도메인 주소를 입력해주세요");
 	    	           email2.focus();
 	    	           return false;
-	    	       } 
+	    	       }  */
 	    	       alert("회원가입 완료.");
 	    	    return true;
 	    			
@@ -206,45 +209,51 @@
     	 
     	 
     	 </script>
+    	 
+    	 <script >
+    	 $(document).ready(function() {
+    		 
+    		 
+    		 $('input[type="checkbox"][name="memGrade"]').click(function(){
+    		 
+    		  if($(this).prop('checked')){
+    		 
+    		     $('input[type="checkbox"][name="memGrade"]').prop('checked',false);
+    		 
+    		     $(this).prop('checked',true);
+    		 
+    		    }
+    		  
+    		   });
+    		  
+    		 });
+    	 
+    	 </script>
+    	 
 </head>
 <body>
 	<br><br><br><br><br><br>
-<h2>Member Register Form</h2><p>
-<form method="post" action="${pageContext.request.contextPath}/registerMember" id="regForm">
-<section >
+
         <div style="margin:auto;text-align:center;">
-        	<form name="joinForm" style="display:inline-block;" action="${path}/front?key=member&methodName=memberJoin" method=post onsubmit="return validate();">
-				<br><br><br><br><br><br>
-				<input type="text" class="underline"  placeholder="ID" id="id" name="id"><span id="idCheck"></span><br><br>
-				<input type="password" class="underline" placeholder="PASSWORD" id="pw" name="pw"> <br><br>
-				<input type="password" class="underline" placeholder="PASSWORD CHECK" type="text" placeholder="CONFIRM PASSWORD" id="pwc" name="pwc"><span id="pwCheck"></span> <br><br>
-				<input type="text" class="underline"  placeholder="NAME" id="name" name="name"> <br><br>
-				<select name="bank" id="bank" >
-					<option value="국민">국민</option>
-					<option value="농협">농협</option>
-					<option value="우리">우리</option>
-					<option value="카카오">카카오</option>
-					<option value="하나">하나</option>
-					<option value="sc제일">sc제일</option>
-				</select>&nbsp;&nbsp;
-				
-				<!--<input type="text" class="underline" placeholder="BANK" id="bank" name="bank">-->
-				<input type="text" class="underline" placeholder="ACCOUNT NUMBER" id="accountNum" name="accountNum"> <br><br>
-				<input type="text" class="underline" placeholder="ADDRESS" id="addr1" name="addr1" required="required" readonly="readonly"> &nbsp <button type="button" onclick="goPopup()" id="bb">Search</button> <br><br>
-				<input type="text" class="underline"  id="con1" name="con1">-
-				<input type="text" class="underline" id="con2" name="con2">-
-				<input type="text" class="underline" id="con3" name="con3"> <br><br>
-				
-				<input type="text" class="underline" placeholder="E-MAIL" id="email1" name="email1">@
-				<input type="text" class="underline" placeholder="DOMAIN" id="email2" name="email2"> <br><br><br><br><br><br>
-				
+        <h2>Member Register Form</h2><p>
+        	<form name="joinForm" style="display:inline-block;" action="${pageContext.request.contextPath}/member/registerMember" accept-charset="UTF-8">
+				<br><br><br>
+				<input type="text" class="underline"  placeholder="ID" id="id" name="memId"><!-- <span id="idCheck"></span> --><br><br>
+				<input type="password" class="underline" placeholder="PASSWORD" id="pw" name="memPw"> <br><br>
+				<input type="text" class="underline"  placeholder="NAME" id="name" name="memName"> <br><br>
+				<input type="text" class="underline" placeholder="AGE" id="age" name="memAge"><br><br>
+				<input type="text" class="underline"  placeholder="ADDRESS" id="addr" name="memAddr"> <br><br>
+				<input type="checkbox"  id="User" name="memGrade" value="User" onclick='checkOnlyOne(this)'> <label for="User">User</label> 
+				<input type="checkbox"  id="Enterprise" name="memGrade" value="Enterprise" onclick='checkOnlyOne(this)'> <label for="Enterprise">Enterprise</label> <br><br>
+				<input type="text" class="underline" placeholder="ACCOUNT NUMBER" id="accountNum" name="memAccount"> <br><br>
 				<input type="submit" title="Create as Account" id="joinbutton" value="Create an Account">
+				<!-- <input type="password" class="underline" placeholder="PASSWORD CHECK" type="text" placeholder="CONFIRM PASSWORD" id="pwc" name="pwc"><span id="pwCheck"></span> <br><br> -->
+				<!--<input type="text" class="underline" placeholder="BANK" id="bank" name="bank">-->
+				<!-- <input type="text" class="underline" placeholder="ADDRESS" id="addr1" name="memAddr" required="required" readonly="readonly"> &nbsp <button type="button" onclick="goPopup()" id="bb">Search</button> <br><br> -->
     		</form>	
     
     
     	</div>
     
-    </section>
-</form>
 </body>
 </html>

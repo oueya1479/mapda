@@ -18,7 +18,7 @@ public interface MemberService {
 
 	void updateMember(Member member);
 
-//	void registerMember(Member member);
+	void registerMember(Member member);
 
 	String idcheck(String memId);
 	

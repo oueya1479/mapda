@@ -8,6 +8,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import kosta.mapda.domain.member.Member;
+import kosta.mapda.domain.member.MemberRole;
 //import kosta.mapda.domain.member.MemberRole;
 import kosta.mapda.repository.member.MemberRepository;
 
@@ -18,9 +19,8 @@ public class MemberServiceImpl implements MemberService {
 	@Autowired
 	private MemberRepository memRepository;
 
-//	@Autowired
-//	private MemberRole memberRole;
-//	
+	
+	
 	/*
 	 * 비밀번호 암호화를 위한 객체를 주입받는다
 	 */
@@ -40,6 +40,7 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public int getMemberCount() {
 		return 0;
+//		return member.getMemberCount();
 	}
 
 	@Override
@@ -47,12 +48,12 @@ public class MemberServiceImpl implements MemberService {
 
 	}
 
-//	@Override
-//	public void registerMember(Member member) {
-//		// 비밀번호 암호화
-//		String encodedPassword = passwordEncoder.encode(member.getPassword());
-//		member.getPassword(encodedPassword);
-//		memRepository.registerMember(member);
+	@Override
+	public void registerMember(Member member) {
+		// 비밀번호 암호화
+		String encodedPassword = passwordEncoder.encode(member.getMemPw());
+		member.setMemPw(encodedPassword);
+		memRepository.save(member);
 
 		// 권한등록
 		/*
@@ -63,11 +64,12 @@ public class MemberServiceImpl implements MemberService {
 //		if (vo.getUserType().equals("1")) {
 //			authoritiesDAO.insertAuthority(new AuthorityVO(vo.getId(), Constants.ROLE_ADMIN));
 //		}
-//	}
+	}
 
 	@Override
 	public String idcheck(String memId) {
-		int count = memRepository.idcheck(memId);
+//		int count = memRepository.idcheck(memId);
+		int count = 0;
 		return (count == 0) ? "ok" : "fail";
 	}
 
