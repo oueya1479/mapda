@@ -28,12 +28,13 @@ public class Event {
 	@SequenceGenerator(sequenceName = "event_emno_seq", allocationSize = 1, name = "event_emno_seq")
 	private Long evNo;
 	private String evTitle;
-	private String evContents;
+	private String evContent;
 	private  LocalDateTime evStartDate;
 	private LocalDateTime evEndDate; 
-	private LocalDateTime evRegDate;
+	private LocalDateTime evRegdate;
 	private  int evStatus;
-	
+    private String evImg; 
+    
 	@ManyToOne
 	@JoinColumn(name="mng_no")
 	private Management management;
