@@ -3,15 +3,18 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>
 <html lang="zxx">
 
 <head>
 
 <!-- memNo 변수설정 -->
-<%-- <sec:authentication property="principal.memNo" var="mno"  /> --%>
-
+<sec:authentication property="principal.memNo" var="mno" />
+<style>
+/* #this(overflow     : hidden;) */
+</style>
 <script src="${pageContext.request.contextPath}/js/jquery-3.3.1.min.js"></script>
 <script>
 	$(function() {
@@ -35,74 +38,30 @@
 						})
 	});
 </script>
-
-<script type="text/javascript">
-	/* $(function(){
-		$("#like").click(function(){
-			var mapNo = $(this).attr("id")
-			alert(mapNo);
-		})
-	}); */
-	/* var subButton = document.getElementById("subButton");
-	subButton.onclick = function(){ subscribe(); }
-	function subscribe(){ 
-		alert(1)
-		$.ajax({
-			url:"/map/subscribe",
-			type:"get",
-			dataType:"json"
-			data:{mapNo : '${map.mapNo}', memNo : '${requestScope.member.memNo}'}
-			success: function(data){
-				
-				 if(data == -1){
-                    alert("구독 오류","error","확인",function(){});
-                }
-                else if(data==1){
-					 $("#subButton").attr("src","/img/map/bookmark-tag.png")
-					  $("#subcnt").empty();
-					 $("#subcnt").append(data.subcnt);  
-				 }else if(data==0){
-					 $("#subButton").attr("src","/img/map/ribbon.png")
-					  $("#subcnt").empty();
-					 $("#subcnt").append(data.subcnt);  
-				 }
-					 
-			},
-			error : function(err){
-				  console.log(err+" 에러 발생.")
-			  }
-		})
-	} */
-
-</script>
-
 <script type="text/javascript">
 	$(function(){
-		$("#subButton").click(function(){
-			/* //alert(${mno})
+		$(document).on('click', '#subButton', function() {
+			let mapNo = $(this).attr('name');
 			$.ajax({
-			url:"/map/subscribe",
-			type:"get",
-			dataType:"json"
-			data:{mapNo : '${map.mapNo}', memNo : '${mno}'}
-			success: function(data){
-				 if(data == -1){
-                    alert("구독 오류","error","확인",function(){});
-                }
-                else if(data==1){
-					 $("#subButton").attr("src","/img/map/bookmark-tag.png")
-				 }else if(data==0){
-					 $("#subButton").attr("src","/img/map/ribbon.png")
-				 }
-					 
-			},
-			error : function(err){
-				  console.log(err+" 에러 발생.")
-			  } */
-			  
-		})//클릭function 끝
+				url:"${pageContext.request.contextPath}/map/subscribe",
+				type:"get",
+				dataType:"json",
+				data: {"mapNoStr" : $(this).attr('name'), "memNoStr" : ${mno}},
+				success: function(data){
+					if(data == -1){
+	                    alert("구독 오류","error","확인",function(){});
+	                } else if(data==1){
+						 $("#subButton").attr("src","/img/map/bookmark-tag.png")
+					} else if(data==0){
+						 $("#subButton").attr("src","/img/map/ribbon.png")
+					}
+				},
+				error : function(err) {
+					console.log(err + "에러 발생");
+				}
+			});
+		});//클릭function 끝
 	});//script 끝
-
 </script>
 </head>
 
@@ -190,7 +149,7 @@
 												&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
 												&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
 												&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-												 <%-- <c:choose>
+												 <c:choose>
 												 	<c:when test="${empty pageContext.request.userPrincipal}">
 												 	<img
 													src="${pageContext.request.contextPath}/img/map/ribbon.png"
@@ -209,13 +168,13 @@
 													alt="" style="height: 20px; width: 20px; cursor: pointer;"
 													id="subButton"><br>
 													</c:otherwise>
-												</c:choose>  --%>
-												 
+												</c:choose>  
+
 												<img
 													src="${pageContext.request.contextPath}/img/map/ribbon.png"
 													alt="" style="height: 20px; width: 20px; cursor: pointer;"
-													id="subButton"
-													onclick="javascript:location.href='${pageContext.request.contextPath}/map/mapRead/${map.mapNo}'"><br> 
+													id="subButton" name="${map.mapNo}"
+													><br>
 												<div class="listing__item__text__inside">
 
 													<h5>
@@ -228,7 +187,7 @@
 
 
 														<div class="listing__item__rating__star">
-															<p>${map.mapContent}</p>
+															<p id="this">${map.mapContent}</p>
 														</div>
 													</div>
 													<h6 style="text-align: right;">${map.member.memId}</h6>

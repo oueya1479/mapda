@@ -198,7 +198,8 @@
 					Cover Image <input type="file" name="file" /> Category
 					&nbsp;&nbsp;&nbsp;
 					<p>
-						<select name="categoryNo">
+					<div class="nice-select" style="padding: 0px; width: 0px; width: 0px;">
+						<select name="categoryNo"  >
 							<option value="1">맛집</option>
 							<option value="2">여행</option>
 							<option value="3">카페</option>
@@ -213,21 +214,24 @@
 							<option value="12">반려동물</option>
 							<option value="13">데이트</option>
 							<option value="14">드라이브</option>
-						</select>
+						</select></div>
 				</div>
 				<div class="row">
 					Accessibility &nbsp;&nbsp;&nbsp;
+					
 					<p>
+					<div class="nice-select" style="padding: 0px; width: 0px; width: 0px;">
 						<select name="mapIsopen">
 							<option value="0">Private</option>
 							<option value="1">Public</option>
 						</select>
+						</div>
 				</div>
 
 			</div>
 			<div class="container">
-				<button type="submit" class="site-btn" id="submitbt">"Create
-					Map"</button>
+				<button type="submit" class="site-btn" id="submitbt">Create
+					Map</button>
 			</div>
 
 		</form>
