@@ -27,7 +27,7 @@
 						<h5>회원 정보</h5>
 					</div>
 					<div class="card-block">
-						<form class="form-material" accept-charset="UTF-8"
+						<form class="form-material" accept-charset="UTF-8" method="post"
 							action="${pageContext.request.contextPath}/admin/update_member">
 							<div class="form-group form-default">
 								<input type="text"  class="form-control" name="memName"
@@ -67,7 +67,6 @@
 							<input name="memAccount" value="${member.memAccount}" type="hidden">
 							<input name="memFollower" value="${member.memFollower}" type="hidden">
 							<input name="memFollowing" value="${member.memFollowing}" type="hidden">
-							<input name="memRegdate" value="${member.memRegdate}" type="hidden">
 						</form>
 					</div>
 				</div>

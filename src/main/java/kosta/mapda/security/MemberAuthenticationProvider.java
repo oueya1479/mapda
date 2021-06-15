@@ -9,6 +9,7 @@ import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -60,19 +61,16 @@ public class MemberAuthenticationProvider implements AuthenticationProvider {
 			throw new UsernameNotFoundException("비밀번호 오류입니다.....");
 		}
 		
-		
-		
+		System.out.println(member.getAuthorities());
 		//성공하면
 		//인증된 사용자의 권한을 검색해서  Authentication에 저장한다.
 		//List<MemberRole>  memRoleList = memberRole.selectAuthorityByUserName(memId);
-		
-		
-		List<SimpleGrantedAuthority> simpleAuthList = new ArrayList<SimpleGrantedAuthority>();
+		List<GrantedAuthority> roles = (List<GrantedAuthority>) member.getAuthorities();
 		//for(MemberRole memberRole : memRoleList) {
 	//		simpleAuthList.add(new SimpleGrantedAuthority(memberRole.getRoleName())); //DB의 권한을 Security의 권한타입에 맞게 변환하는과정
 	//	}
 		
-		return new UsernamePasswordAuthenticationToken(member, null,null);//인증된 사용자의 정보와 권한을 Authentication에 저장--> SecurityContext에저장 -> SecurityHolder -> 
+		return new UsernamePasswordAuthenticationToken(member, pass, roles);//인증된 사용자의 정보와 권한을 Authentication에 저장--> SecurityContext에저장 -> SecurityHolder -> 
 	}
 
 	

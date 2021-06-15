@@ -27,5 +27,4 @@ public interface CouponRepository extends JpaRepository<Coupon, Long> {
 //			+ "VALUES(cp_no_seq.nextval, ?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9)")
 //	@Modifying
 //	int insert(Coupon coupon);
-	
 }
