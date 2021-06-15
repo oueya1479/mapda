@@ -1,4 +1,4 @@
-package kosta.mapda.repository;
+package kosta.mapda.repository.member;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;

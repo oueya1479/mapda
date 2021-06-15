@@ -10,7 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import kosta.mapda.domain.service.Event;
-import kosta.mapda.repository.EventRepository;
+import kosta.mapda.repository.member.EventRepository;
 
 @Service
 @Transactional
