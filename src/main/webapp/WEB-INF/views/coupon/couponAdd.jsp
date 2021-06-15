@@ -111,7 +111,7 @@
 	                        				</li>
 	                 		    			<li>		
 	                 		    			카테고리 : 
-	                 		    			<select name="cpcaNo" size="8" style="display: inline-block; text-align: right; margin-left: 500px;">
+	                 		    			<select class="form-control" name="cpcaNo" size="8" style="display: inline-block; text-align: right; margin-left: 500px;">
 			                 					<option selected="selected">선택</option>
 			                 					<option value="1">카페</option>
 			                 					<option value="2">문화</option>

@@ -114,17 +114,19 @@ public class CouponServiceImpl implements CouponService {
 	public Page<MyCoupon> selectByMyCoupon(Pageable pageable, Long memNo) {
 		
 		Member member = memberRepository.findById(memNo).orElse(null);
-		
 		return myCouponRepository.findBymember(pageable, member);
 	}
-
-//	
-//	@Override
-//	public void insertCoupon(Coupon coupon) {
-//		Enterprise member = new Enterprise();
-//		member.setMemNo(1L);
-//		coupon.setMember(member);
-//		couponRepository.insert(coupon);
-//	}
+	
+	@Override
+	public void insertCoupon(Coupon coupon) {
+		Enterprise member = new Enterprise();
+		member.setMemNo(1L);
+		coupon.setMember(member);
+		
+		Coupon dbCoupon = new Coupon(); 	
+		
+		dbCoupon = couponRepository.save(coupon);
+		
+	}
 	
 }

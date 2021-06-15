@@ -16,9 +16,10 @@ public class PointController {
 	 */
 	public ModelAndView mapPointList() {
 		
-		
 		List<MyPoint> myPointList;
 		ModelAndView mv = new ModelAndView();
+		
+	
 		
 		return mv;
 	}
