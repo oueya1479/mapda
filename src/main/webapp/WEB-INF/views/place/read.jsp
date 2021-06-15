@@ -5,7 +5,7 @@
 <head>
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=dedf9592b51a78be2b5d3ec39a2a2199"></script>
 <style type="text/css">
 .mySlides {display:none;}
@@ -143,6 +143,7 @@
 
 
 <body>
+
     <!-- Listing Section Begin -->
     <section class="listing-hero set-bg" data-setbg="${pageContext.request.contextPath}/img/placeimges/test1.png"><!-- 무슨 사진 넣을지 고민 -->
         <div class="container">
@@ -195,6 +196,7 @@
 						</div>
 
 					<script>
+					
 					var slideIndex = 1;
 					showDivs(slideIndex);
 					
@@ -388,4 +390,5 @@
     <!-- Newslatter Section End -->
 
 </body>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </html>

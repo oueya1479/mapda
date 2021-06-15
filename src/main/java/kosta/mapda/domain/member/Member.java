@@ -111,7 +111,7 @@ public class Member implements UserDetails{
 	public boolean isEnabled() {
 		// TODO Auto-generated method stub
 		return false;
-    
+	}
 	@OneToOne(mappedBy = "member")
 	private MyPoint myPointList;
 	
