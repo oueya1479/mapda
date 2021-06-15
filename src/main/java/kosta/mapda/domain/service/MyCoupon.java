@@ -32,7 +32,7 @@ public class MyCoupon {
 	private Long mycpNo; //내쿠폰번호
 	
 	private String barcoImgPath; //바코드 이미지 경로
-	private int barcoNo; //바코드번호
+	private String barcoNo; //바코드번호
 	
 	@CreationTimestamp
 	private LocalDateTime mycpDate; //쿠폰 발급날짜

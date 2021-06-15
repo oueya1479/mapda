@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt"%>
+
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -58,7 +60,10 @@
 	                                        <li><i class="fa fa-tags"></i> ${myCoup.coupon.couponCategory.cpcaName}</li>
 	                         
 	                                    </ul>
-	                                    <h3><a href="#">${myCoup.coupon.cpName}</a>&nbsp; 발급날짜 : ${myCoup.mycpDate}</h3>
+	                                    <h3><a href="#">${myCoup.coupon.cpName}</a>&nbsp; </h3>
+	                                    <fmt:parseDate value="${myCoup.mycpDate}" pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime" type="both"/>
+	                                    
+	                                    <h5>발급날짜 : <fmt:formatDate value="${parsedDateTime}" pattern="yyyy.MM.dd"/> </h5>
 	                                    
 	                                    <ul class="blog__item__widget">
 	                                    <c:choose>
