@@ -11,7 +11,11 @@
 <head>
 
 <!-- memNo 변수설정 -->
+<sec:authorize access="isAuthenticated()">
 <sec:authentication property="principal.memNo" var="mno" />
+</sec:authorize>
+
+
 <style>
 /* #this(overflow     : hidden;) */
 </style>
@@ -149,7 +153,7 @@
 												&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
 												&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
 												&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-												 <c:choose>
+												<%--  <c:choose>
 												 	<c:when test="${empty pageContext.request.userPrincipal}">
 												 	<img
 													src="${pageContext.request.contextPath}/img/map/ribbon.png"
@@ -168,7 +172,7 @@
 													alt="" style="height: 20px; width: 20px; cursor: pointer;"
 													id="subButton"><br>
 													</c:otherwise>
-												</c:choose>  
+												</c:choose>   --%>
 
 												<img
 													src="${pageContext.request.contextPath}/img/map/ribbon.png"
@@ -233,10 +237,10 @@
 
 
 	</section>
-	<!-- Most Search Section End -->
+	<!— Most Search Section End —>
 
 
-	<!-- Newslatter Section End -->
+	<!— Newslatter Section End —>
 </body>
 
 </html>
