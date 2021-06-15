@@ -3,14 +3,21 @@ package kosta.mapda.controller.admin;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import kosta.mapda.domain.map.Theme;
 import kosta.mapda.domain.member.InfluenceReq;
 import kosta.mapda.domain.member.Member;
 import kosta.mapda.domain.member.RPay;
+import kosta.mapda.domain.service.Coupon;
 import kosta.mapda.service.admin.AdminService;
 
 @Controller
@@ -21,8 +28,9 @@ public class AdminController {
 	private AdminService adminService;
 	
 	@RequestMapping("/member")
-	public void member(Model model) {
-		List<Member> memberList = adminService.getMember();
+	public void member(Model model, @RequestParam(defaultValue = "0") int nowPage) {
+		Pageable pageable = PageRequest.of(nowPage, 10, Direction.ASC, "memNo");
+		Page<Member> memberList =  adminService.getMember(pageable);
 		model.addAttribute("title", "회원 정보");
 		model.addAttribute("content", "회원 정보를 탐색하고 수정할 수 있습니다.");
 		model.addAttribute("memberList", memberList);
@@ -63,8 +71,12 @@ public class AdminController {
 	}
 	
 	@RequestMapping("/theme_post")
-	public void themePost() {
-		
+	public void themePost(Model model, @RequestParam(defaultValue = "0") int nowPage) {
+		Pageable pageable = PageRequest.of(nowPage, 10, Direction.ASC, "mapNo");
+		Page<Theme> themeList = adminService.getTheme(pageable);
+		model.addAttribute("title", "테마 지도");
+		model.addAttribute("content", "테마 지도 게시물에 관련한 페이지입니다.");
+		model.addAttribute("themeList", themeList);
 	}
 	
 	@RequestMapping("/place_post")
