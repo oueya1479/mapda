@@ -1,5 +1,7 @@
 package kosta.mapda.controller.coupon;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -10,6 +12,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Direction;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -25,7 +29,9 @@ import kosta.mapda.domain.member.Member;
 import kosta.mapda.domain.service.Coupon;
 import kosta.mapda.domain.service.CouponCategory;
 import kosta.mapda.domain.service.MyCoupon;
+import kosta.mapda.domain.service.MyPoint;
 import kosta.mapda.service.service.CouponService;
+import kosta.mapda.service.service.PointService;
 
 @Controller
 @RequestMapping("/coupon")
@@ -33,6 +39,9 @@ public class CouponController {
 
 	@Autowired
 	private CouponService service;
+	
+	@Autowired(required=false)
+	private PointService pointService;
 	
 	/**
 	 * 쿠폰 리스트를 가져오는 메소드
@@ -64,17 +73,22 @@ public class CouponController {
 		
 		List<CouponCategory> categoryList = service.couponCategory();
 		
-		model.addAttribute("couponList", couponList);
-		model.addAttribute("categoryList", categoryList);
-		
 		//
 		HttpSession session = request.getSession();
 		Member member = new Member();
-		member.setMemNo(0L);
+		member.setMemNo(11L);
 		member.setMemId("seo");
 		member.setMemPw("1234");
 		session.setAttribute("member", member);
-		//
+		
+		System.out.println("---------------");
+		System.out.println(member.getMemId());
+		
+		//MyPoint myPoint = pointService.selectMyPoint(member.getMemNo());
+		
+		model.addAttribute("couponList", couponList);
+		model.addAttribute("categoryList", categoryList);
+		//model.addAttribute("myPoint", myPoint);
 		
 		return "coupon/list";
 	}
@@ -114,30 +128,28 @@ public class CouponController {
 	}
 	
 	/**
-	 * 관리자 전체 쿠폰 조회
-	 */
-//	@RequestMapping("/admin")
-//	public String allcouponList(Model model, @PageableDefault(size = 10, sort = "id", direction = Sort.Direction.DESC) Pageable pageable ) {
-//		
-//		Page<Coupon> couponList = service.viewAll(pageable);
-//		model.addAttribute("couponList", couponList);
-//		return "coupon/couponManage";
-//	}
-	/**
 	 * 관리자 쿠폰 등록
 	 */
-//	@PostMapping("/insert")
-//	public String insertCoupon(@RequestParam("file") MultipartFile file, Coupon coupon) {
-//		
-//		String rootPath = FileSystemView.getFileSystemView().getHomeDirectory().toString();
-//		String basePath = rootPath + "/" + "single";
-//		
-//		String filePath = basePath + "/" + file.getOriginalFilename();
-//		
-//		service.insertCoupon(coupon);
-//		
-//		return "/coupon/couponAdd";
-//	}
+	@PostMapping("/insert")
+	public String insertCoupon(@RequestParam("file") MultipartFile file, Coupon coupon, HttpServletRequest request) {
+		
+		try {
+			String baseDir = request.getSession().getServletContext().getRealPath("/WEB-INF/static");
+			String filePath = baseDir + "/" + file.getOriginalFilename();
+			file.transferTo(new File(filePath));
+			Authentication user = SecurityContextHolder.getContext().getAuthentication();
+			String memId = user.getName();
+			System.out.println(memId);
+			coupon.setCpImgpath(filePath);
+			
+			service.insertCoupon(coupon);
+			
+		} catch(IOException e) {
+			e.printStackTrace();
+		}
+		
+		return "/coupon/couponAdd";
+	}
 	
 	/**
 	 * 마이페이지- 마이 쿠폰 조회
@@ -151,19 +163,11 @@ public class CouponController {
 		
 		Member m = (Member) session.getAttribute("member");
 		
-		Page<MyCoupon> myCouponList = service.selectByMyCoupon(pageable, m.getMemNo());
+		Page<MyCoupon> myCouponList = service.selectByMyCoupon(pageable, 11L);
 		
 		model.addAttribute("myCouponList", myCouponList);
 		
 		return "coupon/myCoupon";
 	}
-		
 	
-	@ExceptionHandler(Exception.class)
-	public String exception(Exception e) {
-		
-		e.printStackTrace();
-		
-		return"error";
-	}
 }

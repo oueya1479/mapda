@@ -91,11 +91,8 @@ public class MapServiceImpl implements MapService {
 	 */
 	@Override
 	public MapStorage subcheck(Long memNo, Long mapNo) {
-		Member member = new Member();
-		Theme theme = new Theme();
-		member.setMemNo(memNo);
-		theme.setMapNo(mapNo);
-		return mapStorageRepository.findByMemberAndTheme(member, theme);
+
+		return mapStorageRepository.findStorage(memNo, mapNo);
 	}
 	
 	/**

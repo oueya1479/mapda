@@ -4,14 +4,82 @@
 <html lang="zxx">
 <head>
 
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/star-rating-svg.css">
 <style type="text/css">
-</style>
-<script type="text/javascript">
-	function openWindowPop(url, name){
-	    var options = 'top=30, left=150, width=700, height=700, status=no, menubar=no, toolbar=no, resizable=no scrollbars=yes';
-	    window.open(url, name, options);
-	}
+#resultAddress, #placeAddr{
+	background-color: transparent;
+	border: none;
+	color: white;
+}
+#placeTitle{
+	width : 800px;
+	background-color: transparent;
+	border: none;
+	color: white;
+}
 
+
+</style>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=dedf9592b51a78be2b5d3ec39a2a2199&libraries=services"></script>
+<script type="text/javascript">
+	var openWin;
+
+	function openChild(url, name){
+		// window.name = "부모창 이름"; 
+        window.name = "${pageContext.request.contextPath}/place/placeInsertForm";
+        
+	    var options = 'top=30, left=150, width=700, height=700, status=no, menubar=no, toolbar=no, resizable=no, scrollbars=yes';
+	    openWin = window.open(url, name, options);
+	}
+	
+	$(function(){
+		$('.star-box').starRating({
+		    initialRating: 0.5,
+		    starSize: 25,
+		    minRating: 0.5,
+		    disableAfterRate:false,
+			onLeave:function(currentIndex, currentRating, $el){
+				$("#placeStar").val(currentRating*2);
+				
+			}
+		  });
+		
+		$("#hashTag1").hide();
+		$("#tagImg1").click(function(){
+		    $("#hashTag1").toggle();
+		  });
+		$("#hashTag2").hide();
+		$("#tagImg2").click(function(){
+		    $("#hashTag2").toggle();
+		  });
+		$("#hashTag3").hide();
+		$("#tagImg3").click(function(){
+		    $("#hashTag3").toggle();
+		  });
+		$("#hashTag4").hide();
+		$("#tagImg4").click(function(){
+		    $("#hashTag4").toggle();
+		  });
+		$("#hashTag5").hide();
+		$("#tagImg5").click(function(){
+		    $("#hashTag5").toggle();
+		  });
+		$("#hashTag6").hide();
+		$("#tagImg6").click(function(){
+		    $("#hashTag6").toggle();
+		  });
+		$("#hashTag7").hide();
+		$("#tagImg7").click(function(){
+		    $("#hashTag7").toggle();
+		  });
+		$("#hashTag8").hide();
+		$("#tagImg8").click(function(){
+		    $("#hashTag8").toggle();
+		  });
+		
+		
+	});
+	
   </script>
 
 
@@ -19,6 +87,9 @@
 
 
 <body>
+			<%-- <form action="${pageContext.request.contextPath}/map/insertMap"
+			class="contact__form" method="post" enctype="multipart/form-data"></form> --%>
+
     <!-- Listing Section Begin -->
     <section class="listing-hero set-bg" data-setbg="${pageContext.request.contextPath}/img/listing/details/listing-hero.jpg"><!-- 무슨 사진 넣을지 고민 -->
         <div class="container">
@@ -29,12 +100,13 @@
                             <img src="${pageContext.request.contextPath}/img/listing/details/ld-icon.png" alt="" ><!-- 아이콘 모양? user프로필? -->
                         </div>
                         <div class="listing__hero__text">
-                            <h2>지도에서... placeTitle</h2>
-                            <textarea name="placeTitle" placeholder="placeTitle"></textarea>
+                            <h2><input type="text" id="placeTitle" name="placeTitle" readonly="readonly" placeholder="장소명 : 지도 등록시 자동으로 입력됩니다."></h2>
                             <div class="listing__hero__widget">
                             </div><br>
-                            <p><span class="icon_pin_alt"></span>\${requestScope.place.placeAddr}</p>
-                            <textarea name="placeAddr" placeholder="placeAddr"></textarea>
+                            <p><span class="icon_pin_alt"></span><input type="text" id="resultAddress" 
+                            readonly="readonly" style="width: 500px;" placeholder="지번 주소 : 지도 등록시 자동으로 입력됩니다."></p>
+                            <p><span class="icon_pin_alt"></span><input type="text" id="placeAddr" name="placeAddr" 
+                            readonly="readonly" style="width: 500px;" placeholder="도로명 주소 : 지도 등록시 자동으로 입력됩니다."></p>
                         </div>
                     </div>
                 </div>
@@ -50,8 +122,8 @@
                 <div class="col-lg-6">
                     <div class="listing__details__text">
                         <div class="listing__details__about">
-                            <h4>Overview</h4>
-                             <textarea name="placeContent" placeholder="placeContent"></textarea>
+                            <h4>장소에 대한 설명을 적어주세요!</h4>
+								<textarea id="placeContent" name="placeContent" style="width: 500px; height: 163px"></textarea>
                         </div>
 	                    <div class="listing__details__gallery">
 	                            <h4>Place Photo</h4>
@@ -64,81 +136,124 @@
                 <div class="col-lg-6">
                     <div class="listing__details__text">
                         <div class="listing__details__about">
-                            <h4>Place Rate</h4>
+                            <h4>제 점수는요!</h4>
                             <div class="w3-content w3-display-container">
-						  <textarea name="placeRate" placeholder="placeRate"></textarea>
-						</div>
+                            	<br><br>
+								<h4><span class="star-box"></span>&nbsp;&nbsp;<input type="text" id="placeStar" name="placeStar" style="border: none;"></h4>
+								<br><br><br>
+							</div>
                         </div>
+                   
+
+                        
                         <div class="listing__details__gallery">
                             <h4>Place Icon</h4>
-						<div class="w3-content w3-display-container">
-						  <textarea name="placeIcon" placeholder="placeIcon"></textarea>
-						</div>
+							<div class="listing__details__about">
+		<form method="post" action="${pageContext.request.contextPath}/place/placeInsert">					
+								<div class="nice-select" style="padding: 0px; width: 0px; width: 0px;">
+								  <select name="placeIcon" id="placeIcon">
+									<option value="1">맛집</option>
+									<option value="2">여행</option>
+									<option value="3">카페</option>
+									<option value="4">힐링</option>
+									<option value="5">자연</option>
+									<option value="6">액티비티</option>
+									<option value="7">쇼핑</option>
+									<option value="8">문화</option>
+									<option value="9">산책</option>
+									<option value="10">야경</option>
+									<option value="11">명소</option>
+									<option value="12">반려동물</option>
+									<option value="13">데이트</option>
+									<option value="14">드라이브</option>
+								</select>
+								</div>
+				</form>			
+							</div>
                     </div>
+
+                    
+                    
                 </div>
             </div>
 	      </div>
                 
                         <div class="listing__details__amenities">
-                            <h4>HashTag</h4>
+                            <h4>HashTag를 눌러서 내용을 적어주세요!</h4>
                             <div class="row">
 	                                <div class="col-lg-3 col-md-3 col-6">
 	                                    <div class="listing__details__amenities__item">
-	                                        <img src="${pageContext.request.contextPath}/img/placeimges/hashtag.png" alt="" style="width: 30px; height: 30px;">
-												<textarea name="hashTag1" placeholder="hashTag1"></textarea>
+	                                        <p id="tagImg1"><img src="${pageContext.request.contextPath}/img/placeimges/hashtag.png" style="width: 30px; height: 30px;"></p>
+												<h5><input type="text" id="hashTag1" name="hashTag1"></h5>
 	                                    </div>
 	                                </div>
 	                                <div class="col-lg-3 col-md-3 col-6">
 	                                    <div class="listing__details__amenities__item">
-	                                        <img src="${pageContext.request.contextPath}/img/placeimges/hashtag.png" alt="" style="width: 30px; height: 30px;">
-												<textarea name="hashTag2" placeholder="hashTag2"></textarea>
+	                                        <p id="tagImg2"><img src="${pageContext.request.contextPath}/img/placeimges/hashtag.png" style="width: 30px; height: 30px;"></p>
+											<h5><input type="text" id="hashTag2" name="hashTag2"></h5>
 	                                    </div>
 	                                </div>
 	                                <div class="col-lg-3 col-md-3 col-6">
 	                                    <div class="listing__details__amenities__item">
-	                                        <img src="${pageContext.request.contextPath}/img/placeimges/hashtag.png" alt="" style="width: 30px; height: 30px;">
-												<textarea name="hashTag3" placeholder="hashTag3"></textarea>
+	                                        <p id="tagImg3"><img src="${pageContext.request.contextPath}/img/placeimges/hashtag.png" style="width: 30px; height: 30px;"></p>
+												<h5><input type="text" id="hashTag3" name="hashTag3"></h5>
 	                                    </div>
 	                                </div>
 	                                <div class="col-lg-3 col-md-3 col-6">
 	                                    <div class="listing__details__amenities__item">
-	                                        <img src="${pageContext.request.contextPath}/img/placeimges/hashtag.png" alt="" style="width: 30px; height: 30px;">
-												<textarea name="hashTag4" placeholder="hashTag4"></textarea>
+	                                        <p id="tagImg4"><img src="${pageContext.request.contextPath}/img/placeimges/hashtag.png" style="width: 30px; height: 30px;"></p>
+												<h5><input type="text" id="hashTag4" name="hashTag4"></h5>
 	                                    </div>
 	                                </div>
 	                                <div class="col-lg-3 col-md-3 col-6">
 	                                    <div class="listing__details__amenities__item">
-	                                        <img src="${pageContext.request.contextPath}/img/placeimges/hashtag.png" alt="" style="width: 30px; height: 30px;">
-												<textarea name="hashTag5" placeholder="hashTag5"></textarea>
+	                                        <p id="tagImg5"><img src="${pageContext.request.contextPath}/img/placeimges/hashtag.png" style="width: 30px; height: 30px;"></p>
+												<h5><input type="text" id="hashTag5" name="hashTag5"></h5>
 	                                    </div>
 	                                </div>
 	                                <div class="col-lg-3 col-md-3 col-6">
 	                                    <div class="listing__details__amenities__item">
-	                                        <img src="${pageContext.request.contextPath}/img/placeimges/hashtag.png" alt="" style="width: 30px; height: 30px;">
-												<textarea name="hashTag6" placeholder="hashTag6"></textarea>
+	                                        <p id="tagImg6"><img src="${pageContext.request.contextPath}/img/placeimges/hashtag.png" style="width: 30px; height: 30px;"></p>
+												<h5><input type="text" id="hashTag6" name="hashTag6"></h5>
 	                                    </div>
 	                                </div>
 	                                <div class="col-lg-3 col-md-3 col-6">
 	                                    <div class="listing__details__amenities__item">
-	                                        <img src="${pageContext.request.contextPath}/img/placeimges/hashtag.png" alt="" style="width: 30px; height: 30px;">
-												<textarea name="hashTag7" placeholder="hashTag7"></textarea>
+	                                        <p id="tagImg7"><img src="${pageContext.request.contextPath}/img/placeimges/hashtag.png" style="width: 30px; height: 30px;"></p>
+												<h5><input type="text" id="hashTag7" name="hashTag7"></h5>
 	                                    </div>
 	                                </div>
 	                                <div class="col-lg-3 col-md-3 col-6">
 	                                    <div class="listing__details__amenities__item">
-	                                        <img src="${pageContext.request.contextPath}/img/placeimges/hashtag.png" alt="" style="width: 30px; height: 30px;">
-												<textarea name="hashTag1" placeholder="hashTag8"></textarea>
+	                                        <p id="tagImg8"><img src="${pageContext.request.contextPath}/img/placeimges/hashtag.png" style="width: 30px; height: 30px;"></p>
+												<h5><input type="text" id="hashTag8" name="hashTag8"></h5>
 	                                    </div>
 	                                </div>
                             </div>
                         </div>
                         
-                        <div class="listing__details__about">
-                            <h4>Place Map</h4>
-                            <p><a href="javascript:openWindowPop('${pageContext.request.contextPath}/kakaoMapApi/searchPlace', 'kakaoMap');" 
-                            class="btn" style="text-decoration: none; color: black; " onclick="popup()">지도펼치기</a></p>
-                             <textarea name="placeMap" placeholder="title, 위도, 경도, 주소"></textarea>
-                        </div>
+                        
+                       	<div class="row">
+                           <div class="col-lg-6">
+	                           <div class="listing__details__text">
+                        			<div class="listing__details__about">
+                           				 <h4>Place Map</h4>
+                            <p><a href="javascript:openChild('${pageContext.request.contextPath}/kakaoMapApi/searchPlace', 'kakaoMap');" 
+                            class="btn" style="text-decoration: none; color: black; background-color: lime;">지도펼치기</a></p>
+<!-- hidden 처리할것 -->                             <p><input type="text" id="placeLatitude" name="placeLatitude" style="width: 400px; height: 100px;"></p>
+<!-- hidden 처리할것 -->                             <p><input type="text" id="placeLongitude" name="placeLongitude" style="width: 400px; height: 100px;"></p>
+                        			</div>
+                        		</div>
+                   			 </div>
+                   			  <div class="col-lg-6">
+	                           <div class="listing__details__text">
+                        			<div class="listing__details__about">
+                           				 <h4>지도가져오기</h4>
+                           				  <textarea name="mapmap" placeholder="mapmap"></textarea>
+                        			</div>
+                        		</div>
+                   			 </div>
+                    	</div>
                     </div>
 	    </section>
 

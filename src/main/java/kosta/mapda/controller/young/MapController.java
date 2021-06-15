@@ -140,5 +140,11 @@ public class MapController {
 	}
 	
 	
-	
+	/**
+	 * 지도 관리 페이지 - 로그인한 회원이 등록한 전체 테마지도 출력
+	 */
+	@RequestMapping("/manageMap")
+	public void myMaps() {
+		
+	}
 }

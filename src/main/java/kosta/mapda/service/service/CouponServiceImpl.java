@@ -92,9 +92,8 @@ public class CouponServiceImpl implements CouponService {
 	 */
 	@Override
 	public int stop(Long cpNo) {
-		//return couponRepository.stop(cpNo);
+//		return couponRepository.stop(cpNo);
 		return 0;
-
 	}
 
 	@Override
@@ -116,7 +115,6 @@ public class CouponServiceImpl implements CouponService {
 	public Page<MyCoupon> selectByMyCoupon(Pageable pageable, Long memNo) {
 		
 		Member member = memberRepository.findById(memNo).orElse(null);
-		
 		return myCouponRepository.findBymember(pageable, member);
 	}
 	
@@ -125,7 +123,10 @@ public class CouponServiceImpl implements CouponService {
 		Enterprise member = new Enterprise();
 		member.setMemNo(1L);
 		coupon.setMember(member);
-		//couponRepository.insert(coupon);
+		
+		Coupon dbCoupon = new Coupon(); 	
+		
+		dbCoupon = couponRepository.save(coupon);
+		
 	}
-	
 }

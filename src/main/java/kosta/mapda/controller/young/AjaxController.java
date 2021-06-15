@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import kosta.mapda.domain.map.MapStorage;
 import kosta.mapda.domain.member.Member;
+import kosta.mapda.repository.member.MemberRepository;
 import kosta.mapda.service.young.MapService;
 import lombok.RequiredArgsConstructor;
 
@@ -64,23 +65,24 @@ public class AjaxController {
 	 * 테마지도 구독
 	 */
 	@RequestMapping("/map/subscribe")
-	public int subscribe(Long mapNo/*, HttpSession session*/) {
-		//logger.info("request:/map/subscribe");
-//		Member m = (Member) session.getAttribute("member");
-//		Long no = m.getMemNo();
+	public int subscribe(String mapNoStr, String memNoStr) {
+		Long mapNo = Long.parseLong(mapNoStr);
+		Long memNo = Long.parseLong(memNoStr);
 		int resultCode = 1;
 		try {
-			MapStorage mapStorage = mapService.subcheck(1L, mapNo);
+			MapStorage mapStorage = mapService.subcheck(memNo, mapNo);
+			System.out.println("실행완료오오오오오오");
 			if(mapStorage == null) {
 				//처음 구독버튼 눌렀을 때
-				mapService.insertSubscribe(1L, mapNo);//구독 테이블 인서트
+				mapService.insertSubscribe(memNo, mapNo);//구독 테이블 인서트
 				resultCode = 1;
 			} else {
 				//구독상태에서 다시 버튼을 누르면
-				mapService.deleteSubscribe(1L, mapNo);//구독 테이블 delete
+				mapService.deleteSubscribe(memNo, mapNo);//구독 테이블 delete
 				resultCode = 0;
 			}
 		}catch(Exception e) {
+			System.out.println(e.getMessage());
 			resultCode=-1;
 		}
 		return resultCode;
