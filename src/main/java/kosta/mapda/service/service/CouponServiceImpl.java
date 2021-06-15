@@ -92,7 +92,8 @@ public class CouponServiceImpl implements CouponService {
 	 */
 	@Override
 	public int stop(Long cpNo) {
-		return couponRepository.stop(cpNo);
+//		return couponRepository.stop(cpNo);
+		return 0;
 	}
 
 	@Override
@@ -123,7 +124,7 @@ public class CouponServiceImpl implements CouponService {
 		Enterprise member = new Enterprise();
 		member.setMemNo(1L);
 		coupon.setMember(member);
-		couponRepository.insert(coupon);
+//		couponRepository.insert(coupon);
 	}
 	
 }
