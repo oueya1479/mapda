@@ -16,19 +16,43 @@
                     <div class="header__nav">
                         <nav class="header__menu mobile-menu">
                             <ul>
-                                <li class="active"><a href="/index">Home</a></li>
-                                <li><a href="/listing">Listing</a></li>
-
-                                <li><a href="#">Categories</a></li>
-                                <li><a href="#">Pages</a>
-                                    <ul class="dropdown">
-                                        <li><a href="/about">About</a></li>
-                                        <li><a href="/listing-details">Listing Details</a></li>
-                                        <li><a href="/blog-details">Blog Details</a></li>
-                                        <li><a href="/contact">Contact</a></li>
+                                <li class="active"><a href="/main/index">Home</a></li>
+                               <li><a href="#">Map Service</a>
+                                	<ul class="dropdown">
+                                        <li><a href="${pageContext.request.contextPath}/map/mapList">All Maps</a></li>
+                                        <li><a href="${pageContext.request.contextPath}/map/insertForm">Make My Map</a></li>
+                                        <li><a href="${pageContext.request.contextPath}/map/manageMap">Manage My Maps</a></li>
+                                     
                                     </ul>
                                 </li>
-                                <li><a href="/blog">Blog</a></li>
+
+                                <li><a href="#">Enterprise</a>
+                                	<ul class="dropdown">
+                                        <li><a href="${pageContext.request.contextPath}/enterprise/list">Enterprise Service</a></li>
+                                        
+                                    </ul>
+                                </li>
+                                <li><a href="#">Coupon</a>
+                                    <ul class="dropdown">
+                                        <li><a href="/coupon/list">All Coupons</a></li>
+                                        <li><a href="/coupon/admin">Manage Coupons</a></li>
+                                        
+                                    </ul>
+                                </li>
+                               <li><a href="#">Event</a>
+                                	<ul class="dropdown">
+                                        <li><a href="${pageContext.request.contextPath}/event/list">All Events</a></li>
+                                        <li><a href="${pageContext.request.contextPath}/event/posting">Join Event</a></li>
+                                       
+                                    </ul>
+                                </li>
+                                <li><a href="#">Mapbership</a>
+                                	<ul class="dropdown">
+                                        <li><a href="${pageContext.request.contextPath}/member/pay">Regular payment</a></li>
+                                        <li><a href="#">My Membership</a></li>
+                                       
+                                    </ul>
+                                </li>
                                 <li><a href="#">My Page</a>
                                 	<ul class="dropdown">
                                         <li><a href="/about">My Info</a></li>
@@ -40,8 +64,8 @@
                             </ul>
                         </nav>
                         <div class="header__menu__right">
-                            <a href="#" class="primary-btn"><i class="fa fa-plus"></i>Add Listing</a>
-                            <a href="#" class="login-btn"><i class="fa fa-user"></i></a>
+                            <a href="${pageContext.request.contextPath}/member/registerForm" class="primary-btn">Join Us</a>
+                            <a href="${pageContext.request.contextPath}/member/loginForm" class="login-btn"><i class="fa fa-user"></i></a>
                         </div>
                     </div>
                 </div>

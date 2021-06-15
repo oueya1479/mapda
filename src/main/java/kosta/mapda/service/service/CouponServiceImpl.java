@@ -94,6 +94,15 @@ public class CouponServiceImpl implements CouponService {
 //	public int stop(Long cpNo) {
 //		return couponRepository.stop(cpNo);
 //	}
+	
+	/**
+	 * 발급상태 변경하는 ajax 메소드
+	 */
+	@Override
+	public int stop(Long cpNo) {
+//		return couponRepository.stop(cpNo);
+		return 0;
+	}
 
 	@Override
 	public Page<Coupon> selectByCategory(Pageable pageable, Long category) {
@@ -127,6 +136,14 @@ public class CouponServiceImpl implements CouponService {
 		
 		dbCoupon = couponRepository.save(coupon);
 		
+	}
+	
+	@Override
+	public void insertCoupon(Coupon coupon) {
+		Enterprise member = new Enterprise();
+		member.setMemNo(1L);
+		coupon.setMember(member);
+		//couponRepository.insert(coupon);
 	}
 	
 }

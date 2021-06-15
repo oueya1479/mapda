@@ -15,7 +15,7 @@
         	 $(document).on("click","#photoReview",function(){
       			$.ajax({
       				  url: "${pageContext.request.contextPath}/place/reviewAjax/${placeNo}", //서버주소
-      				  type: "post", //요청방식(get,post, put,delete)
+      				  type: "get", //요청방식(get,post, put,delete)
       				  dataType: "json", //서버가 보내오는 데이터타입(응답 - text ,html, xml, json)
       				 // data:{placeNo:1} , //서버에게 보낼 parameter정보
       				  success: function(result){ //item 데이터 ==> ["name":값, subject:값, ... ,customer:{id:값, name:값....}]
@@ -69,7 +69,7 @@
         	 $(document).on("click","#replyReview",function(){
        			$.ajax({
        				  url: "${pageContext.request.contextPath}/place/replyAjax/${placeNo}", //서버주소
-       				  type: "post", //요청방식(get,post, put,delete)
+       				  type: "get", //요청방식(get,post, put,delete)
        				  dataType: "json", //서버가 보내오는 데이터타입(응답 - text ,html, xml, json)
        				 // data:{placeNo:1} , //서버에게 보낼 parameter정보
        				  success: function(result){ //item 데이터 ==> ["name":값, subject:값, ... ,customer:{id:값, name:값....}]
