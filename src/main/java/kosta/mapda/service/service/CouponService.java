@@ -56,5 +56,5 @@ public interface CouponService {
 //	 * 쿠폰 추가하기
 //	 */
 	void insertCoupon(Coupon coupon);
-//	
+	
 }

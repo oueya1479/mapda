@@ -154,7 +154,12 @@ public class CouponController {
 		
 		Member m = (Member) session.getAttribute("member");
 		
-		Page<MyCoupon> myCouponList = service.selectByMyCoupon(pageable, 11L);
+		System.out.println("*************");
+		
+		System.out.println(m.getMemNo());
+		
+		Page<MyCoupon> myCouponList = service.selectByMyCoupon(pageable, m.getMemNo());
+		System.out.println(myCouponList.getContent());
 		
 		model.addAttribute("myCouponList", myCouponList);
 		
