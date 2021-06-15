@@ -14,7 +14,7 @@ public interface MemberService {
 
 	Member login(Member member);
 
-	int getMemberCount();
+//	int getMemberCount();
 
 	void updateMember(Member member);
 

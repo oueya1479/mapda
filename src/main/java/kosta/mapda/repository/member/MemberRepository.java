@@ -3,6 +3,7 @@ package kosta.mapda.repository.member;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import kosta.mapda.domain.member.Member;
 
@@ -23,4 +24,29 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
 	void start(Long memNo);
 	
 	Member findByMemId(String memId);
+
+	@Query("update Member m set m.memPw=:#{#mem.memPw}, m.memAddr=:#{#mem.memAddr}, m.memAccount=:#{#mem.memAccount} where m.memId=:#{#mem.memId}")
+	@Modifying
+	void updateMember(@Param("mem")Member member);
+	
+//	//jpqlT^T...
+//	@Query("select count from Member m where m.memId=?1")
+//	int getMemberCount();
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
