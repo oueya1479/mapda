@@ -150,7 +150,7 @@
                         <div class="blog__sidebar__categories" style =" width : 250px; text-align: center;">
                             <h4>My Point</h4>&nbsp;
                             
-                            <h4><i class="fa fa-money"></i> My Point</h4>
+                            <h4><i class="fa fa-money"></i> ${myPoint.myptRem}</h4>
                             <ul>
                            
                                 
