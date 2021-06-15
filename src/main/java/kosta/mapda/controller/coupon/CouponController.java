@@ -119,15 +119,6 @@ public class CouponController {
 	}
 	
 	/**
-	 * 
-	 */
-	@RequestMapping("/couponAdd")
-	public String couponAdd() {
-		
-		return "coupon/couponAdd";
-	}
-	
-	/**
 	 * 관리자 쿠폰 등록
 	 */
 	@PostMapping("/insert")
