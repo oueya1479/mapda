@@ -43,8 +43,38 @@
 			}
 		  });
 		
-		$('#hashTag1').hide();
-		
+		$("#hashTag1").hide();
+		$("#tagImg1").click(function(){
+		    $("#hashTag1").toggle();
+		  });
+		$("#hashTag2").hide();
+		$("#tagImg2").click(function(){
+		    $("#hashTag2").toggle();
+		  });
+		$("#hashTag3").hide();
+		$("#tagImg3").click(function(){
+		    $("#hashTag3").toggle();
+		  });
+		$("#hashTag4").hide();
+		$("#tagImg4").click(function(){
+		    $("#hashTag4").toggle();
+		  });
+		$("#hashTag5").hide();
+		$("#tagImg5").click(function(){
+		    $("#hashTag5").toggle();
+		  });
+		$("#hashTag6").hide();
+		$("#tagImg6").click(function(){
+		    $("#hashTag6").toggle();
+		  });
+		$("#hashTag7").hide();
+		$("#tagImg7").click(function(){
+		    $("#hashTag7").toggle();
+		  });
+		$("#hashTag8").hide();
+		$("#tagImg8").click(function(){
+		    $("#hashTag8").toggle();
+		  });
 		
 		
 	});
@@ -124,56 +154,50 @@
                             <div class="row">
 	                                <div class="col-lg-3 col-md-3 col-6">
 	                                    <div class="listing__details__amenities__item">
-	                                        <img src="${pageContext.request.contextPath}/img/placeimges/hashtag.png" alt="" style="width: 30px; height: 30px;">
-												<h4><input type="text" id="hashTag1" name="hashTag1"></h4>
+	                                        <p id="tagImg1"><img src="${pageContext.request.contextPath}/img/placeimges/hashtag.png" style="width: 30px; height: 30px;"></p>
+												<h5><input type="text" id="hashTag1" name="hashTag1"></h5>
 	                                    </div>
 	                                </div>
 	                                <div class="col-lg-3 col-md-3 col-6">
 	                                    <div class="listing__details__amenities__item">
-	                                        <img src="${pageContext.request.contextPath}/img/placeimges/hashtag.png" alt="" style="width: 30px; height: 30px;">
-											<input type="text" id="hashTag2" name="hashTag2">
+	                                        <p id="tagImg2"><img src="${pageContext.request.contextPath}/img/placeimges/hashtag.png" style="width: 30px; height: 30px;"></p>
+											<h5><input type="text" id="hashTag2" name="hashTag2"></h5>
 	                                    </div>
 	                                </div>
 	                                <div class="col-lg-3 col-md-3 col-6">
 	                                    <div class="listing__details__amenities__item">
-	                                        <img src="${pageContext.request.contextPath}/img/placeimges/hashtag.png" alt="" style="width: 30px; height: 30px;">
-												<textarea name="hashTag3" placeholder="hashTag3"></textarea>
-												<h4><input type="text" id="hashTag3" name="hashTag3" style="border: none;"></h4>
+	                                        <p id="tagImg3"><img src="${pageContext.request.contextPath}/img/placeimges/hashtag.png" style="width: 30px; height: 30px;"></p>
+												<h5><input type="text" id="hashTag3" name="hashTag3"></h5>
 	                                    </div>
 	                                </div>
 	                                <div class="col-lg-3 col-md-3 col-6">
 	                                    <div class="listing__details__amenities__item">
-	                                        <img src="${pageContext.request.contextPath}/img/placeimges/hashtag.png" alt="" style="width: 30px; height: 30px;">
-												<textarea name="hashTag4" placeholder="hashTag4"></textarea>
-												<h4><input type="text" id="hashTag4" name="hashTag4" style="border: none;"></h4>
+	                                        <p id="tagImg4"><img src="${pageContext.request.contextPath}/img/placeimges/hashtag.png" style="width: 30px; height: 30px;"></p>
+												<h5><input type="text" id="hashTag4" name="hashTag4"></h5>
 	                                    </div>
 	                                </div>
 	                                <div class="col-lg-3 col-md-3 col-6">
 	                                    <div class="listing__details__amenities__item">
-	                                        <img src="${pageContext.request.contextPath}/img/placeimges/hashtag.png" alt="" style="width: 30px; height: 30px;">
-												<textarea name="hashTag5" placeholder="hashTag5"></textarea>
-												<h4><input type="text" id="hashTag5" name="hashTag5" style="border: none;"></h4>
+	                                        <p id="tagImg5"><img src="${pageContext.request.contextPath}/img/placeimges/hashtag.png" style="width: 30px; height: 30px;"></p>
+												<h5><input type="text" id="hashTag5" name="hashTag5"></h5>
 	                                    </div>
 	                                </div>
 	                                <div class="col-lg-3 col-md-3 col-6">
 	                                    <div class="listing__details__amenities__item">
-	                                        <img src="${pageContext.request.contextPath}/img/placeimges/hashtag.png" alt="" style="width: 30px; height: 30px;">
-												<textarea name="hashTag6" placeholder="hashTag6"></textarea>
-												<h4><input type="text" id="hashTag6" name="hashTag6" style="border: none;"></h4>
+	                                        <p id="tagImg6"><img src="${pageContext.request.contextPath}/img/placeimges/hashtag.png" style="width: 30px; height: 30px;"></p>
+												<h5><input type="text" id="hashTag6" name="hashTag6"></h5>
 	                                    </div>
 	                                </div>
 	                                <div class="col-lg-3 col-md-3 col-6">
 	                                    <div class="listing__details__amenities__item">
-	                                        <img src="${pageContext.request.contextPath}/img/placeimges/hashtag.png" alt="" style="width: 30px; height: 30px;">
-												<textarea name="hashTag7" placeholder="hashTag7"></textarea>
-												<h4><input type="text" id="hashTag7" name="hashTag7" style="border: none;"></h4>
+	                                        <p id="tagImg7"><img src="${pageContext.request.contextPath}/img/placeimges/hashtag.png" style="width: 30px; height: 30px;"></p>
+												<h5><input type="text" id="hashTag7" name="hashTag7"></h5>
 	                                    </div>
 	                                </div>
 	                                <div class="col-lg-3 col-md-3 col-6">
 	                                    <div class="listing__details__amenities__item">
-	                                        <img src="${pageContext.request.contextPath}/img/placeimges/hashtag.png" alt="" style="width: 30px; height: 30px;">
-												<textarea name="hashTag8" placeholder="hashTag8"></textarea>
-												<h4><input type="text" id="hashTag8" name="hashTag8" style="border: none;"></h4>
+	                                        <p id="tagImg8"><img src="${pageContext.request.contextPath}/img/placeimges/hashtag.png" style="width: 30px; height: 30px;"></p>
+												<h5><input type="text" id="hashTag8" name="hashTag8"></h5>
 	                                    </div>
 	                                </div>
                             </div>
