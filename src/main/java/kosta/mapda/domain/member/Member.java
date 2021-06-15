@@ -18,6 +18,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import kosta.mapda.domain.map.MapStorage;
 import kosta.mapda.domain.map.Theme;
 import kosta.mapda.domain.service.MyCoupon;
 import kosta.mapda.domain.service.MyPoint;
@@ -59,6 +60,9 @@ public class Member implements UserDetails{
 
 	@OneToMany(mappedBy = "member")
 	private List<MyCoupon> myCouponList;
+	
+	@OneToMany(mappedBy = "member")
+	private List<MapStorage> mapStorageList;
 	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -112,7 +116,6 @@ public class Member implements UserDetails{
 		// TODO Auto-generated method stub
 		return false;
 	}
-    
 	@OneToOne(mappedBy = "member")
 	private MyPoint myPointList;
 	

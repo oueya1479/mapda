@@ -13,7 +13,6 @@ public interface CouponRepository extends JpaRepository<Coupon, Long> {
 	Page<Coupon> findBycouponCategory(Pageable pageable, CouponCategory cpcaNo);
 	
 //	Page<Coupon> findAllBycpNameContainingAndcouponCategory(Pageable pageable, String couponName, CouponCategory cpcaNo);
-
 //	@Query("update Coupon c set c.cpState=0 where c.cpNo=?1")
 //	@Modifying
 //	int stop(Long cpNo);
@@ -24,9 +23,4 @@ public interface CouponRepository extends JpaRepository<Coupon, Long> {
 //			+ "VALUES(cp_no_seq.nextval, ?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9)")
 //	@Modifying
 //	int insert(Coupon coupon);
-
-	
-
-	
-	
 }

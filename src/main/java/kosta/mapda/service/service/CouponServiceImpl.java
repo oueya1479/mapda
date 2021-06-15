@@ -138,5 +138,4 @@ public class CouponServiceImpl implements CouponService {
 		dbCoupon = couponRepository.save(coupon);
 		
 	}
-	
 }

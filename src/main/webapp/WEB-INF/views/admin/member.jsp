@@ -61,7 +61,7 @@
 										</tr>
 									</thead>
 									<tbody>
-										<c:forEach items="${memberList}" var="member">
+										<c:forEach items="${memberList.content}" var="member">
 											<tr>
 												<th scope="row">${member.memNo}</th>
 												<td>${member.memId}</td>

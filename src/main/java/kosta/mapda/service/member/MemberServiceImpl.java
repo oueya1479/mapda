@@ -37,15 +37,15 @@ public class MemberServiceImpl implements MemberService {
 		return memRepository.login(member.getMemId(), member.getMemPw());
 	}
 
-	@Override
-	public int getMemberCount() {
-		return 0;
-//		return member.getMemberCount();
-	}
+//	@Override
+//	public int getMemberCount() {
+//		return memRepository.getMemberCount();
+//	}
 
 	@Override
 	public void updateMember(Member member) {
-
+		memRepository.updateMember(member);
+ 
 	}
 
 	@Override

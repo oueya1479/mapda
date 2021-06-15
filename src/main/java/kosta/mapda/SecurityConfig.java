@@ -33,9 +33,9 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter{
 	protected void configure(HttpSecurity http) throws Exception {
 		http
 		.authorizeRequests()
-		.antMatchers("/admin/member").permitAll()
+		.antMatchers("/**").permitAll()
 		.and()
-		.csrf().disable()
+		.csrf().disable() //csrf 중지
 		.formLogin()
 		.loginPage("/member/loginForm")
 		.usernameParameter("id")

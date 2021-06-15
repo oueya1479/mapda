@@ -36,74 +36,7 @@
 	});
 </script>
 
-<script type="text/javascript">
-	/* $(function(){
-		$("#like").click(function(){
-			var mapNo = $(this).attr("id")
-			alert(mapNo);
-		})
-	}); */
-	/* var subButton = document.getElementById("subButton");
-	subButton.onclick = function(){ subscribe(); }
-	function subscribe(){ 
-		alert(1)
-		$.ajax({
-			url:"/map/subscribe",
-			type:"get",
-			dataType:"json"
-			data:{mapNo : '${map.mapNo}', memNo : '${requestScope.member.memNo}'}
-			success: function(data){
-				
-				 if(data == -1){
-                    alert("구독 오류","error","확인",function(){});
-                }
-                else if(data==1){
-					 $("#subButton").attr("src","/img/map/bookmark-tag.png")
-					  $("#subcnt").empty();
-					 $("#subcnt").append(data.subcnt);  
-				 }else if(data==0){
-					 $("#subButton").attr("src","/img/map/ribbon.png")
-					  $("#subcnt").empty();
-					 $("#subcnt").append(data.subcnt);  
-				 }
-					 
-			},
-			error : function(err){
-				  console.log(err+" 에러 발생.")
-			  }
-		})
-	} */
 
-</script>
-
-<script type="text/javascript">
-	$(function(){
-		$("#subButton").click(function(){
-			/* //alert(${mno})
-			$.ajax({
-			url:"/map/subscribe",
-			type:"get",
-			dataType:"json"
-			data:{mapNo : '${map.mapNo}', memNo : '${mno}'}
-			success: function(data){
-				 if(data == -1){
-                    alert("구독 오류","error","확인",function(){});
-                }
-                else if(data==1){
-					 $("#subButton").attr("src","/img/map/bookmark-tag.png")
-				 }else if(data==0){
-					 $("#subButton").attr("src","/img/map/ribbon.png")
-				 }
-					 
-			},
-			error : function(err){
-				  console.log(err+" 에러 발생.")
-			  } */
-			  
-		})//클릭function 끝
-	});//script 끝
-
-</script>
 </head>
 
 <body>
@@ -116,7 +49,7 @@
 			<div class="row">
 				<div class="col-lg-12 text-center">
 					<div class="breadcrumb__text">
-						<h2>Our All Maps</h2>
+						<h2>Our Your Maps in Mapda</h2>
 					</div>
 				</div>
 			</div>

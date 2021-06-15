@@ -18,6 +18,7 @@
 	color: white;
 }
 
+
 </style>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=dedf9592b51a78be2b5d3ec39a2a2199&libraries=services"></script>
 <script type="text/javascript">
@@ -86,6 +87,9 @@
 
 
 <body>
+			<%-- <form action="${pageContext.request.contextPath}/map/insertMap"
+			class="contact__form" method="post" enctype="multipart/form-data"></form> --%>
+
     <!-- Listing Section Begin -->
     <section class="listing-hero set-bg" data-setbg="${pageContext.request.contextPath}/img/listing/details/listing-hero.jpg"><!-- 무슨 사진 넣을지 고민 -->
         <div class="container">
@@ -139,18 +143,43 @@
 								<br><br><br>
 							</div>
                         </div>
+                   
+
+                        
                         <div class="listing__details__gallery">
                             <h4>Place Icon</h4>
-						<div class="w3-content w3-display-container">
-						  <textarea name="placeIcon" placeholder="placeIcon"></textarea>
-						</div>
+							<div class="listing__details__about">
+		<form method="post" action="${pageContext.request.contextPath}/place/placeInsert">					
+								<div class="nice-select" style="padding: 0px; width: 0px; width: 0px;">
+								  <select name="placeIcon" id="placeIcon">
+									<option value="1">맛집</option>
+									<option value="2">여행</option>
+									<option value="3">카페</option>
+									<option value="4">힐링</option>
+									<option value="5">자연</option>
+									<option value="6">액티비티</option>
+									<option value="7">쇼핑</option>
+									<option value="8">문화</option>
+									<option value="9">산책</option>
+									<option value="10">야경</option>
+									<option value="11">명소</option>
+									<option value="12">반려동물</option>
+									<option value="13">데이트</option>
+									<option value="14">드라이브</option>
+								</select>
+								</div>
+				</form>			
+							</div>
                     </div>
+
+                    
+                    
                 </div>
             </div>
 	      </div>
                 
                         <div class="listing__details__amenities">
-                            <h4>HashTag</h4>
+                            <h4>HashTag를 눌러서 내용을 적어주세요!</h4>
                             <div class="row">
 	                                <div class="col-lg-3 col-md-3 col-6">
 	                                    <div class="listing__details__amenities__item">

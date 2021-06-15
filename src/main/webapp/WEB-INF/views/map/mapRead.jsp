@@ -86,18 +86,18 @@
 		<div class="listing__text__top">
 			<div class="listing__text__top__left">
 				<h5>Places in this Map</h5>
-				<span>등록된 플레이스 개수</span>
+				
 			</div>
 			<div class="listing__text__top__right">
-				Hot Places <i class="fa fa-sort-amount-asc"></i>
+				<button type="button" class="site-btn">Register New Place</button>
 			</div>
 		</div>
 		<div class="listing__list">
 			 <c:choose>
-				<c:when test="${requestScope.themeMap.place eq null}">
+				<c:when test="${empty requestScope.themeMap.place}">
 
 					<p align="center">
-						<b><span style="font-size: 9pt;">등록된 플레이스가 없습니다.</span></b>
+						<b><span style="font-size: 13pt; text-align: center;">등록된 플레이스가 없습니다.</span></b>
 					</p>
 				</c:when>
 				<c:otherwise> 
