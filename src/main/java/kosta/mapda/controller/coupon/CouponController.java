@@ -1,5 +1,7 @@
 package kosta.mapda.controller.coupon;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -10,6 +12,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Direction;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -128,32 +132,28 @@ public class CouponController {
 	}
 	
 	/**
-	 * 관리자 전체 쿠폰 조회
-	 */
-//	@RequestMapping("/admin")
-//	public String allcouponList(Model model, @PageableDefault(size = 10, sort = "id", direction = Sort.Direction.DESC) Pageable pageable ) {
-//		
-//		Page<Coupon> couponList = service.viewAll(pageable);
-//		model.addAttribute("couponList", couponList);
-//		return "coupon/couponManage";
-//	}
-	/**
 	 * 관리자 쿠폰 등록
 	 */
-	/*
-	 * @PostMapping("/insert") public String insertCoupon(@RequestParam("file")
-	 * MultipartFile file, Coupon coupon) {
-	 * 
-	 * String rootPath =
-	 * FileSystemView.getFileSystemView().getHomeDirectory().toString(); String
-	 * basePath = rootPath + "/" + "single";
-	 * 
-	 * String filePath = basePath + "/" + file.getOriginalFilename();
-	 * 
-	 * service.insertCoupon(coupon);
-	 * 
-	 * return "/coupon/couponAdd"; }
-	 */
+	@PostMapping("/insert")
+	public String insertCoupon(@RequestParam("file") MultipartFile file, Coupon coupon, HttpServletRequest request) {
+		
+		try {
+			String baseDir = request.getSession().getServletContext().getRealPath("/WEB-INF/static");
+			String filePath = baseDir + "/" + file.getOriginalFilename();
+			file.transferTo(new File(filePath));
+			Authentication user = SecurityContextHolder.getContext().getAuthentication();
+			String memId = user.getName();
+			System.out.println(memId);
+			coupon.setCpImgpath(filePath);
+			
+			service.insertCoupon(coupon);
+			
+		} catch(IOException e) {
+			e.printStackTrace();
+		}
+		
+		return "/coupon/couponAdd";
+	}
 	
 	/**
 	 * 마이페이지- 마이 쿠폰 조회
@@ -173,13 +173,5 @@ public class CouponController {
 		
 		return "coupon/myCoupon";
 	}
-		
 	
-	@ExceptionHandler(Exception.class)
-	public String exception(Exception e) {
-		
-		e.printStackTrace();
-		
-		return"error";
-	}
 }
