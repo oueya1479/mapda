@@ -33,9 +33,9 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter{
 	protected void configure(HttpSecurity http) throws Exception {
 		http
 		.authorizeRequests()
-		.antMatchers("/member/main")
-		.authenticated()      // <security:intercept-url pattern="/member/main" access="isAuthenticated()"/>
-		.antMatchers("/admin/main").hasRole("ADMIN")   //<security:intercept-url pattern="/admin/main" access="hasRole('ADMIN')"/>
+		.antMatchers("/**").permitAll()
+//		.authenticated()      // <security:intercept-url pattern="/member/main" access="isAuthenticated()"/>
+//		.antMatchers("/admin/main").hasRole("ADMIN")   //<security:intercept-url pattern="/admin/main" access="hasRole('ADMIN')"/>
 		.and()
 		.csrf().disable() //csrf 중지
 		.formLogin()

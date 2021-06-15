@@ -66,6 +66,7 @@ public class MemberAuthenticationProvider implements AuthenticationProvider {
 		//인증된 사용자의 권한을 검색해서  Authentication에 저장한다.
 		//List<MemberRole>  memRoleList = memberRole.selectAuthorityByUserName(memId);
 		
+		
 		List<SimpleGrantedAuthority> simpleAuthList = new ArrayList<SimpleGrantedAuthority>();
 		//for(MemberRole memberRole : memRoleList) {
 	//		simpleAuthList.add(new SimpleGrantedAuthority(memberRole.getRoleName())); //DB의 권한을 Security의 권한타입에 맞게 변환하는과정

@@ -39,7 +39,7 @@ public class MemberRole {
 	private String roleName;
 	
 	@ManyToOne
-	@JoinColumn(name="mem_No")
+	@JoinColumn(name="mem_no")
 	private Member member;
 
 		

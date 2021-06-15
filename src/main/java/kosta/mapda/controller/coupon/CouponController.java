@@ -126,18 +126,18 @@ public class CouponController {
 	/**
 	 * 관리자 쿠폰 등록
 	 */
-	@PostMapping("/insert")
-	public String insertCoupon(@RequestParam("file") MultipartFile file, Coupon coupon) {
-		
-		String rootPath = FileSystemView.getFileSystemView().getHomeDirectory().toString();
-		String basePath = rootPath + "/" + "single";
-		
-		String filePath = basePath + "/" + file.getOriginalFilename();
-		
-		service.insertCoupon(coupon);
-		
-		return "/coupon/couponAdd";
-	}
+//	@PostMapping("/insert")
+//	public String insertCoupon(@RequestParam("file") MultipartFile file, Coupon coupon) {
+//		
+//		String rootPath = FileSystemView.getFileSystemView().getHomeDirectory().toString();
+//		String basePath = rootPath + "/" + "single";
+//		
+//		String filePath = basePath + "/" + file.getOriginalFilename();
+//		
+//		service.insertCoupon(coupon);
+//		
+//		return "/coupon/couponAdd";
+//	}
 	
 	/**
 	 * 마이페이지- 마이 쿠폰 조회
