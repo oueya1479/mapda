@@ -36,12 +36,9 @@ public class AdminController {
 	}
 	
 	@RequestMapping("/update_member")
-	public String memb(Model model, Member member) {
+	public String updateMember(Model model, Member member) {
 		System.out.println(member.getMemRegdate());
 		adminService.updateMember(member);
-		model.addAttribute("title", "회원 정보 수정");
-		model.addAttribute("content", "회원 정보를 수정합니다.");
-		model.addAttribute("member", member);
 		return "admin/exit";
 	}
 	

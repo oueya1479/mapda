@@ -20,8 +20,14 @@ public interface CouponRepository extends JpaRepository<Coupon, Long> {
 
 //	@Query("update Coupon c set c.cpState=0 where c.cpNo=?1")
 //	@Modifying
-//	void stop(Long cpNo);
-	
+//	int stop(Long cpNo);
+//	
+//	
+//	@Query("INSERT INTO Coupon c \r\n"
+//			+ "(c.cpNo, MEM_NO, CPCA_NO, c.cpName, c.cpPlace, c.cpImgpath, c.cpPrice, c.cpDetail, c.cpUsingdetail, c.cpState)\r\n"
+//			+ "VALUES(cp_no_seq.nextval, ?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9)")
+//	@Modifying
+//	int insert(Coupon coupon);
 	
 	
 }

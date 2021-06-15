@@ -39,6 +39,8 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public void updateMember(Member member) {
+		Member dbMember = memberRepository.findById(member.getMemNo()).orElse(null);
+		member.setMemRegdate(dbMember.getMemRegdate());
 		memberRepository.save(member);
 	}
 

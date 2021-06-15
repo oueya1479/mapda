@@ -43,18 +43,18 @@ public interface CouponService {
 	 * */
 	List<CouponCategory> couponCategory();
 	
-	/** 
-	 * 쿠폰 발급상태 변경하기
-	 */
+//	/** 
+//	 * 쿠폰 발급상태 변경하기
+//	 */
 //	int stop(Long cpNo);
-	
+//	
 	/**
 	 * 마이페이지 - 마이쿠폰 가져오기
 	 * */
 	Page<MyCoupon> selectByMyCoupon(Pageable pageable, Long memNo);
-	/* 
-	 * 쿠폰 추가하기
-	 */
-	void insertCoupon(Coupon coupon);
-	
+//	/* 
+//	 * 쿠폰 추가하기
+//	 */
+//	void insertCoupon(Coupon coupon);
+//	
 }

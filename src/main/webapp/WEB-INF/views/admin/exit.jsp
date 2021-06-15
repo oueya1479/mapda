@@ -1,14 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html lnag="kr">
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+<script src="${pageContext.request.contextPath}/js/jquery-3.3.1.min.js"></script>
 </head>
 <body>
 <script>
-	widow.close();
+	window.opener.location.href = "${pageContext.request.contextPath}/admin/member";
+	window.close();
 </script>
+hi~
 </body>
 </html>

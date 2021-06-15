@@ -86,10 +86,10 @@ public class CouponServiceImpl implements CouponService {
 		
 		return couponRepository.findAll(pageable);
 	}
-	
-	/**
-	 * 발급상태 변경하는 ajax 메소드
-	 */
+//	
+//	/**
+//	 * 발급상태 변경하는 ajax 메소드
+//	 */
 //	@Override
 //	public int stop(Long cpNo) {
 //		return couponRepository.stop(cpNo);
