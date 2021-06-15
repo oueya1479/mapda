@@ -13,7 +13,7 @@
 				<div class="row align-items-center">
 					<div class="col-md-8">
 						<div class="page-header-title">
-							<h5 class="m-b-10">회원 정보 변경 폼</h5>
+							<h5 class="m-b-10">테마지도 변경</h5>
 							<p class="m-b-0">회원의 정보를 수정합니다.</p>
 						</div>
 					</div>

@@ -117,6 +117,7 @@ public class CouponServiceImpl implements CouponService {
 		
 		return myCouponRepository.findBymember(pageable, member);
 	}
+
 //	
 //	@Override
 //	public void insertCoupon(Coupon coupon) {
