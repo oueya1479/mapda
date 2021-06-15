@@ -86,10 +86,6 @@ public class CouponController {
 		model.addAttribute("categoryList", categoryList);
 		//model.addAttribute("myPoint", myPoint);
 		
-		
-		
-		
-		
 		return "coupon/list";
 	}
 	
