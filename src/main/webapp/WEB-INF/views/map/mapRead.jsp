@@ -114,7 +114,7 @@
 								</div>
 								<div class="listing__item__text">
 									<div class="listing__item__text__inside">
-										<h5> ${place.placeTitle}</h5><br>
+										<a href="${pageContext.request.contextPath}/place/read/${place.placeNo}"><h5> ${place.placeTitle}</h5><br></a>
 										<a href="#"><img src="${pageContext.request.contextPath}/img/map/star.png"alt="" 
 											style="height:20px; width:20px;" ></a>&nbsp;&nbsp;&nbsp;${place.placeStar}
 										<div class="listing__item__text__rating">

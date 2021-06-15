@@ -130,4 +130,12 @@ public class CouponServiceImpl implements CouponService {
 		
 	}
 	
+	@Override
+	public void insertCoupon(Coupon coupon) {
+		Enterprise member = new Enterprise();
+		member.setMemNo(1L);
+		coupon.setMember(member);
+		//couponRepository.insert(coupon);
+	}
+	
 }
