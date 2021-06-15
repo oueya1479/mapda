@@ -12,4 +12,5 @@ public class KakaoApiController {
 	public String searchPlace() {
 		return "kakaoMapApi/searchPlace";
 	}
+	
 }
