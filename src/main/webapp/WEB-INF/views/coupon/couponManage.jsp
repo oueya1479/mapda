@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -34,7 +35,21 @@
 		padding: 6px 12px;
 		background-color: #F03250;
 	}
-
+	a:link {
+		color: #F03250;
+		text-decoration: none;
+		/* text-shadow: 0 0 5px; */ 
+	}
+	a:visited {
+		text-decoration: none;
+		/* text-shadow: 0 0 5px; */ 
+	}
+	a:hover {
+		color: #F03250;
+	}
+	.cpbtn {
+		text-shadow: 0 0 24px;
+	}
 </style>
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.3.1.min.js"></script>
@@ -174,7 +189,7 @@
 						<tbody>
 						<c:forEach items="${couponList.content}" var="coupon">
 						<tr>
-							<td>${coupon.cpName}</td>
+							<td><a href="${pageContext.request.contextPath}/coupon/couponAdminDetail?cpNo=${coupon.cpNo}" class="cpbtn">${coupon.cpName}</a></td>
 							<td>
 							<c:choose>
 								<c:when test="${coupon.cpState eq 1}">
@@ -187,7 +202,7 @@
 							</td>
 							<td>${coupon.cpPlace}</td>
 							<td><fmt:formatNumber value="${coupon.cpPrice}"/></td>
-						    <td>${coupon.cpState}</td>
+						    <td>${coupon.couponCategory.cpcaName}</td>
 							<td><button id="stop"> - </button></td>
 						</tr>
 						</c:forEach>
