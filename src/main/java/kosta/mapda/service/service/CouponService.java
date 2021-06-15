@@ -46,7 +46,7 @@ public interface CouponService {
 	/** 
 	 * 쿠폰 발급상태 변경하기
 	 */
-	int stop(Long cpNo);
+	//int stop(Long cpNo);
 	
 	/**
 	 * 마이페이지 - 마이쿠폰 가져오기
@@ -55,6 +55,6 @@ public interface CouponService {
 	/* 
 	 * 쿠폰 추가하기
 	 */
-	void insertCoupon(Coupon coupon);
+	//void insertCoupon(Coupon coupon);
 	
 }

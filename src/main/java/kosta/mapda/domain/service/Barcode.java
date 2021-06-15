@@ -8,7 +8,7 @@ import java.util.Random;
 //import net.sourceforge.barbecue.BarcodeImageHandler;
 
 public class Barcode {
-
+/*
 	
 		
 	//@RequestMapping("/couponnum")

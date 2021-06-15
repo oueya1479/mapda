@@ -37,7 +37,7 @@ public class MyPoint {
 	@CreationTimestamp
 	private LocalDateTime myptDate; //포인트 적립 날짜
 	
-	@ManyToOne
+	@OneToOne
 	@JoinColumn(name = "mem_no") //회원번호
 	private Member member;
 	

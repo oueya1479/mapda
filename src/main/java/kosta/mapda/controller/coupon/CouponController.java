@@ -25,7 +25,9 @@ import kosta.mapda.domain.member.Member;
 import kosta.mapda.domain.service.Coupon;
 import kosta.mapda.domain.service.CouponCategory;
 import kosta.mapda.domain.service.MyCoupon;
+import kosta.mapda.domain.service.MyPoint;
 import kosta.mapda.service.service.CouponService;
+import kosta.mapda.service.service.PointService;
 
 @Controller
 @RequestMapping("/coupon")
@@ -33,6 +35,9 @@ public class CouponController {
 
 	@Autowired
 	private CouponService service;
+	
+	@Autowired(required=false)
+	private PointService pointService;
 	
 	/**
 	 * 쿠폰 리스트를 가져오는 메소드
@@ -64,17 +69,26 @@ public class CouponController {
 		
 		List<CouponCategory> categoryList = service.couponCategory();
 		
-		model.addAttribute("couponList", couponList);
-		model.addAttribute("categoryList", categoryList);
-		
 		//
 		HttpSession session = request.getSession();
 		Member member = new Member();
-		member.setMemNo(0L);
+		member.setMemNo(11L);
 		member.setMemId("seo");
 		member.setMemPw("1234");
 		session.setAttribute("member", member);
-		//
+		
+		System.out.println("---------------");
+		System.out.println(member.getMemId());
+		
+		//MyPoint myPoint = pointService.selectMyPoint(member.getMemNo());
+		
+		model.addAttribute("couponList", couponList);
+		model.addAttribute("categoryList", categoryList);
+		//model.addAttribute("myPoint", myPoint);
+		
+		
+		
+		
 		
 		return "coupon/list";
 	}
@@ -126,18 +140,20 @@ public class CouponController {
 	/**
 	 * 관리자 쿠폰 등록
 	 */
-	@PostMapping("/insert")
-	public String insertCoupon(@RequestParam("file") MultipartFile file, Coupon coupon) {
-		
-		String rootPath = FileSystemView.getFileSystemView().getHomeDirectory().toString();
-		String basePath = rootPath + "/" + "single";
-		
-		String filePath = basePath + "/" + file.getOriginalFilename();
-		
-		service.insertCoupon(coupon);
-		
-		return "/coupon/couponAdd";
-	}
+	/*
+	 * @PostMapping("/insert") public String insertCoupon(@RequestParam("file")
+	 * MultipartFile file, Coupon coupon) {
+	 * 
+	 * String rootPath =
+	 * FileSystemView.getFileSystemView().getHomeDirectory().toString(); String
+	 * basePath = rootPath + "/" + "single";
+	 * 
+	 * String filePath = basePath + "/" + file.getOriginalFilename();
+	 * 
+	 * service.insertCoupon(coupon);
+	 * 
+	 * return "/coupon/couponAdd"; }
+	 */
 	
 	/**
 	 * 마이페이지- 마이 쿠폰 조회
@@ -151,7 +167,7 @@ public class CouponController {
 		
 		Member m = (Member) session.getAttribute("member");
 		
-		Page<MyCoupon> myCouponList = service.selectByMyCoupon(pageable, m.getMemNo());
+		Page<MyCoupon> myCouponList = service.selectByMyCoupon(pageable, 11L);
 		
 		model.addAttribute("myCouponList", myCouponList);
 		

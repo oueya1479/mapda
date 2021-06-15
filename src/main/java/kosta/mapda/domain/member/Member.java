@@ -8,12 +8,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 
 import org.hibernate.annotations.CreationTimestamp;
 
 import kosta.mapda.domain.map.Theme;
 import kosta.mapda.domain.service.MyCoupon;
+import kosta.mapda.domain.service.MyPoint;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -52,4 +54,11 @@ public class Member {
 
 	@OneToMany(mappedBy = "member")
 	private List<MyCoupon> myCouponList;
+	
+	@OneToOne(mappedBy = "member")
+	private MyPoint myPointList;
+	
+	public Member(Long memNo) {
+		this.memNo = memNo;
+	}
 }
