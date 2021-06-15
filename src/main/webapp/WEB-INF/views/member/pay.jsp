@@ -12,12 +12,12 @@
 		
 
 	function popupOpen() {
-		var url = "${pageContext.request.contextPath}/member/iamport";
+		var url = "${pageContext.request.contextPath}/payment/iamport";
 		var winWidth = 700;
 		var winHeight = 600;
 		var popupOption = "width=" + winWidth + ", height=" + winHeight; //팝업창 옵션(optoin)
 		var myWindow = window.open(url, "결제창", popupOption);
-	}
+	}  
 	
 	})
 </script>
@@ -151,10 +151,10 @@
 					<div class="col-md-12">
 						<div class="mu-pricing-area">
 
-							<div class="mu-heading-area">
-								<h2 class="mu-heading-title">JOIN US!</h2>
+							<div class="mu-heading-area"><br>
+								<h2 class="mu-heading-title">JOIN US</h2>
 								<span class="mu-header-dot"></span>
-								<p>간단설명</p>
+								<p>정기결제 회원이 되어 혜택을 누려주세요! </p>
 							</div>
 
 							<!-- Start Pricing Content -->
@@ -165,23 +165,30 @@
 									<div class="col-sm-6 col-md-6">
 										<div class="mu-pricing-single">
 
-											<div class="mu-pricing-single-head">
-												<h4>STANDARD PLAN</h4>
+											<div class="mu-pricing-single-head"><br>
+												<h4>Q. 일반회원과 무엇이 다른가요?</h4>
+												<br><br>
+												
+												<!--  
 												<p class="mu-price-tag">
 													<span>$</span> 15
 												</p>
+												-->
 											</div>
 
 											<ul class="mu-price-feature">
 												<li> 테마지도 제작 개수 3개로 제한 </li>
 												<li> 테마지도 당 플레이스 개수 10개로 제한 </li>
+												<li> 나만의 "히든플레이스" 설정 불가</li>
 												<li> 인플루언서 신청 불가 </li>
+												
 											</ul>
-
+											<br><br>	<br>
+<!-- 
 											<div class="mu-pricing-single-footer">
 												<a href="#" class="mu-order-btn">Order Now!</a>
 											</div>
-
+-->
 										</div>
 									</div>
 									<!-- / Pricing Single Content -->
@@ -192,9 +199,9 @@
 
 
 											<div class="mu-pricing-single-head">
-												<h4>PROFESSIONAL PLAN</h4>
+												<h4>SUBSCRIPTION</h4>
 												<p class="mu-price-tag">
-													<span>$</span> 25
+													<span>₩</span> 3,000
 												</p>
 											</div>
 
@@ -206,7 +213,7 @@
 											</ul>
 											
 											<div class="mu-pricing-single-footer">
-												<a href="#" class="mu-order-btn" id="iamport">Order Now!</a>
+												<a href="#" class="mu-order-btn" id="iamport">Start Now!</a>
 											</div>
 											
 

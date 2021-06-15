@@ -92,7 +92,7 @@
 						$("#idCheck").html("");
 						return;
 					}
-					$.ajax({
+/* 					$.ajax({
 						url:"../idCheck",
 						datatype:"text",
 						type:"post",
@@ -103,7 +103,7 @@
 						}
 					}	
 					)
-				})
+				}) */
 				//비밀번호 일치 체크
 				$("#pwc").keyup(function() {
 					if($(this).val()==""){
