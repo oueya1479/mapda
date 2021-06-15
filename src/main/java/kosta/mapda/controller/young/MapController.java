@@ -11,6 +11,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Direction;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,6 +21,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import kosta.mapda.domain.Management;
+import kosta.mapda.domain.map.MapCategory;
 import kosta.mapda.domain.map.Place;
 import kosta.mapda.domain.map.Theme;
 import kosta.mapda.domain.member.Member;
@@ -47,7 +51,19 @@ public class MapController {
 	 * 테마지도 등록하기
 	 */
 	@RequestMapping("/insertMap")
-	public String insertMap(Theme theme) throws IOException{
+	public String insertMap(Theme theme, Long mno, Long categoryNo) throws IOException{
+		Member member = new Member();
+		member.setMemNo(mno);
+		theme.setMember(member);
+		//관리번호 임의로 넣어주기
+		Management manage = new Management();
+		manage.setMngNo(2L);
+		theme.setManagement(manage);
+		//카테고리번호 객체로
+		MapCategory category = new MapCategory();
+		category.setCategoryNo(categoryNo);
+		theme.setMapCategory(category);
+		
 		MultipartFile file=theme.getFile();
 		if(file.getSize()>0) {
 			String fileName = file.getOriginalFilename();
@@ -56,13 +72,12 @@ public class MapController {
 			file.transferTo(new File(SAVE_PATH+"/"+fileName));
 		}
 		
-		Member member = new Member();
-		member.setMemNo(1L);
-		theme.setMember(member);
+//		String content = theme.getMapContent().replace("<", "&lt;");
+//		theme.setMapContent(content);
 		
 		mapService.insertMap(theme);
 		
-		return"redirect:/map/list";
+		return"redirect:/map/mapList";
 	}
 	/**
 	 * 테마지도 전체 목록 가져오기
@@ -112,7 +127,7 @@ public class MapController {
 	public ModelAndView modifyMap(Theme theme) {
 		Theme mapInfo = mapService.modifyMap(theme);
 		
-		return new ModelAndView("map/mapList", "theme", mapInfo);
+		return new ModelAndView("redirect:/map/mapList", "theme", mapInfo);
 	}
 	
 	/**

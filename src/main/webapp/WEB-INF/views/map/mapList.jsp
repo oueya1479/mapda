@@ -2,10 +2,16 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>
 <html lang="zxx">
 
 <head>
+
+<!-- memNo 변수설정 -->
+<%-- <sec:authentication property="principal.memNo" var="mno"  /> --%>
+
 <script src="${pageContext.request.contextPath}/js/jquery-3.3.1.min.js"></script>
 <script>
 	$(function() {
@@ -37,9 +43,10 @@
 			alert(mapNo);
 		})
 	}); */
-	var subButton = document.getElementById("#subButton");
+	/* var subButton = document.getElementById("subButton");
 	subButton.onclick = function(){ subscribe(); }
 	function subscribe(){ 
+		alert(1)
 		$.ajax({
 			url:"/map/subscribe",
 			type:"get",
@@ -51,13 +58,13 @@
                     alert("구독 오류","error","확인",function(){});
                 }
                 else if(data==1){
-					 $("#subButton").attr("/img/map/bookmark-tag.png")
-					 /* $("#subcnt").empty();
-					 $("#subcnt").append(data.subcnt);  */
+					 $("#subButton").attr("src","/img/map/bookmark-tag.png")
+					  $("#subcnt").empty();
+					 $("#subcnt").append(data.subcnt);  
 				 }else if(data==0){
-					 $("#subButton").attr("/img/map/ribbon.png")
-					/*  $("#subcnt").empty();
-					 $("#subcnt").append(data.subcnt);  */
+					 $("#subButton").attr("src","/img/map/ribbon.png")
+					  $("#subcnt").empty();
+					 $("#subcnt").append(data.subcnt);  
 				 }
 					 
 			},
@@ -65,7 +72,36 @@
 				  console.log(err+" 에러 발생.")
 			  }
 		})
-	}
+	} */
+
+</script>
+
+<script type="text/javascript">
+	$(function(){
+		$("#subButton").click(function(){
+			/* //alert(${mno})
+			$.ajax({
+			url:"/map/subscribe",
+			type:"get",
+			dataType:"json"
+			data:{mapNo : '${map.mapNo}', memNo : '${mno}'}
+			success: function(data){
+				 if(data == -1){
+                    alert("구독 오류","error","확인",function(){});
+                }
+                else if(data==1){
+					 $("#subButton").attr("src","/img/map/bookmark-tag.png")
+				 }else if(data==0){
+					 $("#subButton").attr("src","/img/map/ribbon.png")
+				 }
+					 
+			},
+			error : function(err){
+				  console.log(err+" 에러 발생.")
+			  } */
+			  
+		})//클릭function 끝
+	});//script 끝
 
 </script>
 </head>
@@ -134,15 +170,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
 					<div class="tab-content">
 						<div class="tab-pane active" id="tabs-1" role="tabpanel">
 							<div class="row">
@@ -163,29 +190,32 @@
 												&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
 												&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
 												&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-												<%-- <c:choose>
-													<c:when test="${map.mapNo ne map.mapNo and map.mapStorage.memNo eq member.memNo}">
-														<img
+												 <%-- <c:choose>
+												 	<c:when test="${empty pageContext.request.userPrincipal}">
+												 	<img
+													src="${pageContext.request.contextPath}/img/map/ribbon.png"
+													alt="" style="height: 20px; width: 20px; cursor: pointer;"
+													id="subButton"><br>
+												 	</c:when>
+													<c:when test="${pageContext.request.userPrincipal ne map.mapNo and map.mapStorage.memNo eq null}">
+														<input type="button" class="btm_image"><img
 													src="${pageContext.request.contextPath}/img/map/bookmark-tag.png"
 													alt="" style="height: 20px; width: 20px; cursor: pointer;"
-													id="subButton"
-													onclick="javascript:location.href='${pageContext.request.contextPath}/map/mapRead/${map.mapNo}'"><br>
+													id="subButton"/><br>
 													</c:when>
 													<c:otherwise>
 														<img
 													src="${pageContext.request.contextPath}/img/map/ribbon.png"
 													alt="" style="height: 20px; width: 20px; cursor: pointer;"
-													id="subButton"
-													onclick="javascript:location.href='${pageContext.request.contextPath}/map/mapRead/${map.mapNo}'"><br>
+													id="subButton"><br>
 													</c:otherwise>
-												</c:choose>
- --%>
-												
+												</c:choose>  --%>
+												 
 												<img
 													src="${pageContext.request.contextPath}/img/map/ribbon.png"
 													alt="" style="height: 20px; width: 20px; cursor: pointer;"
 													id="subButton"
-													onclick="javascript:location.href='${pageContext.request.contextPath}/map/mapRead/${map.mapNo}'"><br>
+													onclick="javascript:location.href='${pageContext.request.contextPath}/map/mapRead/${map.mapNo}'"><br> 
 												<div class="listing__item__text__inside">
 
 													<h5>
