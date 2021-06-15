@@ -138,11 +138,6 @@ public class MemberController {
 
 	}
 	
-	@RequestMapping("/iamport")
-	public void iamport() {
-		
-	}
-	
 	@RequestMapping("/start")
 	public String start() {
 		Long memNo = 2L;

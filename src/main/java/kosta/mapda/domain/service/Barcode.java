@@ -4,8 +4,8 @@ import java.io.File;
 import java.util.HashSet;
 import java.util.Random;
 
-import net.sourceforge.barbecue.BarcodeFactory;
-import net.sourceforge.barbecue.BarcodeImageHandler;
+//import net.sourceforge.barbecue.BarcodeFactory;
+//import net.sourceforge.barbecue.BarcodeImageHandler;
 
 public class Barcode {
 
