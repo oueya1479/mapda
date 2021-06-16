@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="zxx">
@@ -49,6 +50,8 @@
 </head>
 
 <body>
+<sec:authorize access="isAuthenticated()">
+	<sec:authentication property="principal.memId" var="userId"/>
 
     <!-- Listing Section Begin -->
     <section class="listing-hero set-bg" data-setbg="${pageContext.request.contextPath}/img/listing/details/listing-hero.jpg">
@@ -60,7 +63,7 @@
                             <img src="${pageContext.request.contextPath}/img/listing/details/ld-icon.png" alt="">
                         </div>
                         <div class="listing__hero__text">
-                            <h2>${place.member.memName}님의  <br>Reply and Photo Review</h2>
+                            <h2>${userId}님의  <br>Reply and Photo Review</h2>
                             <div class="listing__hero__widget">
                                 <div>
                                 	Reply : ${prList.size()}개<p>
@@ -92,12 +95,13 @@
 			                                    <div class="listing__details__comment__item__rating">
 			                                    </div>
 			                                    <span>${prList.prRegdate}</span>
-			                                    <h5>${prList.member.memName}</h5>
-			                                    <p>${prList.prContent}</p>
+			                                    <p>${prList.member.memName}</p>
+			                                    <h6>${prList.prContent}</h6>
 			                                    <ul>
 			                                        <li><i class="fa fa-pencil" aria-hidden="true"></i>
-			                                        	<form class="form-container" name="updateForm" method="post"  
-														action="${pageContext.request.contextPath}/place/placeReplyUpdate/placeNo=${prList.place.placeNo}&memId=${prList.member.memId}/${prList.prNo}">
+			                                        	<form class="form-container" name="updateForm" method="post" 
+			                                        	action="${pageContext.request.contextPath}/place/placeReplyUpdate/placeNo=${prList.place.placeNo}&memId=${prList.member.memId}/${prList.prNo}">
+														<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 														<input type='hidden' name='prNo' value="${prList.prNo}">
 			                                        	<a href="javascript:;" class="btn" id="editBtn" style="color: blue; text-decoration: none;" onclick="openForm()" >수정하기</a></li>
 														<div class="listing__details__review" id="myForm" style="text-align: center;">
@@ -145,6 +149,7 @@
 		                                        <li><i class="fa fa-pencil" aria-hidden="true"></i>
 		                                        	<form class="form-container" name="updatePhotoReview" method="post"  
 														action="${pageContext.request.contextPath}/place/placePhotoReviewUpdate/placeNo=${pprList.place.placeNo}&memId=${pprList.member.memId}/${pprList.pprNo}">
+														<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 														<input type='hidden' name='pprNo' value="${pprList.pprNo}">
 			                                        	<a href="javascript:;" class="btn" id="editBtn" style="color: blue; text-decoration: none;" onclick="openForm()" >수정하기</a></li>
 														<div class="listing__details__review" id="myForm" style="text-align: center;">
@@ -166,7 +171,7 @@
 		</div>
 	</section>
 
-
+</sec:authorize>
 </body>
 
 </html>

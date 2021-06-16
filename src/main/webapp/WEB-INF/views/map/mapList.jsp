@@ -154,11 +154,8 @@
 												&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
 												&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
 												&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-												
-												
-												<%-- 
-												<c:choose>
-												 	<c:when test="">
+												<%--  <c:choose>
+												 	<c:when test="${empty pageContext.request.userPrincipal}">
 												 	<img
 													src="${pageContext.request.contextPath}/img/map/ribbon.png"
 													alt="" style="height: 20px; width: 20px; cursor: pointer;"
@@ -176,8 +173,7 @@
 													alt="" style="height: 20px; width: 20px; cursor: pointer;"
 													id="subButton"><br>
 													</c:otherwise>
-												</c:choose> --%>
-
+												</c:choose>   --%>
 
 												<img
 													src="${pageContext.request.contextPath}/img/map/ribbon.png"

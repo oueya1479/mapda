@@ -31,7 +31,7 @@ public class PlacePhotoReviewPhoto {	//Place_Photo_Review_Photo
 	
 	@JsonIgnore	//이거
 	@ManyToOne
-	@JoinColumn(name = "pprNo")
+	@JoinColumn(name = "ppr_no")
 	private PlacePhotoReview ppr;
 	
 }

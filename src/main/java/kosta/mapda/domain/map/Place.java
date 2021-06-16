@@ -53,15 +53,15 @@ public class Place {
 	//////////////////////////////////////////////////////////////////////////////////////
 	
 	@ManyToOne
-	@JoinColumn(name = "memNo")
+	@JoinColumn(name = "mem_no")
 	private Member member;
 	
 	@ManyToOne
-	@JoinColumn(name = "mngNo")
+	@JoinColumn(name = "mng_no")
 	private Management management;
 	
 	@ManyToOne
-	@JoinColumn(name = "mapNo")
+	@JoinColumn(name = "map_no")
 	private Theme theme;
 	
 	

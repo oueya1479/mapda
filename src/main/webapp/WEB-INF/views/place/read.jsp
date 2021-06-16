@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="zxx">
@@ -278,14 +280,11 @@
                         	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;
                         	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        	 <a href="${pageContext.request.contextPath}/place/myReplyReview/placeNo=${placeNo}&memId=testuserid" 
+<sec:authorize access="isAuthenticated()">
+	<sec:authentication property="principal.memId" var="memId"/>
+                        	 <a href="${pageContext.request.contextPath}/place/myReplyReview/placeNo=${placeNo}&memId=${memId}" 
                         	 class="btn" id="deleteReplyReview" style="text-decoration: none; color: black; ">My Reply, PhotoReview Edit</a>
-                   <%--      	 <form name="requestReviewForm" method="post" id="requestReviewForm">
-                        	 	<input type="hidden" name="placeNo" value="${placeNo}" id="placeNo">
-                        	 	<input type="hidden" name="memId" value="\${sessionId}" id="memId">
-                        	 </form> --%>
- <!-- memId 부분에 세션 아이디 받아오기 -->
-                        	 
+   </sec:authorize>                     	 
                         </h4>
                         <div class="listing__details__comment">
    				 <c:forEach items="${prList}" var="prList">       
@@ -307,19 +306,25 @@
         			 </c:forEach>                 
                         </div>
            		 </section>  
-
+<sec:authorize access="isAuthenticated()">
+	<sec:authentication property="principal.memName" var="userName"/>
+	<sec:authentication property="principal.memNo" var="userNo"/>
            		<div class="listing__details__review">
                             <h4>Add Review</h4>
-                            <form name="replyForm" method="post" action="${pageContext.request.contextPath}/place/replyWrite" onSubmit='return checkValid()' >
+                            <form name="replyForm" method="post" action="${pageContext.request.contextPath}/place/replyWrite">
+                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
                             <input type="hidden" name="placeNo" value="${placeNo}"/>
-                        
-  <!-- 아이디 가져와서 placeholder 하기 -->  <input type="text" placeholder="Name\${place.member.memId}" readonly="readonly">
+                            <input type="hidden" name="memNo" value="${userNo}"/>
+                            <input type="hidden" name="mngNo" value="${prList[0].management.mngNo}"/>
+                            <input type="hidden" name="prStatus" value="1"/>
+
+  							<input type="text" placeholder="${userName}" readonly="readonly">
   						
                                 <textarea name="prContent" placeholder="Review"></textarea>
                                 <button type="submit" class="site-btn" id="replySubmit">Submit Now</button>
                             </form>
                         </div>
-
+</sec:authorize>
                     </div>
                 </div>
                 <div class="col-lg-4">
