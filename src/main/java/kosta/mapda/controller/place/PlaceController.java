@@ -1,7 +1,10 @@
 package kosta.mapda.controller.place;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,10 +12,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import kosta.mapda.domain.Management;
 import kosta.mapda.domain.map.Place;
 import kosta.mapda.domain.map.PlacePhoto;
 import kosta.mapda.domain.map.PlacePhotoReview;
 import kosta.mapda.domain.map.PlaceReview;
+import kosta.mapda.domain.member.Member;
 import kosta.mapda.service.place.PlaceReviewService;
 import kosta.mapda.service.place.PlaceService;
 
@@ -27,6 +32,8 @@ public class PlaceController {
 	private PlaceReviewService prService;
 	
 	private final String SAVE_PATH = "C:\\KostaEdu\\thirdProject\\fileSave";
+	
+	private LocalDateTime ldt;
 	
 	/**
 	 * 		상세보기
@@ -86,12 +93,14 @@ public class PlaceController {
 	 * 		댓글 등록하기
 	 * */
 	@RequestMapping("/replyWrite")
-	public String insert(PlaceReview placeReview, Long placeNo) {
+	public String insert(PlaceReview placeReview, Long placeNo, Member member, Management management,HttpServletRequest request) {
+		Long memNo =Long.valueOf(request.getParameter("memNo"));
+		Long mngNo = Long.valueOf(request.getParameter("mngNo"));
+		System.out.println("placeReview.getPrStatus()" + placeReview.getPrStatus());
 		placeReview.setPlace(new Place(placeNo));
-		
-		// 임시용
-		
-		//
+		placeReview.setMember(new Member(memNo));
+		placeReview.setManagement(new Management(mngNo));
+
 		prService.insert(placeReview);
 		return "redirect:/place/read/"+placeNo;
 	}

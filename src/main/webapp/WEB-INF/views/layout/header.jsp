@@ -40,7 +40,7 @@
                               href="${pageContext.request.contextPath}/map/insertForm">Make
                                  My Map</a></li>
                            <li><a
-                              href="${pageContext.request.contextPath}/map/manageMap/${memNo}">Manage
+                              href="${pageContext.request.contextPath}/map/manageMap">Manage
                                  My Maps</a></li>
 
                         </ul></li>
@@ -73,7 +73,7 @@
                            <li><a
                               href="${pageContext.request.contextPath}/member/pay">Regular
                                  payment</a></li>
-                           <li><a href="">My Membership</a></li>
+                           <li><a href="#">My Membership</a></li>
 
                         </ul></li>
                      <li><a href="#">My Page</a>

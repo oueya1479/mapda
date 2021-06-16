@@ -23,4 +23,8 @@ public class Management {
 	@SequenceGenerator(sequenceName = "management_mngno_seq", allocationSize = 1, name = "management_mngno_seq")
 	private Long mngNo;
 	private String mngBoard;
+	
+	public Management(Long mngNo) {
+		this.mngNo = mngNo;
+	}
 }
