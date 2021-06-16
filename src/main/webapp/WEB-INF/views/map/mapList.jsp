@@ -28,9 +28,10 @@
 							var url = "${pageContext.request.contextPath}/map/modifyForm?mapNo="+ mapNo;
 							$(location).attr('href', url);
 						})
-		$("input[value=Delete]").click(function() {
+		$(document).on("click","input[value=Delete]", function() {
 							var mapNo = $(this).attr("id")
 							var pwd = prompt("비밀번호를 입력하세요.");
+							
 							if (pwd==$("#memPw").val()) {
 								$("#requestForm")
 										.attr("action",
@@ -153,8 +154,11 @@
 												&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
 												&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
 												&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-												<%--  <c:choose>
-												 	<c:when test="${empty pageContext.request.userPrincipal}">
+												
+												
+												<%-- 
+												<c:choose>
+												 	<c:when test="">
 												 	<img
 													src="${pageContext.request.contextPath}/img/map/ribbon.png"
 													alt="" style="height: 20px; width: 20px; cursor: pointer;"
@@ -172,7 +176,8 @@
 													alt="" style="height: 20px; width: 20px; cursor: pointer;"
 													id="subButton"><br>
 													</c:otherwise>
-												</c:choose>   --%>
+												</c:choose> --%>
+
 
 												<img
 													src="${pageContext.request.contextPath}/img/map/ribbon.png"
@@ -215,11 +220,12 @@
 												</div>
 											</div>
 										</div>
-										<input type="button" class="btn btn-outline-danger"
-											value="Modify" id="${map.mapNo}" name="modifyMap"
-											style="width: 100px" /> <input type="button"
-											class="btn btn-outline-dark" value="Delete" name="deleteMap"
-											id="${map.mapNo}" style="width: 100px; float: right;" />
+										
+										<input type="button" class="btn btn-outline-danger" value="Modify" id="${map.mapNo}" name="modifyMap"
+											style="width: 100px" /> 
+										<input type="button" class="btn btn-outline-dark" value="Delete" name="deleteMap" id="${map.mapNo}" 
+										style="width: 100px; float: right;" />
+										
 									</div>
 									<form name="requestForm" method="post" id="requestForm">
 										<input type=hidden name="mapNo" value="${map.mapNo}">

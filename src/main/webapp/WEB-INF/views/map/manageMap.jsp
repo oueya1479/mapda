@@ -63,8 +63,8 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="section-title">
-						<h2>All our Maps in here!</h2>
-						<p>You can find fanciest places with Mapda's various Maps~</p>
+						<h2>All your Maps in here!</h2>
+						
 					</div>
 				</div>
 			</div>
@@ -106,7 +106,7 @@
 					<div class="tab-content">
 						<div class="tab-pane active" id="tabs-1" role="tabpanel">
 							<div class="row">
-								<c:forEach items="${mapList.content}" var="map">
+								<c:forEach items="${themeList.content}" var="map">
 									<div class="col-lg-4 col-md-6">
 										<div class="listing__item">
 											<div class="listing__item__pic set-bg"

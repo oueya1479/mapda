@@ -2,17 +2,22 @@ package kosta.mapda.controller.young;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.security.sasl.AuthenticationException;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Direction;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -39,6 +44,8 @@ public class MapController {
 	
 	private final String SAVE_PATH="/Users/soyoung/Desktop/fileSave";
 
+	private final PasswordEncoder passwordEncoder;
+	
 	
 	/**
 	 * 테마지도 등록 폼
@@ -84,17 +91,12 @@ public class MapController {
 	 */
 	@RequestMapping("/mapList")
 	public void list(HttpServletRequest request, Model model, @RequestParam(defaultValue = "0") int nowPage) {
+		
 		Pageable pageable = PageRequest.of(nowPage, 10, Direction.DESC, "mapNo");
 		Page<Theme> mapList = mapService.selectAll(pageable);
 		model.addAttribute("mapList", mapList);
 		
-		//나중에 제거하세요
-		HttpSession session = request.getSession();
-		Member member = new Member();
-		member.setMemNo(1L);
-		session.setAttribute("member", member);
-		//
-		
+				
 	}
 	/**
 	 * 상세보기
@@ -143,8 +145,21 @@ public class MapController {
 	/**
 	 * 지도 관리 페이지 - 로그인한 회원이 등록한 전체 테마지도 출력
 	 */
-	@RequestMapping("/manageMap")
-	public void myMaps() {
-		
+	@RequestMapping("/manageMap/{memId}")
+	public ModelAndView myMaps(Long memNo) {
+		List<Theme> themeList = mapService.myMaps(memNo);
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("map/manageMap");
+		mv.addObject("themeList", themeList);
+		return mv;
 	}
+	
+	
+	
+
+	
+	
 }
+
+
+

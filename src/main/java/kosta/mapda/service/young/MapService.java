@@ -1,6 +1,7 @@
 package kosta.mapda.service.young;
 
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.data.domain.Page;
@@ -55,6 +56,11 @@ public interface MapService {
 	 * 구독 테이블에 삭제
 	 */
 	void deleteSubscribe(Long memNo, Long MapNo);
+
+	/**
+	 * 로그인한 회원이 등록한 지도 목록 보기
+	 */
+	List<Theme> myMaps(Long memNo);
 
 	
 

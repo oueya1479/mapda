@@ -1,5 +1,7 @@
 package kosta.mapda.service.young;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.data.domain.Page;
@@ -120,7 +122,17 @@ public class MapServiceImpl implements MapService {
 	 */
 	@Override
 	public void deleteSubscribe(Long memNo, Long mapNo) {
-//		mapStorageRepository.deleteSubscribe(memNo, mapNo);
+		
+		mapStorageRepository.deleteSub(memNo,mapNo);
+		
+	}
+
+	/**
+	 * 로그인한 회원이 등록한 지도 목록
+	 */
+	@Override
+	public List<Theme> myMaps(Long memNo) {
+		return maprepository.selectByMemId(memNo);
 	}
 
 	
