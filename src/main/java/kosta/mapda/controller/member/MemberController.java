@@ -111,11 +111,11 @@ public class MemberController {
 	public void pay() {
 
 	}
-	
+	/*
 	@RequestMapping("/start")
 	public String start() {
 		Long memNo = 2L;
 		memService.start(memNo);
 		return "main/index";
-	}
+	}*/
 }

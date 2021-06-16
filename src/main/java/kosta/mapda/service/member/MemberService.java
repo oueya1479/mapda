@@ -24,7 +24,11 @@ public interface MemberService {
 	
 //	List<AuthorityVO> selectAuthorityByUsername(String username);
 
-	void start(Long memNo);
-
+	
+	
+/**
+ *  정기결제 - memPayStatus
+ */
+	void updatePayStatus(Long memNo); 
 
 }

@@ -50,8 +50,7 @@ public class EventController {
 			    event.setEvImg(fileName);
 			    file.transferTo(new File(SAVE_PATH + "/" + fileName));
 			}
-		   eventService.insert(event);
-			
+			//Event dbEvent = new Event(file, null, event.getEvTitle(), event.getEvContent(), event.getEvStartDate(), event.getEvEndDate(), null, 0, null, null);
 			String content = event.getEvContent().replace("<","&lt;");
 			eventService.insert(event);
 			return "redirect:/event/list";

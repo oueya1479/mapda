@@ -81,7 +81,9 @@ public class MemberServiceImpl implements MemberService {
 
 
 	@Override
-	public void start(Long memNo) {
-		memRepository.start(memNo);
+	public void updatePayStatus(Long memNo) {
+	memRepository.updatePayStatus(memNo);
+
+		
 	}
 }

@@ -93,11 +93,11 @@
         </div>
         <div class="row mb-5">
           <div class="col-lg-12">
-            <form class="p-4 p-md-5 border rounded" method="post">
+ 
               <h3 class="text-black mb-5 border-bottom pb-2">여러분의 방문후기를 공유해주세요^^!</h3>
               
               
-               <form action= "/event/insertPosting"  method = "post" enctype="multipart/form-data"/>
+               <form action= "/event/insertPosting"  method = "post" enctype="multipart/form-data">
               <div class="form-group">
                 <label for="company-website-tw d-block">Upload Featured Image</label> <br>
                 
@@ -120,16 +120,14 @@
              <div class="form-group">
                 <label for="job-description">방문후기</label>
                 <div class="editor" id="editor-1">
-                <textarea input type="text"  class="form-control" id="editor_text" placeholder="내용을 입력해주세요"  name="evContent"
-                  style="width:1040px;height:300px;font-size:17x;"></textarea><hr>
+                <input type="text" class="form-control" id="editor_text" placeholder="내용을 입력해주세요"  name="evContent">
                   시작날짜 <input type="datetime-local" name="evStartDate"/>
                   <p> <br>
                   종료날짜 <input type="datetime-local" name="evEndDate"/>
                 </div>
               </div>
-              
-              <input type  = "submit" class ="site-btn" id = "submitbtn" value = "submitButton".>
-                </form>
+             
+               
           
 
         <div class="row align-items-center mb-5">
@@ -138,15 +136,19 @@
             <div class="row">
            
               <div class="col-6">
-              <input type  = "submit" class ="site-btn" id = "submitbt" value = "submitButton".>
+              <input type ="submit" class ="site-btn" id = "submitbt" value = "submitButton">
               </div>
+              
             </div>
           </div>
         </div>
+        	 </form>
+      </div>
+      </div>
       </div>
     </section>
 
-
+</div>
 
 
 
