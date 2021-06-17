@@ -39,8 +39,17 @@ public class EventController {
 	 * 이벤트 글 등록폼 
 	 * */
 	@RequestMapping("/posting/{evNo}")
-	public String write(Model model, @PathVariable Long evNo) {
+	public String write(Model model, @PathVariable Long evNo, String title, String content, Long evpNo) {
 		model.addAttribute("evNo", evNo);
+		if(title != null) {
+			model.addAttribute("title", title);
+		}
+		if(content != null) {
+			model.addAttribute("content", content);
+		}
+		if(evpNo != null) {
+			model.addAttribute("evpNo", evpNo);
+		}
 		return "event/posting";
 	}
 	
@@ -49,7 +58,7 @@ public class EventController {
 	 *  이벤트 글 등록하기 
 	 * */
 		@RequestMapping("/insertPosting/{evNo}")
-		public String insert(EventPost eventPost, @PathVariable Long evNo)throws IOException {
+		public String insert(EventPost eventPost, @PathVariable Long evNo, Long evpNo)throws IOException {
 			Member member = new Member(); 
 			Event event = eventService.getEvent(evNo);
 			eventPost.setEvent(event);
@@ -61,6 +70,11 @@ public class EventController {
 			}
 			//Event dbEvent = new Event(file, null, event.getEvTitle(), event.getEvContent(), event.getEvStartDate(), event.getEvEndDate(), null, 0, null, null);
 			String content = eventPost.getEvpContent().replace("<","&lt;");
+			
+			if(evpNo != null) {
+				eventPost.setEvpNo(evpNo);
+			}
+			
 			eventService.insert(eventPost);
 			return "redirect:/event/list";
 	}
@@ -114,7 +128,7 @@ public class EventController {
 		@RequestMapping("/update")
 		public String update(Event event) { //내용, 비번, 제목, 글번호 
 			Event dbEvent = eventService.update(event);
-			return "redirect:/event/list";
+			return "redirect:/event/posting";
 		}
 	
 	/**

@@ -133,11 +133,7 @@
 
 							<div class="card text-center card-product">
 								<div class="card-product__img"></div>
-								<div class="card-body">
-
-									<h4 class="card-product__title"></h4>
-
-								</div>
+								
 							</div>
 						</div>
 
@@ -167,7 +163,21 @@
 								<div class="nk-post-text">
 									${post.evpContent}
 								</div>
+								<form action="${pageContext.request.contextPath}/event/posting/${post.event.evNo}" method="post">
+									<input type="hidden" name="title" value="${post.evpTitle}">
+									<input type="hidden" name="content" value="${post.evpContent}">
+									<input type="hidden" name="evpNo" value="${post.evpNo}">
+									<input type="submit" value="수정" style="background-color: #bbbbff ">
+								</form>
+								
+								<form action="${pageContext.request.contextPath}/event/posting/${post.event.evNo}" method="post">
+									<input type="hidden" name="title" value="${post.evpTitle}">
+									<input type="hidden" name="content" value="${post.evpContent}">
+									<input type="hidden" name="evpNo" value="${post.evpNo}">
+									<input type="submit" value="삭제 " style = "background-cololr: #bbbbff">
+								</form>
 							</div>
+							
 						</div>
 					 </c:forEach>
 						<!-- END: Post -->

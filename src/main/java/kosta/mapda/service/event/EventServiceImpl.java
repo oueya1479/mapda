@@ -51,6 +51,7 @@ public class EventServiceImpl implements EventService {
 
 	@Override
 	public Event update(Event event) {
+		
 		return eventRepository.save(event);
 	}
 

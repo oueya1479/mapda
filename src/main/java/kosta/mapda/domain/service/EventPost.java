@@ -33,7 +33,7 @@ public class EventPost {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "evp_evpno_seq")
 	@SequenceGenerator(sequenceName = "evp_evpno_seq", allocationSize = 1, name = "evp_evpno_seq")
-	private int evpNo;
+	private Long evpNo;
 	private String evpTitle;
 	private String evpContent;
 	private String evpImg;

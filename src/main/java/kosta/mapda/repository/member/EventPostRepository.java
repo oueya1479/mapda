@@ -12,4 +12,6 @@ public interface EventPostRepository extends JpaRepository<EventPost, Long> {
 	@Query("select e from EventPost e where e.event.evNo = ?1")
 	Page<EventPost> selectAllPost(Pageable pageable, Long evNo);
 
+
+	
 }
