@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import kosta.mapda.domain.map.PlaceReview;
 
 public interface PlaceReviewRepository extends JpaRepository<PlaceReview, Long> {
-	@Query("select pr from PlaceReview pr where pr.place.placeNo=?1")
+	@Query("select pr from PlaceReview pr where pr.place.placeNo=?1 order by pr.prRegdate")
 	List<PlaceReview> selectByPlaceNo(Long placeNo);
 	
 	@Query("select pr from PlaceReview pr where pr.place.placeNo=?1 and pr.member.memId=?2")

@@ -2,16 +2,15 @@ package kosta.mapda.controller.young;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Direction;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,23 +22,23 @@ import org.springframework.web.servlet.ModelAndView;
 
 import kosta.mapda.domain.Management;
 import kosta.mapda.domain.map.MapCategory;
+import kosta.mapda.domain.map.MapStorage;
 import kosta.mapda.domain.map.Place;
 import kosta.mapda.domain.map.Theme;
 import kosta.mapda.domain.member.Member;
 import kosta.mapda.service.young.MapService;
-import lombok.RequiredArgsConstructor;
 
 @Controller
-@RequiredArgsConstructor
+
 @RequestMapping("/map")
 public class MapController {
 
 	@Autowired
-	private final MapService mapService;
+	private  MapService mapService;
+	
 	
 	private final String SAVE_PATH="/Users/soyoung/Desktop/fileSave";
 
-	
 	/**
 	 * 테마지도 등록 폼
 	 */
@@ -84,16 +83,17 @@ public class MapController {
 	 */
 	@RequestMapping("/mapList")
 	public void list(HttpServletRequest request, Model model, @RequestParam(defaultValue = "0") int nowPage) {
+		
 		Pageable pageable = PageRequest.of(nowPage, 10, Direction.DESC, "mapNo");
 		Page<Theme> mapList = mapService.selectAll(pageable);
-		model.addAttribute("mapList", mapList);
 		
-		//나중에 제거하세요
-		HttpSession session = request.getSession();
-		Member member = new Member();
-		member.setMemNo(1L);
-		session.setAttribute("member", member);
-		//
+		Member mem = (Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Long memNo = mem.getMemNo();
+		
+		List<MapStorage> mapStorage = mapService.selectByMapNo(memNo);
+		
+		model.addAttribute("mapList", mapList);
+		model.addAttribute("mapStorage", mapStorage);	
 		
 	}
 	/**
@@ -126,16 +126,15 @@ public class MapController {
 	@RequestMapping("/modifyMap")
 	public ModelAndView modifyMap(Theme theme) {
 		Theme mapInfo = mapService.modifyMap(theme);
-		
 		return new ModelAndView("redirect:/map/mapList", "theme", mapInfo);
 	}
 	
 	/**
-	 * 삭제
+	 * 삭제 
 	 */
 	@RequestMapping("/deleteMap")
-	public String delete(Long mapNo, String password) {
-		mapService.deleteMap(mapNo, password);
+	public String delete(Long mapNo,  String pwd ) throws Exception {
+		mapService.deleteMap(mapNo);
 		return "redirect:/map/mapList";
 	}
 	
@@ -143,8 +142,51 @@ public class MapController {
 	/**
 	 * 지도 관리 페이지 - 로그인한 회원이 등록한 전체 테마지도 출력
 	 */
-	@RequestMapping("/manageMap")
-	public void myMaps() {
+	@RequestMapping("/manageMap/{memNo}")
+	public ModelAndView myMaps(@PathVariable Long memNo) {
+		List<Theme> themeList = mapService.myMaps(memNo);
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("map/manageMap");
+		mv.addObject("themeList", themeList);
+		return mv;
+	}
+	
+	
+	/**
+	 * 좋아요한 지도 목록 출력
+	 */
+	@RequestMapping("/likeMaps")
+	public void likeMaps(Long memId, HttpServletRequest request, Model model, @RequestParam(defaultValue = "0") int nowPage) {
 		
 	}
+	
+	/**
+	 * 구독하는 지도 목록 출력
+	 */
+	@RequestMapping("/subMaps")
+	public void subMaps(Model model) {
+		Member mem = (Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Long memNo = mem.getMemNo();
+		List<MapStorage> mapStorage = mapService.selectByMapNo(memNo);
+		String memId = mapStorage.get(0).getMember().getMemId();
+		model.addAttribute("mapStorage", mapStorage);
+		model.addAttribute("memId", memId);
+			
+	}
+	
+	/**
+	 * 지도 검색 - 카테고리별
+	 */
+	@RequestMapping("/selectedMaps")
+	public void selectByCategory(@PathVariable Long categoryNo, Model model) {
+		MapCategory category = new MapCategory();
+		List<Theme> mapList = mapService.selectByCategory(category);
+		model.addAttribute(mapList);
+	}
+
+	
+	
 }
+
+
+

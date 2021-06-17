@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="zxx">
@@ -88,9 +88,22 @@
 				<h5>Places in this Map</h5>
 				
 			</div>
-			<div class="listing__text__top__right">
-				<button type="button" class="site-btn">Register New Place</button>
-			</div>
+	
+	<!-- 버튼 생성 조건 1. 권한을 갖어야함(로그인이 되어 있어야 함), 2.themeMap을 제작한 사람과 로그인한 사람이 같아야함. -->
+			<sec:authorize access="isAuthenticated()">
+				<sec:authentication property="principal.memNo" var="loginMemNo"/>
+					<c:if test="${themeMap.member.memNo== loginMemNo}">
+						<form action="${pageContext.request.contextPath}/place/placeInsertForm" method="post">
+							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+							<input type="hidden" name="memNo" value="${themeMap.member.memNo}">
+							<input type="hidden" name ="mapNo" value="${themeMap.mapNo}">
+								<div class="listing__text__top__right">
+									<button type="submit" class="site-btn">Register New Place</button>
+								</div>
+						</form>
+					</c:if>
+			</sec:authorize>		
+			
 		</div>
 		<div class="listing__list">
 			 <c:choose>
@@ -109,7 +122,7 @@
 									<img
 										src="${pageContext.request.contextPath}/img/listing/list_icon-2.png"
 										alt="">
-									<div class="listing__item__pic__tag top_rate">See Details</div>
+									<div class="listing__item__pic__tag top_rate"><a href="${pageContext.request.contextPath}/place/read/${place.placeNo}">See Details</a></div>
 									
 								</div>
 								<div class="listing__item__text">

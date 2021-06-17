@@ -30,7 +30,7 @@ public class PlaceReviewServiceImpl implements PlaceReviewService {
 	
 	@Override
 	public void insert(PlaceReview placeReview) {
-		prRepository.save(placeReview);
+			prRepository.save(placeReview);
 	}
 	
 	@Override

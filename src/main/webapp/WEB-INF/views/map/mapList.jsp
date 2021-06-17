@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
@@ -12,7 +13,7 @@
 
 <!-- memNo 변수설정 -->
 <sec:authorize access="isAuthenticated()">
-<sec:authentication property="principal.memNo" var="mno" />
+	<sec:authentication property="principal.memNo" var="mno" />
 </sec:authorize>
 
 
@@ -28,36 +29,57 @@
 							var url = "${pageContext.request.contextPath}/map/modifyForm?mapNo="+ mapNo;
 							$(location).attr('href', url);
 						})
-		$("input[value=Delete]").click(function() {
+						
+		            $(document).on("click","input[value=Delete]", function() {
 							var mapNo = $(this).attr("id")
 							var pwd = prompt("비밀번호를 입력하세요.");
-							if (pwd==$("#memPw").val()) {
-								$("#requestForm")
+							
+							$.ajax({
+								url:"${pageContext.request.contextPath}/map/check",
+								type:"post",
+								dataType:"text",
+								data: {"pwd" : pwd},
+								success: function(data){
+									if(data=='ok'){
+										$("#requestForm")
 										.attr("action",
-												"${pageContext.request.contextPath}/map/deleteMap");
-								$("#requestForm").submit();
-							}else{
-								alert("비밀번호오류입니다")
-							}
+												"${pageContext.request.contextPath}/map/deleteMap?" + mapNo);
+										$("#requestForm").submit();
+									
+									}else{
+										alert("비밀번호가 일치하지 않습니다. 다시 확인해주세요")
+									}
+								},	
+								error : function(err) {
+									alert("지도 삭제 오류. 다시 시도해주세요")
+								}
+							});
+							
 						})
 	});
 </script>
 <script type="text/javascript">
 	$(function(){
 		$(document).on('click', '#subButton', function() {
+			let img = $(this)
 			let mapNo = $(this).attr('name');
+			let no = 0;
 			$.ajax({
 				url:"${pageContext.request.contextPath}/map/subscribe",
 				type:"get",
 				dataType:"json",
 				data: {"mapNoStr" : $(this).attr('name'), "memNoStr" : ${mno}},
 				success: function(data){
+					
 					if(data == -1){
 	                    alert("구독 오류","error","확인",function(){});
 	                } else if(data==1){
-						 $("#subButton").attr("src","/img/map/bookmark-tag.png")
+	                	
+	                	img.attr("src","${pageContext.request.contextPath}/img/map/bookmark-tag.png")
+	                	
 					} else if(data==0){
-						 $("#subButton").attr("src","/img/map/ribbon.png")
+						img.attr("src","${pageContext.request.contextPath}/img/map/ribbon.png")
+						
 					}
 				},
 				error : function(err) {
@@ -132,7 +154,6 @@
 
 
 
-
 					<div class="tab-content">
 						<div class="tab-pane active" id="tabs-1" role="tabpanel">
 							<div class="row">
@@ -153,32 +174,36 @@
 												&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
 												&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
 												&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-												<%--  <c:choose>
-												 	<c:when test="${empty pageContext.request.userPrincipal}">
-												 	<img
-													src="${pageContext.request.contextPath}/img/map/ribbon.png"
-													alt="" style="height: 20px; width: 20px; cursor: pointer;"
-													id="subButton"><br>
-												 	</c:when>
-													<c:when test="${pageContext.request.userPrincipal ne map.mapNo and map.mapStorage.memNo eq null}">
-														<input type="button" class="btm_image"><img
-													src="${pageContext.request.contextPath}/img/map/book mark-tag.png"
-													alt="" style="height: 20px; width: 20px; cursor: pointer;"
-													id="subButton"/><br>
+												
+												<c:set var="name" value="0"/>
+												<c:forEach items="${mapStorage}" var="storage">
+													<c:if test="${storage.theme.mapNo eq map.mapNo}">
+														<c:set var="name" value="1"/>
+													</c:if>
+												</c:forEach>
+		
+												<c:choose>
+													<c:when test="${name eq 1}">
+														<img
+															src="${pageContext.request.contextPath}/img/map/bookmark-tag.png"
+															alt=""
+															style="height: 20px; width: 20px; cursor: pointer;"
+															id="subButton" name="${map.mapNo}">
 													</c:when>
 													<c:otherwise>
 														<img
-													src="${pageContext.request.contextPath}/img/map/ribbon.png"
-													alt="" style="height: 20px; width: 20px; cursor: pointer;"
-													id="subButton"><br>
+															src="${pageContext.request.contextPath}/img/map/ribbon.png"
+															alt=""
+															style="height: 20px; width: 20px; cursor: pointer;"
+															id="subButton" name="${map.mapNo}">
 													</c:otherwise>
-												</c:choose>   --%>
+												</c:choose>
+												<c:set var="name" value="0"/>
+												<%-- ${pageContext.request.userPrincipal.principal.memId} --%>
 
-												<img
-													src="${pageContext.request.contextPath}/img/map/ribbon.png"
-													alt="" style="height: 20px; width: 20px; cursor: pointer;"
-													id="subButton" name="${map.mapNo}"
-													><br>
+
+
+												<br>
 												<div class="listing__item__text__inside">
 
 													<h5>
@@ -215,14 +240,42 @@
 												</div>
 											</div>
 										</div>
-										<input type="button" class="btn btn-outline-danger"
-											value="Modify" id="${map.mapNo}" name="modifyMap"
-											style="width: 100px" /> <input type="button"
-											class="btn btn-outline-dark" value="Delete" name="deleteMap"
-											id="${map.mapNo}" style="width: 100px; float: right;" />
+
+
+
+
+										<c:if
+											test="${not empty pageContext.request.userPrincipal.principal.mapList}">
+											<c:set var="doneloop" value="false" />
+											<c:forEach
+												items="${pageContext.request.userPrincipal.principal.mapList}"
+												var="the">
+												<c:if test="${not donloop}">
+													<c:if test="${the.mapNo==map.mapNo}">
+														<input type="button" class="btn btn-outline-danger"
+															value="Modify" id="${map.mapNo}" name="modifyMap"
+															style="width: 100px" />
+														<input type="button" class="btn btn-outline-dark"
+															value="Delete" name="deleteMap" id="${map.mapNo}"
+															style="width: 100px; float: right;" />
+														<c:set var="doneloop" value="true" />
+													</c:if>
+												</c:if>
+											</c:forEach>
+										</c:if>
+
+
+
+
+
+
+
+
+
 									</div>
 									<form name="requestForm" method="post" id="requestForm">
 										<input type=hidden name="mapNo" value="${map.mapNo}">
+										
 										<input type=hidden name="memPw" value="${map.member.memPw}"
 											id="memPw">
 									</form>
@@ -237,10 +290,6 @@
 
 
 	</section>
-	<!— Most Search Section End —>
-
-
-	<!— Newslatter Section End —>
 </body>
 
 </html>

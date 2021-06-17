@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="zxx">
@@ -123,8 +125,7 @@
       		 	$(location).attr('href', url);
       	 	});  
 */
-/* session에 저장된 아이디 불러오기 */
-        
+
       	}); 
     	
       	function checkValid(){
@@ -145,20 +146,21 @@
 <body>
 
     <!-- Listing Section Begin -->
-    <section class="listing-hero set-bg" data-setbg="${pageContext.request.contextPath}/img/placeimges/test1.png"><!-- 무슨 사진 넣을지 고민 -->
+    <%-- <section class="listing-hero set-bg" data-setbg="${pageContext.request.contextPath}/img/placeimges/test1.png"> --%><!-- 무슨 사진 넣을지 고민 -->
+    <section class="listing-hero set-bg" data-setbg="https://www.journey4.co.uk/wp-content/uploads/2020/04/about-us-2-1920x420.jpg">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8">
                     <div class="listing__hero__option">
                         <div class="listing__hero__icon">
-                            <img src="${pageContext.request.contextPath}" alt="" ><!-- 아이콘 모양? user프로필? -->
+                            <img src="${pageContext.request.contextPath}/img/placeimges/dadadadada.png" alt="" style="width: 150px; height: 150px;" ><!-- 아이콘 모양? user프로필? -->
                         </div>
                         <div class="listing__hero__text">
                             <h2>${requestScope.place.placeTitle}</h2>
                             <div class="listing__hero__widget">
                                 <div class="listing__details__rating__star"></div>
                                 <div>&nbsp;&nbsp; Rate : ${starAvg}</div>
-                                <br> <div>${totalReviewCount} Review</div>
+                                <br> <div>${totalReviewCount} &nbsp;&nbsp;&nbsp;Total Reviews</div>
                             </div>
                             <p><span class="icon_pin_alt"></span> ${requestScope.place.placeAddr}</p>
                         </div>
@@ -239,7 +241,7 @@
                                 <h2>${starAvg}</h2>
                                  <div class="listing__details__rating__star">
                                 </div>
-                                <span>${pprList.size()}&nbsp;reviews</span>
+                                <span>${pprList.size()}&nbsp;Photo Reviews</span>
                             </div>
                             
                             <div class="listing__details__rating__bar">
@@ -273,19 +275,17 @@
                         </div>
                       
       					<section class="listing-details spad">        
-                        <h4><a href="javascript:;" class="btn" id="replyReview" style="text-decoration: none; color: black;">Reply</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <h4><a href="javascript:;" class="btn" id="replyReview" style="text-decoration: none; color: black;">Reply</a> 
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         	<a href="javascript:;" class="btn" id="photoReview" style="text-decoration: none; color: black;">PhotoReview</a>
                         	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;
                         	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        	 <a href="${pageContext.request.contextPath}/place/myReplyReview/placeNo=${placeNo}&memId=testuserid" 
+<sec:authorize access="isAuthenticated()">
+	<sec:authentication property="principal.memId" var="memId"/>
+                        	 <a href="${pageContext.request.contextPath}/place/myReplyReview/placeNo=${placeNo}&memId=${memId}" 
                         	 class="btn" id="deleteReplyReview" style="text-decoration: none; color: black; ">My Reply, PhotoReview Edit</a>
-                   <%--      	 <form name="requestReviewForm" method="post" id="requestReviewForm">
-                        	 	<input type="hidden" name="placeNo" value="${placeNo}" id="placeNo">
-                        	 	<input type="hidden" name="memId" value="\${sessionId}" id="memId">
-                        	 </form> --%>
- <!-- memId 부분에 세션 아이디 받아오기 -->
-                        	 
+   </sec:authorize>                     	 
                         </h4>
                         <div class="listing__details__comment">
    				 <c:forEach items="${prList}" var="prList">       
@@ -307,19 +307,28 @@
         			 </c:forEach>                 
                         </div>
            		 </section>  
-
+           		 
+           		
+           		 
+           		 
+<sec:authorize access="isAuthenticated()">
+	<sec:authentication property="principal.memName" var="userName"/>
+	<sec:authentication property="principal.memNo" var="userNo"/>
            		<div class="listing__details__review">
                             <h4>Add Review</h4>
-                            <form name="replyForm" method="post" action="${pageContext.request.contextPath}/place/replyWrite" onSubmit='return checkValid()' >
+                            <form name="replyForm" method="post" action="${pageContext.request.contextPath}/place/replyWrite">
+                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
                             <input type="hidden" name="placeNo" value="${placeNo}"/>
-                        
-  <!-- 아이디 가져와서 placeholder 하기 -->  <input type="text" placeholder="Name\${place.member.memId}" readonly="readonly">
+                            <input type="hidden" name="memNo" value="${userNo}"/>
+                            <input type="hidden" name="prStatus" value="1"/>
+
+  							<input type="text" placeholder="${userName}" readonly="readonly">
   						
                                 <textarea name="prContent" placeholder="Review"></textarea>
                                 <button type="submit" class="site-btn" id="replySubmit">Submit Now</button>
                             </form>
                         </div>
-
+</sec:authorize>
                     </div>
                 </div>
                 <div class="col-lg-4">
@@ -367,28 +376,23 @@
             </div>
         </div>
     </section>
-
-    <!-- Newslatter Section Begin -->
-    <section class="newslatter">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6 col-md-6">
-                    <div class="newslatter__text">
-                        <h3>Subscribe Newsletter</h3>
-                        <p>Subscribe to our newsletter and don’t miss anything</p>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-6">
-                    <form action="#" class="newslatter__form">
-                        <input type="text" placeholder="Your email">
-                        <button type="submit">Subscribe</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Newslatter Section End -->
-
+	
+ 	 <sec:authorize access="isAnonymous()">
+	 	<c:if test="${empty memId}">
+		    <section class="newslatter">
+		        <div class="container">
+		            <div class="row">
+		                <div class="col-lg-6 col-md-6">
+		                    <div class="newslatter__text">
+		                        <h3>댓글과 포토 후기를 남기시려면 로그인을 해주세요!</h3>
+		                    </div>
+		                </div>
+		            </div>
+		        </div>
+		    </section>
+		  </c:if>
+	</sec:authorize>
+	
 </body>
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </html>

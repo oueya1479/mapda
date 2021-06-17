@@ -1,9 +1,12 @@
 package kosta.mapda.domain.map;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
 import lombok.AllArgsConstructor;
@@ -22,5 +25,8 @@ public class MapCategory {
 	@SequenceGenerator(sequenceName = "mapcategory_ctgrno_seq", allocationSize = 1, name = "mapcategory_ctgrno_seq")
 	private Long categoryNo;
 	private String categoryName;
+	
+	@OneToMany(mappedBy="mapCategory")
+	private List<Theme> mapList;
 
 }

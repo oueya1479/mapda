@@ -13,10 +13,10 @@
    <div class="loader"></div>
 </div>
 <sec:authorize access="isAuthenticated()">
-<sec:authentication property="principal.memNo" var="mno" />
+<sec:authentication property="principal.memNo" var="memNo" />
 <sec:authentication property="principal.memId" var="userId" />
 </sec:authorize>
-<!-- Header Sectiouuuuuuuuuuuuuuuuuuuuun Begin -->
+<!-- Header Section Begin -->
 <header class="header header--normal">
    <div class="container-fluid">
       <div class="row">
@@ -40,8 +40,10 @@
                               href="${pageContext.request.contextPath}/map/insertForm">Make
                                  My Map</a></li>
                            <li><a
-                              href="${pageContext.request.contextPath}/map/manageMap">Manage
+                              href="${pageContext.request.contextPath}/map/manageMap/${memNo}">Manage
                                  My Maps</a></li>
+                           <li><a
+                              href="${pageContext.request.contextPath}/map/subMaps">Subscribed Maps</a></li>      
 
                         </ul></li>
 
@@ -63,9 +65,6 @@
                            <li><a
                               href="${pageContext.request.contextPath}/event/list">All
                                  Events</a></li>
-                           <li><a
-                              href="${pageContext.request.contextPath}/event/posting">Join
-                                 Event</a></li>
 
                         </ul></li>
                      <li><a href="#">Mapbership</a>
@@ -75,27 +74,27 @@
                                  payment</a></li>
                            <li><a href="#">My Membership</a></li>
 
-                        </ul></li>
-                     <li><a href="#">My Page</a>
-                        <ul class="dropdown">
-                           <li><a href="/about">My Info</a></li>
-                           <li><a href="/listing-details">My Post</a></li>
-                           <li><a href="/point/myPoint">My Point</a></li>
-                           <li><a href="/coupon/myCoupon">My Coupon</a></li>
-                        </ul></li>
-                  </ul>
-               </nav>
-               <div class="header__menu__right">
-                  <sec:authorize access="isAnonymous()">
-                     <a href="${pageContext.request.contextPath}/member/registerForm"
-                        class="primary-btn">Join Us</a>
-                  </sec:authorize>
-                  <sec:authorize access="isAuthenticated()">
-                  <a>${userId}&nbsp;&nbsp;&nbsp;</a>
-                  <!-- 로그아웃 버튼 만들 위치 -->
-                  
-                  <a href="${pageContext.request.contextPath}/member/logout">Logout</a>
-                  </sec:authorize>
+								</ul></li>
+							<li><a href="#">My Page</a>
+								<ul class="dropdown">
+									<li><a href="/about">My Info</a></li>
+									<li><a href="/listing-details">My Post</a></li>
+									<li><a href="/blog-details">My Point</a></li>
+									<li><a href="/myPage/myCoupon">My Coupon</a></li>
+								</ul></li>
+						</ul>
+					</nav>
+					<div class="header__menu__right">
+						<sec:authorize access="isAnonymous()">
+							<a href="${pageContext.request.contextPath}/member/registerForm"
+								class="primary-btn">Join Us</a>
+						</sec:authorize>
+						<sec:authorize access="isAuthenticated()">
+						<a>${userId}&nbsp;&nbsp;&nbsp;</a>
+						<!-- 로그아웃 버튼 만들 위치 -->
+						
+						<a href="${pageContext.request.contextPath}/member/logout">Logout</a>
+						</sec:authorize>
 
 
                   <a href="${pageContext.request.contextPath}/member/loginForm"

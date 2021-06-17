@@ -1,6 +1,5 @@
 package kosta.mapda.security;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,20 +9,21 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import kosta.mapda.domain.map.MapStorage;
+import kosta.mapda.domain.map.Theme;
 import kosta.mapda.domain.member.Member;
 //import kosta.mapda.domain.member.MemberRole;
 import kosta.mapda.repository.member.MemberRepository;
-import lombok.RequiredArgsConstructor;
+import kosta.mapda.repository.young.MapRepository;
+import kosta.mapda.repository.young.MapStorageRepository;
 
 
 @Service //id="memberAuthenticationProvider"
-@RequiredArgsConstructor
 public class MemberAuthenticationProvider implements AuthenticationProvider {
 
 	
@@ -33,6 +33,12 @@ public class MemberAuthenticationProvider implements AuthenticationProvider {
      
      @Autowired
      private MemberRepository memberRepository;
+     
+     @Autowired
+     private MapRepository mapRepository;
+     
+     @Autowired
+     private MapStorageRepository mapStorageRepository;
 	
 	/*public MemberAuthenticationProvider() {
 		System.out.println("MemberAuthenticationProvider 생성.....");
@@ -52,6 +58,7 @@ public class MemberAuthenticationProvider implements AuthenticationProvider {
 		
 		//아이디에 해당하는 회원의 정보 검색...
 		Member member = memberRepository.findMemberById(memId);
+	
 		if(member==null) throw new UsernameNotFoundException(memId+"는 존재하지 않아 인증에 실패했습니다wwww.");
 		
 		//DB에 있는 비번과 인수로 전달된 비번 비교...
@@ -61,7 +68,9 @@ public class MemberAuthenticationProvider implements AuthenticationProvider {
 			throw new UsernameNotFoundException("비밀번호 오류입니다.....");
 		}
 		
-		System.out.println(member.getAuthorities());
+		List<Theme>themeList = mapRepository.selectByMemId(member.getMemNo());
+		member.setMapList(themeList);
+		
 		//성공하면
 		//인증된 사용자의 권한을 검색해서  Authentication에 저장한다.
 		//List<MemberRole>  memRoleList = memberRole.selectAuthorityByUserName(memId);

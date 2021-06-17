@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
+import kosta.mapda.domain.map.MapCategory;
 import kosta.mapda.domain.map.Theme;
 
 public interface MapRepository extends JpaRepository<Theme, Long> {
@@ -20,4 +21,12 @@ public interface MapRepository extends JpaRepository<Theme, Long> {
 	 * 마이페이지 - 나의 게시 맵 조회 (마이포인트 메뉴에서 사용목적)
 	 * */
 	List<Theme> findBymember_memNo(Long memNo);
+
+	
+	@Query("select t from Theme t where t.member.memNo=?1")
+	List<Theme> selectByMemId(Long memNo);
+
+
+	@Query("select t from Theme t where t.mapCategory.categoryNo=?1")
+	List<Theme> selectByCategory(MapCategory category);
 }

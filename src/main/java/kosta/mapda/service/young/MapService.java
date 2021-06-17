@@ -1,13 +1,16 @@
 package kosta.mapda.service.young;
 
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import kosta.mapda.domain.map.MapCategory;
 import kosta.mapda.domain.map.MapStorage;
 import kosta.mapda.domain.map.Theme;
+import kosta.mapda.domain.member.Member;
 
 public interface MapService {
 
@@ -39,7 +42,7 @@ public interface MapService {
 	/**
 	 * 삭제
 	 */
-	void deleteMap(Long mapNo, String password);
+	void deleteMap(Long mapNo);
 
 	/**
 	 * 구독 상태 체크
@@ -56,6 +59,26 @@ public interface MapService {
 	 */
 	void deleteSubscribe(Long memNo, Long MapNo);
 
+	/**
+	 * 로그인한 회원이 등록한 지도 목록 보기
+	 */
+	List<Theme> myMaps(Long memNo);
+
+	/**
+	 * 로그인한 회원의 MapStorage가져오기
+	 */
+	List<MapStorage> selectByMapNo(Long memNo);
+
+	/**
+	 * 비밀번호 평문화 위한 메소드
+	 */
+	Member findInform(String memId);
+
+	/**
+	 * 카테고리 별 지도 검색
+	 */
+	List<Theme> selectByCategory(MapCategory category);
+	
 	
 
 }

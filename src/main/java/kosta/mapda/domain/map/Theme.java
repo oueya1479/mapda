@@ -74,4 +74,8 @@ public class Theme{
 	@OneToMany(mappedBy="theme")
 	private List<MapStorage> mapStorage;
 
+	public Theme(Long mapNo) {
+		this.mapNo = mapNo;
+	}
+
 }

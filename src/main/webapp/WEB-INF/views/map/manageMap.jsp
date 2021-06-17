@@ -21,19 +21,65 @@
 							var url = "${pageContext.request.contextPath}/map/modifyForm?mapNo="+ mapNo;
 							$(location).attr('href', url);
 						})
-		$("input[value=Delete]").click(function() {
+						
+		            $(document).on("click","input[value=Delete]", function() {
 							var mapNo = $(this).attr("id")
 							var pwd = prompt("비밀번호를 입력하세요.");
-							if (pwd==$("#memPw").val()) {
-								$("#requestForm")
+							
+							$.ajax({
+								url:"${pageContext.request.contextPath}/map/check",
+								type:"post",
+								dataType:"text",
+								data: {"pwd" : pwd},
+								success: function(data){
+									if(data=='ok'){
+										$("#requestForm")
 										.attr("action",
-												"${pageContext.request.contextPath}/map/deleteMap");
-								$("#requestForm").submit();
-							}else{
-								alert("비밀번호오류입니다")
-							}
+												"${pageContext.request.contextPath}/map/deleteMap?" + mapNo);
+										$("#requestForm").submit();
+									
+									}else{
+										alert("비밀번호가 일치하지 않습니다. 다시 확인해주세요")
+									}
+								},	
+								error : function(err) {
+									alert("지도 삭제 오류. 다시 시도해주세요")
+								}
+							});
+							
 						})
 	});
+</script>
+<script type="text/javascript">
+	$(function(){
+		$(document).on('click', '#subButton', function() {
+			let img = $(this)
+			let mapNo = $(this).attr('name');
+			let no = 0;
+			$.ajax({
+				url:"${pageContext.request.contextPath}/map/subscribe",
+				type:"get",
+				dataType:"json",
+				data: {"mapNoStr" : $(this).attr('name'), "memNoStr" : ${mno}},
+				success: function(data){
+					
+					if(data == -1){
+	                    alert("구독 오류","error","확인",function(){});
+	                } else if(data==1){
+	                	
+	                	img.attr("src","${pageContext.request.contextPath}/img/map/bookmark-tag.png")
+	                	alert("추가")
+					} else if(data==0){
+						img.attr("src","${pageContext.request.contextPath}/img/map/ribbon.png")
+						alert("제거")
+					}
+				},
+				error : function(err) {
+					console.log(err + "에러 발생");
+				}
+			});
+		});//클릭function 끝
+	});//script 끝
 </script>
 
 
@@ -63,8 +109,8 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="section-title">
-						<h2>All our Maps in here!</h2>
-						<p>You can find fanciest places with Mapda's various Maps~</p>
+						<h2>All your Maps in here!</h2>
+						
 					</div>
 				</div>
 			</div>
@@ -106,7 +152,7 @@
 					<div class="tab-content">
 						<div class="tab-pane active" id="tabs-1" role="tabpanel">
 							<div class="row">
-								<c:forEach items="${mapList.content}" var="map">
+								<c:forEach items="${themeList}" var="map">
 									<div class="col-lg-4 col-md-6">
 										<div class="listing__item">
 											<div class="listing__item__pic set-bg"
@@ -144,11 +190,11 @@
 													</c:otherwise>
 												</c:choose>  --%>
 												 
-												<img
+												<%-- <img
 													src="${pageContext.request.contextPath}/img/map/ribbon.png"
 													alt="" style="height: 20px; width: 20px; cursor: pointer;"
 													id="subButton"
-													onclick="javascript:location.href='${pageContext.request.contextPath}/map/mapRead/${map.mapNo}'"><br> 
+													onclick="javascript:location.href='${pageContext.request.contextPath}/map/mapRead/${map.mapNo}'"><br> --%> 
 												<div class="listing__item__text__inside">
 
 													<h5>

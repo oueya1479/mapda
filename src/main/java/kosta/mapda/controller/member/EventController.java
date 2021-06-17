@@ -2,6 +2,7 @@ package kosta.mapda.controller.member;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -17,7 +18,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import kosta.mapda.domain.Management;
+import kosta.mapda.domain.member.Member;
 import kosta.mapda.domain.service.Event;
+import kosta.mapda.domain.service.EventPost;
 import kosta.mapda.service.event.EventService;
 
 
@@ -28,32 +32,36 @@ public class EventController {
 	@Autowired
 	private EventService eventService;
 
-	private final String SAVE_PATH = "/User/baeeunjin/Desktop/fileSave";	
+	private final String SAVE_PATH = "/Users/baeeunjin/Desktop/fileSave";	
 	
 	
 	/**
 	 * 이벤트 글 등록폼 
 	 * */
-	@RequestMapping("/posting")
-	public void write() {	
-	
+	@RequestMapping("/posting/{evNo}")
+	public String write(Model model, @PathVariable Long evNo) {
+		model.addAttribute("evNo", evNo);
+		return "event/posting";
 	}
+	
 	
 	/**
 	 *  이벤트 글 등록하기 
 	 * */
-		@RequestMapping("/insertPosting")
-		public String insert(Event event)throws IOException {
-			MultipartFile file = event.getFile();
+		@RequestMapping("/insertPosting/{evNo}")
+		public String insert(EventPost eventPost, @PathVariable Long evNo)throws IOException {
+			Member member = new Member(); 
+			Event event = eventService.getEvent(evNo);
+			eventPost.setEvent(event);
+			MultipartFile file = eventPost.getFile();
 			if(file.getSize() > 0 ) {
 				String fileName = file.getOriginalFilename();
-			    event.setEvImg(fileName);
+				eventPost.setEvpImg(fileName);
 			    file.transferTo(new File(SAVE_PATH + "/" + fileName));
 			}
-		   eventService.insert(event);
-			
-			String content = event.getEvContent().replace("<","&lt;");
-			eventService.insert(event);
+			//Event dbEvent = new Event(file, null, event.getEvTitle(), event.getEvContent(), event.getEvStartDate(), event.getEvEndDate(), null, 0, null, null);
+			String content = eventPost.getEvpContent().replace("<","&lt;");
+			eventService.insert(eventPost);
 			return "redirect:/event/list";
 	}
 	
@@ -68,20 +76,26 @@ public class EventController {
 			Pageable pageable = PageRequest.of(nowPage, 10, Direction.DESC, "evNo");
 					//eventService.selectAll(null);
 					Page<Event> eventList = eventService.selectAll(pageable);
+					List<Event> list = eventList.getContent();
+					for(int i = 0; i < list.size(); i++) {
+						System.out.println(list);
+					}
 					model.addAttribute("eventList", eventList); // 뷰페이지에서 ${pageList.메소드이름}
+					
+				
 		}
 	
 		
 		/**
 		 * 이벤트 참여자 게시물 상세보기
 		 */
-		@RequestMapping("/read/{evNo}")  //뒤에 무슨 수가 들어오는 지 몰라? 변수를 써주는 거야 
-		public ModelAndView read(@PathVariable Long evNo, String flag) {
-			boolean state = flag==null? true : false; 
+		@RequestMapping("/singlePosting/{evNo}")  //뒤에 무슨 수가 들어오는 지 몰라? 변수를 써주는 거야 
+		public ModelAndView singlePosting(@PathVariable Long evNo, String flag) {
+			boolean state = flag==null? true : false; //조회수 기능 할 때 넣기
 			Event event = eventService.selectBy(evNo); // state가 true이면 조회수 증가, false이면 조회수 증가 X
 			
 			ModelAndView mv = new ModelAndView();
-			mv.setViewName("event/read");
+			mv.setViewName("event/singlePosting");
 			mv.addObject("event", event);
 			
 			return mv; 
@@ -111,6 +125,17 @@ public class EventController {
       eventService.delete();
 		return "redirect:/event/list";
 	
+	}
+	
+	/**
+	 * postListing 으로 이동
+	 */
+	@RequestMapping("/postingList/{evNo}")
+	public String postingList(Model model, @RequestParam(defaultValue="0") int nowPage, @PathVariable Long evNo) {
+		Pageable pageable = PageRequest.of(nowPage, 10, Direction.DESC, "evpNo");
+		Page<EventPost> eventPostList = eventService.selectAllPost(pageable, evNo);
+		model.addAttribute("eventPostList", eventPostList); // 뷰페이지에서 ${pageList.메소드이름}
+		return "event/postingList";
 	}
 	
 	

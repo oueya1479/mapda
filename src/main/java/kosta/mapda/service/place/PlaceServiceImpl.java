@@ -38,8 +38,7 @@ public class PlaceServiceImpl implements PlaceService {
 
 	@Override
 	public void insert(Place place) {
-		// TODO Auto-generated method stub
-
+		placeRepository.save(place);
 	}
 
 	@Override

@@ -10,6 +10,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import kosta.mapda.domain.service.Event;
+import kosta.mapda.domain.service.EventPost;
+import kosta.mapda.repository.member.EventPostRepository;
 import kosta.mapda.repository.member.EventRepository;
 
 @Service
@@ -19,6 +21,9 @@ public class EventServiceImpl implements EventService {
 
 	@Autowired
 	private EventRepository eventRepository;
+	
+	@Autowired
+	private EventPostRepository postRepository;
 
 	@Override
 
@@ -28,8 +33,8 @@ public class EventServiceImpl implements EventService {
 	}
 
 	@Override
-	public void insert(Event event) {
-		eventRepository.save(event);
+	public void insert(EventPost event) {
+		postRepository.save(event);
 		
 	}
 
@@ -41,7 +46,7 @@ public class EventServiceImpl implements EventService {
 
 	@Override
 	public Event selectBy(Long evNo) {
-		return eventRepository.findById(null).orElse(null);
+		return eventRepository.findById(evNo).orElse(null);
 	}
 
 	@Override
@@ -59,6 +64,16 @@ public class EventServiceImpl implements EventService {
 	public List<Event> list() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public Page<EventPost> selectAllPost(Pageable pageable, Long evNo) {
+		return postRepository.selectAllPost(pageable, evNo);
+	}
+
+	@Override
+	public Event getEvent(Long evNo) {
+		return eventRepository.findById(evNo).orElse(null);
 	}
 	
 	
