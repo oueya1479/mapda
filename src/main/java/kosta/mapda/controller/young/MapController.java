@@ -157,6 +157,7 @@ public class MapController {
 		mv.setViewName("map/manageMap");
 		mv.addObject("themeList", themeList);
 		return mv;
+		
 	}
 	
 	
@@ -186,10 +187,28 @@ public class MapController {
 	 * 지도 검색 - 카테고리별
 	 */
 	@RequestMapping("/selectedMaps")
-	public void selectByCategory(@PathVariable Long categoryNo, Model model) {
-		MapCategory category = new MapCategory();
-		List<Theme> mapList = mapService.selectByCategory(category);
-		model.addAttribute(mapList);
+	public void selectByCategory(Long categoryNo, Model model, String keyWord) {
+		System.out.println("categoryNo = "+categoryNo);
+		System.out.println("keyWord = "+keyWord);
+		
+		List<Theme> mapList=null;
+		if(categoryNo!=0 && keyWord.equals("")) {
+			System.out.println(1);
+			mapList = mapService.selectByCategory(categoryNo);
+			
+		}else if(categoryNo==0 && !keyWord.equals("")) {
+			System.out.println(2);
+			mapList = mapService.selectByKeyWord(keyWord);
+			
+			
+		}else {
+			System.out.println(3);
+			mapList = mapService.selectByKeyAndCategory(keyWord, categoryNo);
+			
+		}
+		System.out.println(mapList);
+		
+		model.addAttribute("mapList", mapList);
 	}
 
 	
