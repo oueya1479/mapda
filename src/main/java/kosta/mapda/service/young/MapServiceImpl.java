@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import kosta.mapda.domain.map.MapCategory;
 import kosta.mapda.domain.map.MapStorage;
 import kosta.mapda.domain.map.Theme;
 import kosta.mapda.domain.member.Member;
@@ -153,6 +154,15 @@ public class MapServiceImpl implements MapService {
 	@Override
 	public List<MapStorage> selectByMapNo(Long memNo) {
 		return mapStorageRepository.selectByMapNo(memNo);
+	}
+
+
+	/**
+	 * 카테고리 별 지도 검색
+	 */
+	@Override
+	public List<Theme> selectByCategory(MapCategory category) {
+		return maprepository.selectByCategory(category);
 	}
 
 	

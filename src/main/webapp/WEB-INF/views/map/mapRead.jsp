@@ -122,7 +122,7 @@
 									<img
 										src="${pageContext.request.contextPath}/img/listing/list_icon-2.png"
 										alt="">
-									<div class="listing__item__pic__tag top_rate">See Details</div>
+									<div class="listing__item__pic__tag top_rate"><a href="${pageContext.request.contextPath}/place/read/${place.placeNo}">See Details</a></div>
 									
 								</div>
 								<div class="listing__item__text">

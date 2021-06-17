@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import kosta.mapda.domain.map.MapCategory;
 import kosta.mapda.domain.map.MapStorage;
 import kosta.mapda.domain.map.Theme;
 import kosta.mapda.domain.member.Member;
@@ -73,6 +74,11 @@ public interface MapService {
 	 */
 	Member findInform(String memId);
 
+	/**
+	 * 카테고리 별 지도 검색
+	 */
+	List<Theme> selectByCategory(MapCategory category);
+	
 	
 
 }

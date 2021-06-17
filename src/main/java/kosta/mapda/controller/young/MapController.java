@@ -156,29 +156,33 @@ public class MapController {
 	 * 좋아요한 지도 목록 출력
 	 */
 	@RequestMapping("/likeMaps")
-	public void likeMaps(/*Long memId, HttpServletRequest request, Model model, @RequestParam(defaultValue = "0") int nowPage*/) {
+	public void likeMaps(Long memId, HttpServletRequest request, Model model, @RequestParam(defaultValue = "0") int nowPage) {
 		
-//		Pageable pageable = PageRequest.of(nowPage, 10, Direction.DESC, "memNo");
-//		Page<Theme> likeList = manageService.likeList(pageable);
-//		model.addAttribute("likeList", likeList);
-		
-				
 	}
 	
 	/**
 	 * 구독하는 지도 목록 출력
 	 */
 	@RequestMapping("/subMaps")
-	public void subMaps(/*Long memId, HttpServletRequest request, Model model, @RequestParam(defaultValue = "0") int nowPage*/) {
-		
-//		Pageable pageable = PageRequest.of(nowPage, 10, Direction.DESC, "memNo");
-//		Page<Theme> subList = manageService.subList(pageable);
-//		model.addAttribute("subList", subList);
-		
-				
+	public void subMaps(Model model) {
+		Member mem = (Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Long memNo = mem.getMemNo();
+		List<MapStorage> mapStorage = mapService.selectByMapNo(memNo);
+		String memId = mapStorage.get(0).getMember().getMemId();
+		model.addAttribute("mapStorage", mapStorage);
+		model.addAttribute("memId", memId);
+			
 	}
 	
-
+	/**
+	 * 지도 검색 - 카테고리별
+	 */
+	@RequestMapping("/selectedMaps")
+	public void selectByCategory(@PathVariable Long categoryNo, Model model) {
+		MapCategory category = new MapCategory();
+		List<Theme> mapList = mapService.selectByCategory(category);
+		model.addAttribute(mapList);
+	}
 
 	
 	
