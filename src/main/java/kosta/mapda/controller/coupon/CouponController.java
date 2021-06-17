@@ -41,7 +41,7 @@ public class CouponController {
 	@Autowired
 	private CouponService service;
 	
-	@Autowired(required=false)
+	@Autowired
 	private PointService pointService;
 	
 	/**
@@ -55,6 +55,8 @@ public class CouponController {
 	
 		Pageable pageable = PageRequest.of(nowPage, 10, Direction.ASC, "cpNo");
 		Page<Coupon> couponList; 
+		
+		
 		
 		/*if(keyword.isEmpty()==false || keyword!=null) {
 			couponList = service.selectByName(pageable, keyword);
@@ -75,21 +77,22 @@ public class CouponController {
 		List<CouponCategory> categoryList = service.couponCategory();
 		
 		//
-		HttpSession session = request.getSession();
+		/*HttpSession session = request.getSession();
 		Member member = new Member();
 		member.setMemNo(11L);
 		member.setMemId("seo");
 		member.setMemPw("1234");
-		session.setAttribute("member", member);
+		session.setAttribute("member", member);*/
 		
 		System.out.println("---------------");
-		System.out.println(member.getMemId());
+	
 		
-		//MyPoint myPoint = pointService.selectMyPoint(member.getMemNo());
+		
+		
 		
 		model.addAttribute("couponList", couponList);
 		model.addAttribute("categoryList", categoryList);
-		//model.addAttribute("myPoint", myPoint);
+	
 		
 		return "coupon/list";
 	}
@@ -147,19 +150,20 @@ public class CouponController {
 	 * 마이페이지- 마이 쿠폰 조회
 	 * */
 	@RequestMapping("/myCoupon")
-	public String myCoupon(Model model, @RequestParam(defaultValue = "0") int nowPage,
-			HttpSession session ) {
+	public String myCoupon(Model model, @RequestParam(defaultValue = "0") int nowPage
+			) {
 		
+		Member mem = (Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
 		Pageable pageable = PageRequest.of(nowPage, 10, Direction.ASC, "mycpNo");
 		
-		Member m = (Member) session.getAttribute("member");
+		
 		
 		System.out.println("*************");
 		
-		System.out.println(m.getMemNo());
 		
-		Page<MyCoupon> myCouponList = service.selectByMyCoupon(pageable, m.getMemNo());
+		
+		Page<MyCoupon> myCouponList = service.selectByMyCoupon(pageable, mem.getMemNo());
 		System.out.println(myCouponList.getContent());
 		
 		model.addAttribute("myCouponList", myCouponList);

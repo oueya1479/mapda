@@ -1,9 +1,36 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>
 <html lang="zxx">
 
 <head>
- 
+
+<sec:authentication property="principal.memNo" var="mno" />
+
+ <script type="text/javascript">
+	$(function(){
+		$(document).on('click', '.site-btn', function() {
+			let couponNo = $(this).attr('name');
+			$.ajax({
+				url:"${pageContext.request.contextPath}/coupon/subscribe",
+				type:"get",
+				dataType:"json",
+				data: {"couponNoStr" : $(this).attr('name'), "memNoStr" : ${mno}},
+				success: function(data){
+					if(data == -1){
+	                    alert("발급 오류","error","확인",function(){});
+	                } else if(data==1){
+						alert()
+					} 
+				},
+				error : function(err) {
+					console.log(err + "에러 발생");
+				}
+			});
+		});//클릭function 끝
+	});//script 끝
+</script>
 </head>
 
 <body>
@@ -49,7 +76,7 @@
                            
                            		<h5><i class="fa fa-user"></i>교환처 : ${coupon.member.entName}</h5>  
                             
-                                <hr><button type="submit" class="site-btn">발급</button>
+                                <hr><button class="site-btn" name="${coupon.cpNo}">발급</button>
                         </div>
                     </div>
                     <div class="blog__item__large">

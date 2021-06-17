@@ -117,7 +117,6 @@ public class CouponServiceImpl implements CouponService {
 		
 		//Member member = memberRepository.findById(memNo).orElse(null);
 
-		System.out.println("===========================");
 		
 		//myCouponRepository.test().forEach(a->System.out.println(a));
 		//List<MyCoupon> list = myCouponRepository.test();
@@ -136,6 +135,22 @@ public class CouponServiceImpl implements CouponService {
 		Coupon dbCoupon = new Coupon(); 	
 		
 		dbCoupon = couponRepository.save(coupon);
+		
+	}
+
+	@Override
+	public void insertMyCoupon(Coupon coupon, Long memNo) {
+		
+		MyCoupon mc = new MyCoupon();
+		//mc.setMycpNo(null);
+		mc.setBarcoNo(null);
+		mc.setMember(memberRepository.findById(memNo).orElse(null));
+		mc.setMycpState(1);
+		//mc.setMycpDate(null);
+		mc.setCoupon(coupon);
+		
+		myCouponRepository.save(mc);
+		
 		
 	}
 }

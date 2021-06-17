@@ -38,6 +38,10 @@
       <definition name="coupon/*" extends="layout-tiles">
     	 <put-attribute name="body" value="/WEB-INF/views/coupon/{1}.jsp" />     
     </definition>
+    
+    <definition name="point/*" extends="layout-tiles">
+    	 <put-attribute name="body" value="/WEB-INF/views/point/{1}.jsp" />     
+    </definition>
 
 
     <definition name="event/*" extends="layout-tiles">
