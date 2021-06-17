@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.web.multipart.MultipartFile;
 
+import kosta.mapda.domain.member.Member;
 import kosta.mapda.domain.service.Coupon;
 import kosta.mapda.domain.service.CouponCategory;
 import kosta.mapda.domain.service.MyCoupon;
@@ -56,5 +58,18 @@ public interface CouponService {
 //	 * 쿠폰 추가하기
 //	 */
 	void insertCoupon(Coupon coupon);
+	/**
+	 * 쿠폰 수정하기
+	 */
+	Coupon updateCoupon(Coupon coupon);
 	
+	/**
+	 * 쿠폰 발급하기
+	 * */
+	 void insertMyCoupon(Coupon coupon, Long memNo);
+	
+	/*
+	 * 쿠폰 카테고리 가져오기
+	 */
+	CouponCategory getCouponCategory(Long cpcaNo);
 }

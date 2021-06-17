@@ -65,7 +65,6 @@
                            <li><a
                               href="${pageContext.request.contextPath}/event/list">All
                                  Events</a></li>
-                       
 
                         </ul></li>
                      <li><a href="#">Mapbership</a>

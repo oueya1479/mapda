@@ -14,7 +14,6 @@ public interface MyCouponRepository extends JpaRepository<MyCoupon, Long> {
 
 	Page<MyCoupon> findBymember_memNo(Pageable pageable, Long memNo);
 	
-	//@Query("SELECT m FROM My_Coupon m WHERE m.member.memNo=11")
-	//public List<MyCoupon> test();
+	
 	
 }

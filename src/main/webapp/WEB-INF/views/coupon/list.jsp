@@ -1,10 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>
 <html lang="zxx">
 
 <head>
+
+
 <SCRIPT>
 
 
@@ -150,9 +154,14 @@
                         <div class="blog__sidebar__categories" style =" width : 250px; text-align: center;">
                             <h4>My Point</h4>&nbsp;
                             
-                            <h4><i class="fa fa-money"></i> ${myPoint.myptRem}</h4>
+                            <h4><i class="fa fa-money"></i> </h4>
                             <ul>
-                           
+                        		
+                                <c:forEach items="${requestScope.myPointList}" var="myPo">
+                                <li>${myPo.myptRem}<span></span></li>
+                                </c:forEach>
+
+
                                 
                                 
                             </ul>

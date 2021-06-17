@@ -4,6 +4,13 @@
 
 <head>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/fontawesome.min.css">
+	
+	<style>
+		span {
+			font-weight: bold;
+		}
+	
+	</style>
 </head>
  <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.3.1.min.js"></script>
  
@@ -13,7 +20,6 @@
  		$(document).on("click", "#deleteBtn", function() {
  			confirm("해당 쿠폰을 정말 삭제하시겠습니까?");
  		})
- 		
  	});
  	
  	function update(cpNo) {
@@ -22,7 +28,7 @@
  		answer = confirm("쿠폰 수정 페이지로 이동합니다.");
  		
  		if(answer==true) {
-			location.href = "${pageContext.request.contextPath}/coupon/couponUpdateForm?cpNo=" + cpNo; 		
+			location.href = "${pageContext.request.contextPath}/coupon/updateForm?cpNo=" + cpNo; 		
  		} else {
  			alert("다시 시도해 주세요.");
  		}
@@ -68,13 +74,13 @@
                             </ul>
                             <h3>${coupon.cpName}</h3>&nbsp;
                             
-                               <h5><i class="fa fa-hand-o-right" aria-hidden="true"></i>교환처 :  ${coupon.cpPrice}point</h5>
+                               <h5><i class="fa fa-hand-o-right" aria-hidden="true"></i>&nbsp;<span>교환처 : </span>  ${coupon.cpPlace}</h5>
                  
-                               <h5><i class="fa fa-money"></i>가격 :  ${coupon.cpPrice}point</h5>
+                               <h5><i class="fa fa-money"></i>&nbsp;<span>가격 : </span> ${coupon.cpPrice}point</h5>
                  
-	                           <h5><i class="fa fa-user"></i>이용매장 : ${coupon.cpPlace}</h5>  
+	                           <h5><i class="fa fa-cart-plus" aria-hidden="true"></i>&nbsp;<span>이용매장 : </span> ${coupon.cpPlace}</h5>  
                            
-                           		<h5><i class="fa fa-user"></i>카테고리 : ${coupon.couponCategory.cpcaName}</h5>  
+                           		<h5><i class="fa fa-sliders" aria-hidden="true"></i>&nbsp;<span>카테고리 : </span> ${coupon.couponCategory.cpcaName}</h5>  
                             
                                 <hr><button type="button" class="site-btn" style="background-color:#3498DB" id="updateBtn" onclick="update(${coupon.cpNo});">수정</button>
                                 	&nbsp;&nbsp;&nbsp;

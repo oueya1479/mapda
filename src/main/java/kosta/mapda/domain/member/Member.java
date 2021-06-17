@@ -20,6 +20,8 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import kosta.mapda.domain.map.MapStorage;
+import kosta.mapda.domain.map.Place;
+import kosta.mapda.domain.map.PlacePhotoReview;
 import kosta.mapda.domain.map.Theme;
 import kosta.mapda.domain.service.MyCoupon;
 import kosta.mapda.domain.service.MyPoint;
@@ -58,6 +60,12 @@ public class Member implements UserDetails{
 	
 	@OneToMany(mappedBy = "mapNo", fetch = FetchType.EAGER)
 	private List<Theme> mapList;
+	
+	@OneToMany(mappedBy = "member")
+	private List<Place> myPlaceList;
+	
+	@OneToMany(mappedBy = "member")
+	private List<PlacePhotoReview> myPhotoReviewList;
 
 	@OneToMany(mappedBy = "member")
 	private List<MyCoupon> myCouponList;
@@ -117,8 +125,8 @@ public class Member implements UserDetails{
 		// TODO Auto-generated method stub
 		return false;
 	}
-	@OneToOne(mappedBy = "member")
-	private MyPoint myPointList;
+	@OneToMany(mappedBy = "member")
+	private List<MyPoint> myPointList;
 	
 	public Member(Long memNo) {
 		this.memNo = memNo;

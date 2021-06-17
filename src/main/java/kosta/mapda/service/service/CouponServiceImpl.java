@@ -4,10 +4,12 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import org.hibernate.cache.spi.support.AbstractReadWriteAccess.Item;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import kosta.mapda.domain.member.Member;
 import kosta.mapda.domain.enterprise.Enterprise;
@@ -117,7 +119,6 @@ public class CouponServiceImpl implements CouponService {
 		
 		//Member member = memberRepository.findById(memNo).orElse(null);
 
-		System.out.println("===========================");
 		
 		//myCouponRepository.test().forEach(a->System.out.println(a));
 		//List<MyCoupon> list = myCouponRepository.test();
@@ -138,4 +139,32 @@ public class CouponServiceImpl implements CouponService {
 		dbCoupon = couponRepository.save(coupon);
 		
 	}
+
+	@Override
+	public void insertMyCoupon(Coupon coupon, Long memNo) {
+		
+		MyCoupon mc = new MyCoupon();
+		//mc.setMycpNo(null);
+		mc.setBarcoNo(null);
+		mc.setMember(memberRepository.findById(memNo).orElse(null));
+		mc.setMycpState(1);
+		//mc.setMycpDate(null);
+		mc.setCoupon(coupon);
+		
+		myCouponRepository.save(mc);
+		
+		
+	}
+	
+	public Coupon updateCoupon(Coupon coupon) {
+		
+		return couponRepository.save(coupon); 
+	}
+	
+	@Override
+	public CouponCategory getCouponCategory(Long cpcaNo) {
+		
+		return couponCategoryRepository.findById(cpcaNo).orElse(null);
+	}
+	
 }

@@ -2,11 +2,64 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt"%>
-
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>
 <html lang="zxx">
 
 <head>
+
+<!-- memNo 변수설정 -->
+<sec:authorize access="isAuthenticated()">
+<sec:authentication property="principal.memNo" var="mno" />
+</sec:authorize>
+
+<style type="text/css">
+
+ #pop{
+	 width:300px; height:300px;
+	 position:absolute; margin-bottom: auto; text-align:center;
+	 border: 2px solid #000;
+ }
+ 
+ #pop_bt{
+ 	
+ 	width: 100px; margin :auto;
+ 	cursor: pointer;
+ 	font-weight: bold;
+ 	text-align: center;
+ 	padding: 5px;
+ }
+ 
+
+
+</style>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+	$('#pop_bt').click(function(){
+		$('#pop').show();
+	});
+	
+ }); 
+
+$(document).mouseup(function (e){
+
+    var container = $('#pop');
+
+    if( container.has(e.target).length === 0){
+
+      container.css('display','none');
+
+    }
+
+  });
+ 
+ 
+</script>
 
 
 </head>
@@ -49,18 +102,25 @@
 							<c:otherwise>
                     	<c:forEach items="${requestScope.myCouponList.content}" var="myCoup">
 	                        <div class="col-lg-6 col-md-6">
-	                            <div class="blog__item" style="width: 300px; height: 400px; ">
-	                                <div class="blog__item__pic set-bg">
+	                            <div class="blog__item" style="width: 300px; height: 400px; text-align: center;">
+	                                <div class="blog__item__pic set-bg" id="pop_bt">
+	                              
 	                                	<img src="${myCoup.coupon.cpImgpath}" alt="" style="width: 200px; height: 200px;">
+	                                </div>
+	                                
+	                                <div id="pop" style="display:none;">
+	                                <div>
+	                                	<img src="${myCoup.barcoImgPath}" alt="" style="width: 200px; height: 200px;">
+	                                </div>
+	                                
 	                                </div>
 	                               
 	                                
-	                                <div class="blog__item__text">
-	                                    <ul class="blog__item__tags">
-	                                        <li><i class="fa fa-tags"></i> ${myCoup.coupon.couponCategory.cpcaName}</li>
-	                         
-	                                    </ul>
-	                                    <h3><a href="#">${myCoup.coupon.cpName}</a>&nbsp; </h3>
+	                                <div class="blog__item__text" >
+	                                    
+	                                       <i class="fa fa-tags"></i> ${myCoup.coupon.couponCategory.cpcaName}
+	                                    
+	                                    <h4>${myCoup.coupon.cpName}&nbsp; </h4>
 	                                    <fmt:parseDate value="${myCoup.mycpDate}" pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime" type="both"/>
 	                                    
 	                                    <h5>발급날짜 : <fmt:formatDate value="${parsedDateTime}" pattern="yyyy.MM.dd"/> </h5>
