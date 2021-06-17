@@ -40,6 +40,7 @@ public class PlaceController {
 	//private PlacePhoto placePhoto;
 	
 	private final String SAVE_PATH = "C:\\KostaEdu\\thirdProject\\fileSave";
+	//C:\KostaEdu\Spring\SpringWork\mapda\src\main\resources\static\img\placeimges
 	
 	/**
 	 * 		상세보기
@@ -148,7 +149,6 @@ public class PlaceController {
 		String[] tagArr = {t1, t2, t3, t4, t5, t6, t7, t8};
 		String totalTag="";
 		for(int i=0; i<8; i++) {
-			//System.out.println("tagArr["+i +"] = " + tagArr[i]);
 				if(tagArr[i]=="") {
 					tagArr[i]="";
 				}else{
@@ -177,23 +177,10 @@ public class PlaceController {
 			case 14: place.setPlaceIconName("드라이브"); place.setPlaceIconPath("img/placeicon/drive1.png"); break;
 			default: System.out.println("오류"); break;
 		}
-		//System.out.println(place.getPlaceIconName());
-		//System.out.println(place.getPlaceIconPath());
-		//mapNo
-		//mngNo
-		//memNo
+
 		place.setManagement(new Management(3L));
 		place.setTheme(new Theme(mapNo));
 		place.setMember(new Member(member.getMemNo()));
-		
-		System.out.println("mapNo = " + mapNo);
-		System.out.println("member.getMemNo() = " +member.getMemNo());
-		//System.out.println("place.getMember().getMemNo() = " +place.getMember().getMemNo());
-		
-		/*임시용 mapNo => 앞에서 받아오기*/
-		//place.setTheme(new Theme(183L));
-		//place.setMember(new Member(81L));
-		///////////////////////////////////////////////
 		
 		// 플레이스 사진 등록
 //		List<MultipartFile> fileList = place.getFile();
