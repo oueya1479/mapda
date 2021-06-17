@@ -1,5 +1,7 @@
 package kosta.mapda.controller.member;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -83,7 +85,8 @@ public class MemberController {
 	@RequestMapping("/profile/{memNo}")
 	public ModelAndView memInfo(HttpServletRequest request, @PathVariable Long memNo) {
 		Member member = memService.getMember(memNo);
-		return new ModelAndView ("member/profile", "member", member);
+		ModelAndView mv = new ModelAndView("member/profile", "member", member);
+		return mv;
 	}
 	
 	// 회원정보 수정하기
@@ -111,6 +114,14 @@ public class MemberController {
 		return new ModelAndView("member/update_result");
 	}
 	
+	//회원탈퇴
+	
+	
+	//마이페이지 최근 플레이스 가져오기
+//	@RequestMapping("/??")
+//	public String recentlyList() {
+//		return "??";
+//	}
 
 	@RequestMapping("/pay")
 	public void pay() {

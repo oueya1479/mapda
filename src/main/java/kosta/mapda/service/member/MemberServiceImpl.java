@@ -92,4 +92,6 @@ public class MemberServiceImpl implements MemberService {
 		return memRepository.findById(memNo).orElse(null);
 	}
 
+
+
 }

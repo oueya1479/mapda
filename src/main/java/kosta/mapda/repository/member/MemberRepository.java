@@ -18,13 +18,6 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
 	//다시체크해보기T^T
 	@Query("select m from Member m where m.memId=?1")
 	int idcheck(String memId);
-
-	
-	/*
-	@Query("update Member m set m.memPaystatus = 1 where m.memNo = ?1")
-	@Modifying
-	void start(Long memNo);
-	*/
 	
 	Member findByMemId(String memId);
 
@@ -32,13 +25,11 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
 	@Modifying
 	void updateMember(@Param("mem")Member member);
 	
-//	//jpqlT^T...
-//	@Query("select count from Member m where m.memId=?1")
-//	int getMemberCount();
-	
 	@Query("update Member m set m.memPaystatus = 1 where m.memNo = ?1")
 	@Modifying
 	void updatePayStatus(Long memNo);
+	
+//	String recentlyList();
 	
 }
 

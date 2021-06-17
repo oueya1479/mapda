@@ -28,6 +28,8 @@ public interface MemberService {
 
 	String idcheck(String memId);
 	
+//	String recentlyList ();
+	
 //	List<AuthorityVO> selectAuthorityByUsername(String username);
 
 	
@@ -37,6 +39,6 @@ public interface MemberService {
  */
 	void updatePayStatus(Long memNo);
 
-Member getMember(Long memNo); 
+	Member getMember(Long memNo); 
 
 }
