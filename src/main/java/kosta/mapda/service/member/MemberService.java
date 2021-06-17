@@ -35,6 +35,8 @@ public interface MemberService {
 /**
  *  정기결제 - memPayStatus
  */
-	void updatePayStatus(Long memNo); 
+	void updatePayStatus(Long memNo);
+
+Member getMember(Long memNo); 
 
 }

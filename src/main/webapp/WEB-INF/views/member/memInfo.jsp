@@ -180,7 +180,7 @@ input.underline {
 <body>
 	<br><br><br><br><br><br>
 	<div style="margin: auto; text-align: center;">
-		<h2>Member Information</h2>
+	
 		<sec:authorize access="isAuthenticated()">
 			<body>
 				<div class="wrap"
@@ -189,13 +189,14 @@ input.underline {
 						<input type="hidden" name="command" value="meminfo"> 
 						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 						<br><br>
-						<h3> <sec:authentication property="principal.memId"/>님의 회원정보<br><br> </h3>
+						<h2> <sec:authentication property="principal.memId"/>님의 회원정보<br><br> </h2>
 				  		<br><br>
 						ID : <input type="text"class="underline" name="memId" value="${member.memId}" readonly>
 						<br>Name : <input type="text" class="underline"name="memName" value="${member.memName}" readonly> 
 						<br>Address : <input type="text" class="underline" name="memAddr"value="${member.memAddr}" readonly>
 						<br>Account : <input type="text" class="underline" name="memAcount"value="${member.memAccount}" readonly> 
 						<br>Grade : <input type="text" class="underline" name="memGrade"value="${member.memGrade}" readonly>
+					  	<br><br><a href="${pageContext.request.contextPath}/member/updateForm">Update Infomation</a>
 					</form>
 				</div>
 				<br><br><br><br><br><br>

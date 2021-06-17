@@ -42,7 +42,8 @@ public class MemberController {
 	public String insertMaember(Member member) {
 		System.out.println("member:" + member);
 		memService.registerMember(member);
-		return "main/index";
+		return "member/register_success";
+		//return "main/index";
 
 	}
 	
@@ -79,12 +80,10 @@ public class MemberController {
 	}
 
 	//회원정보 확인
-	@RequestMapping("/memInfo")
-	public ModelAndView memInfo(HttpServletRequest request) {
-		Member pmember = (Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		Member member = memService.findMemberById(pmember.getMemId());
-		
-		return new ModelAndView ("member/memInfo", "member", member);
+	@RequestMapping("/profile/{memNo}")
+	public ModelAndView memInfo(HttpServletRequest request, @PathVariable Long memNo) {
+		Member member = memService.getMember(memNo);
+		return new ModelAndView ("member/profile", "member", member);
 	}
 	
 	// 회원정보 수정하기

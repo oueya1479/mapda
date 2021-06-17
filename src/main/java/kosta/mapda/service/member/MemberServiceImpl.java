@@ -87,4 +87,9 @@ public class MemberServiceImpl implements MemberService {
 		
 	}
 
+	@Override
+	public Member getMember(Long memNo) {
+		return memRepository.findById(memNo).orElse(null);
+	}
+
 }
