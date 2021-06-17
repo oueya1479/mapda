@@ -2,10 +2,11 @@ package kosta.mapda.controller.coupon;
 
 import java.io.File;
 import java.io.IOException;
+import java.security.Principal;
 import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.swing.filechooser.FileSystemView;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -16,9 +17,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,7 +30,7 @@ import kosta.mapda.domain.member.Member;
 import kosta.mapda.domain.service.Coupon;
 import kosta.mapda.domain.service.CouponCategory;
 import kosta.mapda.domain.service.MyCoupon;
-import kosta.mapda.domain.service.MyPoint;
+import kosta.mapda.repository.CouponRepository;
 import kosta.mapda.service.service.CouponService;
 import kosta.mapda.service.service.PointService;
 
@@ -122,10 +122,16 @@ public class CouponController {
 		return "coupon/couponManage";
 	}
 	
+	
+	@RequestMapping("/insert")
+	public String insert() {
+		return "coupon/couponAdd";
+	}
+	
 	/**
 	 * 관리자 쿠폰 등록
 	 */
-	@PostMapping("/insert")
+	@PostMapping("/insert/form")
 	public String insertCoupon(@RequestParam("file") MultipartFile file, Coupon coupon, HttpServletRequest request) {
 		
 		try {
@@ -143,7 +149,7 @@ public class CouponController {
 			e.printStackTrace();
 		}
 		
-		return "/coupon/couponAdd";
+		return "/coupon/admin";
 	}
 	
 	/**
@@ -170,7 +176,9 @@ public class CouponController {
 		
 		return "coupon/myCoupon";
 	}
-	
+	/**
+	 *  관리자 쿠폰 상세보기
+	 */
 	@GetMapping("/couponAdminDetail")
 	public String couponAdminDetail(@RequestParam("cpNo") Long cpNo, Model model) {
 		
@@ -179,6 +187,61 @@ public class CouponController {
 		model.addAttribute("coupon", coupon);
 		
 		return "coupon/couponAdminDetail";
+	}
+	
+	/**
+	 * 수정버튼 눌렀을 시 수정 form으로 가는 메소드
+	 */
+	@GetMapping("/updateForm")
+	public String couponAdminUpdateForm(@RequestParam("cpNo") Long cpNo, Model model) {
+		Coupon coupon = service.selectCoupon(cpNo);
+		
+		model.addAttribute("coupon", coupon);
+		
+		return "coupon/couponUpdateForm";
+		
+	}
+	
+	/**
+	 * 수정 form insert 후 다시 목록으로 가는 메소드
+	 */
+	@RequestMapping("/updateCoupon")
+	public String couponAdminUpdate(@RequestParam("file") MultipartFile file,
+									@ModelAttribute("coupon") Coupon coupon,
+									Model model,
+									HttpServletRequest request) {
+//		CouponCategory newCouponCategory = coupon.getCouponCategory();
+//		Long newCpca = newCouponCategory.getCpcaNo();
+//		
+//		CouponCategory dbCouponCategory = service.getCouponCategory(newCpca);
+//		
+//		coupon.setCouponCategory(dbCouponCategory);
+//		
+//		coupon.getCouponCategory();
+		Coupon dbCoupon = new Coupon();
+		
+//		try {
+//			
+//			if(file !=null) {
+//				String baseDir = request.getSession().getServletContext().getRealPath("/WEB-INF/static");
+//				String filePath = baseDir + "/" + file.getOriginalFilename();
+//				file.transferTo(new File(filePath));
+//				coupon.setCpImgpath(filePath);
+//				dbCoupon = service.updateCoupon(coupon);
+//				
+//			} else {
+//				coupon.setCpImgpath("www.naver.com");
+				dbCoupon = service.updateCoupon(coupon);
+//			}
+			
+//		} catch(IOException e) {
+//			e.printStackTrace();
+//		}
+		
+		
+		model.addAttribute("coupon", dbCoupon);
+		
+		return "main/index";
 	}
 	
 }
