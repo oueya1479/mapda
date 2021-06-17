@@ -1,31 +1,33 @@
 package kosta.mapda.controller.young;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import kosta.mapda.domain.map.MapStorage;
 import kosta.mapda.domain.member.Member;
-import kosta.mapda.repository.member.MemberRepository;
 import kosta.mapda.service.young.MapService;
-import lombok.RequiredArgsConstructor;
 
 
-@RequiredArgsConstructor
+
 @RestController
 public class AjaxController {
 	
 	@Autowired
 	private MapService mapService;
 	
+	@Autowired
+	private  PasswordEncoder passwordEncoder;
+	
 	/**
 	 * 테마지도 구독
 	 */
 	@RequestMapping("/map/subscribe")
 	public int subscribe(String mapNoStr, String memNoStr) {
+		
 		Long mapNo = Long.parseLong(mapNoStr);
 		Long memNo = Long.parseLong(memNoStr);
 		
@@ -55,4 +57,22 @@ public class AjaxController {
 	public String like(Long mapNo) {
 		return null;
 	}
+	
+	/**
+	 * 테마지도 삭제시 입력한 비밀번호와 실제 비밀번호 비교
+	 */
+	@RequestMapping("/map/check")
+	public String check(@RequestParam("pwd") String pwd) {
+		System.out.println(pwd);
+		Member mem = (Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String memId = mem.getMemId();
+		Member member = mapService.findInform(memId);
+		
+		if(!passwordEncoder.matches(pwd, member.getMemPw())) {
+			return "fail";
+		}else {
+			return "ok";
+		}
+	}
+	
 }

@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 
 import kosta.mapda.domain.map.MapStorage;
 import kosta.mapda.domain.map.Theme;
+import kosta.mapda.domain.member.Member;
 
 public interface MapService {
 
@@ -40,7 +41,7 @@ public interface MapService {
 	/**
 	 * 삭제
 	 */
-	void deleteMap(Long mapNo, String password);
+	void deleteMap(Long mapNo);
 
 	/**
 	 * 구독 상태 체크
@@ -61,6 +62,16 @@ public interface MapService {
 	 * 로그인한 회원이 등록한 지도 목록 보기
 	 */
 	List<Theme> myMaps(Long memNo);
+
+	/**
+	 * 로그인한 회원의 MapStorage가져오기
+	 */
+	List<MapStorage> selectByMapNo(Long memNo);
+
+	/**
+	 * 비밀번호 평문화 위한 메소드
+	 */
+	Member findInform(String memId);
 
 	
 

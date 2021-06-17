@@ -17,6 +17,6 @@ public interface MapRepository extends JpaRepository<Theme, Long> {
 	void readnumUpdate(Long mapNo);
 
 	
-	@Query("select t from Theme t where memNo=?1")
+	@Query("select t from Theme t where t.member.memNo=?1")
 	List<Theme> selectByMemId(Long memNo);
 }

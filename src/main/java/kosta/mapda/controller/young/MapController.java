@@ -2,10 +2,8 @@ package kosta.mapda.controller.young;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
-import javax.security.sasl.AuthenticationException;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,11 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Direction;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,25 +22,23 @@ import org.springframework.web.servlet.ModelAndView;
 
 import kosta.mapda.domain.Management;
 import kosta.mapda.domain.map.MapCategory;
+import kosta.mapda.domain.map.MapStorage;
 import kosta.mapda.domain.map.Place;
 import kosta.mapda.domain.map.Theme;
 import kosta.mapda.domain.member.Member;
 import kosta.mapda.service.young.MapService;
-import lombok.RequiredArgsConstructor;
 
 @Controller
-@RequiredArgsConstructor
+
 @RequestMapping("/map")
 public class MapController {
 
 	@Autowired
-	private final MapService mapService;
+	private  MapService mapService;
+	
 	
 	private final String SAVE_PATH="/Users/soyoung/Desktop/fileSave";
 
-	private final PasswordEncoder passwordEncoder;
-	
-	
 	/**
 	 * 테마지도 등록 폼
 	 */
@@ -94,9 +86,15 @@ public class MapController {
 		
 		Pageable pageable = PageRequest.of(nowPage, 10, Direction.DESC, "mapNo");
 		Page<Theme> mapList = mapService.selectAll(pageable);
-		model.addAttribute("mapList", mapList);
 		
-				
+		Member mem = (Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Long memNo = mem.getMemNo();
+		
+		List<MapStorage> mapStorage = mapService.selectByMapNo(memNo);
+		
+		model.addAttribute("mapList", mapList);
+		model.addAttribute("mapStorage", mapStorage);	
+		
 	}
 	/**
 	 * 상세보기
@@ -128,16 +126,15 @@ public class MapController {
 	@RequestMapping("/modifyMap")
 	public ModelAndView modifyMap(Theme theme) {
 		Theme mapInfo = mapService.modifyMap(theme);
-		
 		return new ModelAndView("redirect:/map/mapList", "theme", mapInfo);
 	}
 	
 	/**
-	 * 삭제
+	 * 삭제 
 	 */
 	@RequestMapping("/deleteMap")
-	public String delete(Long mapNo, String password) {
-		mapService.deleteMap(mapNo, password);
+	public String delete(Long mapNo,  String pwd ) throws Exception {
+		mapService.deleteMap(mapNo);
 		return "redirect:/map/mapList";
 	}
 	
@@ -145,8 +142,8 @@ public class MapController {
 	/**
 	 * 지도 관리 페이지 - 로그인한 회원이 등록한 전체 테마지도 출력
 	 */
-	@RequestMapping("/manageMap/{memId}")
-	public ModelAndView myMaps(Long memNo) {
+	@RequestMapping("/manageMap/{memNo}")
+	public ModelAndView myMaps(@PathVariable Long memNo) {
 		List<Theme> themeList = mapService.myMaps(memNo);
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("map/manageMap");
@@ -155,7 +152,33 @@ public class MapController {
 	}
 	
 	
+	/**
+	 * 좋아요한 지도 목록 출력
+	 */
+	@RequestMapping("/likeMaps")
+	public void likeMaps(/*Long memId, HttpServletRequest request, Model model, @RequestParam(defaultValue = "0") int nowPage*/) {
+		
+//		Pageable pageable = PageRequest.of(nowPage, 10, Direction.DESC, "memNo");
+//		Page<Theme> likeList = manageService.likeList(pageable);
+//		model.addAttribute("likeList", likeList);
+		
+				
+	}
 	
+	/**
+	 * 구독하는 지도 목록 출력
+	 */
+	@RequestMapping("/subMaps")
+	public void subMaps(/*Long memId, HttpServletRequest request, Model model, @RequestParam(defaultValue = "0") int nowPage*/) {
+		
+//		Pageable pageable = PageRequest.of(nowPage, 10, Direction.DESC, "memNo");
+//		Page<Theme> subList = manageService.subList(pageable);
+//		model.addAttribute("subList", subList);
+		
+				
+	}
+	
+
 
 	
 	

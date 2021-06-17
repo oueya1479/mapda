@@ -40,8 +40,10 @@
                               href="${pageContext.request.contextPath}/map/insertForm">Make
                                  My Map</a></li>
                            <li><a
-                              href="${pageContext.request.contextPath}/map/manageMap">Manage
+                              href="${pageContext.request.contextPath}/map/manageMap/${memNo}">Manage
                                  My Maps</a></li>
+                           <li><a
+                              href="${pageContext.request.contextPath}/map/subMaps">Subscribed Maps</a></li>      
 
                         </ul></li>
 
@@ -63,9 +65,7 @@
                            <li><a
                               href="${pageContext.request.contextPath}/event/list">All
                                  Events</a></li>
-                           <li><a
-                              href="${pageContext.request.contextPath}/event/posting">Join
-                                 Event</a></li>
+                       
 
                         </ul></li>
                      <li><a href="#">Mapbership</a>
