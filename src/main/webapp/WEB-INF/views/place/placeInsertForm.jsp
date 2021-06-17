@@ -165,6 +165,7 @@
 	<form name="f" action="${pageContext.request.contextPath}/place/placeInsert" method="post" enctype="multipart/form-data">
 			 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">						
 			 <input type="hidden" name=memNo value="${memNo}">
+			 <input type="hidden" name=mapNo value="${mapNo}">
 																																					<!--  onsubmit="return checkValid()" -->
 			
     <!-- Listing Section Begin -->

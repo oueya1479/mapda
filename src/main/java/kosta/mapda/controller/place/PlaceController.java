@@ -10,10 +10,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import kosta.mapda.domain.Management;
@@ -126,15 +126,16 @@ public class PlaceController {
 	 * 		플레이스 등록하기 폼
 	 * */
 	@RequestMapping("/placeInsertForm")
-	public String placeInsertForm() {
-		return "place/placeInsertForm";
+	public void placeInsertForm(Model model, Long mapNo, Long memNo) {
+		model.addAttribute("memNo", memNo);
+		model.addAttribute("mapNo", mapNo);
 	}
 	
 	/**
 	 * 		플레이스 등록하기
 	 * */
 	@RequestMapping("/placeInsert")
-	public String placeInsert(Place place, Long mapNo, HttpServletRequest request) {
+	public String placeInsert(Place place, Long mapNo, HttpServletRequest request, Member member) {
 		String t1 = request.getParameter("hashTag1");
 		String t2 = request.getParameter("hashTag2");
 		String t3 = request.getParameter("hashTag3");
@@ -147,7 +148,7 @@ public class PlaceController {
 		String[] tagArr = {t1, t2, t3, t4, t5, t6, t7, t8};
 		String totalTag="";
 		for(int i=0; i<8; i++) {
-			System.out.println("tagArr["+i +"] = " + tagArr[i]);
+			//System.out.println("tagArr["+i +"] = " + tagArr[i]);
 				if(tagArr[i]=="") {
 					tagArr[i]="";
 				}else{
@@ -182,19 +183,25 @@ public class PlaceController {
 		//mngNo
 		//memNo
 		place.setManagement(new Management(3L));
+		place.setTheme(new Theme(mapNo));
+		place.setMember(new Member(member.getMemNo()));
+		
+		System.out.println("mapNo = " + mapNo);
+		System.out.println("member.getMemNo() = " +member.getMemNo());
+		//System.out.println("place.getMember().getMemNo() = " +place.getMember().getMemNo());
 		
 		/*임시용 mapNo => 앞에서 받아오기*/
-		place.setTheme(new Theme(183L));
-		place.setMember(new Member(81L));
+		//place.setTheme(new Theme(183L));
+		//place.setMember(new Member(81L));
 		///////////////////////////////////////////////
 		
 		// 플레이스 사진 등록
-		List<MultipartFile> fileList = place.getFile();
-		
-		for(MultipartFile file : fileList) {
-			String fileName = file.getOriginalFilename();
-			long fileSize =  file.getSize();
-		}
+//		List<MultipartFile> fileList = place.getFile();
+//		
+//		for(MultipartFile file : fileList) {
+//			String fileName = file.getOriginalFilename();
+//			long fileSize =  file.getSize();
+//		}
 		
 		//placePhoto.setPpPath(totalTag);
 		
@@ -203,10 +210,7 @@ public class PlaceController {
 		
 		/////////////////////////////////////////////////
 		placeService.insert(place);
-		
-		//return "redirect:/map/mapList"+mapNo;	//나중에 테마지도 페이지
-		//return "redirect:/place/placeInsertForm";	//임시용
-		return "redirect:/map/mapRead/183";	//임시용
+		return "redirect:/map/mapRead/"+mapNo;
 	}
 	
 	
