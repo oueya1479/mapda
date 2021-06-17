@@ -36,8 +36,8 @@ public class PlaceController {
 	@Autowired
 	private PlaceReviewService prService;
 	
-	@Autowired
-	private PlacePhoto placePhoto;
+	//@Autowired
+	//private PlacePhoto placePhoto;
 	
 	private final String SAVE_PATH = "C:\\KostaEdu\\thirdProject\\fileSave";
 	
