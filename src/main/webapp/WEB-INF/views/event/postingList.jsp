@@ -148,11 +148,13 @@
 									<a href="${pageContext.request.contextPath}/event/singlePosting/${post.evpNo}"> <img
 										src="${post.evpImg}"
 										alt="" class="nk-img-stretch">
-										
 									</a>
+									
+									<!-- 
 									<div class="nk-post-category">
 										<a href="#">후기 이벤트 참여</a>
 									</div>
+									-->
 								</div>
 								<h2 class="nk-post-title h4">
 									<a href="blog-single.html">${post.evpTitle}</a>
@@ -163,19 +165,20 @@
 								<div class="nk-post-text">
 									${post.evpContent}
 								</div>
-								<form action="${pageContext.request.contextPath}/event/posting/${post.event.evNo}" method="post">
+								<div class="row">
+								<form action="${pageContext.request.contextPath}/event/posting/${post.event.evNo}" method="post" style="margin-left: 10px">
 									<input type="hidden" name="title" value="${post.evpTitle}">
 									<input type="hidden" name="content" value="${post.evpContent}">
 									<input type="hidden" name="evpNo" value="${post.evpNo}">
-									<input type="submit" value="수정" style="background-color: #bbbbff ">
+									<input class="btn btn-default" type="submit" value="수정" style="background-color: #bbbbff ">
 								</form>
 								
-								<form action="${pageContext.request.contextPath}/event/posting/${post.event.evNo}" method="post">
-									<input type="hidden" name="title" value="${post.evpTitle}">
-									<input type="hidden" name="content" value="${post.evpContent}">
+								<form action="${pageContext.request.contextPath}/event/deletePost" method="post" style="margin-left: 10px">
+									<input type="hidden" name="evNo" value="${post.event.evNo}">
 									<input type="hidden" name="evpNo" value="${post.evpNo}">
-									<input type="submit" value="삭제 " style = "background-cololr: #bbbbff">
+									<input class="btn btn-default" type="submit" value="삭제 " style = "background-color: rgba(255, 0, 0, 0.1);">
 								</form>
+								</div>
 							</div>
 							
 						</div>
@@ -227,7 +230,7 @@
 				</div>
 			</div>
 		</footer>
-		<!-- END: Footer -->
+		<!-- END: Footer --> 
 
 
 	</div>

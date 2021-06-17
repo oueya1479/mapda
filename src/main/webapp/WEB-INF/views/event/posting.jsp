@@ -94,7 +94,8 @@
         <div class="row mb-5">
           <div class="col-lg-12">
  
-              <h3 class="text-black mb-5 border-bottom pb-2">여러분의 방문후기를 공유해주세요^^!</h3>
+              <h3 class="text-black mb-5 border-bottom pb-2">
+              ${event.evTitle}</h3>
               
               
                <form action= "/event/insertPosting/${evNo}"  method = "post" enctype="multipart/form-data">

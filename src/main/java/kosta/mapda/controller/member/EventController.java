@@ -33,7 +33,7 @@ public class EventController {
 	private EventService eventService;
 
 	private final String SAVE_PATH = "/Users/baeeunjin/Desktop/fileSave";	
-	
+
 	
 	/**
 	 * 이벤트 글 등록폼 
@@ -58,9 +58,11 @@ public class EventController {
 	 *  이벤트 글 등록하기 
 	 * */
 		@RequestMapping("/insertPosting/{evNo}")
-		public String insert(EventPost eventPost, @PathVariable Long evNo, Long evpNo)throws IOException {
+		public String insert(EventPost eventPost, @PathVariable Long evNo, Long evpNo, Model model)throws IOException {
+			
 			Member member = new Member(); 
 			Event event = eventService.getEvent(evNo);
+			
 			eventPost.setEvent(event);
 			MultipartFile file = eventPost.getFile();
 			if(file.getSize() > 0 ) {
@@ -75,8 +77,11 @@ public class EventController {
 				eventPost.setEvpNo(evpNo);
 			}
 			
+			model.addAttribute("event", event);
 			eventService.insert(eventPost);
+			
 			return "redirect:/event/list";
+			
 	}
 	
 	
@@ -139,6 +144,16 @@ public class EventController {
       eventService.delete();
 		return "redirect:/event/list";
 	
+	}
+	
+	/**
+	 *게시물 삭제하기 
+	 **/
+	@RequestMapping("/deletePost")
+	public String deletePost(Long evNo, Long evpNo) {
+		eventService.deletePost(evpNo);
+		return "redirect:/event/postingList/" + evNo;
+		
 	}
 	
 	/**
