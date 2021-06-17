@@ -4,7 +4,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -36,8 +38,6 @@ public class MapController {
 	@Autowired
 	private  MapService mapService;
 	
-	
-	private final String SAVE_PATH="/Users/soyoung/Desktop/fileSave";
 
 	/**
 	 * 테마지도 등록 폼
@@ -50,7 +50,7 @@ public class MapController {
 	 * 테마지도 등록하기
 	 */
 	@RequestMapping("/insertMap")
-	public String insertMap(Theme theme, Long mno, Long categoryNo) throws IOException{
+	public String insertMap(Theme theme, Long mno, Long categoryNo, HttpSession session) throws IOException{
 		Member member = new Member();
 		member.setMemNo(mno);
 		theme.setMember(member);
@@ -63,12 +63,20 @@ public class MapController {
 		category.setCategoryNo(categoryNo);
 		theme.setMapCategory(category);
 		
+		
+		
+		
+		
 		MultipartFile file=theme.getFile();
 		if(file.getSize()>0) {
 			String fileName = file.getOriginalFilename();
 			theme.setMapImg(fileName);
 			
-			file.transferTo(new File(SAVE_PATH+"/"+fileName));
+			ServletContext application = session.getServletContext();
+			String path = application.getRealPath("/WEB-INF/save");
+			
+			
+			file.transferTo(new File(path+"/"+fileName));
 		}
 		
 //		String content = theme.getMapContent().replace("<", "&lt;");
