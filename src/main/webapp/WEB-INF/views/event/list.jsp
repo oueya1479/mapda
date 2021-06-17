@@ -71,7 +71,7 @@
 				<div class="col-lg-4">
 					<h1 class="mb-3 display-3">Participate In Our Event!</h1>
 					<p>
-						좋아요 수가 많은 1,2,3위에게는 포인트를 드립니다! <br>많은 참여 부탁드립니다 ^^
+						좋아요 수가 많은 1,2,3위에게는 포인트를 드립니다! <br> 
 					</p>
 				</div>
 				<div class="col-lg-8">
@@ -88,6 +88,7 @@
 
 				<div class="row">
 					<div class="col-lg-3">
+						<!-- 
 						<div class="featured-user  mb-5 mb-lg-0">
 							<h3 class="mb-4">이전 당첨자</h3>
 							<ul class="list-unstyled">
@@ -141,6 +142,7 @@
 								</a></li>
 							</ul>
 						</div>
+						-->
 					</div>
 
 					<div class="col-lg-9">
@@ -153,7 +155,7 @@
 								<div class="text">
 
 									<h3 class="font-weight-light">
-										<a href="single-post.html">${event.evTitle}
+										<a href="${pageContext.request.contextPath}/event/postingList/${event.evNo}">${event.evTitle}
 										</a>
 									</h3>
 									<div class="mb-3">
@@ -162,7 +164,7 @@
 												class="sep">/</span><br>등록일 : ${event.evRegdate}
 										</small></span>
 									</div>
-									<button class="btn btn-default" type="submit" style="border-color: #bbbbff; color: #4444ff">참여하기</button>
+									<a href="${pageContext.request.contextPath}/event/posting/${event.evNo}" type="submit" style="border-color: #bbbbff; color: #4444ff">참여하기</a>
 								</div>
 							</div>
 						</c:forEach>

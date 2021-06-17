@@ -97,19 +97,19 @@
               <h3 class="text-black mb-5 border-bottom pb-2">여러분의 방문후기를 공유해주세요^^!</h3>
               
               
-               <form action= "/event/insertPosting"  method = "post" enctype="multipart/form-data">
+               <form action= "/event/insertPosting/${evNo}"  method = "post" enctype="multipart/form-data">
               <div class="form-group">
                 <label for="company-website-tw d-block">Upload Featured Image</label> <br>
                 
                 <label class="btn btn-primary btn-md btn-file">
-                  Browse File<input type="file" name = "evImg">
+                  Browse File<input type="file" name = "file">
                 </label>
               </div>
 
               
               <div class="form-group">
                 <label for="job-title">제목</label>
-                <input type="text" class="form-control" id="job-title" placeholder="제목을 입력해주세요" name="evTitle">
+                <input type="text" class="form-control" id="job-title" placeholder="제목을 입력해주세요" name="evpTitle">
               </div>
               <!-- <div class="form-group">
                 <label for="job-location">지역</label>
@@ -120,10 +120,8 @@
              <div class="form-group">
                 <label for="job-description">방문후기</label>
                 <div class="editor" id="editor-1">
-                <input type="text" class="form-control" id="editor_text" placeholder="내용을 입력해주세요"  name="evContent">
-                  시작날짜 <input type="datetime-local" name="evStartDate"/>
-                  <p> <br>
-                  종료날짜 <input type="datetime-local" name="evEndDate"/>
+                <textarea type="text" class="form-control" id="editor_text"  placeholder="내용을 입력해주세요"  name="evpContent"
+               style= "width:1140px; height:300px"> </textarea><br>
                 </div>
               </div>
              
@@ -143,6 +141,9 @@
           </div>
         </div>
         	 </form>
+        	 
+        	 
+        	 
       </div>
       </div>
       </div>
