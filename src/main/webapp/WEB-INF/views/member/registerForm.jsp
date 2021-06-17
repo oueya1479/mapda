@@ -48,12 +48,12 @@
 		    @import url(//db.onlinewebfonts.com/c/789f9065baf48309d73fd0ff02fe4aec?family=Big+Caslon+Black);
 		    @import url('https://fonts.googleapis.com/css2?family=Archivo:wght@100&display=swap');
 		    .dropdown-item{font-family: ITC Grouch;}
-		    #loginTitle{font-family: ITC Grouch; font-size:35px; text-align:center; color:gray;}
-		    #loginStart{font-family: ITC Grouch;}
+		    #loginTitle{font-family: "Noto Sans KR", sans-serif; font-size:35px; text-align:center; color:gray;}
+		    #loginStart{font-family: "Noto Sans KR", sans-serif;}
 		    #password{font-family: 'Archivo', sans-serif; }
 		    #idPlace{font-family: 'Archivo', sans-serif; }
 		    #remember{font-family: adobe-caslon-pro, serif;}
-		    h2, h3, h4, h5, h6, p{font-family: adobe-caslon-pro, serif; font-style: normal; font-weight: 700}
+		    h2, h3, h4, h5, h6, p{ffont-family: "Noto Sans KR", sans-serif; font-style: normal; font-weight: 700}
 		    #joinTitle{text-align: center; font-family: ITC Grouch;}
 		    input.underline { border-left-width:0; border-right-width:0; border-top-width:0; border-bottom-width:1; width:450px; } 
 			#joinForm{display: inline-block; text-align: center;}
@@ -69,8 +69,7 @@
 			#con1{width:155px}
 			#con2{width:155px}
 			#con3{width:155px}
-			#email1{width:235px; height:30px;}
-			#email2{width:240px}
+			
 			#addr1{width:395px}
 			#bb{font-family: ITC Grouch; background-color: gray; border:0; outline:0; padding:6px 17px; font-size: 15px; color:black;}
 			#oti{font-family:ITC Grouch; font-size: 100px; text-align: center; color:white;}
@@ -79,9 +78,7 @@
 	
 	
 		</style>
-<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.js"></script>
-		<script type="text/javascript" src="../js/jquery-3.6.0.min.js">
-			
+
 		</script>
 		
     	 <script type="text/javascript">
@@ -92,9 +89,9 @@
 						$("#idCheck").html("");
 						return;
 					}
-/* 					$.ajax({
-						url:"../idCheck",
-						datatype:"text",
+ 					$.ajax({
+						url:"${pageContext.request.contextPath}/member/idcheckAjax",
+						dataType:"text",
 						type:"post",
 						data:{id:$(this).val()},
 						success:function(result){$("#idCheck").text(result)},
@@ -103,26 +100,9 @@
 						}
 					}	
 					)
-				}) */
-				//비밀번호 일치 체크
-				$("#pwc").keyup(function() {
-					if($(this).val()==""){
-						$("#pwCheck").html("");
-						return;
-					}
-					$.ajax({
-						url:"../pwCheck",
-						datatype:"text",
-						type:"post",
-						data:{pwc:$(this).val(),pw:$("#pw").val()},
-						success:function(result){$("#pwCheck").text(result)},
-						error:function(err){
-							alert(err+"비밀번호 조회 에러.")
-						}
-					}	
-					)
 				})
-    	 	})
+				
+		
     	 
     	 	function goUrl(url) {
 				location.href=url;
@@ -238,7 +218,7 @@
         <h2>Member Register Form</h2><p>
         	<form name="joinForm" style="display:inline-block;" action="${pageContext.request.contextPath}/member/registerMember" accept-charset="UTF-8">
 				<br><br><br>
-				<input type="text" class="underline"  placeholder="ID" id="id" name="memId"><!-- <span id="idCheck"></span> --><br><br>
+				<input type="text" class="underline"  placeholder="ID" id="id" name="memId"><span id="idCheckAjax"></span><br><br>
 				<input type="password" class="underline" placeholder="PASSWORD" id="pw" name="memPw"> <br><br>
 				<input type="text" class="underline"  placeholder="NAME" id="name" name="memName"> <br><br>
 				<input type="text" class="underline" placeholder="AGE" id="age" name="memAge"><br><br>
@@ -247,9 +227,6 @@
 				<input type="checkbox"  id="Enterprise" name="memGrade" value="Enterprise" onclick='checkOnlyOne(this)'> <label for="Enterprise">Enterprise</label> <br><br>
 				<input type="text" class="underline" placeholder="ACCOUNT NUMBER" id="accountNum" name="memAccount"> <br><br>
 				<input type="submit" title="Create as Account" id="joinbutton" value="Create an Account">
-				<!-- <input type="password" class="underline" placeholder="PASSWORD CHECK" type="text" placeholder="CONFIRM PASSWORD" id="pwc" name="pwc"><span id="pwCheck"></span> <br><br> -->
-				<!--<input type="text" class="underline" placeholder="BANK" id="bank" name="bank">-->
-				<!-- <input type="text" class="underline" placeholder="ADDRESS" id="addr1" name="memAddr" required="required" readonly="readonly"> &nbsp <button type="button" onclick="goPopup()" id="bb">Search</button> <br><br> -->
     		</form>	
     
     

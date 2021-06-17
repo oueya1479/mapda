@@ -5,6 +5,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <style type="text/css">
 * {
   margin: 0;
@@ -43,29 +44,8 @@ li {
 }
 
 h2 {
-  color: tomato;
+  color: #c32e62;
   font-size: 2em;
-}
-.login_sns {
-  padding: 20px;
-  display: flex;
-}
-
-.login_sns li {
-  padding: 0px 15px;
-}
-
-.login_sns a {
-  width: 50px;
-  height: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 10px;
-  border-radius: 50px;
-  background: white;
-  font-size: 20px;
-  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.4), -3px -3px 5px rgba(0, 0, 0, 0.1);
 }
 
 .login_id {
@@ -118,8 +98,8 @@ h2 {
   border: 0;
   outline: none;
   border-radius: 40px;
-  background: linear-gradient(to left, rgb(255, 77, 46), rgb(255, 155, 47));
-  color: white;
+  background: linear-gradient(to left, gray(255, 77, 46), gray(255, 155, 47));
+  color: black;
   font-size: 1.2em;
   letter-spacing: 2px;
 }
@@ -134,20 +114,20 @@ h2 {
     <title>Log-In</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/53a8c415f1.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="./login.css">
 </head>
 <body>
+<form action="${pageContext.request.contextPath}/login" method="post">
+	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
     <div class="wrap">
         <div class="login">
             <h2>Log-In</h2>
-            
             <div class="login_id">
                 <h4>ID</h4>
-                <input type="id" name="" id="" placeholder="id">
+                <input type="text" name="id" id="id" placeholder="id">
             </div>
             <div class="login_pw">
                 <h4>Password</h4>
-                <input type="password" name="" id="" placeholder="Password">
+                <input type="password" name="password" id="password" placeholder="Password">
             </div>
             <div class="login_etc">
                 <div class="checkbox">
@@ -158,12 +138,10 @@ h2 {
             </div>
             </div>
             <div class="submit">
-                <input type="submit" value="submit">
+                <input type="submit" value="Log-In">
             </div>
         </div>
     </div>
+    </form>
 </body>
 </html>
-
-
-

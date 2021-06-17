@@ -15,9 +15,9 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
 	@Query("select m from Member m where m.memId=?1 and m.memPw=?2")
 	Member login(String memId, String memPw);
 	
-	//다시체크해보기
-//	@Query("")
-//	int idcheck(String memId);
+	//다시체크해보기T^T
+	@Query("select m from Member m where m.memId=?1")
+	int idcheck(String memId);
 
 	
 	/*

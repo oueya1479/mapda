@@ -16,7 +16,7 @@
 <sec:authentication property="principal.memNo" var="memNo" />
 <sec:authentication property="principal.memId" var="userId" />
 </sec:authorize>
-<!-- Header Sectiouuuuuuuuuuuuuuuuuuuuun Begin -->
+<!-- Header Section Begin -->
 <header class="header header--normal">
    <div class="container-fluid">
       <div class="row">

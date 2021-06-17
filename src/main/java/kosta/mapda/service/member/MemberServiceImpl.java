@@ -1,11 +1,13 @@
 package kosta.mapda.service.member;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.ModelAndView;
 
 import kosta.mapda.domain.member.Member;
 import kosta.mapda.domain.member.MemberRole;
@@ -33,20 +35,25 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
+	public ModelAndView findMember(HttpServletRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	@Override
 	public Member login(Member member) {
 		return memRepository.login(member.getMemId(), member.getMemPw());
 	}
 
-//	@Override
-//	public int getMemberCount() {
-//		return memRepository.getMemberCount();
-//	}
 
 	@Override
 	public void updateMember(Member member) {
 		memRepository.updateMember(member);
  
 	}
+	
+
+
 
 	@Override
 	public void registerMember(Member member) {
@@ -68,16 +75,9 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public String idcheck(String memId) {
-//		int count = memRepository.idcheck(memId);
-		int count = 0;
-		return (count == 0) ? "ok" : "fail";
+	 Member member = memRepository.findMemberById(memId);
+		return (member == null) ? "ok" : "fail";
 	}
-
-//	@Override
-//	public List<MemberRole> selectAuthorityByUsername(String memName) {
-//
-//		return MemRoleReopository.selectAuthorityByUserName(username);
-//	}
 
 
 	@Override
@@ -86,4 +86,5 @@ public class MemberServiceImpl implements MemberService {
 
 		
 	}
+
 }
