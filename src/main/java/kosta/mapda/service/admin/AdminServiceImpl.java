@@ -9,6 +9,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import kosta.mapda.domain.enterprise.EnterprisePost;
+import kosta.mapda.domain.enterprise.EnterpriseReply;
+import kosta.mapda.domain.map.Place;
+import kosta.mapda.domain.map.PlacePhotoReview;
+import kosta.mapda.domain.map.PlaceReview;
 import kosta.mapda.domain.map.Theme;
 import kosta.mapda.domain.member.InfluenceReq;
 import kosta.mapda.domain.member.Member;
@@ -16,6 +21,11 @@ import kosta.mapda.domain.member.RPay;
 import kosta.mapda.repository.admin.AdminMemberRepository;
 import kosta.mapda.repository.admin.InfluenceReqRepositiry;
 import kosta.mapda.repository.admin.RPayRepository;
+import kosta.mapda.repository.enterprise.EnterprisePostRepository;
+import kosta.mapda.repository.enterprise.EnterpriseReplyRepository;
+import kosta.mapda.repository.place.PlacePhotoReviewRepository;
+import kosta.mapda.repository.place.PlaceRepository;
+import kosta.mapda.repository.place.PlaceReviewRepository;
 import kosta.mapda.repository.young.MapRepository;
 
 @Service
@@ -33,6 +43,21 @@ public class AdminServiceImpl implements AdminService {
 	
 	@Autowired
 	private MapRepository mapRepository;
+	
+	@Autowired
+	private PlaceRepository placeRepository;
+	
+	@Autowired
+	private EnterprisePostRepository enterprisePostRepository;
+	
+	@Autowired
+	private PlacePhotoReviewRepository photoReviewRepository;
+	
+	@Autowired
+	private PlaceReviewRepository reviewRepository;
+	
+	@Autowired
+	private EnterpriseReplyRepository enterpriseReplyRepository;
 
 	@Override
 	public Page<Member> getMember(Pageable pageable) {
@@ -74,5 +99,30 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public Page<Theme> getTheme(Pageable pageable) {
 		return mapRepository.findAll(pageable);
+	}
+
+	@Override
+	public Page<Place> getPlace(Pageable pageable) {
+		return placeRepository.findAll(pageable);
+	}
+
+	@Override
+	public Page<EnterprisePost> getEnterprisePost(Pageable pageable) {
+		return enterprisePostRepository.findAll(pageable);
+	}
+
+	@Override
+	public Page<PlacePhotoReview> getPhotoReview(Pageable pageable) {
+		return photoReviewRepository.findAll(pageable);
+	}
+
+	@Override
+	public Page<PlaceReview> getReview(Pageable pageable) {
+		return reviewRepository.findAll(pageable);
+	}
+
+	@Override
+	public Page<EnterpriseReply> getEnterpriseReply(Pageable pageable) {
+		return enterpriseReplyRepository.findAll(pageable);
 	}
 }

@@ -1,9 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html lang="zxx">
 
 <head>
+<style>
+a:hover {
+	color: black;
+}
+</style>
 </head>
 
 <body>
@@ -39,13 +45,12 @@
 	                                <div class="blog__item__pic set-bg" data-setbg="${ent.epLogo}"></div>
 	                                <div class="blog__item__text">
 	                                    <ul class="blog__item__tags">
-	                                        <li><i class="fa fa-tags"></i> Travel</li>
-	                                        <li>Videos</li>
+	                                        <li>${ent.epTag}</li>
 	                                    </ul>
-	                                    <h5><a href="#">${ent.enterprise.entName}</a></h5>
+	                                    <h5><a href="${pageContext.request.contextPath}/enterprise/post/${ent.epNo}">${ent.epTitle}</a></h5>
 	                                    <ul class="blog__item__widget">
 	                                        <li><i class="fa fa-clock-o"></i>${ent.epRegdate}</li>
-	                                        <li><i class="fa fa-user"></i> ${ent.enterprise.entName}</li>
+	                                        <li><a href="${pageContext.request.contextPath}/enterprise/profile/${ent.enterprise.member.memNo}"><i class="fa fa-user"></i> ${ent.enterprise.entName}</a></li>
 	                                    </ul>
 	                                </div>
 	                            </div>
@@ -70,65 +75,22 @@
                         </div>
                         <div class="blog__sidebar__recent">
                             <h5>Recent Post</h5>
-                            <a href="#" class="blog__sidebar__recent__item">
-                                <div class="blog__sidebar__recent__item__pic">
-                                    <img src="img/blog/recent-1.jpg" alt="">
-                                </div>
+                        <c:forEach items="${enterprisePostList.content}" var="post" begin="0" end="5">
+                            <a href="${pageContext.request.contextPath}/enterprise/post/${post.epNo}" class="blog__sidebar__recent__item">
                                 <div class="blog__sidebar__recent__item__text">
-                                    <span><i class="fa fa-tags"></i> Shopping</span>
-                                    <h6>Tortoise grilled on salt</h6>
-                                    <p><i class="fa fa-clock-o"></i> 19th March, 2019</p>
+                                    <span><i class="fa fa-tags"></i>${post.epTag}</span>
+                                    <h6>${post.epTitle}</h6>
+                                    <p><i class="fa fa-clock-o"></i>${post.epRegdate}</p>
                                 </div>
                             </a>
-                            <a href="#" class="blog__sidebar__recent__item">
-                                <div class="blog__sidebar__recent__item__pic">
-                                    <img src="img/blog/recent-2.jpg" alt="">
-                                </div>
-                                <div class="blog__sidebar__recent__item__text">
-                                    <span><i class="fa fa-tags"></i> Hotels</span>
-                                    <h6>Shrimp floured and fried</h6>
-                                    <p><i class="fa fa-clock-o"></i> 22th March, 2019</p>
-                                </div>
-                            </a>
-                            <a href="#" class="blog__sidebar__recent__item">
-                                <div class="blog__sidebar__recent__item__pic">
-                                    <img src="img/blog/recent-3.jpg" alt="">
-                                </div>
-                                <div class="blog__sidebar__recent__item__text">
-                                    <span><i class="fa fa-tags"></i> Restaurant</span>
-                                    <h6>Sweet and sour pork ribs</h6>
-                                    <p><i class="fa fa-clock-o"></i> 25th March, 2019</p>
-                                </div>
-                            </a>
-                            <a href="#" class="blog__sidebar__recent__item">
-                                <div class="blog__sidebar__recent__item__pic">
-                                    <img src="img/blog/recent-4.jpg" alt="">
-                                </div>
-                                <div class="blog__sidebar__recent__item__text">
-                                    <span><i class="fa fa-tags"></i> Videos</span>
-                                    <h6>Crab fried with tamarind</h6>
-                                    <p><i class="fa fa-clock-o"></i> 19th March, 2019</p>
-                                </div>
-                            </a>
-                            <a href="#" class="blog__sidebar__recent__item">
-                                <div class="blog__sidebar__recent__item__pic">
-                                    <img src="img/blog/recent-5.jpg" alt="">
-                                </div>
-                                <div class="blog__sidebar__recent__item__text">
-                                    <span><i class="fa fa-tags"></i> Travel</span>
-                                    <h6>Tortoise grilled on salt</h6>
-                                    <p><i class="fa fa-clock-o"></i> 19th March, 2019</p>
-                                </div>
-                            </a>
+                            </c:forEach>
                         </div>
                         <div class="blog__sidebar__categories">
                             <h5>Categories</h5>
                             <ul>
-                                <li><a href="#">Finance <span>18</span></a></li>
-                                <li><a href="#">Business <span>20</span></a></li>
-                                <li><a href="#">Loan <span>07</span></a></li>
-                                <li><a href="#">Consulting <span>22</span></a></li>
-                                <li><a href="#">Credit <span>19</span></a></li>
+                           		<c:forEach items="${categories}" var="category">
+                                	<li><a href="">${category.category}<span>${fn:length(category.enterprisePostList)}</span></a></li>
+                                </c:forEach>
                             </ul>
                         </div>
                         <div class="blog__sidebar__tags">
