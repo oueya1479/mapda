@@ -88,8 +88,6 @@ public class CouponController {
 	
 		
 		
-		
-		
 		model.addAttribute("couponList", couponList);
 		model.addAttribute("categoryList", categoryList);
 	

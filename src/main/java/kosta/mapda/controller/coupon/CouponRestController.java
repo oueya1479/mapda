@@ -14,7 +14,7 @@ import kosta.mapda.service.service.CouponService;
  * 비동기화 통신용 controller
  */
 @RestController
-@RequestMapping("/coupon")
+@RequestMapping("/couponAjax")
 public class CouponRestController {
 
 	@Autowired

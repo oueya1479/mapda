@@ -13,7 +13,7 @@
 		$(document).on('click', '.site-btn', function() {
 			let couponNo = $(this).attr('name');
 			$.ajax({
-				url:"${pageContext.request.contextPath}/coupon/subscribe",
+				url:"${pageContext.request.contextPath}/couponAjax/issue",
 				type:"get",
 				dataType:"json",
 				data: {"couponNoStr" : $(this).attr('name'), "memNoStr" : ${mno}},
