@@ -42,6 +42,51 @@
 #pagination {margin:10px auto;text-align: center;}
 #pagination a {display:inline-block;margin-right:10px;}
 #pagination .on {font-weight: bold; cursor: default;color:#777;}
+
+#bttn:before{
+  content:'';
+  height:100%;
+  display:inline-block;
+  vertical-align:middle;
+}
+#bttn{
+  background:#1AAB8A;
+  color:#fff;
+  border:none;
+  position:relative;
+  height:60px;
+  font-size:1.6em;
+  padding:0 2em;
+  cursor:pointer;
+  transition:800ms ease all;
+  outline:none;
+}
+#bttn:hover{
+  background:#fff;
+  color:#1AAB8A;
+}
+#bttn:before,#bttn:after{
+  content:'';
+  position:absolute;
+  top:0;
+  right:0;
+  height:2px;
+  width:0;
+  background: #1AAB8A;
+  transition:400ms ease all;
+}
+#bttn:after{
+  right:inherit;
+  top:inherit;
+  left:0;
+  bottom:0;
+}
+#bttn:hover:before,#bttn:hover:after{
+  width:100%;
+  transition:800ms ease all;
+}
+
+
 </style>
 </head>
 <body>
@@ -73,8 +118,11 @@
  <div id="longResult" style="display: none;"></div>
  <div id="titleResult" style="display: none;"></div>
  <div id="addressResult" style="display: none;"></div>
- <div id="roadResult" style="display: none;"></div>
-<input type="submit" value="확인" onclick="setParentText()"/>
+ <div id="roadResult" style="display: none;"></div><br>
+ <!-- <div id="checkchecked" style="display: none;"></div> -->
+ <div style="text-align: center;">
+<input type="submit" value="입력하기" onclick="setParentText()" id="bttn"/>
+</div>
  
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=dedf9592b51a78be2b5d3ec39a2a2199&libraries=services"></script>
 <script>
@@ -182,6 +230,7 @@ function displayPlaces(places) {
                     var latiDiv = document.getElementById('latiResult');
                     var longDiv = document.getElementById('longResult');
                     var titleDiv = document.getElementById('titleResult');
+                   // var checkDiv = document.getElementById('checkchecked');
                     
                     let addr = getAddr(placePosition.Ma, placePosition.La);
                     
@@ -191,6 +240,7 @@ function displayPlaces(places) {
                         latiDiv.innerHTML =placePosition.Ma;
                         longDiv.innerHTML =placePosition.La;
                         titleDiv.innerHTML = title;
+                       // checkDiv.innerHTML = "<input type="+'text'+" value="+'등록이 완료 되었습니다! ^^'+">";
                      }else{
                     	resultDiv.innerHTML="";
                         resultDiv.innerHTML += '선택하신 장소의 이름은 ['+title +'] 입니다.<br>';
@@ -198,6 +248,7 @@ function displayPlaces(places) {
                         latiDiv.innerHTML =placePosition.Ma;
                         longDiv.innerHTML =placePosition.La;
                         titleDiv.innerHTML = title;
+                        //checkDiv.innerHTML = "<input type="+'text'+" value="+'등록이 완료 되었습니다! ^^'+">";
                      }
                      
                     
@@ -357,11 +408,13 @@ function setParentText(){
 	const titleContent = document.getElementById("titleResult").innerText;
 	const addressContent = document.getElementById("addressResult").innerText;
 	const roadContent = document.getElementById("roadResult").innerText;
+//	const resultContent = document.getElementById("checkchecked").innerText;
     opener.document.getElementById("placeLatitude").value = latiContent;
     opener.document.getElementById("placeLongitude").value = longContent;
     opener.document.getElementById("placeTitle").value = titleContent;
     opener.document.getElementById("resultAddress").value = addressContent;
     opener.document.getElementById("placeAddr").value = roadContent;
+//    opener.document.getElementById("checkchecked").value = resultContent;
     self.close();
  }
 

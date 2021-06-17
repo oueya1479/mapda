@@ -140,8 +140,8 @@
 		                                    <div class="listing__details__comment__item__rating">
 		                                    </div>
 		                                    <span>${pprList.pprRegdate}</span>
-		                                    <h5>${pprList.member.memName}</h5>
-		                                    <p>${pprList.pprContent}</p>
+		                                    <p>${pprList.member.memName}</p>
+		                                    <h6>${pprList.pprContent}</h6>
 			                                    <c:forEach items="${pprList.pprpList}" var="pprpList">
 	      				  							<img src="${pageContext.request.contextPath}/${pprpList.pprpPath}" style="width: 200px; height: 200px;">
 	      				  						</c:forEach>

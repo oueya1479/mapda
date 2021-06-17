@@ -1,6 +1,7 @@
 package kosta.mapda.domain.map;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,9 +10,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.multipart.MultipartFile;
 
 import kosta.mapda.domain.Management;
 import kosta.mapda.domain.member.Member;
@@ -26,6 +29,10 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Place {
+	
+	@Transient //테이블에 컬럼으로 생성되지 않게 ....
+	private List<MultipartFile> file;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PL_placeNo_seq")
 	@SequenceGenerator(sequenceName = "PL_placeNo_seq",allocationSize = 1,name = "PL_placeNo_seq")
@@ -38,7 +45,6 @@ public class Place {
 	private String placeContent;
 	
 	@CreationTimestamp
-	@DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
 	private LocalDateTime placeRegdate;
 	
 	private String placeTag;
