@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import kosta.mapda.domain.service.Event;
+import kosta.mapda.domain.service.EventPost;
 
 public interface EventService {
 
@@ -23,7 +24,7 @@ public interface EventService {
 	/**
 	 *  이벤트 글 등록하기 
 	 * */
-	void insert(Event event);
+	void insert(EventPost event);
 	
 	
 	/**
@@ -47,5 +48,9 @@ public interface EventService {
 	 * 이벤트 게시물 삭제
 	 * */
 	void delete();
+
+	Page<EventPost> selectAllPost(Pageable pageable, Long evNo);
+
+	Event getEvent(Long evNo);
 	
 }

@@ -15,13 +15,16 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
 	@Query("select m from Member m where m.memId=?1 and m.memPw=?2")
 	Member login(String memId, String memPw);
 	
-	//다시체크해보기
-//	@Query("")
-//	int idcheck(String memId);
+	//다시체크해보기T^T
+	@Query("select m from Member m where m.memId=?1")
+	int idcheck(String memId);
 
+	
+	/*
 	@Query("update Member m set m.memPaystatus = 1 where m.memNo = ?1")
 	@Modifying
 	void start(Long memNo);
+	*/
 	
 	Member findByMemId(String memId);
 
@@ -32,7 +35,11 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
 //	//jpqlT^T...
 //	@Query("select count from Member m where m.memId=?1")
 //	int getMemberCount();
-
+	
+	@Query("update Member m set m.memPaystatus = 1 where m.memNo = ?1")
+	@Modifying
+	void updatePayStatus(Long memNo);
+	
 }
 
 

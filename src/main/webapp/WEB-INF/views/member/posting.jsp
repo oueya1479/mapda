@@ -93,7 +93,7 @@
         </div>
         <div class="row mb-5">
           <div class="col-lg-12">
-            <form class="p-4 p-md-5 border rounded" method="post">
+            <form class="p-4 p-md-5 border rounded" method="post" action="/event/insertPosting">
               <h3 class="text-black mb-5 border-bottom pb-2">.</h3>
               
               <div class="form-group">
@@ -106,13 +106,14 @@
    
               <div class="form-group">
                 <label for="job-title">Title</label>
-                <input type="text" class="form-control" id="job-title" placeholder="제목을 입력해주세요">
+                <input type="text" name = "evTitle" class="form-control" id="job-title" placeholder="제목을 입력해주세요">
               </div>
+              <!-- 
               <div class="form-group">
                 <label for="job-location">Location</label>
                 <input type="text" class="form-control" id="job-location" placeholder="지역을 입력해주세요">
               </div>
-
+-->
 
              <div class="form-group">
                 <label for="job-description">Job Description</label>
@@ -131,8 +132,9 @@
             <div class="row">
            
               <div class="col-6">
-                <a href="event/list" class="btn btn-block btn-primary btn-md">submit</a>
-              </div>
+                <button class="btn btn-block btn-primary btn-md" type = "submit">submit</button>
+                
+               </div>
             </div>
           </div>
         </div>

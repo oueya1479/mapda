@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h2>결제 완료되었습니다. </h2>
+
 
 
 
