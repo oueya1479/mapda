@@ -53,11 +53,6 @@ public class PlaceAjaxController {
 		List<PlaceReview> prList = prService.selectAllPlaceReview(placeNo);
 		
 		for(PlaceReview pr : prList) {
-			System.out.println("pr.getPrRegdate() = " + pr.getPrRegdate());
-			System.out.println("pr.getPrContent() = " + pr.getPrContent());
-			System.out.println("prList.size() = " + prList.size());
-			System.out.println("pr.getMember().getMemName() = " + pr.getMember().getMemName());
-			
 			dbList.add(new ReviewDTO(pr.getPrRegdate(), pr.getPrContent(), pr.getMember().getMemName(), prList.size()));
 		}
 		return dbList;
