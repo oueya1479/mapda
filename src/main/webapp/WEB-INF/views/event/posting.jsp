@@ -41,7 +41,7 @@
         <div class="site-mobile-menu-close mt-3">
           <span class="icon-close2 js-menu-toggle"></span>
         </div>
-      </div>
+      </div> 
       <div class="site-mobile-menu-body"></div>
     </div> <!-- .site-mobile-menu -->
     
@@ -96,7 +96,6 @@
  
               <h3 class="text-black mb-5 border-bottom pb-2">
               ${event.evTitle}</h3>
-              
               
                <form action= "/event/insertPosting/${evNo}"  method = "post" enctype="multipart/form-data">
               <div class="form-group">

@@ -4,6 +4,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery-3.3.1.min.js">  </script>
+
+<script type="text/javascript">
+$(function(){
+	alert(1);
+}
+</script>
 <style type="text/css">
 </style>
 <title>Podcast &mdash; Colorlib Website Template</title>
@@ -164,7 +171,7 @@
 												class="sep">/</span><br>등록일 : ${event.evRegdate}
 										</small></span>
 									</div>
-									<a href="${pageContext.request.contextPath}/event/posting/${event.evNo}" type="submit" style="border-color: #bbbbff; color: #4444ff">참여하기</a>
+									<button  id = "${event.evNo}" type="submit" style="border-color: #bbbbff; color: #4444ff">참여하기</button>
 								</div>
 							</div>
 						</c:forEach>
@@ -173,7 +180,7 @@
 					<div class="container" data-aos="fade-up">
 						<div class="row">
 							<div class="col-md-12 text-center">
-								<div class="site-block-27">
+								<!--  <div class="site-block-27">
 									<ul>
 										<li><a href="#" class="icon-keyboard_arrow_left"></a></li>
 										<li class="active"><span>1</span></li>
