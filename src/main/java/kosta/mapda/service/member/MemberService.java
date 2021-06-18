@@ -6,6 +6,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.web.servlet.ModelAndView;
 
+import kosta.mapda.domain.map.MapStorage;
+import kosta.mapda.domain.map.Theme;
 import kosta.mapda.domain.member.Member;
 
 public interface MemberService {
@@ -28,7 +30,9 @@ public interface MemberService {
 
 	String idcheck(String memId);
 	
-//	String recentlyList ();
+	void delete(Member member);
+	
+	List<Theme> myRecenMaps(Long memNo);
 	
 //	List<AuthorityVO> selectAuthorityByUsername(String username);
 

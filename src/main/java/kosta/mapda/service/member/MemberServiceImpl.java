@@ -1,5 +1,7 @@
 package kosta.mapda.service.member;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 
@@ -9,10 +11,13 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
+import kosta.mapda.domain.map.MapStorage;
+import kosta.mapda.domain.map.Theme;
 import kosta.mapda.domain.member.Member;
 import kosta.mapda.domain.member.MemberRole;
 //import kosta.mapda.domain.member.MemberRole;
 import kosta.mapda.repository.member.MemberRepository;
+import kosta.mapda.repository.young.MapRepository;
 
 @Service
 @Transactional
@@ -20,7 +25,6 @@ public class MemberServiceImpl implements MemberService {
 
 	@Autowired
 	private MemberRepository memRepository;
-
 	
 	
 	/*
@@ -90,6 +94,19 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public Member getMember(Long memNo) {
 		return memRepository.findById(memNo).orElse(null);
+	}
+
+	@Override
+	public void delete(Member member) {
+		memRepository.delete(member);
+		
+	}
+
+
+	@Override
+	public List<Theme> myRecenMaps(Long memNo) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 

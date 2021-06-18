@@ -28,9 +28,10 @@
                     </div>
                 </div>
                 <div class="col-lg-4" ><!--버튼을 오른쪽으로 보내고 싶어요-->
-                    <div class="listing__hero__btns" style="float: right; margin-left: 25px">
-                        <a href="${pageContext.request.contextPath}/member/updateForm" class="primary-btn share-btn"> update</a>
-                        <a href="#" class="primary-btn"><i class="fa fa-bookmark"></i> Subscribe</a> 
+                    <div class="listing__hero__btns" style="float: right;">
+                        <li><a href="${pageContext.request.contextPath}/member/updateForm" class="primary-btn share-btn"> Update</a></li>
+                        <li><a href="#" class="primary-btn"><i class="fa fa-bookmark"></i>Subscribe</a></li> 
+                        <li><a href="#" class="primary-btn">Withdrawal</a></li> 
                     </div>
                 </div>
             </div>
