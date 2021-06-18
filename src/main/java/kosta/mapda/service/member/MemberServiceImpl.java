@@ -12,11 +12,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
 import kosta.mapda.domain.map.MapStorage;
+import kosta.mapda.domain.map.PlaceReview;
 import kosta.mapda.domain.map.Theme;
 import kosta.mapda.domain.member.Member;
 import kosta.mapda.domain.member.MemberRole;
 //import kosta.mapda.domain.member.MemberRole;
 import kosta.mapda.repository.member.MemberRepository;
+import kosta.mapda.repository.place.PlaceReviewRepository;
 import kosta.mapda.repository.young.MapRepository;
 
 @Service
@@ -25,6 +27,12 @@ public class MemberServiceImpl implements MemberService {
 
 	@Autowired
 	private MemberRepository memRepository;
+	
+	@Autowired
+	private MapRepository mapRepository;
+	
+	@Autowired
+	private PlaceReviewRepository placeReviewRepository;
 	
 	
 	/*
@@ -98,15 +106,19 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public void delete(Member member) {
-		memRepository.delete(member);
+		memRepository.deleteById(member.getMemNo());
 		
 	}
 
-
 	@Override
 	public List<Theme> myRecenMaps(Long memNo) {
-		// TODO Auto-generated method stub
-		return null;
+		return mapRepository.selectByMemNoOrderRegDesc(memNo);
+		
+	}
+
+	@Override
+	public List<PlaceReview> myRecenPlaceReviews(Long memNo) {
+		return placeReviewRepository.selectByMemNoReviewOrderRegDesc(memNo);
 	}
 
 

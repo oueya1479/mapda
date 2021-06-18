@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import kosta.mapda.domain.map.MapStorage;
+import kosta.mapda.domain.map.PlaceReview;
 import kosta.mapda.domain.map.Theme;
 import kosta.mapda.domain.member.Member;
 import kosta.mapda.service.member.MemberService;
@@ -37,9 +38,7 @@ public class MemberController {
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
 	
-	// 최근 테마지도 
-	@Autowired
-	private  MapService mapService;
+	
 	
 	//새로 추가
 	@RequestMapping("/index")
@@ -98,9 +97,18 @@ public class MemberController {
 	//회원정보 확인
 	@RequestMapping("/profile/{memNo}")
 	public ModelAndView memInfo(HttpServletRequest request, @PathVariable Long memNo) {
-		Member member = memService.getMember(memNo);
-		ModelAndView mv = new ModelAndView("member/profile", "member", member);
+		Member member = memService.getMember(memNo); //회원 정보
+		
+		List<Theme> mapList = memService.myRecenMaps(memNo); //회원 의 지도 정보
+		List<PlaceReview> placeReview = memService.myRecenPlaceReviews(memNo);
+		
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("member/profile");
+		mv.addObject("member", member);
+		mv.addObject("mapList", mapList);
+		mv.addObject("placeReview", placeReview);
 		return mv;
+		
 	}
 	
 	// 회원정보 수정하기
@@ -130,34 +138,34 @@ public class MemberController {
 	
 	//회원탈퇴
 	@RequestMapping("/withdrawal")
-	public void delete(HttpServletRequest request, Member member) {
+	public String delete(HttpServletRequest request) {
 		Member pmember = (Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		memService.delete(member);
+		memService.delete(pmember);
+		return "main/index";
 	}
 	
-	//마이페이지 최근 지도 가져오기
-	@RequestMapping("/mapList")
-	public void recenList(HttpServletRequest request, Model model, @RequestParam(defaultValue = "0") int nowPage) {
+	//마이페이지 최근지도 리스트 가져오기
+	/*@RequestMapping("/profile")
+	public ModelAndView recenList() {
+		Member pmember = (Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Long memNo = pmember.getMemNo();
 		
-		Pageable pageable = PageRequest.of(nowPage, 10, Direction.DESC, "mapNo");
-		Page<Theme> mapList = mapService.selectAll(pageable);
+		List<Theme> mapList = memService.myRecenMaps(memNo);
 		
-		Member mem = (Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		Long memNo = mem.getMemNo();
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("member/profile");
+		mv.addObject("mapList", mapList);
+		return mv;
 		
-		List<MapStorage> mapStorage = mapService.selectByMapNo(memNo);
-		
-		model.addAttribute("mapList", mapList);
-		model.addAttribute("mapStorage", mapStorage);	
-		
-	}
+         
+	}*/
 
 	@RequestMapping("/pay")
 	public void pay() {
 
 	}
 	/*
-	@RequestMapping("/start")
+	@RequestMapping("/start")7
 	public String start() {
 		Long memNo = 2L;
 		memService.start(memNo);
