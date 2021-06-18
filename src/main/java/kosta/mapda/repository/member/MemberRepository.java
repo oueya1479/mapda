@@ -40,8 +40,8 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
 	/**
 	 * 마이페이지 - 나의 게시 맵 조회 (마이포인트 메뉴에서 사용목적)
 	 * */
-	@Query("")
-	List<Theme> myRecenMaps(Long memNo);
+//	@Query("")
+//	List<Theme> myRecenMaps(Long memNo);
 //	String recentlyList();
 	
 }
