@@ -14,7 +14,11 @@ import kosta.mapda.domain.map.PlacePhotoReview;
 import kosta.mapda.domain.map.Theme;
 import kosta.mapda.domain.member.Member;
 import kosta.mapda.domain.service.MyPoint;
+import kosta.mapda.domain.service.SavingHistory;
+import kosta.mapda.domain.service.UsingHistory;
 import kosta.mapda.repository.MyPointRepository;
+import kosta.mapda.repository.SavingHistoryRepository;
+import kosta.mapda.repository.UsingHistoryRepository;
 import kosta.mapda.repository.member.MemberRepository;
 import kosta.mapda.repository.place.PlacePhotoRepository;
 import kosta.mapda.repository.place.PlacePhotoReviewPhotoRepository;
@@ -38,8 +42,14 @@ public class PointServiceImpl implements PointService {
 	@Autowired
 	private PlacePhotoReviewRepository placePhotoReviewRepository;
 	
+	@Autowired
+	private SavingHistoryRepository savingHistoryRepository;
+	
+	@Autowired
+	private UsingHistoryRepository usingHistoryRepository;
+	
 	@Override
-	public List<MyPoint> selectMyPoint(Long memNo) {
+	public MyPoint selectMyPoint(Long memNo) {
 		
 				
 		return myPointRepository.findBymember_memNo(memNo);
@@ -63,5 +73,47 @@ public class PointServiceImpl implements PointService {
 		
 		return placePhotoReviewRepository.findBymember_memNo(memNo);
 	}
+
+	@Override
+	public void pointSum(int savePoint, int usePoint, Long memNo) {
+		int myPoint = savePoint - usePoint;
+		
+		MyPoint mp = new MyPoint();
+		mp.setMemNo(memNo);
+		mp.setMyPoint(myPoint);
+		
+		myPointRepository.save(mp);
+		
+	}
+
+	@Override
+	public void pointPlus(SavingHistory savePoint) {
+		
+		savingHistoryRepository.save(savePoint);
+		
+	}
+
+	@Override
+	public void pointMinus(UsingHistory usingPoint) {
+		
+		usingHistoryRepository.save(usingPoint);
+		
+	}
+
+	@Override
+	public List<SavingHistory> selectSavingHistory(Long memNo) {
+		
+		return savingHistoryRepository.findBymyPoint_memNo(memNo);
+	}
+
+	@Override
+	public List<UsingHistory> selectUsingHistory(Long memNo) {
+		
+		return usingHistoryRepository.findBymyPoint_memNo(memNo);
+	}
+	
+	
+	
+	
 
 }

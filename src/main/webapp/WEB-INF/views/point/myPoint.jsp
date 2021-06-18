@@ -62,15 +62,18 @@
 </style>
 
 <SCRIPT>
-
 $(document).on('click','#plus',function(){
+	
+	let name = $(this).attr('name');
+	let value = $(this).val();
+	
+	alert(value + " " + name);
 	if(confirm("적립 해당 게시물은 30일간 삭제불가합니다. 적립하시겠습니까?") == true){
-		
 		$.ajax({
 			url: "${pageContext.request.contextPath}/point/pointPlus",
 			type: "get",
 			dataType: "json",
-			data: {"postObject" : $(this).attr('name')},
+			data: {value : name},
 			success: function(data){
 				if(data == -1){
                     alert("적립 오류","error","확인",function(){});
@@ -156,7 +159,7 @@ $(document).on('click','#plus',function(){
 						<c:if test="${today == writeDate }">
 							<td>${status.count}</td>
 							<td>&nbsp;${myTheme.mapTitle}</td>
-							<td><button id="plus"> 적립 </button></td>
+							<td><button id="plus" name="${myTheme}" value="theme"> 적립 </button></td>
 
 							</c:if>
 						</tr>				
@@ -184,10 +187,10 @@ $(document).on('click','#plus',function(){
 						<fmt:formatDate value="${parsedDateTime2}" pattern="yyyy-MM-dd" var="writeDate2"/>
 
 						<tr>
-						<c:if test="${today > writeDate2 }">
+						<c:if test="${today == writeDate2 }">
 							<td>${status.count}</td>
 							<td>&nbsp;${myPlace.placeTitle}</td>
-							<td><button id="plus" name="${myPlace}"> 적립 </button></td>
+							<td><button id="plus" name="${myPlace}" value="place"> 적립 </button></td>
 
 							</c:if>
 						</tr>				
@@ -217,7 +220,7 @@ $(document).on('click','#plus',function(){
 						<c:if test="${today == writeDate3 }">
 							<td>${status.count}</td>
 							<td>&nbsp;${myReview.place.placeTitle} 에 대한 포토리뷰</td>
-							<td><button id="plus" > 적립 </button></td>
+							<td><button id="plus" name="${myReview}" value="review"> 적립 </button></td>
 
 							</c:if>
 						</tr>				

@@ -20,6 +20,8 @@ import kosta.mapda.domain.map.PlacePhotoReview;
 import kosta.mapda.domain.map.Theme;
 import kosta.mapda.domain.member.Member;
 import kosta.mapda.domain.service.MyPoint;
+import kosta.mapda.domain.service.SavingHistory;
+import kosta.mapda.domain.service.UsingHistory;
 import kosta.mapda.service.service.PointService;
 
 @Controller
@@ -49,6 +51,27 @@ public class PointController {
 		
 		
 		return "point/myPoint";
+	}
+	
+	/**
+	 * 마이페이지 - 포인트 내역 리스트 가져오기
+	 * */
+	@RequestMapping("/myPointHistory")
+	public String myPointHistory(Model model) {
+		
+		Member mem = (Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		
+		MyPoint myPoint = pointService.selectMyPoint(mem.getMemNo());
+		
+		List<SavingHistory> mySavingList = pointService.selectSavingHistory(mem.getMemNo());
+		
+		List<UsingHistory> myHistoryList = pointService.selectUsingHistory(mem.getMemNo());
+		
+		model.addAttribute("myPoint", myPoint);
+		model.addAttribute("mySavingList", mySavingList);
+		model.addAttribute("myHistoryList", myHistoryList);
+		
+		return "point/myPointHistory";
 	}
 	
 	/**
