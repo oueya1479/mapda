@@ -54,14 +54,20 @@
                 <div class="col-lg-8">
                     <div class="row">
                     <c:choose>
+                    		
 							<c:when test="${empty requestScope.couponList.content}">
 								
 								<p align="center">
 									<b><span style="font-size: 9pt;">등록된 상품이 없습니다.</span></b>
 								</p>
 							</c:when>
+							
+							
+							
 							<c:otherwise>
                     	<c:forEach items="${requestScope.couponList.content}" var="coup">
+							<c:if test="${coup.cpState eq 1}">
+                    	
 	                        <div class="col-lg-6 col-md-6">
 	                            <div class="blog__item" style="width: 300px; height: 400px; ">
 	                                <div class="blog__item__pic set-bg">
@@ -78,13 +84,16 @@
 	                                    
 	                                    <ul class="blog__item__widget">
 	                                        <li><i class="fa fa-money"></i>포인트 :  ${coup.cpPrice}point</li>
-	                                        <li><i class="fa fa-user"></i>이용매장 : ${coup.cpPlace}</li>                
+	                                        <li><i class="fa fa-user"></i>이용매장 : ${coup.cpState}</li>
+	                                                        
 	                                    </ul>
 	                                </div>
 	                            </div>
 	                        </div>
+	                        </c:if>
                         </c:forEach>
                         </c:otherwise>
+                       
 						</c:choose>
                     </div>
                     
@@ -158,7 +167,7 @@
                             <ul>
                         		
                                 <c:forEach items="${requestScope.myPointList}" var="myPo">
-                                <li>${myPo.myptRem}<span></span></li>
+                                <li>${myPo.myPoint}포인트<span></span></li>
                                 </c:forEach>
 
 

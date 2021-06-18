@@ -79,8 +79,8 @@
 								<ul class="dropdown">
 									<li><a href="/about">My Info</a></li>
 									<li><a href="/listing-details">My Post</a></li>
-									<li><a href="/blog-details">My Point</a></li>
-									<li><a href="/myPage/myCoupon">My Coupon</a></li>
+									<li><a href="/point/myPoint">My Point</a></li>
+									<li><a href="/coupon/myCoupon">My Coupon</a></li>
 								</ul></li>
 						</ul>
 					</nav>
