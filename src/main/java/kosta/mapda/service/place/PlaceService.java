@@ -22,7 +22,7 @@ public interface PlaceService {
 	/**
 	 * 		등록
 	 * */
-	void insert(Place place);
+	void insert(Place place, List<PlacePhoto> ppList);
 	
 	/**
 	 * 		플레이스 번호 검색
@@ -47,6 +47,6 @@ public interface PlaceService {
 	/**
 	 * 		플레이스 사진 등록하기
 	 * */
-	void insertPlacePhoto(List<PlacePhoto> photoList);
+//	void insertPlacePhoto(List<PlacePhoto> photoList);
 	
 }

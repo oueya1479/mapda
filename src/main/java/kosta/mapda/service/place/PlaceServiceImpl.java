@@ -37,8 +37,9 @@ public class PlaceServiceImpl implements PlaceService {
 	}
 
 	@Override
-	public void insert(Place place) {
+	public void insert(Place place, List<PlacePhoto> ppList) {
 		placeRepository.save(place);
+		placePhotoRepository.saveAll(ppList);
 	}
 
 	@Override
@@ -48,14 +49,31 @@ public class PlaceServiceImpl implements PlaceService {
 
 	@Override
 	public Place update(Place place) {
-		// TODO Auto-generated method stub
-		return null;
+		System.out.println("PlaceService update place = " + place);
+		Place dbPlace = placeRepository.findById(place.getPlaceNo()).orElse(null);
+		
+		System.out.println("PlaceService update dbPlace = " + dbPlace);
+		if(dbPlace == null) {
+			throw new RuntimeException("플레이스 번호가 일치하지 않아 수정될 수 없습니다.");
+		}
+		
+		dbPlace.setPlaceContent(place.getPlaceContent().replace("<", "&lt;"));
+		
+		return dbPlace;
 	}
 
 	@Override
 	public void delete(Long placeNo) {
-		// TODO Auto-generated method stub
-
+		Place dbPlace = placeRepository.findById(placeNo).orElse(null);
+//		LocalDateTime validRegdate = dbPlace.getPlaceRegdate().plusDays(30);
+//		LocalDateTime nowRegdate = dbPlace.getPlaceRegdate();
+//		if(nowRegdate.isBefore(validRegdate)) {
+//			throw new RuntimeException("30일 이후에 삭제가 가능합니다.");
+//		}else {
+//			placeRepository.deleteById(placeNo);
+//		}
+//		
+		placeRepository.deleteById(placeNo);
 	}
 
 	@Override
@@ -63,9 +81,9 @@ public class PlaceServiceImpl implements PlaceService {
 		return placePhotoRepository.selectPlacePhotoByPlaceNo(placeNo);
 	}
 
-	@Override
-	public void insertPlacePhoto(List<PlacePhoto> photoList) {
-		placePhotoRepository.saveAll(photoList);
-	}
+//	@Override
+//	public void insertPlacePhoto(List<PlacePhoto> photoList) {
+//		placePhotoRepository.saveAll(photoList);
+//	}
 	
 }

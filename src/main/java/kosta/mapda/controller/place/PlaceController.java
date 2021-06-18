@@ -163,14 +163,14 @@ public class PlaceController {
 				PlacePhotoReviewPhoto photo = new PlacePhotoReviewPhoto();
 				photo.setPpr(placePhotoReview);
 				String fileName = mf.getOriginalFilename();
-				photo.setPprpPath(path + "/" + fileName);
+				photo.setPprpPath(fileName);
 				mf.transferTo(new File(path + "/" + fileName));
 				pprpList.add(photo);
 			}
 		}
 		System.out.println("pprpList = " + pprpList);
 		
-		prService.prInsert(placePhotoReview , pprpList);//부모님
+		prService.prInsert(placePhotoReview , pprpList);//부모
 		
 		//prService.insertPprPhoto(pprpList);
 		
@@ -192,9 +192,34 @@ public class PlaceController {
 	 * 		플레이스 수정하기 폼
 	 * */
 	@RequestMapping("/placeUpdateForm")
-	public void placeUpdateForm(Model model, Long mapNo, Long memNo) {
-		model.addAttribute("mapNo", mapNo);
-		model.addAttribute("memNo", memNo);
+	public ModelAndView placeUpdateForm(Model model ,Long placeNo) {
+		Place place = placeService.selectBy(placeNo);	//db에서 꺼내옴
+		
+		// 해쉬태그 #기준으로 나눔
+		List<String> tagStr=new ArrayList<String>();
+		String dbTag =place.getPlaceTag();	//db에서 꺼낸거 //#kosta#한식#맛#강추#꼭가요#가즈아#다있어
+		String [] hashStr = dbTag.split("#");
+		for(int i=1; i<hashStr.length; i++) {
+			tagStr.add(hashStr[i]);
+		}
+		
+		model.addAttribute("tagStr", tagStr);
+		
+		return new ModelAndView("place/placeUpdateForm", "place", place);
+	}
+	
+	/**
+	 * 		플레이스 수정하기 완료
+	 * */
+	@RequestMapping("/placeUpdate")
+	public ModelAndView placeUpdate(Place place) {
+		System.out.println("PlaceController placeUpdate place = " + place);
+		Place dbPlace = placeService.update(place);
+		
+		System.out.println("PlaceController placeUpdate dbPlace = " + dbPlace);
+		System.out.println("dbPlace.getPlaceNo() = " + dbPlace.getPlaceNo() );
+		
+		return new ModelAndView("place/read/"+dbPlace.getPlaceNo(), "place", dbPlace);
 	}
 	
 	/**
@@ -268,8 +293,8 @@ public class PlaceController {
 			}
 		}
 		
-		placeService.insert(place);
-		placeService.insertPlacePhoto(photoList);
+		placeService.insert(place, photoList);
+		//placeService.insertPlacePhoto(photoList);
 		return "redirect:/map/mapRead/"+mapNo;
 	}
 	
@@ -307,6 +332,17 @@ public class PlaceController {
 	public String photoReviewDelete(@PathVariable Long placeNo, @PathVariable String memId, @PathVariable Long pprNo) {
 		prService.prDelete(pprNo);
 		return "redirect:/place/myReplyReview/placeNo="+placeNo+"&memId="+memId;
+	}
+	
+	/**
+	 * 		플레이스 삭제하기
+	 * */
+	@RequestMapping("/placeDelete")
+	public String placeDelete(Long placeNo) {
+		placeService.delete(placeNo);
+		
+		//return "redirect:/map/mapRead/";		//수정하기
+		return "redirect:/";		//수정하기
 	}
 	
 	/**

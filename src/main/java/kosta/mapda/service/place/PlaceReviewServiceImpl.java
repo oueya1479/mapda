@@ -102,10 +102,10 @@ public class PlaceReviewServiceImpl implements PlaceReviewService {
 	}
 	
 	// 사용 안됨
-	@Override
-	public void insertPprPhoto(List<PlacePhotoReviewPhoto> pprpList) {
-		 List<PlacePhotoReviewPhoto> pppp= pprpRepository.saveAll(pprpList);
-	}
+//	@Override
+//	public void insertPprPhoto(List<PlacePhotoReviewPhoto> pprpList) {
+//		 List<PlacePhotoReviewPhoto> pppp= pprpRepository.saveAll(pprpList);
+//	}
 
 //	@Override
 //	public List<PlacePhotoReviewPhoto> selectAllPhotoReviewPhotoPlaceNo(Long placeNo) {

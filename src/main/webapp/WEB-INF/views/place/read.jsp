@@ -1,13 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
-
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="zxx">
 <head>
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=dedf9592b51a78be2b5d3ec39a2a2199"></script>
 <style type="text/css">
 .mySlides {display:none;}
@@ -139,6 +138,11 @@
       	}
       	
       	//alert(${placeNo});
+      	
+      	function deleteValid(){
+      		confirm("30일이 지난 게시물의 경우 삭제가 가능합니다. 삭제하시겠습니까?");
+      	}
+      	
   </script>
 
 
@@ -155,7 +159,7 @@
                 <div class="col-lg-8">
                     <div class="listing__hero__option">
                         <div class="listing__hero__icon">
-                            <img src="${pageContext.request.contextPath}/${place.placeIconPath}" alt="" style="width: 150px; height: 150px;" ><!-- 아이콘 모양? user프로필? -->
+                            <img src="${pageContext.request.contextPath}/save/placeicon/${place.placeIconPath}" alt="" style="width: 150px; height: 150px;" ><!-- 아이콘 모양? user프로필? -->
                         </div>
                         <div class="listing__hero__text">
                             <h2>${requestScope.place.placeTitle}</h2>
@@ -185,7 +189,29 @@
                 <div class="col-lg-8">
                     <div class="listing__details__text">
                         <div class="listing__details__about">
-                            <h4>Overview</h4>
+                            
+<sec:authorize access="isAuthenticated()">
+				<sec:authentication property="principal.memNo" var="loginMemNo"/>
+					<c:if test="${place.member.memNo== loginMemNo}">
+					
+						<form action="${pageContext.request.contextPath}/place/placeUpdateForm" method="post">
+							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+							<input type="hidden" name="memNo" value="${place.member.memNo}">
+							<input type="hidden" name ="placeNo" value="${placeNo}">
+							 <button type="submit" class="btn btn-outline-danger" id="prUpdated" style="width: 150px">Place Modify</button>
+						</form>
+						
+						<form action="${pageContext.request.contextPath}/place/placeDelete" method="post">
+							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+							<input type="hidden" name="memNo" value="${place.member.memNo}">
+							<input type="hidden" name ="placeNo" value="${placeNo}">
+							 <button type="submit" class="btn btn-outline-dark" id="prDelete" style="width: 150px; float: right;" onclick="deleteValid();">Place Delete</button>
+						</form>
+						
+					</c:if>
+	</sec:authorize>                            
+
+                            <br><br><h4>Overview</h4>
                             <p> ${requestScope.place.placeContent}</p>
                         </div>
                         <div class="listing__details__gallery">
@@ -193,11 +219,11 @@
                             <!-- ============================================================ -->
 						<div class="w3-content w3-display-container">
 								<c:forEach items="${ppList}" var="ppList">
-								  	<%-- <img class="mySlides" src="${pageContext.request.contextPath}/${ppList.ppPath}" style="height: 400px; width: 100%;"> --%>
-								  	<img class="mySlides" src="C:\\KostaEdu\\thirdProject\\fileSave/${ppList.ppPath}" style="height: 400px; width: 100%;">
+								  	 <img class="mySlides" src="${pageContext.request.contextPath}/${ppList.ppPath}" style="height: 400px; width: 100%;">
+								  <%-- 	<img class="mySlides" src="C:\\KostaEdu\\thirdProject\\fileSave/${ppList.ppPath}" style="height: 400px; width: 100%;"> --%>
 								  </c:forEach>
-							 <button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
-							  <button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">&#10095;</button>
+								 <button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
+							 	 <button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">&#10095;</button>
 						</div>
 
 					<script>
@@ -265,7 +291,7 @@
                                 	<tr>
                                 	<c:forEach items="${pp.pprpList}" var="ppp">
 											<td style="color: black;">
-												 <img src="${pageContext.request.contextPath}/${ppp.pprpPath}" style="width: 50px; height: 50px;">
+												 <img src="${pageContext.request.contextPath}/save/${ppp.pprpPath}" style="width: 50px; height: 50px;">
 											</td>
 									</c:forEach>
 									</tr>
@@ -319,7 +345,7 @@
                             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
                             <input type="hidden" name="placeNo" value="${placeNo}"/>
                             <input type="hidden" name="memNo" value="${userNo}"/>
-               				 <button type="submit" class="btn" id="prSubmit" style="background-color: teal; font-weight: bolder;">Photo Review 작성하기</button>
+               				 <button type="submit" class="btn btn-outline-dark" id="prSubmit" style=" font-weight: bolder;">Photo Review 작성하기</button>
                         </form>
                 </h4>
                          <form name="replyForm" method="post" action="${pageContext.request.contextPath}/place/replyWrite">
@@ -374,44 +400,6 @@
 		// 아래 코드는 지도 위의 마커를 제거하는 코드입니다
 		// marker.setMap(null);    
      </script>                
- 				<div class="col-lg-4" style="margin-top: 100px;">
-                    <div class="listing__sidebar">
-                        <div class="listing__sidebar__contact">
-                            <div class="listing__sidebar__contact__map">
-                            	<div>
-                            	
-<input type="button" class="btn btn-outline-danger" value="Modify" id="${map.mapNo}" name="modifyMap" style="width: 100px" />
-<input type="button" class="btn btn-outline-dark" value="Delete" name="deleteMap" id="${map.mapNo}" style="width: 100px; float: right;" />
-  <sec:authorize access="isAuthenticated()">
-				<sec:authentication property="principal.memNo" var="loginMemNo"/>
-					<c:if test="${place.member.memNo== loginMemNo}">
-						<form action="${pageContext.request.contextPath}/place/placeUpdateForm" method="post">
-							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-							<input type="hidden" name="memNo" value="${place.member.memNo}">
-							<input type="hidden" name ="mapNo" value="${place.mapNo}">
-								<div class="listing__text__top__right">
-									<input type=submit class="btn btn-outline-danger" value="Modify" id="${map.mapNo}" name="modifyMap" style="width: 100px" />
-									 <button type="submit" class="btn btn-outline-danger" id="prUpdated" style="background-color: teal; font-weight: bolder;">Modify</button>
-								</div>
-						</form>
-					</c:if>
-			</sec:authorize>	        
-			
-			<form name=prForm method="post" action="${pageContext.request.contextPath}/place/photoReviewForm" style="text-align: right;">
-                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-                            <input type="hidden" name="placeNo" value="${placeNo}"/>
-                            <input type="hidden" name="memNo" value="${userNo}"/>
-               				 <button type="submit" class="btn" id="prSubmit" style="background-color: teal; font-weight: bolder;">Photo Review 작성하기</button>
-                        </form>                  	
-
-          
-          
-                            		
-                            	</div>
-                  			</div>
-                  		</div>
-                  	</div>
-                  </div>	       
                                 <img src="img/listing/details/map-icon.png" alt="">
                             </div>
                         </div>

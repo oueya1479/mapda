@@ -35,7 +35,7 @@ public class Place {
 	private MultipartFile file;
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PL_placeNo_seq")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PL_placeNo_seq")	//pl_place_no_seq
 	@SequenceGenerator(sequenceName = "PL_placeNo_seq",allocationSize = 1,name = "PL_placeNo_seq")
 	private Long placeNo;
 	

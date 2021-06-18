@@ -46,41 +46,6 @@
 			}
 		  });
 		
-		
-			$("#hashTag1").hide();
-			$("#tagImg1").click(function(){
-			    $("#hashTag1").toggle();
-			  });
-			$("#hashTag2").hide();
-			$("#tagImg2").click(function(){
-			    $("#hashTag2").toggle();
-			  });
-			$("#hashTag3").hide();
-			$("#tagImg3").click(function(){
-			    $("#hashTag3").toggle();
-			  });
-			$("#hashTag4").hide();
-			$("#tagImg4").click(function(){
-			    $("#hashTag4").toggle();
-			  });
-			$("#hashTag5").hide();
-			$("#tagImg5").click(function(){
-			    $("#hashTag5").toggle();
-			  });
-			$("#hashTag6").hide();
-			$("#tagImg6").click(function(){
-			    $("#hashTag6").toggle();
-			  });
-			$("#hashTag7").hide();
-			$("#tagImg7").click(function(){
-			    $("#hashTag7").toggle();
-			  });
-			$("#hashTag8").hide();
-			$("#tagImg8").click(function(){
-			    $("#hashTag8").toggle();
-			  });
-		
-		
 		//$("#allForms>div>span> img").on("click", function(){
 				/* $("#allForms>div>span:nth-child(1) >img").on("click", function(){
 					$("#allForms>div>span:nth-child(2) >img").css("opacity", "0.5");
@@ -178,13 +143,12 @@
                             <img src="${memImage}" alt="" style="width:120px; height:120px;"><!-- 아이콘 모양? user프로필? -->
                         </div>
                         <div class="listing__hero__text">
-                            <h2><input type="text" id="placeTitle" name="placeTitle" readonly="readonly" placeholder="장소명 : 지도 등록시 자동으로 입력됩니다."></h2>
+                            <h2>Place Modify</h2>
+                            <h4><input type="text" id="placeTitle" name="placeTitle" readonly="readonly" value="${place.placeTitle}"></h4>
                             <div class="listing__hero__widget">
                             </div><br>
                             <p><span class="icon_pin_alt"></span><input type="text" id="placeAddr" name="placeAddr" 
-                            readonly="readonly" style="width: 500px;" placeholder="지번 주소 : 지도 등록시 자동으로 입력됩니다."></p>
-                            <p><span class="icon_pin_alt"></span><input type="text" id="resultAddress" name="resultAddress" 
-                            readonly="readonly" style="width: 500px;" placeholder="도로명 주소 : 지도 등록시 자동으로 입력됩니다."></p>
+                            readonly="readonly" style="width: 500px;" value="${place.placeAddr}"></p>
                         </div>
                     </div>
                 </div>
@@ -199,13 +163,17 @@
                            <div class="col-lg-12">
 	                           <div class="listing__details__amenities">
                         			<div class="listing__details__about">
-                           				<h4>아래 버튼을 눌러서 지도를 등록해주세요!</h4>
-	                           				<div style="text-align: center;">
-	                           					<input type="hidden" id="placeLatitude" name="placeLatitude">
-												<input type="hidden" id="placeLongitude" name="placeLongitude">
-					                            <p><a href="javascript:openChild('${pageContext.request.contextPath}/kakaoMapApi/searchPlace', 'kakaoMap');" 
-					                            class="btn btn-primary" style="text-decoration: none;">지도펼치기</a></p>
-											</div>
+	                           					<h4>장소 변경은 불가능 합니다.</h4>
+	                           					<input type="hidden" id="placeLatitude" name="placeLatitude" value="${place.placeLatitude}">
+												<input type="hidden" id="placeLongitude" name="placeLongitude" value="${place.placeLongitude}">
+													<input type ="hidden" name="placeStatus" value = "1">
+													
+											<div class="blog__item__text">
+										<img src="${pageContext.request.contextPath}/img/placeimges/dadadadada.png" style="float:left; width: 100px; height: 100px; margin-right: 10px;" >
+										  <span style="margin-top:20px;font-size:18px;" >
+										  보다 공정하고 정확한 장소의 내용을 공유하기 위하여 처음 지정한 place 에서 많은 내용을 변경 할 수 없는 점 양해 부탁 드립니다.
+                                         많은 플레이스 지정을 부탁 드리며, 저희 <span style="font-weight: bolder; font-size: 20px; color: blue;">맵多</span>를 이용해 주셔서 감사합니다.</span>
+                                    </div>
                         			</div>
                         		</div>
                    			 </div>
@@ -221,8 +189,8 @@
                 <div class="col-lg-6">
                     <div class="listing__details__amenities">
                         <div class="listing__details__about">
-                            <h4>장소에 대한 설명을 적어주세요!</h4>
-								<textarea id="placeContent" name="placeContent" style="width: 500px; height: 163px"></textarea>
+                            <h4>설명을 변경하시겠습니까?</h4>
+								<textarea id="placeContent" name="placeContent" style="width: 500px; height: 163px" value="${place.placeContent}"></textarea>
                         </div>
 	                    <div class="listing__details__gallery">
 	                            <h4>장소의 사진을 넣어 주세요 !</h4>
@@ -238,7 +206,7 @@
                 <div class="col-lg-6">
                    <div class="listing__details__amenities">
                         <div class="listing__details__about">
-                            <h4>제 점수는요!</h4>
+                            <h4>달라진 점수는요?</h4>
                             <div class="w3-content w3-display-container">
                             	<br><br>
 									<h4><span class="star-box"></span>
@@ -346,70 +314,30 @@
                     </div>
                 </div>
             </div>
-	      </div>
+	      </div>      
                         <div class="listing__details__amenities">
-                            <h4>HashTag를 눌러서 내용을 적어주세요!</h4>
+                            <h4>HashTag를 수정해 주세요!</h4>
                             <div class="row">
-	                                <div class="col-lg-3 col-md-3 col-6">
-	                                    <div class="listing__details__amenities__item">
-	                                        <p id="tagImg1"><img src="${pageContext.request.contextPath}/img/placeimges/hashtag.png" style="width: 30px; height: 30px;"></p>
-												<h5><input type="text" id="hashTag1" name="hashTag1"></h5>
-	                                    </div>
-	                                </div>
-	                                <div class="col-lg-3 col-md-3 col-6">
-	                                    <div class="listing__details__amenities__item">
-	                                        <p id="tagImg2"><img src="${pageContext.request.contextPath}/img/placeimges/hashtag.png" style="width: 30px; height: 30px;"></p>
-											<h5><input type="text" id="hashTag2" name="hashTag2"></h5>
-	                                    </div>
-	                                </div>
-	                                <div class="col-lg-3 col-md-3 col-6">
-	                                    <div class="listing__details__amenities__item">
-	                                        <p id="tagImg3"><img src="${pageContext.request.contextPath}/img/placeimges/hashtag.png" style="width: 30px; height: 30px;"></p>
-												<h5><input type="text" id="hashTag3" name="hashTag3"></h5>
-	                                    </div>
-	                                </div>
-	                                <div class="col-lg-3 col-md-3 col-6">
-	                                    <div class="listing__details__amenities__item">
-	                                        <p id="tagImg4"><img src="${pageContext.request.contextPath}/img/placeimges/hashtag.png" style="width: 30px; height: 30px;"></p>
-												<h5><input type="text" id="hashTag4" name="hashTag4"></h5>
-	                                    </div>
-	                                </div>
-	                                <div class="col-lg-3 col-md-3 col-6">
-	                                    <div class="listing__details__amenities__item">
-	                                        <p id="tagImg5"><img src="${pageContext.request.contextPath}/img/placeimges/hashtag.png" style="width: 30px; height: 30px;"></p>
-												<h5><input type="text" id="hashTag5" name="hashTag5"></h5>
-	                                    </div>
-	                                </div>
-	                                <div class="col-lg-3 col-md-3 col-6">
-	                                    <div class="listing__details__amenities__item">
-	                                        <p id="tagImg6"><img src="${pageContext.request.contextPath}/img/placeimges/hashtag.png" style="width: 30px; height: 30px;"></p>
-												<h5><input type="text" id="hashTag6" name="hashTag6"></h5>
-	                                    </div>
-	                                </div>
-	                                <div class="col-lg-3 col-md-3 col-6">
-	                                    <div class="listing__details__amenities__item">
-	                                        <p id="tagImg7"><img src="${pageContext.request.contextPath}/img/placeimges/hashtag.png" style="width: 30px; height: 30px;"></p>
-												<h5><input type="text" id="hashTag7" name="hashTag7"></h5>
-	                                    </div>
-	                                </div>
-	                                <div class="col-lg-3 col-md-3 col-6">
-	                                    <div class="listing__details__amenities__item">
-	                                        <p id="tagImg8"><img src="${pageContext.request.contextPath}/img/placeimges/hashtag.png" style="width: 30px; height: 30px;"></p>
-												<h5><input type="text" id="hashTag8" name="hashTag8"></h5>
-	                                    </div>
-	                                </div>
-                            </div>
+									<c:forEach items="${tagStr}" var="tagStr">
+			      							<div class="col-lg-3 col-md-3 col-6">
+			                                    <div class="listing__details__amenities__item">
+			                                        <p id="tagImg1"><img src="${pageContext.request.contextPath}/img/placeimges/hashtag.png" style="width: 30px; height: 30px;"></p>
+														<h5><input type="text" id="hashTag1" name="hashTag1" value="${tagStr}"></h5>
+			                                    </div>
+			                                </div>
+			      				   </c:forEach>
+	                       </div>
+                         </div>
                         </div>
                     	<div class="row">
 	                    	<div class="col-lg-12">
 		                    	<div class="listing__details__amenities">
 			                    	<div style="text-align: center;">
-			                    		<button type="submit" class="site-btn" id="replySubmit">장소 등록하기!</button>
+			                    		<button type="submit" class="site-btn" id="replySubmit">장소 수정하기!</button>
 			                    	</div>
 		                    	</div>
 	                    	</div>
                     	</div>
-                    </div>
 	    </section>
 </form>
 </sec:authorize>
