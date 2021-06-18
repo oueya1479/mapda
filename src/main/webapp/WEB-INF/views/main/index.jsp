@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -16,12 +17,12 @@
 				<div class="col-lg-12">
 					<div class="hero__text">
 						<div class="section-title">
-							<h2>Discover The Best Services Near You</h2>
+							<h2>Discover The Best Maps In Mapda</h2>
 							<p>1.118.940.376 The best service package is waiting for you</p>
 						</div>
 						<div class="hero__search__form">
-							<form action="${pageContext.request.contextPath}/map/selectedMaps/${categoryNo}" method="post">
-								<input type="text" placeholder="Search..." style="width:685px">
+							<form action="${pageContext.request.contextPath}/map/selectedMaps" method="post">
+								<input type="text" name="keyWord" style="width:685px">
 								<div class="select__option">
 								<div class="nice-select" >
 									<select name="categoryNo">

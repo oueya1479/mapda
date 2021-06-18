@@ -68,7 +68,7 @@ public class Theme{
 	@JoinColumn(name="mem_no")
 	private Member member;
 	
-	@OneToMany(mappedBy="theme")
+	@OneToMany(mappedBy="theme", cascade = CascadeType.ALL)
 	private List<Place> place;
 	
 	@OneToMany(mappedBy="theme")

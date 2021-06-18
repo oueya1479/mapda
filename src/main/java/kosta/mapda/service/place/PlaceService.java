@@ -43,4 +43,10 @@ public interface PlaceService {
 	 * 	 플레이스 사진 전체 검색
 	 * */
 	List<PlacePhoto> selectAllPlacePhoto(Long placeNo);
+	
+	/**
+	 * 		플레이스 사진 등록하기
+	 * */
+	void insertPlacePhoto(List<PlacePhoto> photoList);
+	
 }

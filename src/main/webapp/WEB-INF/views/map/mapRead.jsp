@@ -1,6 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -86,82 +89,85 @@
 		<div class="listing__text__top">
 			<div class="listing__text__top__left">
 				<h5>Places in this Map</h5>
-				
+
 			</div>
-	
-	<!-- 버튼 생성 조건 1. 권한을 갖어야함(로그인이 되어 있어야 함), 2.themeMap을 제작한 사람과 로그인한 사람이 같아야함. -->
+
+			<!-- 버튼 생성 조건 1. 권한을 갖어야함(로그인이 되어 있어야 함), 2.themeMap을 제작한 사람과 로그인한 사람이 같아야함. -->
 			<sec:authorize access="isAuthenticated()">
-				<sec:authentication property="principal.memNo" var="loginMemNo"/>
-					<c:if test="${themeMap.member.memNo== loginMemNo}">
-						<form action="${pageContext.request.contextPath}/place/placeInsertForm" method="post">
-							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-							<input type="hidden" name="memNo" value="${themeMap.member.memNo}">
-							<input type="hidden" name ="mapNo" value="${themeMap.mapNo}">
-								<div class="listing__text__top__right">
-									<button type="submit" class="site-btn">Register New Place</button>
-								</div>
-						</form>
-					</c:if>
-			</sec:authorize>		
-			
+				<sec:authentication property="principal.memNo" var="loginMemNo" />
+				<c:if test="${themeMap.member.memNo== loginMemNo}">
+					<form
+						action="${pageContext.request.contextPath}/place/placeInsertForm"
+						method="post">
+						<input type="hidden" name="${_csrf.parameterName}"
+							value="${_csrf.token}"> <input type="hidden" name="memNo"
+							value="${themeMap.member.memNo}"> <input type="hidden"
+							name="mapNo" value="${themeMap.mapNo}">
+						<div class="listing__text__top__right">
+							<button type="submit" class="site-btn">Register New
+								Place</button>
+						</div>
+					</form>
+				</c:if>
+			</sec:authorize>
+
 		</div>
 		<div class="listing__list">
-			 <c:choose>
-				<c:when test="${empty requestScope.themeMap.place}">
-
-					<p align="center">
-						<b><span style="font-size: 13pt; text-align: center;">등록된 플레이스가 없습니다.</span></b>
-					</p>
-				</c:when>
-				<c:otherwise> 
-					
-						<c:forEach items="${requestScope.themeMap.place}" var="place">
-							<div class="listing__item">
-								<div class="listing__item__pic set-bg"
-									data-setbg="${pageContext.request.contextPath}/img/listing/list-2.jpg">
-									<img
-										src="${pageContext.request.contextPath}/img/listing/list_icon-2.png"
-										alt="">
-									<div class="listing__item__pic__tag top_rate"><a href="${pageContext.request.contextPath}/place/read/${place.placeNo}">See Details</a></div>
-									
+			
+					<c:forEach items="${requestScope.themeMap.place}" var="place" varStatus="state">
+						<div class="listing__item">
+							<div class="listing__item__pic set-bg"
+								data-setbg="${pageContext.request.contextPath}/save/${place.photo}">
+								<img
+									src="${pageContext.request.contextPath}/img/listing/list_icon-2.png"
+									alt="">
+								<div class="listing__item__pic__tag top_rate">
+									<a
+										href="${pageContext.request.contextPath}/place/read/${place.placeNo}">See
+										Details</a>
 								</div>
-								<div class="listing__item__text">
-									<div class="listing__item__text__inside">
-										<a href="${pageContext.request.contextPath}/place/read/${place.placeNo}"><h5> ${place.placeTitle}</h5><br></a>
-										<a href="#"><img src="${pageContext.request.contextPath}/img/map/star.png"alt="" 
-											style="height:20px; width:20px;" ></a>&nbsp;&nbsp;&nbsp;${place.placeStar}
-										<div class="listing__item__text__rating">
-										</div>
-										<ul>
-											<li><span class="icon_zoom-in_alt"></span>
-												 ${place.placeContent}</li>
-											<li><span class="icon_pin_alt"></span> ${place.placeAddr}</li>
-										</ul>
-									</div><p>
-									<div class="listing__item__text__info">
-										<div class="listing__item__text__info__left">
-											<a href=""><img src="${pageContext.request.contextPath}/img/map/heart.png"style="height:20px; width:20px; 
-												alt=""> </a><span>${place.placeLike}</span>
+								
+								\${place.photo}=${place.photo}
 
-										</div>
-										<div class="listing__item__text__info__right closed"><img src="${pageContext.request.contextPath}/img/map/ribbon.png"style="height:20px; width:20px; 
-												alt=""></div>
+							</div>
+							<div class="listing__item__text">
+								<div class="listing__item__text__inside">
+									<a
+										href="${pageContext.request.contextPath}/place/read/${place.placeNo}"><h5>
+											${place.placeTitle}</h5> <br></a> <a href="#"><img
+										src="${pageContext.request.contextPath}/img/map/star.png"
+										alt="" style="height: 20px; width: 20px;"></a>&nbsp;&nbsp;&nbsp;${place.placeStar}
+									<div class="listing__item__text__rating"></div>
+									<ul>
+										<li><span class="icon_zoom-in_alt"></span>
+											${place.placeContent}</li>
+										<li><span class="icon_pin_alt"></span> ${place.placeAddr}</li>
+									</ul>
+								</div>
+								<p>
+								<div class="listing__item__text__info">
+									<div class="listing__item__text__info__left">
+										<a href=""><img
+											src="${pageContext.request.contextPath}/img/map/heart.png"
+											style="height: 20px; width: 20px;""> </a><span>${place.placeLike}</span>
+
+									</div>
+									<div class="listing__item__text__info__right closed">
+										<img
+											src="${pageContext.request.contextPath}/img/map/ribbon.png"
+											style="height: 20px; width: 20px;"">
 									</div>
 								</div>
 							</div>
-						</c:forEach>
-					
-				 </c:otherwise>
-			</c:choose> 
-			
-			
-			
-			
-			
+						</div>
+					</c:forEach>
+
+				
+
+
+
+
 			<!-- 확인하려고 띄운 폼 지울 것 -->
-			
-		
-							
 	</section>
 	<!-- Listing Section End -->
 
@@ -171,37 +177,146 @@
 
 		<p id="result"></p>
 
-		<script type="text/javascript"
-			src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a72fc6d2575e28fbd026e0a4b7f8c331"></script>
-		<script>
-			var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-			mapOption = {
-				center : new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-				level : 3
-			// 지도의 확대 레벨
-			};
+		<c:choose>
+			<c:when test="${empty requestScope.themeMap.place}">
 
-			var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+				<script type="text/javascript"
+					src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a72fc6d2575e28fbd026e0a4b7f8c331"></script>
+				<script>
+					var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
+					mapOption = {
+						center : new kakao.maps.LatLng(37.52057532965539,
+								127.02430963130959), // 지도의 중심좌표
+						level : 9
+					// 지도의 확대 레벨
+					};
 
-			// 지도가 이동, 확대, 축소로 인해 지도영역이 변경되면 마지막 파라미터로 넘어온 함수를 호출하도록 이벤트를 등록합니다
-			kakao.maps.event.addListener(map, 'bounds_changed', function() {
+					var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 
-				// 지도 영역정보를 얻어옵니다 
-				var bounds = map.getBounds();
+					// 마커를 표시할 위치와 내용을 가지고 있는 객체 배열입니다 
+					var positions = [
+						 	 ]; 
 
-				// 영역정보의 남서쪽 정보를 얻어옵니다 
-				var swLatlng = bounds.getSouthWest();
+					for (var i = 0; i < positions.length; i++) {
+						// 마커를 생성합니다
+						var marker = new kakao.maps.Marker({
+							map : map, // 마커를 표시할 지도
+							position : positions[i].latlng
+						// 마커의 위치
+						});
 
-				// 영역정보의 북동쪽 정보를 얻어옵니다 
-				var neLatlng = bounds.getNorthEast();
+						// 마커에 표시할 인포윈도우를 생성합니다 
+						var infowindow = new kakao.maps.InfoWindow({
+							content : positions[i].content
+						// 인포윈도우에 표시할 내용
+						});
 
-				var resultDiv = document.getElementById('result');
-				resultDiv.innerHTML = message;
+						// 마커에 mouseover 이벤트와 mouseout 이벤트를 등록합니다
+						// 이벤트 리스너로는 클로저를 만들어 등록합니다 
+						// for문에서 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됩니다
+						kakao.maps.event.addListener(marker, 'mouseover',
+								makeOverListener(map, marker, infowindow));
+						kakao.maps.event.addListener(marker, 'mouseout',
+								makeOutListener(infowindow));
+					}
 
-			});
-		</script>
+					// 인포윈도우를 표시하는 클로저를 만드는 함수입니다 
+					function makeOverListener(map, marker, infowindow) {
+						return function() {
+							infowindow.open(map, marker);
+						};
+					}
+
+					// 인포윈도우를 닫는 클로저를 만드는 함수입니다 
+					function makeOutListener(infowindow) {
+						return function() {
+							infowindow.close();
+						};
+
+					}
+				</script>
 
 
+
+			</c:when>
+			<c:otherwise>
+			
+			
+			
+			
+
+
+					<script type="text/javascript"
+						src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a72fc6d2575e28fbd026e0a4b7f8c331"></script>
+					<script>
+					var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
+					mapOption = {
+						center : new kakao.maps.LatLng(37.52057532965539,
+								127.02430963130959), // 지도의 중심좌표
+						level : 9
+					// 지도의 확대 레벨
+					};
+
+					var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+
+					// 마커를 표시할 위치와 내용을 가지고 있는 객체 배열입니다 
+					
+					
+					
+					
+					var positions = [];
+					
+					for(var a = 0; a < '${fn:length(themeMap.place)}'; a++) {
+						positions.push({
+							content : '<div>${place.placeTitle}</div>',
+							latlng : new kakao.maps.LatLng(
+									${place.placeLatitude}, ${place.placeLongitude})
+						})
+					}
+					
+					alert(positions[0].latlng);
+					alert(positions[1].latlng);
+					for (var i = 0; i < positions.length; i++) {
+						// 마커를 생성합니다
+						var marker = new kakao.maps.Marker({
+							map : map, // 마커를 표시할 지도
+							position : positions[i].latlng
+						// 마커의 위치
+						});
+
+						// 마커에 표시할 인포윈도우를 생성합니다 
+						var infowindow = new kakao.maps.InfoWindow({
+							content : positions[i].content
+						// 인포윈도우에 표시할 내용
+						});
+
+						// 마커에 mouseover 이벤트와 mouseout 이벤트를 등록합니다
+						// 이벤트 리스너로는 클로저를 만들어 등록합니다 
+						// for문에서 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됩니다
+						kakao.maps.event.addListener(marker, 'mouseover',
+								makeOverListener(map, marker, infowindow));
+						kakao.maps.event.addListener(marker, 'mouseout',
+								makeOutListener(infowindow));
+					}
+
+					// 인포윈도우를 표시하는 클로저를 만드는 함수입니다 
+					function makeOverListener(map, marker, infowindow) {
+						return function() {
+							infowindow.open(map, marker);
+						};
+					}
+
+					// 인포윈도우를 닫는 클로저를 만드는 함수입니다 
+					function makeOutListener(infowindow) {
+						return function() {
+							infowindow.close();
+						};
+
+					}
+				</script>
+
+			</c:otherwise>
+		</c:choose>
 	</div>
 
 	</div>

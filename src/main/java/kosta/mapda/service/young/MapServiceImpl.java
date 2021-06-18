@@ -8,7 +8,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import kosta.mapda.domain.map.MapCategory;
 import kosta.mapda.domain.map.MapStorage;
 import kosta.mapda.domain.map.Theme;
 import kosta.mapda.domain.member.Member;
@@ -27,6 +26,7 @@ public class MapServiceImpl implements MapService {
 	private final MapStorageRepository mapStorageRepository;
 
 	private final MemberRepository memberRepository;
+	
 
 	/**
 	 * 등록
@@ -161,11 +161,26 @@ public class MapServiceImpl implements MapService {
 	 * 카테고리 별 지도 검색
 	 */
 	@Override
-	public List<Theme> selectByCategory(MapCategory category) {
-		return maprepository.selectByCategory(category);
+	public List<Theme> selectByCategory(Long categoryNo) {
+		return maprepository.selectByCategory(categoryNo);
 	}
 
-	
-	
+	/**
+	 * 키워드로 지도 검색
+	 */
+	@Override
+	public List<Theme> selectByKeyWord(String keyWord) {
+		return maprepository.selectByKeyWord(keyWord);
+	}
+
+	/**
+	 * 키워드 + 카테고리 검색
+	 */
+	@Override
+	public List<Theme> selectByKeyAndCategory(String keyWord, Long categoryNo) {
+		return maprepository.selectByKeyAndCategory(keyWord,categoryNo);
+	}
+
+
 
 }
