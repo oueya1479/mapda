@@ -1,17 +1,18 @@
 package kosta.mapda.service.service;
 
+import java.io.File;
 import java.util.List;
+import java.util.Random;
 
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 
-import org.hibernate.cache.spi.support.AbstractReadWriteAccess.Item;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
-import kosta.mapda.domain.member.Member;
 import kosta.mapda.domain.enterprise.Enterprise;
 import kosta.mapda.domain.service.Coupon;
 import kosta.mapda.domain.service.CouponCategory;
@@ -20,6 +21,9 @@ import kosta.mapda.repository.CouponCategoryRepository;
 import kosta.mapda.repository.CouponRepository;
 import kosta.mapda.repository.MyCouponRepository;
 import kosta.mapda.repository.member.MemberRepository;
+import net.sourceforge.barbecue.Barcode;
+import net.sourceforge.barbecue.BarcodeFactory;
+import net.sourceforge.barbecue.BarcodeImageHandler;
 
 @Service
 @Transactional
@@ -141,17 +145,52 @@ public class CouponServiceImpl implements CouponService {
 	}
 
 	@Override
-	public void insertMyCoupon(Coupon coupon, Long memNo) {
+	public void insertMyCoupon(Coupon coupon, Long memNo, HttpSession session) {
 		
-		MyCoupon mc = new MyCoupon();
-		//mc.setMycpNo(null);
-		mc.setBarcoNo(null);
-		mc.setMember(memberRepository.findById(memNo).orElse(null));
-		mc.setMycpState(1);
-		//mc.setMycpDate(null);
-		mc.setCoupon(coupon);
 		
-		myCouponRepository.save(mc);
+		/*try {
+			int couponSize = 16;
+			final char[] possibleCharacters =
+			    {'1','2','3','4','5','6','7','8','9','0'};
+			  
+			  final int possibleCharacterCount = possibleCharacters.length;
+			  String[] arr = new String[couponSize];
+			  Random rnd = new Random();
+			  int currentIndex = 0;
+			  int i = 0;
+			  while (currentIndex < couponSize) {
+			   StringBuffer buf = new StringBuffer(16);
+			   //i는 8자리의 랜덤값을 의미
+			   for (i= 16; i > 0; i--) {
+			    buf.append(possibleCharacters[rnd.nextInt(possibleCharacterCount)]);
+			   }
+			   String couponNum = buf.toString();
+			 
+			
+			  Barcode barcode = BarcodeFactory.createCode128(couponNum);
+			  
+			  File file = new File("c:/barcode1.png");
+			  
+			  BarcodeImageHandler.savePNG(barcode, file);
+			  
+			  MyCoupon mc = new MyCoupon();
+				//mc.setMycpNo(null);
+				mc.setBarcoNo("1234");
+				mc.setMember(memberRepository.findById(memNo).orElse(null));
+				mc.setMycpState(1);
+				mc.setBarcoImgPath(couponNum);
+				//mc.setMycpDate(null);
+				mc.setCoupon(coupon);
+				
+				myCouponRepository.save(mc);
+			  
+			  }
+			  
+			  }catch(Exception e) {
+				  e.printStackTrace();
+		}*/
+		
+		
 		
 		
 	}

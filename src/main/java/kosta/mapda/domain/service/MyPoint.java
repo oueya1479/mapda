@@ -1,13 +1,16 @@
 package kosta.mapda.domain.service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 
@@ -27,21 +30,21 @@ import lombok.Setter;
 public class MyPoint {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE , generator = "mypt_no_seq")
-	@SequenceGenerator(sequenceName = "mypt_no_seq", allocationSize = 1, name = "mypt_no_seq")
-	private Long myptNo; // 내포인트 번호
-	private int myptRem; // 잔여포인트
-	private int myptPlus; // 누적포인트
-	private int myptMinus; // 소멸포인트
+	@GeneratedValue
+	@Column(name = "mem_no")
+	private Long memNo;
+	private int myPoint;
 	
-	@CreationTimestamp
-	private LocalDateTime myptDate; //포인트 적립 날짜
-	
-	@ManyToOne
-	@JoinColumn(name = "mem_no") //회원번호
-	private Member member;
 	
 	@OneToOne
-	@JoinColumn(name = "pt_no") //포인트번호
-	private Point point;
+	@JoinColumn(name = "mem_no")
+	private Member member;
+	
+	@OneToMany(mappedBy = "myPoint")
+	private List<MyPoint> myPointList;
+	
+	
+	
+	
+
 }

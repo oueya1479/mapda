@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>
@@ -11,17 +12,17 @@
  <script type="text/javascript">
 	$(function(){
 		$(document).on('click', '.site-btn', function() {
-			let couponNo = $(this).attr('name');
+			
 			$.ajax({
 				url:"${pageContext.request.contextPath}/couponAjax/issue",
 				type:"get",
 				dataType:"json",
-				data: {"couponNoStr" : $(this).attr('name'), "memNoStr" : ${mno}},
+				data: {"couponNoStr" : $(this).attr('name')},
 				success: function(data){
 					if(data == -1){
 	                    alert("발급 오류","error","확인",function(){});
 	                } else if(data==1){
-						alert()
+						alert("발급 완료")
 					} 
 				},
 				error : function(err) {
@@ -75,8 +76,9 @@
 	                           <h5><i class="fa fa-user"></i>이용매장 : ${coupon.cpPlace}</h5>  
                            
                            		<h5><i class="fa fa-user"></i>교환처 : ${coupon.member.entName}</h5>  
-                            
+                            	<c:if test="${not empty mno}">
                                 <hr><button class="site-btn" name="${coupon.cpNo}">발급</button>
+                                </c:if>
                         </div>
                     </div>
                     <div class="blog__item__large">

@@ -51,6 +51,7 @@ public class EventServiceImpl implements EventService {
 
 	@Override
 	public Event update(Event event) {
+		
 		return eventRepository.save(event);
 	}
 
@@ -75,6 +76,12 @@ public class EventServiceImpl implements EventService {
 	public Event getEvent(Long evNo) {
 		return eventRepository.findById(evNo).orElse(null);
 	}
-	
+
+	@Override
+	public void deletePost(Long evpNo) {
+		postRepository.deleteById(evpNo);
+	}
+
+
 	
 }

@@ -52,5 +52,9 @@ public interface EventService {
 	Page<EventPost> selectAllPost(Pageable pageable, Long evNo);
 
 	Event getEvent(Long evNo);
+
+	void deletePost(Long evpNo);
+
+	
 	
 }

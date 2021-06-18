@@ -6,6 +6,11 @@
 <html lang="kr">
 
 <head>
+<script type="text/javascript"> 
+
+
+
+</script>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <br><br><br><br><br><br><br>
@@ -133,11 +138,7 @@
 
 							<div class="card text-center card-product">
 								<div class="card-product__img"></div>
-								<div class="card-body">
-
-									<h4 class="card-product__title"></h4>
-
-								</div>
+								
 							</div>
 						</div>
 
@@ -149,14 +150,16 @@
 						<div class="nk-isotope-item" data-filter="Nature">
 							<div class="nk-blog-post">
 								<div class="nk-post-thumb">
-									<a href="${pageContext.request.contextPath}/event/singlePosting/${post.evpNo}"> <img
-										src="${post.evpImg}"
+									<a href="${pageContext.request.contextPath}/event/singlePosting/${post.evpNo}">
+									<img src="${post.evpImg}"
 										alt="" class="nk-img-stretch">
-										
 									</a>
+									
+									<!-- 
 									<div class="nk-post-category">
 										<a href="#">후기 이벤트 참여</a>
 									</div>
+									-->
 								</div>
 								<h2 class="nk-post-title h4">
 									<a href="blog-single.html">${post.evpTitle}</a>
@@ -167,7 +170,42 @@
 								<div class="nk-post-text">
 									${post.evpContent}
 								</div>
-							</div>
+								
+							<c:if test="${memNo eq post.member.memNo}" >
+								<div class="row">
+								<form action="${pageContext.request.contextPath}/event/posting/${post.event.evNo}" method="post" style="margin-left: 10px">
+									<input type="hidden" name="title" value="${post.evpTitle}">
+									<input type="hidden" name="content" value="${post.evpContent}">
+									<input type="hidden" name="evpNo" value="${post.evpNo}">
+									<input class="btn btn-default" type="submit" value="수정" style="background-color: #bbbbff ">
+								</form>
+								
+								<form action="${pageContext.request.contextPath}/event/deletePost" method="post" style="margin-left: 10px">
+									<input type="hidden" name="evNo" value="${post.event.evNo}">
+									<input type="hidden" name="evpNo" value="${post.evpNo}">
+									<input class="btn btn-default" type="submit" value="삭제 " style = "background-color: rgba(255, 0, 0, 0.1);">
+								</form>
+								</div>
+								</c:if>
+
+									<div class="list__posting__text__info">
+										<div class="list__post__text__info__left">
+											<img
+												src="${pageContext.request.contextPath}/img/map/heart.png"
+												alt=""> <span>${event.eventLike}</span>
+										</div>
+										<div class="listing__item__text__info__right">
+											<p style="text-align: right;">
+												<img
+													src="${pageContext.request.contextPath}/img/map/view.png"
+													alt="" style="height: 20px; width: 20px;">
+												${map.mapReadnum}
+											</p>
+										</div>
+									</div>
+
+								</div>
+							
 						</div>
 					 </c:forEach>
 						<!-- END: Post -->
@@ -217,7 +255,7 @@
 				</div>
 			</div>
 		</footer>
-		<!-- END: Footer -->
+		<!-- END: Footer --> 
 
 
 	</div>

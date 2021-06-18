@@ -5,13 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css" rel="stylesheet">
- 
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.min.js"></script>
+<title>Insert title here</title>
 </head>
 <body>
 	<!-- Blog Hero Begin -->
@@ -39,22 +33,32 @@
 			<div class="row">
 				<div class="col-lg-8">
 					<div class="blog__details__text">
-						<div class="row justify-content-center">
-    <div class="col-md-8">
-        <div class="row">
-            <a href="https://unsplash.it/1200/768.jpg?image=251" data-toggle="lightbox" class="col-sm-4" data-title="모달 제목" data-footer="모달 푸터내용">
-                <img src="https://unsplash.it/600.jpg?image=251" class="img-fluid rounded">
-            </a>
-            <a href="https://unsplash.it/1200/768.jpg?image=252" data-toggle="lightbox" data-gallery="example-gallery" class="col-sm-4">
-                <img src="https://unsplash.it/600.jpg?image=252" class="img-fluid rounded">
-            </a>
-            <a href="https://unsplash.it/1200/768.jpg?image=253" data-toggle="lightbox" data-gallery="example-gallery" class="col-sm-4">
-                <img src="https://unsplash.it/600.jpg?image=253" class="img-fluid rounded">
-            </a>
-        </div>
-    </div>
-</div>
-
+						<div id="carouselExampleIndicators" class="carousel slide"
+							data-ride="carousel">
+							<ol class="carousel-indicators">
+								<li data-target="#carouselExampleIndicators" data-slide-to="0"
+									class="active"></li>
+								<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+								<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+							</ol>
+							<div class="carousel-inner">
+								<c:forEach items="${post.imageList}" var="image">
+									<div class="carousel-item active">
+										<img class="d-block w-100" src="${pageContext.request.contextPath}/${image.imageSource}"
+											alt="First slide">
+									</div>
+								</c:forEach>
+							</div>
+							<a class="carousel-control-prev"
+								href="#carouselExampleIndicators" role="button"
+								data-slide="prev"> <span class="carousel-control-prev-icon"
+								aria-hidden="true"></span> <span class="sr-only">Previous</span>
+							</a> <a class="carousel-control-next"
+								href="#carouselExampleIndicators" role="button"
+								data-slide="next"> <span class="carousel-control-next-icon"
+								aria-hidden="true"></span> <span class="sr-only">Next</span>
+							</a>
+						</div>
 						${post.epContent}
 					</div>
 					<div class="blog__details__tags">

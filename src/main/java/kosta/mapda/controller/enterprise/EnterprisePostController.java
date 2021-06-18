@@ -2,7 +2,11 @@ package kosta.mapda.controller.enterprise;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -38,8 +42,6 @@ public class EnterprisePostController {
 	@Autowired
 	private EnterpriseReplyService replyService;
 	
-	private final String SAVE_PATH="/Users/oueya/Desktop/PHOTO/test";
-	
 	@RequestMapping("/list")
 	public String postList(Model model, @RequestParam(defaultValue = "0") int nowpage) {
 		Pageable pageable = PageRequest.of(nowpage, 10, Direction.DESC, "epNo");
@@ -67,14 +69,13 @@ public class EnterprisePostController {
 	public void writeForm() {}
 	
 	@RequestMapping("/write")
-	public ModelAndView write(EnterprisePost post, EnterprisePostImage image) throws IllegalStateException, IOException {
+	public ModelAndView write(HttpSession session, EnterprisePost post, EnterprisePostImage image) throws IllegalStateException, IOException {
 		
 		Member mem = (Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		Long memNo = mem.getMemNo();
 		Enterprise enterprise = new Enterprise();
 		enterprise.setMemNo(memNo);
 		post.setEnterprise(enterprise);
-		image.setEnterprisePost(post);
 		
 		EnterpriseCategory category = new EnterpriseCategory();
 		category.setCgNo(1L);
@@ -83,16 +84,23 @@ public class EnterprisePostController {
 		post.setCategory(category);
 		post.setManagement(management);
 		
+		ServletContext application = session.getServletContext();
+		String path = application.getRealPath("/WEB-INF/save");
 		List<MultipartFile> file = image.getFiles();
+		List<EnterprisePostImage> imageList = new ArrayList<EnterprisePostImage>();
+		
 		for(MultipartFile m : file) {
 			if(m.getSize()>0) {
+				EnterprisePostImage test = new EnterprisePostImage();
+				test.setEnterprisePost(post);
 				String fileName = m.getOriginalFilename();
-				image.setImageSource(fileName);
-				m.transferTo(new File(SAVE_PATH+"/"+fileName));
-				postService.insertPostImage(image);
+				test.setImageSource(path + "/" + fileName);
+				m.transferTo(new File(path+"/"+fileName));
+				imageList.add(test);
 			}
 		}
-		postService.insertPost(post);
+		
+		postService.insertPostImage(imageList);
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("redirect:/enterprise/list");
 		return mv;
@@ -101,6 +109,8 @@ public class EnterprisePostController {
 	@RequestMapping("/post/{epNo}")
 	public String post(Model model, @PathVariable Long epNo) {
 		EnterprisePost post = postService.getPost(epNo);
+		System.out.println("---------");
+		System.out.println(post.getImageList());
 		List<EnterpriseReply> replyList = replyService.getReply(epNo);
 		model.addAttribute("post", post);
 		model.addAttribute("replyList", replyList);

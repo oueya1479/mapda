@@ -41,7 +41,7 @@
         <div class="site-mobile-menu-close mt-3">
           <span class="icon-close2 js-menu-toggle"></span>
         </div>
-      </div>
+      </div> 
       <div class="site-mobile-menu-body"></div>
     </div> <!-- .site-mobile-menu -->
     
@@ -94,13 +94,13 @@
         <div class="row mb-5">
           <div class="col-lg-12">
  
-              <h3 class="text-black mb-5 border-bottom pb-2">여러분의 방문후기를 공유해주세요^^!</h3>
-              
+              <h3 class="text-black mb-5 border-bottom pb-2">
+              ${event.evTitle}</h3>
               
                <form action= "/event/insertPosting/${evNo}"  method = "post" enctype="multipart/form-data">
               <div class="form-group">
                 <label for="company-website-tw d-block">Upload Featured Image</label> <br>
-                
+                <input type="hidden" name="evpNo" value="${evpNo }">
                 <label class="btn btn-primary btn-md btn-file">
                   Browse File<input type="file" name = "file">
                 </label>
@@ -109,7 +109,7 @@
               
               <div class="form-group">
                 <label for="job-title">제목</label>
-                <input type="text" class="form-control" id="job-title" placeholder="제목을 입력해주세요" name="evpTitle">
+                <input type="text" class="form-control" id="job-title" placeholder="제목을 입력해주세요" name="evpTitle" value="${title }">
               </div>
               <!-- <div class="form-group">
                 <label for="job-location">지역</label>
@@ -120,12 +120,12 @@
              <div class="form-group">
                 <label for="job-description">방문후기</label>
                 <div class="editor" id="editor-1">
-                <textarea type="text" class="form-control" id="editor_text"  placeholder="내용을 입력해주세요"  name="evpContent"
-               style= "width:1140px; height:300px"> </textarea><br>
+                <textarea type="text" class="form-control" id="editor_text"  placeholder="내용을 입력해주세요"  name="evpContent" 
+               style= "width:1140px; height:300px">${content}</textarea><br>
                 </div>
               </div>
              
-               
+	
           
 
         <div class="row align-items-center mb-5">

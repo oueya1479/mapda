@@ -47,12 +47,10 @@
 		    @import url(//db.onlinewebfonts.com/c/537c29c4b78689a51f1c48cd802a503f?family=ITC+Grouch);
 		    @import url(//db.onlinewebfonts.com/c/789f9065baf48309d73fd0ff02fe4aec?family=Big+Caslon+Black);
 		    @import url('https://fonts.googleapis.com/css2?family=Archivo:wght@100&display=swap');
-		    .dropdown-item{font-family: ITC Grouch;}
-		    
 		    #password{font-family: 'Archivo', sans-serif; }
 		    #idPlace{font-family: 'Archivo', sans-serif; }
 		    #remember{font-family: adobe-caslon-pro, serif;}
-		    h2, h3, h4, h5, h6, p{font-family: "Noto Sans KR", sans-serif; font-style: normal; font-weight: 700}
+		    h2, p{font-family: "Noto Sans KR", sans-serif; font-style: normal; font-weight: 700}
 		    input.underline { border-left-width:0; border-right-width:0; border-top-width:0; border-bottom-width:1; width:450px; } 
 			#checkbutton{font-family: 'Archivo', sans-serif; ; background-color: white; border:0; outline:0; padding:8px 20px; font-size: 18px}
 			#id{width:405px}
@@ -87,8 +85,6 @@
 		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 		ID : <input type="text" class="underline" name="memId" value="${pageContext.request.userPrincipal.principal.memId}" readonly>
 		<br>Password : <input type="password" class="underline" name="memPw" >	
-		<br>Address : <input type="text" class="underline" name="memAddr" value="${pageContext.request.userPrincipal.principal.memAddr}" >
-		<br>Account : <input type="text" class="underline" name="memAcount" value="${pageContext.request.userPrincipal.principal.memAccount}" >	
 		<br><br><br><br><input id="checkbutton"type="submit" value="submit">
  </form>
 </div> 

@@ -60,7 +60,7 @@ public class EnterprisePostServiceImpl implements EnterprisePostService {
 	}
 
 	@Override
-	public void insertPostImage(EnterprisePostImage image) {
-		imageRepository.save(image);		
+	public void insertPostImage(List<EnterprisePostImage> imageList) {
+		imageRepository.saveAll(imageList);
 	}
 }

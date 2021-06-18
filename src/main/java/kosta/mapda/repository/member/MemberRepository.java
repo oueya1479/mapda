@@ -1,10 +1,14 @@
 package kosta.mapda.repository.member;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import kosta.mapda.domain.map.MapStorage;
+import kosta.mapda.domain.map.Theme;
 import kosta.mapda.domain.member.Member;
 
 public interface MemberRepository extends JpaRepository<Member, Long> {
@@ -18,13 +22,6 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
 	//다시체크해보기T^T
 	@Query("select m from Member m where m.memId=?1")
 	int idcheck(String memId);
-
-	
-	/*
-	@Query("update Member m set m.memPaystatus = 1 where m.memNo = ?1")
-	@Modifying
-	void start(Long memNo);
-	*/
 	
 	Member findByMemId(String memId);
 
@@ -32,13 +29,20 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
 	@Modifying
 	void updateMember(@Param("mem")Member member);
 	
-//	//jpqlT^T...
-//	@Query("select count from Member m where m.memId=?1")
-//	int getMemberCount();
-	
 	@Query("update Member m set m.memPaystatus = 1 where m.memNo = ?1")
 	@Modifying
 	void updatePayStatus(Long memNo);
+	
+	@Query("select m from MapStorage m where m.member.memNo=?1")
+	List<MapStorage> selectByMapNo(Long memNo);
+	
+	
+	/**
+	 * 마이페이지 - 나의 게시 맵 조회 (마이포인트 메뉴에서 사용목적)
+	 * */
+	@Query("")
+	List<Theme> myRecenMaps(Long memNo);
+//	String recentlyList();
 	
 }
 
