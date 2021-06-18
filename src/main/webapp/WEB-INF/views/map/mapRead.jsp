@@ -117,7 +117,7 @@
 					<c:forEach items="${requestScope.themeMap.place}" var="place" varStatus="state">
 						<div class="listing__item">
 							<div class="listing__item__pic set-bg"
-								data-setbg="${pageContext.request.contextPath}/save/${place.photo}">
+								data-setbg="${pageContext.request.contextPath}/save/${place.theme.mapImg}<%-- ${place.photo.ppPath} --%>">
 								<img
 									src="${pageContext.request.contextPath}/img/listing/list_icon-2.png"
 									alt="">
@@ -127,8 +127,7 @@
 										Details</a>
 								</div>
 								
-								\${place.photo}=${place.photo}
-
+								
 							</div>
 							<div class="listing__item__text">
 								<div class="listing__item__text__inside">
