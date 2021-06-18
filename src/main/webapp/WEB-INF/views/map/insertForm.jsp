@@ -46,8 +46,7 @@
 
 						<script type="text/javascript"
 							src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a72fc6d2575e28fbd026e0a4b7f8c331"></script>
-						<script type="text/javascript"
-							src="//dapi.kakao.com/v2/maps/sdk.js?appkey=발급받은 APP KEY를 사용하세요"></script>
+						
 						<script>
 							var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
 							mapOption = {

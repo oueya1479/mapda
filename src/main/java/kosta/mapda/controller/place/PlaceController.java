@@ -261,7 +261,7 @@ public class PlaceController {
 				photo.setPlace(place);
 				
 				String fileName = mf.getOriginalFilename();
-				photo.setPpPath(path + "/" + fileName);
+				photo.setPpPath(fileName);
 				//mf.transferTo(new File(SAVE_PATH + "/" + fileName));
 				mf.transferTo(new File(path + "/" + fileName));
 				photoList.add(photo);

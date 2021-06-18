@@ -63,7 +63,6 @@ public class AjaxController {
 	 */
 	@RequestMapping("/map/check")
 	public String check(@RequestParam("pwd") String pwd) {
-		System.out.println(pwd);
 		Member mem = (Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		String memId = mem.getMemId();
 		Member member = mapService.findInform(memId);

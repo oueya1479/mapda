@@ -38,7 +38,7 @@ public class MapController {
 	@Autowired
 	private  MapService mapService;
 	
-	private final String path = "/Users/soyoung/Desktop/fileSave";	
+	//private final String path = "/Users/soyoung/Desktop/fileSave";	
 
 	/**
 	 * 테마지도 등록 폼
@@ -70,7 +70,6 @@ public class MapController {
 			
 			String fileName = file.getOriginalFilename();
 			theme.setMapImg(fileName);
-			ServletContext application = session.getServletContext();
 			
 //			String webPath = "/static/save";
 //			String realPath = application.getRealPath(webPath);
@@ -81,6 +80,8 @@ public class MapController {
 //			realPath += File.separator +fileName;
 //			File saveFile = new File(realPath);
 			
+			ServletContext application =session.getServletContext();
+			String path = application.getRealPath("/WEB-INF/save");
 			file.transferTo(new File(path+"/"+fileName));
 		}
 		
@@ -156,7 +157,7 @@ public class MapController {
 	 * 삭제 
 	 */
 	@RequestMapping("/deleteMap")
-	public String delete(Long mapNo,  String pwd ) throws Exception {
+	public String delete( Long mapNo ) throws Exception {
 		mapService.deleteMap(mapNo);
 		return "redirect:/map/mapList";
 	}
