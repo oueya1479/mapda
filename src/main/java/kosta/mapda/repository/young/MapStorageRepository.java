@@ -7,7 +7,6 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 import kosta.mapda.domain.map.MapStorage;
-import kosta.mapda.domain.member.Member;
 
 public interface MapStorageRepository extends JpaRepository<MapStorage, Long> {
 

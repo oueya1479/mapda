@@ -1,5 +1,7 @@
 package kosta.mapda.controller.coupon;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,13 +39,16 @@ public class CouponRestController {
 	 * 쿠폰 발급하기
 	 * */
 	@RequestMapping(value="/issue")
-	public int couponIssue(String couponNoStr, String memNoStr) {
+	public int couponIssue(String couponNoStr, HttpSession session) throws Exception{
 		Long cpNo = Long.parseLong(couponNoStr);
-		Long memNo = Long.parseLong(memNoStr);
+		
+		Member mem = (Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		
 		int resultCode = 1;
 		try {//발급완료
+			
 			Coupon coupon = couponservice.selectCoupon(cpNo);
-			couponservice.insertMyCoupon(coupon, memNo);
+			couponservice.insertMyCoupon(coupon, mem.getMemNo(), session);
 			resultCode = 1;
 		}catch(Exception e){//발급실패
 			System.out.println(e.getMessage());

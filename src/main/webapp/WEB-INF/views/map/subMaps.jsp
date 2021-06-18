@@ -58,7 +58,7 @@
 							<div class="listing__details__gallery__pic">
 								<div class="listing__details__gallery__item">
 									<img class="listing__details__gallery__item__large"
-										src="${pageContext.request.contextPath}/img/listing/details/listing-details-1.jpg"
+										src="${pageContext.request.contextPath}/save/${storage.theme.mapImg}
 										alt=""> <span><i class="fa fa-camera"></i> 개수
 										Places</span>
 								</div>

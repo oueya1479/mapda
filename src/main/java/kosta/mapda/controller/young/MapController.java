@@ -4,7 +4,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -36,8 +38,7 @@ public class MapController {
 	@Autowired
 	private  MapService mapService;
 	
-	
-	private final String SAVE_PATH="/Users/soyoung/Desktop/fileSave";
+	private final String path = "/Users/soyoung/Desktop/fileSave";	
 
 	/**
 	 * 테마지도 등록 폼
@@ -50,7 +51,7 @@ public class MapController {
 	 * 테마지도 등록하기
 	 */
 	@RequestMapping("/insertMap")
-	public String insertMap(Theme theme, Long mno, Long categoryNo) throws IOException{
+	public String insertMap(Theme theme, Long mno, Long categoryNo, HttpSession session) throws IOException{
 		Member member = new Member();
 		member.setMemNo(mno);
 		theme.setMember(member);
@@ -63,12 +64,24 @@ public class MapController {
 		category.setCategoryNo(categoryNo);
 		theme.setMapCategory(category);
 		
+		
 		MultipartFile file=theme.getFile();
 		if(file.getSize()>0) {
+			
 			String fileName = file.getOriginalFilename();
 			theme.setMapImg(fileName);
+			ServletContext application = session.getServletContext();
 			
-			file.transferTo(new File(SAVE_PATH+"/"+fileName));
+//			String webPath = "/static/save";
+//			String realPath = application.getRealPath(webPath);
+//			
+//			File f = new File(realPath);
+//			if(f.exists()) 
+//				f.mkdirs();
+//			realPath += File.separator +fileName;
+//			File saveFile = new File(realPath);
+			
+			file.transferTo(new File(path+"/"+fileName));
 		}
 		
 //		String content = theme.getMapContent().replace("<", "&lt;");
@@ -78,6 +91,7 @@ public class MapController {
 		
 		return"redirect:/map/mapList";
 	}
+	
 	/**
 	 * 테마지도 전체 목록 가져오기
 	 */
@@ -115,7 +129,16 @@ public class MapController {
 	 * 수정 폼
 	 */
 	@RequestMapping("/modifyForm")
-	public ModelAndView modifyMap(Long mapNo) {
+	public ModelAndView modifyMap(Long mapNo, HttpSession session/*, Theme theme*/)throws IOException {
+//		MultipartFile file=theme.getFile();
+//		if(file.getSize()>0) {
+//			String fileName = file.getOriginalFilename();
+//			theme.setMapImg(fileName);
+//			ServletContext application = session.getServletContext();
+//			String path = application.getRealPath("/img/save");
+//			file.transferTo(new File(path+"/"+fileName));
+//		}
+		
 		Theme theme= mapService.selectBy(mapNo, false);
 		return new ModelAndView("map/modifyMap", "theme", theme);
 	}
@@ -149,6 +172,7 @@ public class MapController {
 		mv.setViewName("map/manageMap");
 		mv.addObject("themeList", themeList);
 		return mv;
+		
 	}
 	
 	
@@ -178,13 +202,21 @@ public class MapController {
 	 * 지도 검색 - 카테고리별
 	 */
 	@RequestMapping("/selectedMaps")
-	public void selectByCategory(@PathVariable Long categoryNo, Model model) {
-		MapCategory category = new MapCategory();
-		List<Theme> mapList = mapService.selectByCategory(category);
-		model.addAttribute(mapList);
+	public void selectByCategory(Long categoryNo, Model model, String keyWord) {
+		System.out.println("categoryNo = "+categoryNo);
+		System.out.println("keyWord = "+keyWord);
+		
+		List<Theme> mapList=null;
+		if(categoryNo!=0 && keyWord.equals("")) {
+			mapList = mapService.selectByCategory(categoryNo);
+		}else if(categoryNo==0 && !keyWord.equals("")) {
+			mapList = mapService.selectByKeyWord(keyWord);
+		}else {
+			mapList = mapService.selectByKeyAndCategory(keyWord, categoryNo);
+		}
+		model.addAttribute("mapList", mapList);
 	}
 
-	
 	
 }
 

@@ -6,7 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
-import kosta.mapda.domain.map.MapCategory;
 import kosta.mapda.domain.map.Theme;
 
 public interface MapRepository extends JpaRepository<Theme, Long> {
@@ -26,7 +25,21 @@ public interface MapRepository extends JpaRepository<Theme, Long> {
 	@Query("select t from Theme t where t.member.memNo=?1")
 	List<Theme> selectByMemId(Long memNo);
 
-
+	/**
+	 * 카테고리 별 지도 검색
+	 */
 	@Query("select t from Theme t where t.mapCategory.categoryNo=?1")
-	List<Theme> selectByCategory(MapCategory category);
+	List<Theme> selectByCategory(Long categoryNo);
+
+	/**
+	 * 키워드 별 지도 검색
+	 */
+	@Query("select t from Theme t where t.mapTitle like %?1% or t.mapContent like %?1%")
+	List<Theme> selectByKeyWord(String keyWord);
+
+	/**
+	 * 키워드 + 카테고리 검색
+	 */
+	@Query("select t from Theme t where t.mapTitle like %?1% or t.mapContent like %?1% and t.mapCategory.categoryNo=?2")
+	List<Theme> selectByKeyAndCategory(String keyWord, Long categoryNo);
 }

@@ -16,7 +16,7 @@ public interface PlaceReviewService {
 	/**
 	 * 		PhotoReview 등록하기
 	 * */
-	void prInsert(PlacePhotoReview placePhotoReview);
+	void prInsert(PlacePhotoReview placePhotoReview, List<PlacePhotoReviewPhoto> rrprList);
 	
 	/**
 	 * 		reply 삭제하기
@@ -72,4 +72,9 @@ public interface PlaceReviewService {
 	 * 		플레이스 포토리뷰 수정하기
 	 * */
 	PlacePhotoReview prrUpdate(PlacePhotoReview placePhotoReview);
+	
+	/**
+	 * 		플레이스 포토리뷰 포토 사진 등록하기
+	 * */
+	void insertPprPhoto(List<PlacePhotoReviewPhoto> pprpList);
 }

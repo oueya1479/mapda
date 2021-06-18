@@ -2,6 +2,8 @@ package kosta.mapda.service.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.multipart.MultipartFile;
@@ -66,7 +68,7 @@ public interface CouponService {
 	/**
 	 * 쿠폰 발급하기
 	 * */
-	 void insertMyCoupon(Coupon coupon, Long memNo);
+	 void insertMyCoupon(Coupon coupon, Long memNo, HttpSession session);
 	
 	/*
 	 * 쿠폰 카테고리 가져오기

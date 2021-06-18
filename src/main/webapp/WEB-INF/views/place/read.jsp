@@ -21,7 +21,7 @@
       				  dataType: "json", //서버가 보내오는 데이터타입(응답 - text ,html, xml, json)
       				 // data:{placeNo:1} , //서버에게 보낼 parameter정보
       				  success: function(result){ //item 데이터 ==> ["name":값, subject:값, ... ,customer:{id:값, name:값....}]
-      				  		//console.log(result);      				  	       				  		
+      				  		//alert(result);      				  	       				  		
 								var str="";
   				  		if(result==""){
   				  			str+="<p>등록된 포토리뷰가 없습니다.</p>";
@@ -137,6 +137,8 @@
       		}
       		return true;
       	}
+      	
+      	//alert(${placeNo});
   </script>
 
 
@@ -153,7 +155,7 @@
                 <div class="col-lg-8">
                     <div class="listing__hero__option">
                         <div class="listing__hero__icon">
-                            <img src="${pageContext.request.contextPath}/img/placeimges/dadadadada.png" alt="" style="width: 150px; height: 150px;" ><!-- 아이콘 모양? user프로필? -->
+                            <img src="${pageContext.request.contextPath}/${place.placeIconPath}" alt="" style="width: 150px; height: 150px;" ><!-- 아이콘 모양? user프로필? -->
                         </div>
                         <div class="listing__hero__text">
                             <h2>${requestScope.place.placeTitle}</h2>
@@ -187,11 +189,12 @@
                             <p> ${requestScope.place.placeContent}</p>
                         </div>
                         <div class="listing__details__gallery">
-                            <h4>Gallery</h4>
+                            <h4>Gallery(${ppListSize})</h4>
                             <!-- ============================================================ -->
 						<div class="w3-content w3-display-container">
 								<c:forEach items="${ppList}" var="ppList">
-								  	<img class="mySlides" src="${pageContext.request.contextPath}/${ppList.ppPath}" style="height: 400px; width: 100%;">
+								  	<%-- <img class="mySlides" src="${pageContext.request.contextPath}/${ppList.ppPath}" style="height: 400px; width: 100%;"> --%>
+								  	<img class="mySlides" src="C:\\KostaEdu\\thirdProject\\fileSave/${ppList.ppPath}" style="height: 400px; width: 100%;">
 								  </c:forEach>
 							 <button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
 							  <button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">&#10095;</button>
@@ -222,7 +225,6 @@
                 
                         <div class="listing__details__amenities">
                             <h4>HashTag</h4>
-                            
                             <div class="row">
                             	<c:forEach items="${tagStr}" var="tagStr">
 	                                <div class="col-lg-3 col-md-3 col-6">
@@ -245,7 +247,6 @@
                             </div>
                             
                             <div class="listing__details__rating__bar">
-   
                                 <div class="listing__details__rating__bar__item">
                                     <span></span>
                                     <div id="bar3" class="barfiller">
@@ -307,16 +308,21 @@
         			 </c:forEach>                 
                         </div>
            		 </section>  
-           		 
-           		
-           		 
-           		 
+           		<!--  <div class="row">
+					<div class="col-xs-8 col-sm-6"> -->
 <sec:authorize access="isAuthenticated()">
 	<sec:authentication property="principal.memName" var="userName"/>
 	<sec:authentication property="principal.memNo" var="userNo"/>
            		<div class="listing__details__review">
-                            <h4>Add Review</h4>
-                            <form name="replyForm" method="post" action="${pageContext.request.contextPath}/place/replyWrite">
+               <h4>Add Review
+               			<form name=prForm method="post" action="${pageContext.request.contextPath}/place/photoReviewForm" style="text-align: right;">
+                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+                            <input type="hidden" name="placeNo" value="${placeNo}"/>
+                            <input type="hidden" name="memNo" value="${userNo}"/>
+               				 <button type="submit" class="btn" id="prSubmit" style="background-color: teal; font-weight: bolder;">Photo Review 작성하기</button>
+                        </form>
+                </h4>
+                         <form name="replyForm" method="post" action="${pageContext.request.contextPath}/place/replyWrite">
                             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
                             <input type="hidden" name="placeNo" value="${placeNo}"/>
                             <input type="hidden" name="memNo" value="${userNo}"/>
@@ -367,12 +373,51 @@
 		
 		// 아래 코드는 지도 위의 마커를 제거하는 코드입니다
 		// marker.setMap(null);    
-     </script>                           
+     </script>                
+ 				<div class="col-lg-4" style="margin-top: 100px;">
+                    <div class="listing__sidebar">
+                        <div class="listing__sidebar__contact">
+                            <div class="listing__sidebar__contact__map">
+                            	<div>
+                            	
+<input type="button" class="btn btn-outline-danger" value="Modify" id="${map.mapNo}" name="modifyMap" style="width: 100px" />
+<input type="button" class="btn btn-outline-dark" value="Delete" name="deleteMap" id="${map.mapNo}" style="width: 100px; float: right;" />
+  <sec:authorize access="isAuthenticated()">
+				<sec:authentication property="principal.memNo" var="loginMemNo"/>
+					<c:if test="${place.member.memNo== loginMemNo}">
+						<form action="${pageContext.request.contextPath}/place/placeUpdateForm" method="post">
+							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+							<input type="hidden" name="memNo" value="${place.member.memNo}">
+							<input type="hidden" name ="mapNo" value="${place.mapNo}">
+								<div class="listing__text__top__right">
+									<input type=submit class="btn btn-outline-danger" value="Modify" id="${map.mapNo}" name="modifyMap" style="width: 100px" />
+									 <button type="submit" class="btn btn-outline-danger" id="prUpdated" style="background-color: teal; font-weight: bolder;">Modify</button>
+								</div>
+						</form>
+					</c:if>
+			</sec:authorize>	        
+			
+			<form name=prForm method="post" action="${pageContext.request.contextPath}/place/photoReviewForm" style="text-align: right;">
+                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+                            <input type="hidden" name="placeNo" value="${placeNo}"/>
+                            <input type="hidden" name="memNo" value="${userNo}"/>
+               				 <button type="submit" class="btn" id="prSubmit" style="background-color: teal; font-weight: bolder;">Photo Review 작성하기</button>
+                        </form>                  	
+
+          
+          
+                            		
+                            	</div>
+                  			</div>
+                  		</div>
+                  	</div>
+                  </div>	       
                                 <img src="img/listing/details/map-icon.png" alt="">
                             </div>
                         </div>
                       </div>
                   </div>
+                   		
             </div>
         </div>
     </section>

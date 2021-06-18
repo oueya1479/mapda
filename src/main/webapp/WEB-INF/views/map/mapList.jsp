@@ -18,7 +18,7 @@
 
 
 <style>
-/* #this(overflow     : hidden;) */
+
 </style>
 <script src="${pageContext.request.contextPath}/js/jquery-3.3.1.min.js"></script>
 <script>
@@ -157,112 +157,113 @@
 					<div class="tab-content">
 						<div class="tab-pane active" id="tabs-1" role="tabpanel">
 							<div class="row">
-								<c:forEach items="${mapList.content}" var="map">
-									<div class="col-lg-4 col-md-6">
-										<div class="listing__item">
-											<div class="listing__item__pic set-bg"
-												data-setbg="${pageContext.request.contextPath}/img/listing/list-1.jpg">
+								
+										<c:forEach items="${mapList.content}" var="map">
+											<div class="col-lg-4 col-md-6">
+												<div class="listing__item">
+													<div class="listing__item__pic set-bg"
+														data-setbg="${pageContext.request.contextPath}/save/${map.mapImg}">
 
-												<div class="listing__item__pic__tag">
-													${map.mapCategory.categoryName}</div>
-												<div class="listing__item__pic__btns">
-													<a href="#"><span>${map.mapNo}</span></a>
-												</div>
-											</div>
-											<div class="listing__item__text">
-												&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-												&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-												&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-												&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-												
-												<c:set var="name" value="0"/>
-												<c:forEach items="${mapStorage}" var="storage">
-													<c:if test="${storage.theme.mapNo eq map.mapNo}">
-														<c:set var="name" value="1"/>
-													</c:if>
-												</c:forEach>
-		
-												<c:choose>
-													<c:when test="${name eq 1}">
-														<img
-															src="${pageContext.request.contextPath}/img/map/bookmark-tag.png"
-															alt=""
-															style="height: 20px; width: 20px; cursor: pointer;"
-															id="subButton" name="${map.mapNo}">
-													</c:when>
-													<c:otherwise>
-														<img
-															src="${pageContext.request.contextPath}/img/map/ribbon.png"
-															alt=""
-															style="height: 20px; width: 20px; cursor: pointer;"
-															id="subButton" name="${map.mapNo}">
-													</c:otherwise>
-												</c:choose>
-												<c:set var="name" value="0"/>
-												<%-- ${pageContext.request.userPrincipal.principal.memId} --%>
-
-
-
-												<br>
-												<div class="listing__item__text__inside">
-
-													<h5>
-
-														<a
-															href="${pageContext.request.contextPath}/map/mapRead/${map.mapNo}">${map.mapTitle}</a>
-													</h5>
-
-													<div class="listing__item__text__rating">
-
-
-														<div class="listing__item__rating__star">
-															<p id="this">${map.mapContent}</p>
+														<div class="listing__item__pic__tag">
+															${map.mapCategory.categoryName}</div>
+														<div class="listing__item__pic__btns">
+															<a href="#"><span>${map.mapNo}</span></a>
 														</div>
 													</div>
-													<h6 style="text-align: right;">${map.member.memId}</h6>
-													<p>
-													<p>
-												</div>
-												<div class="listing__item__text__info">
-													<div class="listing__item__text__info__left">
-														<img
-															src="${pageContext.request.contextPath}/img/map/heart.png"
-															alt=""> <span>${map.mapLike}</span>
+													<div class="listing__item__text">
+														&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+														&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+														&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+														&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+
+														<c:set var="name" value="0" />
+														<c:forEach items="${mapStorage}" var="storage">
+															<c:if test="${storage.theme.mapNo eq map.mapNo}">
+																<c:set var="name" value="1" />
+															</c:if>
+														</c:forEach>
+
+														<c:choose>
+															<c:when test="${name eq 1}">
+																<img
+																	src="${pageContext.request.contextPath}/img/map/bookmark-tag.png"
+																	alt=""
+																	style="height: 20px; width: 20px; cursor: pointer;"
+																	id="subButton" name="${map.mapNo}">
+															</c:when>
+															<c:otherwise>
+																<img
+																	src="${pageContext.request.contextPath}/img/map/ribbon.png"
+																	alt=""
+																	style="height: 20px; width: 20px; cursor: pointer;"
+																	id="subButton" name="${map.mapNo}">
+															</c:otherwise>
+														</c:choose>
+														<c:set var="name" value="0" />
+														<%-- ${pageContext.request.userPrincipal.principal.memId} --%>
+
+
+
+														<br>
+														<div class="listing__item__text__inside">
+
+															<h5>
+
+																<a
+																	href="${pageContext.request.contextPath}/map/mapRead/${map.mapNo}">${map.mapTitle}</a>
+															</h5>
+
+															<div class="listing__item__text__rating">
+
+
+																<div class="listing__item__rating__star">
+																	<p id="this">${map.mapContent}</p>
+																</div>
+															</div>
+															<h6 style="text-align: right;">${map.member.memId}</h6>
+															<p>
+															<p>
+														</div>
+														<div class="listing__item__text__info">
+															<div class="listing__item__text__info__left">
+																<img
+																	src="${pageContext.request.contextPath}/img/map/heart.png"
+																	alt=""> <span>${map.mapLike}</span>
+															</div>
+															<div class="listing__item__text__info__right">
+																<p style="text-align: right;">
+																	<img
+																		src="${pageContext.request.contextPath}/img/map/view.png"
+																		alt="" style="height: 20px; width: 20px;">
+																	${map.mapReadnum}
+																</p>
+															</div>
+														</div>
 													</div>
-													<div class="listing__item__text__info__right">
-														<p style="text-align: right;">
-															<img
-																src="${pageContext.request.contextPath}/img/map/view.png"
-																alt="" style="height: 20px; width: 20px;">
-															${map.mapReadnum}
-														</p>
-													</div>
 												</div>
-											</div>
-										</div>
 
 
 
 
-										<c:if
-											test="${not empty pageContext.request.userPrincipal.principal.mapList}">
-											<c:set var="doneloop" value="false" />
-											<c:forEach
-												items="${pageContext.request.userPrincipal.principal.mapList}"
-												var="the">
-												<c:if test="${not donloop}">
-													<c:if test="${the.mapNo==map.mapNo}">
-														<input type="button" class="btn btn-outline-danger"
-															value="Modify" id="${map.mapNo}" name="modifyMap"
-															style="width: 100px" />
-														<input type="button" class="btn btn-outline-dark"
-															value="Delete" name="deleteMap" id="${map.mapNo}"
-															style="width: 100px; float: right;" />
-														<c:set var="doneloop" value="true" />
-													</c:if>
+												<c:if
+													test="${not empty pageContext.request.userPrincipal.principal.mapList}">
+													<c:set var="doneloop" value="false" />
+													<c:forEach
+														items="${pageContext.request.userPrincipal.principal.mapList}"
+														var="the">
+														<c:if test="${not donloop}">
+															<c:if test="${the.mapNo==map.mapNo}">
+																<input type="button" class="btn btn-outline-danger"
+																	value="Modify" id="${map.mapNo}" name="modifyMap"
+																	style="width: 100px" />
+																<input type="button" class="btn btn-outline-dark"
+																	value="Delete" name="deleteMap" id="${map.mapNo}"
+																	style="width: 100px; float: right;" />
+																<c:set var="doneloop" value="true" />
+															</c:if>
+														</c:if>
+													</c:forEach>
 												</c:if>
-											</c:forEach>
-										</c:if>
 
 
 
@@ -272,14 +273,15 @@
 
 
 
-									</div>
-									<form name="requestForm" method="post" id="requestForm">
-										<input type=hidden name="mapNo" value="${map.mapNo}">
-										
-										<input type=hidden name="memPw" value="${map.member.memPw}"
-											id="memPw">
-									</form>
-								</c:forEach>
+											</div>
+											<form name="requestForm" method="post" id="requestForm">
+												<input type=hidden name="mapNo" value="${map.mapNo}">
+
+												<input type=hidden name="memPw" value="${map.member.memPw}"
+													id="memPw">
+											</form>
+										</c:forEach>
+									
 							</div>
 						</div>
 					</div>

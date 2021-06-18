@@ -31,10 +31,9 @@ public class EventController {
 
 	@Autowired
 	private EventService eventService;
-
+  
 	private final String SAVE_PATH = "/Users/baeeunjin/Desktop/fileSave";	
 
-	
 	/**
 	 * 이벤트 글 등록폼 
 	 * */
