@@ -37,5 +37,5 @@ public interface EnterprisePostService {
 	 */
 	List<EnterpriseCategory> getCategory();
 
-	void insertPostImage(EnterprisePostImage image);
+	void insertPostImage(List<EnterprisePostImage> imageList);
 }
