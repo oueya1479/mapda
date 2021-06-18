@@ -69,9 +69,9 @@ public class PlaceReviewServiceImpl implements PlaceReviewService {
 	}
 
 	@Override
-	public void prInsert(PlacePhotoReview placePhotoReview) {
-		// TODO Auto-generated method stub
-		
+	public void prInsert(PlacePhotoReview placePhotoReview, List<PlacePhotoReviewPhoto> pprpList) {
+		pprRepository.save(placePhotoReview);
+		pprpRepository.saveAll(pprpList);
 	}
 
 	@Override
@@ -99,6 +99,12 @@ public class PlaceReviewServiceImpl implements PlaceReviewService {
 		PlacePhotoReview dbPpr = pprRepository.findById(placePhotoReview.getPprNo()).orElse(null);
 		dbPpr.setPprContent(placePhotoReview.getPprContent().replace("<", "&lt;"));
 		return dbPpr;
+	}
+	
+	// 사용 안됨
+	@Override
+	public void insertPprPhoto(List<PlacePhotoReviewPhoto> pprpList) {
+		 List<PlacePhotoReviewPhoto> pppp= pprpRepository.saveAll(pprpList);
 	}
 
 //	@Override

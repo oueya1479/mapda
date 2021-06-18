@@ -1,14 +1,18 @@
 package kosta.mapda.controller.place;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,6 +24,7 @@ import kosta.mapda.domain.Management;
 import kosta.mapda.domain.map.Place;
 import kosta.mapda.domain.map.PlacePhoto;
 import kosta.mapda.domain.map.PlacePhotoReview;
+import kosta.mapda.domain.map.PlacePhotoReviewPhoto;
 import kosta.mapda.domain.map.PlaceReview;
 import kosta.mapda.domain.map.Theme;
 import kosta.mapda.domain.member.Member;
@@ -36,10 +41,7 @@ public class PlaceController {
 	@Autowired
 	private PlaceReviewService prService;
 	
-	//@Autowired
-	//private PlacePhoto placePhoto;
-	
-	private final String SAVE_PATH = "C:\\KostaEdu\\thirdProject\\fileSave";
+	//private final String SAVE_PATH = "C:\\KostaEdu\\thirdProject\\fileSave";
 	//C:\KostaEdu\Spring\SpringWork\mapda\src\main\resources\static\img\placeimges
 	
 	/**
@@ -91,7 +93,7 @@ public class PlaceController {
 		mv.addObject("starAvg", starAvg);
 		mv.addObject("starAvgPer", starAvgPer);
 		mv.addObject("totalReviewCount", totalReviewCount);
-		
+		mv.addObject("ppListSize", ppList.size());
 		return mv;
 	}
 	
@@ -99,7 +101,8 @@ public class PlaceController {
 	 * 		댓글 등록하기
 	 * */
 	@RequestMapping("/replyWrite")
-	public String insert(PlaceReview placeReview, Long placeNo, Member member, Management management,HttpServletRequest request, HttpServletResponse response) {
+	public String insert(PlaceReview placeReview, Long placeNo, Member member, Management management,
+			HttpServletRequest request, HttpServletResponse response) {
 		Long memNo =Long.valueOf(request.getParameter("memNo"));
 		String prContent = request.getParameter("prContent");
 
@@ -124,19 +127,82 @@ public class PlaceController {
 	}
 	
 	/**
+	 * 		포토리뷰 등록하기 폼
+	 * */
+	@RequestMapping("/photoReviewForm")
+	public void photoReviewForm(Model model, Long placeNo, Long memNo) {
+		model.addAttribute("placeNo", placeNo);
+		model.addAttribute("memNo", memNo);
+	}
+	
+	/**
+	 * 		포토리뷰 등록하기
+	 * */
+	@RequestMapping("/photoReviewInsert")
+	public String photoReviewInsert(
+			PlacePhotoReview placePhotoReview, Long placeNo, HttpServletRequest request,
+			PlacePhotoReviewPhoto pprp, HttpSession session) throws IOException, IllegalStateException{
+		
+		placePhotoReview.setManagement(new Management(5L));
+		placePhotoReview.setPlace(new Place(placeNo));
+		Member member = (Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		System.out.println("memNo= " + member.getMemNo());
+		placePhotoReview.setMember(member);
+		System.out.println("memId = " + member.getMemId());
+		placePhotoReview.setPprStatus(1);
+		System.out.println("placeNo = " + placeNo);
+		
+		List<MultipartFile> fileList = pprp.getFiles();
+		
+		List<PlacePhotoReviewPhoto> pprpList = new ArrayList<PlacePhotoReviewPhoto>();
+		
+		ServletContext application = session.getServletContext();
+		String path = application.getRealPath("/WEB-INF/save");
+		for(MultipartFile mf : fileList) {
+			if(mf.getSize()>0) {
+				PlacePhotoReviewPhoto photo = new PlacePhotoReviewPhoto();
+				photo.setPpr(placePhotoReview);
+				String fileName = mf.getOriginalFilename();
+				photo.setPprpPath(path + "/" + fileName);
+				mf.transferTo(new File(path + "/" + fileName));
+				pprpList.add(photo);
+			}
+		}
+		System.out.println("pprpList = " + pprpList);
+		
+		prService.prInsert(placePhotoReview , pprpList);//부모님
+		
+		//prService.insertPprPhoto(pprpList);
+		
+		
+		
+		return "redirect:/place/read/"+placeNo;
+	}
+	
+	/**
 	 * 		플레이스 등록하기 폼
 	 * */
 	@RequestMapping("/placeInsertForm")
-	public void placeInsertForm(Model model, Long mapNo, Long memNo) {
-		model.addAttribute("memNo", memNo);
+	public void placeInsertForm(Model model, Long mapNo , Long memNo) {
 		model.addAttribute("mapNo", mapNo);
+		model.addAttribute("memNo", memNo);
+	}
+	
+	/**
+	 * 		플레이스 수정하기 폼
+	 * */
+	@RequestMapping("/placeUpdateForm")
+	public void placeUpdateForm(Model model, Long mapNo, Long memNo) {
+		model.addAttribute("mapNo", mapNo);
+		model.addAttribute("memNo", memNo);
 	}
 	
 	/**
 	 * 		플레이스 등록하기
 	 * */
 	@RequestMapping("/placeInsert")
-	public String placeInsert(Place place, Long mapNo, HttpServletRequest request, Member member) {
+	public String placeInsert(Place place, Long mapNo, HttpServletRequest request, Member member, 
+			PlacePhoto placePhoto,HttpSession session) throws IllegalStateException, IOException{
 		String t1 = request.getParameter("hashTag1");
 		String t2 = request.getParameter("hashTag2");
 		String t3 = request.getParameter("hashTag3");
@@ -175,28 +241,35 @@ public class PlaceController {
 			case 12: place.setPlaceIconName("반려동물"); place.setPlaceIconPath("img/placeicon/pet1.png"); break;
 			case 13: place.setPlaceIconName("데이트"); place.setPlaceIconPath("img/placeicon/date1.png"); break;
 			case 14: place.setPlaceIconName("드라이브"); place.setPlaceIconPath("img/placeicon/drive1.png"); break;
-			default: System.out.println("오류"); break;
+			default: System.out.println("오류place.getPlaceIconNo()"); break;
 		}
-
+		
 		place.setManagement(new Management(3L));
 		place.setTheme(new Theme(mapNo));
 		place.setMember(new Member(member.getMemNo()));
-		
 		// 플레이스 사진 등록
-//		List<MultipartFile> fileList = place.getFile();
-//		
-//		for(MultipartFile file : fileList) {
-//			String fileName = file.getOriginalFilename();
-//			long fileSize =  file.getSize();
-//		}
 		
-		//placePhoto.setPpPath(totalTag);
+		List<MultipartFile> fileList = placePhoto.getFiles();
+		List<PlacePhoto> photoList = new ArrayList<PlacePhoto>();
 		
+		ServletContext application = session.getServletContext();
+		String path = application.getRealPath("/WEB-INF/save");
 		
+		for(MultipartFile mf : fileList) {
+			if(mf.getSize()>0) {
+				PlacePhoto photo = new PlacePhoto();
+				photo.setPlace(place);
+				
+				String fileName = mf.getOriginalFilename();
+				photo.setPpPath(path + "/" + fileName);
+				//mf.transferTo(new File(SAVE_PATH + "/" + fileName));
+				mf.transferTo(new File(path + "/" + fileName));
+				photoList.add(photo);
+			}
+		}
 		
-		
-		/////////////////////////////////////////////////
 		placeService.insert(place);
+		placeService.insertPlacePhoto(photoList);
 		return "redirect:/map/mapRead/"+mapNo;
 	}
 	
@@ -253,13 +326,12 @@ public class PlaceController {
 	 * */
 	@RequestMapping("/placePhotoReviewUpdate/placeNo={placeNo}&memId={memId}/{pprNo}")
 	public String placePhotoReviewUpdate(@PathVariable Long placeNo, @PathVariable String memId,@PathVariable Long pprNo, PlacePhotoReview placePhotoReview) {
-		PlacePhotoReview dbPpr = prService.prrUpdate(placePhotoReview);
+		/* PlacePhotoReview dbPpr = */ 
+		prService.prrUpdate(placePhotoReview);
 //		System.out.println("placePhotoReview = " + placePhotoReview.getPprNo());
 //		System.out.println("dbPpr.getPprNo() = " +dbPpr.getPprNo());
 //		System.out.println("dbPpr.getPprContent() = "+dbPpr.getPprContent());
 		return "redirect:/place/myReplyReview/placeNo="+placeNo+"&memId="+memId;
 	}
-	
-
 	
 }

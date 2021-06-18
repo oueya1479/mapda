@@ -14,7 +14,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
 import org.hibernate.annotations.CreationTimestamp;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import kosta.mapda.domain.Management;
 import kosta.mapda.domain.member.Member;
@@ -30,6 +29,9 @@ import lombok.Setter;
 @NoArgsConstructor
 public class PlacePhotoReview {	// Place_Photo_Review
 	
+//	@Transient
+//	private MultipartFile file;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PPR_PPRNo_seq")
 	@SequenceGenerator(sequenceName = "PPR_PPRNo_seq", allocationSize = 1, name = "PPR_PPRNo_seq")
@@ -38,7 +40,6 @@ public class PlacePhotoReview {	// Place_Photo_Review
 	private String pprContent;
 	
 	@CreationTimestamp
-	@DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
 	private LocalDateTime pprRegdate;
 	
 	private int pprStar;
@@ -56,8 +57,8 @@ public class PlacePhotoReview {	// Place_Photo_Review
 	@JoinColumn(name = "mng_no")
 	private Management management;
 	
-	//@JsonIgnore
-	@OneToMany(mappedBy = "ppr", cascade = CascadeType.ALL)
-	private List<PlacePhotoReviewPhoto> pprpList;	// place photo review photo
 	
+	//@JsonIgnore
+	@OneToMany(mappedBy = "ppr" ,cascade = CascadeType.ALL)
+	private List<PlacePhotoReviewPhoto> pprpList;	// place photo review photo
 }

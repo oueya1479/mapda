@@ -3,6 +3,7 @@ package kosta.mapda.domain.map;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -31,7 +32,7 @@ import lombok.Setter;
 public class Place {
 	
 	@Transient //테이블에 컬럼으로 생성되지 않게 ....
-	private List<MultipartFile> file;
+	private MultipartFile file;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PL_placeNo_seq")
@@ -70,18 +71,15 @@ public class Place {
 	@JoinColumn(name = "map_no")
 	private Theme theme;
 	
-	@OneToMany(mappedBy ="place")
-	private List<PlacePhoto> photo;
+	@OneToMany(mappedBy = "place", cascade = CascadeType.ALL)
+	private List<PlacePhoto> ppList;		// place photo
 	
 //	@OneToMany(mappedBy = "place", cascade = CascadeType.ALL)
-//	private List<PlacePhoto> ppList;		// place photo
-//	
-//	@OneToMany(mappedBy = "place", cascade = CascadeType.ALL)
 //	private List<PlaceReview> prList;		// place reply
-//
+
 //	@OneToMany(mappedBy = "place", cascade = CascadeType.ALL)
 //	private List<PlacePhotoReview> pprList;		// place photo review
-//	
+
 	
 	public Place(Long placeNo) {
 		this.placeNo = placeNo;
