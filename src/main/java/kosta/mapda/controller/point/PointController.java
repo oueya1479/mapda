@@ -6,8 +6,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -28,24 +30,18 @@ public class PointController {
 	private PointService pointService;
 	
 	/**
-	 * 적립 가능한 포인트 리스트 가져오기
+	 * 마이페이지 - 적립 가능한 포인트 리스트 가져오기
 	 */
 	@RequestMapping("/myPoint")
-	public String myPoint(HttpServletRequest request, Model model) {
+	public String myPoint(Model model) {
 		
+		Member mem = (Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
-		HttpSession session = request.getSession();
-		Member member = new Member();
-		member.setMemNo(11L);
-		member.setMemId("seo");
-		member.setMemPw("1234");
-		session.setAttribute("member", member);
+		List<Theme> myThemeList = pointService.selectMyThemeMyPoint(mem.getMemNo());
 		
-		List<Theme> myThemeList = pointService.selectMyThemeMyPoint(member.getMemNo());
+		List<Place> myPlaceList = pointService.selectMyPlaceMyPoint(mem.getMemNo()); 
 		
-		List<Place> myPlaceList = pointService.selectMyPlaceMyPoint(member.getMemNo()); 
-		
-		List<PlacePhotoReview> myPhotoReviewList = pointService.selectMyPlacePhotoMyPoint(member.getMemNo());
+		List<PlacePhotoReview> myPhotoReviewList = pointService.selectMyPlacePhotoMyPoint(mem.getMemNo());
 		
 		model.addAttribute("myThemeList" , myThemeList);
 		model.addAttribute("myPlaceList" , myPlaceList);

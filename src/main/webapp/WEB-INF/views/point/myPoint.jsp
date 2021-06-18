@@ -2,11 +2,19 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt"%>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
 
 <!DOCTYPE html>
 <html lang="zxx">
 
 <head>
+
+<!-- memNo 변수설정 -->
+<sec:authorize access="isAuthenticated()">
+<sec:authentication property="principal.memNo" var="mno" />
+</sec:authorize>
+
 <style type="text/css">
 	table {
 		width: 45em;
@@ -57,18 +65,21 @@
 
 $(document).on('click','#plus',function(){
 	if(confirm("적립 해당 게시물은 30일간 삭제불가합니다. 적립하시겠습니까?") == true){
-		alert(1);
-		let test = $(this).val();
+		
 		$.ajax({
-			url: "${pageContext.request.contextPath}/coupon/pointPlus",
-			type: "post",
-			dataType: "text",
-			data: {"id" : test}
-			success : function(){
-				alert("적립완료");
+			url: "${pageContext.request.contextPath}/point/pointPlus",
+			type: "get",
+			dataType: "json",
+			data: {"pointNoStr" : $(this).attr('name')},
+			success: function(data){
+				if(data == -1){
+                    alert("발급 오류","error","확인",function(){});
+                } else if(data==1){
+					alert("발급 완료")
+				} 
 			},
-			error : function(){
-				alert("에러");
+			error : function(err) {
+				console.log(err + "에러 발생");
 			}
 			
 			
@@ -176,7 +187,7 @@ $(document).on('click','#plus',function(){
 						<c:if test="${today > writeDate2 }">
 							<td>${status.count}</td>
 							<td>&nbsp;${myPlace.placeTitle}</td>
-							<td><button id="plus" value="${myPlace.placeTitle}"> 적립 </button></td>
+							<td><button id="plus" name="${myPlace.placeNo}"> 적립 </button></td>
 
 							</c:if>
 						</tr>				
@@ -206,7 +217,7 @@ $(document).on('click','#plus',function(){
 						<c:if test="${today == writeDate3 }">
 							<td>${status.count}</td>
 							<td>&nbsp;${myReview.place.placeTitle} 에 대한 포토리뷰</td>
-							<td><button id="plus"> 적립 </button></td>
+							<td><button id="plus" > 적립 </button></td>
 
 							</c:if>
 						</tr>				

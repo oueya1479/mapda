@@ -125,8 +125,8 @@ public class Member implements UserDetails{
 		// TODO Auto-generated method stub
 		return false;
 	}
-	@OneToMany(mappedBy = "member")
-	private List<MyPoint> myPointList;
+	@OneToOne(mappedBy = "member")
+	private MyPoint myPoint;
 	
 	public Member(Long memNo) {
 		this.memNo = memNo;

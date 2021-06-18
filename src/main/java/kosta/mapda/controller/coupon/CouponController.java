@@ -68,24 +68,13 @@ public class CouponController {
 		
 		couponList = service.selectAll(pageable,keyword,cetegory);
 		
-		/*
-		 * int size = couponList.getContent().size(); for(int i = 0; i < size; i++) {
-		 * if(couponList.getContent().get(i).getCouponCategory().getCpcaNo() == c)) {
-		 * couponList.getContent().get(i) } }
-		 */
 		
 		List<CouponCategory> categoryList = service.couponCategory();
 		
-		//
-		/*HttpSession session = request.getSession();
-		Member member = new Member();
-		member.setMemNo(11L);
-		member.setMemId("seo");
-		member.setMemPw("1234");
-		session.setAttribute("member", member);*/
+	
 		
 		System.out.println("---------------");
-	
+		//System.out.println(couponList.getContent().);
 		
 		
 		model.addAttribute("couponList", couponList);
