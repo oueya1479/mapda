@@ -106,7 +106,7 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public List<Theme> myRecenMaps(Long memNo) {
 		// TODO Auto-generated method stub
-		return null;
+		return memRepository.myRecenMaps(memNo);
 	}
 
 

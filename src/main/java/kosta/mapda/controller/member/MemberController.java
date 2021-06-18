@@ -136,7 +136,7 @@ public class MemberController {
 	}
 	
 	//마이페이지 최근 지도 가져오기
-	@RequestMapping("/mapList")
+	@RequestMapping("/profile")
 	public void recenList(HttpServletRequest request, Model model, @RequestParam(defaultValue = "0") int nowPage) {
 		
 		Pageable pageable = PageRequest.of(nowPage, 10, Direction.DESC, "mapNo");

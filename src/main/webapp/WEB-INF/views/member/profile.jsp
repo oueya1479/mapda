@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -47,7 +52,7 @@
                     <div class="listing__details__text">
                         <div class="listing__details__about">
                             <h4>Recently My Maps</h4>
-                            ${theme.mapStorage}
+                            ${mapList.content}
                         </div>
                         <div class="listing__details__comment">
                             <h4>Recently My Comments</h4>
