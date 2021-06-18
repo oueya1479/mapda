@@ -21,10 +21,11 @@ public class PointRestController {
 	 *  포인트 적립처리 
 	 * */
 	@RequestMapping(value= "/pointPlus")
-	public int pointPlus(String pointNoStr, Model model) {
-		Long postNo = Long.parseLong(pointNoStr);
+	public int pointPlus(List<String> postObject , Model model) {
 		
 		Member mem = (Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		
+		System.out.println("postObject");
 		
 		int resultCode = 1;
 		

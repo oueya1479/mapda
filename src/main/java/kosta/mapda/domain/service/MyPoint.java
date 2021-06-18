@@ -35,7 +35,6 @@ public class MyPoint {
 	private Long memNo;
 	private int myPoint;
 	
-	
 	@OneToOne
 	@JoinColumn(name = "mem_no")
 	private Member member;

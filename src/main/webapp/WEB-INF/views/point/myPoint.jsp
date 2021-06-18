@@ -70,12 +70,12 @@ $(document).on('click','#plus',function(){
 			url: "${pageContext.request.contextPath}/point/pointPlus",
 			type: "get",
 			dataType: "json",
-			data: {"pointNoStr" : $(this).attr('name')},
+			data: {"postObject" : $(this).attr('name')},
 			success: function(data){
 				if(data == -1){
-                    alert("발급 오류","error","확인",function(){});
+                    alert("적립 오류","error","확인",function(){});
                 } else if(data==1){
-					alert("발급 완료")
+					alert("적립 완료")
 				} 
 			},
 			error : function(err) {
@@ -187,7 +187,7 @@ $(document).on('click','#plus',function(){
 						<c:if test="${today > writeDate2 }">
 							<td>${status.count}</td>
 							<td>&nbsp;${myPlace.placeTitle}</td>
-							<td><button id="plus" name="${myPlace.placeNo}"> 적립 </button></td>
+							<td><button id="plus" name="${myPlace}"> 적립 </button></td>
 
 							</c:if>
 						</tr>				
