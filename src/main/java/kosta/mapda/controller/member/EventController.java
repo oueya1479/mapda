@@ -32,7 +32,7 @@ public class EventController {
 	@Autowired
 	private EventService eventService;
 
-	private final String SAVE_PATH = "/Users/baeeunjin/Desktop/fileSave";	
+	private final String SAVE_PATH = "/Users/soyoung/Desktop/fileSave";	
 	
 	
 	/**

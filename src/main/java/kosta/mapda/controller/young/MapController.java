@@ -38,6 +38,7 @@ public class MapController {
 	@Autowired
 	private  MapService mapService;
 	
+	private final String path = "/Users/soyoung/Desktop/fileSave";	
 
 	/**
 	 * 테마지도 등록 폼
@@ -64,17 +65,21 @@ public class MapController {
 		theme.setMapCategory(category);
 		
 		
-		
-		
-		
 		MultipartFile file=theme.getFile();
 		if(file.getSize()>0) {
+			
 			String fileName = file.getOriginalFilename();
 			theme.setMapImg(fileName);
-			
 			ServletContext application = session.getServletContext();
-			String path = application.getRealPath("/WEB-INF/save");
 			
+//			String webPath = "/static/save";
+//			String realPath = application.getRealPath(webPath);
+//			
+//			File f = new File(realPath);
+//			if(f.exists()) 
+//				f.mkdirs();
+//			realPath += File.separator +fileName;
+//			File saveFile = new File(realPath);
 			
 			file.transferTo(new File(path+"/"+fileName));
 		}
@@ -86,6 +91,7 @@ public class MapController {
 		
 		return"redirect:/map/mapList";
 	}
+	
 	/**
 	 * 테마지도 전체 목록 가져오기
 	 */
@@ -123,7 +129,16 @@ public class MapController {
 	 * 수정 폼
 	 */
 	@RequestMapping("/modifyForm")
-	public ModelAndView modifyMap(Long mapNo) {
+	public ModelAndView modifyMap(Long mapNo, HttpSession session/*, Theme theme*/)throws IOException {
+//		MultipartFile file=theme.getFile();
+//		if(file.getSize()>0) {
+//			String fileName = file.getOriginalFilename();
+//			theme.setMapImg(fileName);
+//			ServletContext application = session.getServletContext();
+//			String path = application.getRealPath("/img/save");
+//			file.transferTo(new File(path+"/"+fileName));
+//		}
+		
 		Theme theme= mapService.selectBy(mapNo, false);
 		return new ModelAndView("map/modifyMap", "theme", theme);
 	}
@@ -193,25 +208,15 @@ public class MapController {
 		
 		List<Theme> mapList=null;
 		if(categoryNo!=0 && keyWord.equals("")) {
-			System.out.println(1);
 			mapList = mapService.selectByCategory(categoryNo);
-			
 		}else if(categoryNo==0 && !keyWord.equals("")) {
-			System.out.println(2);
 			mapList = mapService.selectByKeyWord(keyWord);
-			
-			
 		}else {
-			System.out.println(3);
 			mapList = mapService.selectByKeyAndCategory(keyWord, categoryNo);
-			
 		}
-		System.out.println(mapList);
-		
 		model.addAttribute("mapList", mapList);
 	}
 
-	
 	
 }
 

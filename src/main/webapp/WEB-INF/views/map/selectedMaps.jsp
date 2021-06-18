@@ -176,7 +176,7 @@
 											<div class="col-lg-4 col-md-6">
 												<div class="listing__item">
 													<div class="listing__item__pic set-bg"
-														data-setbg="${pageContext.request.contextPath}/img/listing/list-1.jpg">
+														data-setbg="${pageContext.request.contextPath}/save/${map.mapImg}">
 
 														<div class="listing__item__pic__tag">
 															${map.mapCategory.categoryName}</div>

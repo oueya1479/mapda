@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Transient;
 
@@ -69,6 +70,8 @@ public class Place {
 	@JoinColumn(name = "map_no")
 	private Theme theme;
 	
+	@OneToMany(mappedBy ="place")
+	private List<PlacePhoto> photo;
 	
 //	@OneToMany(mappedBy = "place", cascade = CascadeType.ALL)
 //	private List<PlacePhoto> ppList;		// place photo

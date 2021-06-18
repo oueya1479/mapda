@@ -3,7 +3,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -110,7 +111,7 @@
 				<div class="col-lg-12">
 					<div class="section-title">
 						<h2>All your Maps in here!</h2>
-						
+
 					</div>
 				</div>
 			</div>
@@ -152,24 +153,26 @@
 					<div class="tab-content">
 						<div class="tab-pane active" id="tabs-1" role="tabpanel">
 							<div class="row">
-								<c:forEach items="${themeList}" var="map">
-									<div class="col-lg-4 col-md-6">
-										<div class="listing__item">
-											<div class="listing__item__pic set-bg"
-												data-setbg="${pageContext.request.contextPath}/img/listing/list-1.jpg">
+								
+										<c:forEach items="${themeList}" var="map">
+											<div class="col-lg-4 col-md-6">
+												<div class="listing__item">
+													<div class="listing__item__pic set-bg"
+														data-setbg="${pageContext.request.contextPath}/save/${map.mapImg}"
+														>
 
-												<div class="listing__item__pic__tag">
-													${map.mapCategory.categoryName}</div>
-												<div class="listing__item__pic__btns">
-													<a href="#"><span>${map.mapNo}</span></a>
-												</div>
-											</div>
-											<div class="listing__item__text">
-												&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-												&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-												&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-												&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-												 <%-- <c:choose>
+														<div class="listing__item__pic__tag">
+															${map.mapCategory.categoryName}</div>
+														<div class="listing__item__pic__btns">
+															<a href="#"><span>${map.mapNo}</span></a>
+														</div>
+													</div>
+													<div class="listing__item__text">
+														&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+														&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+														&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+														&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+														<%-- <c:choose>
 												 	<c:when test="${empty pageContext.request.userPrincipal}">
 												 	<img
 													src="${pageContext.request.contextPath}/img/map/ribbon.png"
@@ -189,60 +192,62 @@
 													id="subButton"><br>
 													</c:otherwise>
 												</c:choose>  --%>
-												 
-												<%-- <img
+
+														<%-- <img
 													src="${pageContext.request.contextPath}/img/map/ribbon.png"
 													alt="" style="height: 20px; width: 20px; cursor: pointer;"
 													id="subButton"
-													onclick="javascript:location.href='${pageContext.request.contextPath}/map/mapRead/${map.mapNo}'"><br> --%> 
-												<div class="listing__item__text__inside">
+													onclick="javascript:location.href='${pageContext.request.contextPath}/map/mapRead/${map.mapNo}'"><br> --%>
+														<div class="listing__item__text__inside">
 
-													<h5>
+															<h5>
 
-														<a
-															href="${pageContext.request.contextPath}/map/mapRead/${map.mapNo}">${map.mapTitle}</a>
-													</h5>
+																<a
+																	href="${pageContext.request.contextPath}/map/mapRead/${map.mapNo}">${map.mapTitle}</a>
+															</h5>
 
-													<div class="listing__item__text__rating">
+															<div class="listing__item__text__rating">
 
 
-														<div class="listing__item__rating__star">
-															<p>${map.mapContent}</p>
+																<div class="listing__item__rating__star">
+																	<p>${map.mapContent}</p>
+																</div>
+															</div>
+															<h6 style="text-align: right;">${map.member.memId}</h6>
+															<p>
+															<p>
+														</div>
+														<div class="listing__item__text__info">
+															<div class="listing__item__text__info__left">
+																<img
+																	src="${pageContext.request.contextPath}/img/map/heart.png"
+																	alt=""> <span>${map.mapLike}</span>
+															</div>
+															<div class="listing__item__text__info__right">
+																<p style="text-align: right;">
+																	<img
+																		src="${pageContext.request.contextPath}/img/map/view.png"
+																		alt="" style="height: 20px; width: 20px;">
+																	${map.mapReadnum}
+																</p>
+															</div>
 														</div>
 													</div>
-													<h6 style="text-align: right;">${map.member.memId}</h6>
-													<p>
-													<p>
 												</div>
-												<div class="listing__item__text__info">
-													<div class="listing__item__text__info__left">
-														<img
-															src="${pageContext.request.contextPath}/img/map/heart.png"
-															alt=""> <span>${map.mapLike}</span>
-													</div>
-													<div class="listing__item__text__info__right">
-														<p style="text-align: right;">
-															<img
-																src="${pageContext.request.contextPath}/img/map/view.png"
-																alt="" style="height: 20px; width: 20px;">
-															${map.mapReadnum}
-														</p>
-													</div>
-												</div>
+												<input type="button" class="btn btn-outline-danger"
+													value="Modify" id="${map.mapNo}" name="modifyMap"
+													style="width: 100px" /> <input type="button"
+													class="btn btn-outline-dark" value="Delete"
+													name="deleteMap" id="${map.mapNo}"
+													style="width: 100px; float: right;" />
 											</div>
-										</div>
-										<input type="button" class="btn btn-outline-danger"
-											value="Modify" id="${map.mapNo}" name="modifyMap"
-											style="width: 100px" /> <input type="button"
-											class="btn btn-outline-dark" value="Delete" name="deleteMap"
-											id="${map.mapNo}" style="width: 100px; float: right;" />
-									</div>
-									<form name="requestForm" method="post" id="requestForm">
-										<input type=hidden name="mapNo" value="${map.mapNo}">
-										<input type=hidden name="memPw" value="${map.member.memPw}"
-											id="memPw">
-									</form>
-								</c:forEach>
+											<form name="requestForm" method="post" id="requestForm">
+												<input type=hidden name="mapNo" value="${map.mapNo}">
+												<input type=hidden name="memPw" value="${map.member.memPw}"
+													id="memPw">
+											</form>
+										</c:forEach>
+								
 							</div>
 						</div>
 					</div>
