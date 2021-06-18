@@ -5,11 +5,23 @@
 <html lang="en">
 <head>
 <script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery-3.3.1.min.js">  </script>
-
 <script type="text/javascript">
 $(function(){
-	alert(1);
-}
+	$(document).on('click', '#participate', function() {
+		let evNo = $(this).val();
+		 $.ajax({
+	            url: '${pageContext.request.contextPath}/event/isDuplicate',
+	            dataType:'text',
+	            data: {"evNo" : evNo},
+	            success:function(){
+	            	location.href='${pageContext.request.contextPath}/event/posting/'+evNo;
+	            },
+	            error: function(err) {
+	            	alert("이미 참가하셨습니다.");
+	            }
+	        })
+	});
+});
 </script>
 <style type="text/css">
 </style>
@@ -95,61 +107,6 @@ $(function(){
 
 				<div class="row">
 					<div class="col-lg-3">
-						<!-- 
-						<div class="featured-user  mb-5 mb-lg-0">
-							<h3 class="mb-4">이전 당첨자</h3>
-							<ul class="list-unstyled">
-								<li><a href="#" class="d-flex align-items-center"> <img
-										src="${pageContext.request.contextPath}/ej/images/person_1.jpg"
-										alt="Image" class="img-fluid mr-2">
-										<div class="podcaster">
-											<span class="d-block">Claire Stanford</span> <span
-												class="small">32,420 podcasts</span>
-										</div>
-								</a></li>
-								<li><a href="#" class="d-flex align-items-center"> <img
-										src="${pageContext.request.contextPath}/ej/images/person_2.jpg"
-										alt="Image" class="img-fluid mr-2">
-										<div class="podcaster">
-											<span class="d-block">Dianne Winston</span> <span
-												class="small">12,381 podcasts</span>
-										</div>
-								</a></li>
-								<li><a href="#" class="d-flex align-items-center"> <img
-										src="${pageContext.request.contextPath}/ej/images/person_3.jpg"
-										alt="Image" class="img-fluid mr-2">
-										<div class="podcaster">
-											<span class="d-block">Borris Larry</span> <span class="small">9,291
-												podcasts</span>
-										</div>
-								</a></li>
-								<li><a href="#" class="d-flex align-items-center"> <img
-										src="${pageContext.request.contextPath}/ej/images/person_4.jpg"
-										alt="Image" class="img-fluid mr-2">
-										<div class="podcaster">
-											<span class="d-block">Garry Smith</span> <span class="small">3,291
-												podcasts</span>
-										</div>
-								</a></li>
-								<li><a href="#" class="d-flex align-items-center"> <img
-										src="${pageContext.request.contextPath}/ej/images/person_5.jpg"
-										alt="Image" class="img-fluid mr-2">
-										<div class="podcaster">
-											<span class="d-block">Gerson Stack</span> <span class="small">1,092
-												podcasts</span>
-										</div>
-								</a></li>
-								<li><a href="#" class="d-flex align-items-center"> <img
-										src="${pageContext.request.contextPath}/ej/images/person_6.jpg"
-										alt="Image" class="img-fluid mr-2">
-										<div class="podcaster">
-											<span class="d-block">Jenna Stone</span> <span class="small">911
-												podcasts</span>
-										</div>
-								</a></li>
-							</ul>
-						</div>
-						-->
 					</div>
 
 					<div class="col-lg-9">
@@ -171,7 +128,7 @@ $(function(){
 												class="sep">/</span><br>등록일 : ${event.evRegdate}
 										</small></span>
 									</div>
-									<button  id = "${event.evNo}" type="submit" style="border-color: #bbbbff; color: #4444ff">참여하기</button>
+									<button  id ="participate" value="${event.evNo}" type="submit" style="border-color: #bbbbff; color: #4444ff">참여하기</button>
 								</div>
 							</div>
 						</c:forEach>
@@ -180,162 +137,12 @@ $(function(){
 					<div class="container" data-aos="fade-up">
 						<div class="row">
 							<div class="col-md-12 text-center">
-								<!--  <div class="site-block-27">
-									<ul>
-										<li><a href="#" class="icon-keyboard_arrow_left"></a></li>
-										<li class="active"><span>1</span></li>
-										<li><a href="#">2</a></li>
-										<li><a href="#">3</a></li>
-										<li><a href="#">4</a></li>
-										<li><a href="#">5</a></li>
-										<li><a href="#" class="icon-keyboard_arrow_right"></a></li>
-									</ul>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<!-- <div class="site-section">
-      <div class="container" data-aos="fade-up">
-        <div class="row mb-5">
-          <div class="col-md-12 text-center">
-            <h2 class="font-weight-bold text-black">Behind The Mic</h2>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-6 col-lg-4 mb-5 mb-lg-5">
-            <div class="team-member">
-
-              <img src="${pageContext.request.contextPath}/ej/images/person_1.jpg" alt="Image" class="img-fluid">
-
-              <div class="text">
-
-                <h2 class="mb-2 font-weight-light h4">Megan Smith</h2>
-                <span class="d-block mb-2 text-white-opacity-05">Creative Director</span>
-                <p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit ullam reprehenderit nemo.</p>
-                <p>
-                  <a href="#" class="text-white p-2"><span class="icon-facebook"></span></a>
-                  <a href="#" class="text-white p-2"><span class="icon-twitter"></span></a>
-                  <a href="#" class="text-white p-2"><span class="icon-linkedin"></span></a>
-                </p>
-              </div>
-
-            </div>
-          </div>
-
-          <div class="col-md-6 col-lg-4 mb-5 mb-lg-5">
-            <div class="team-member">
-
-              <img src="${pageContext.request.contextPath}/ej/images/person_2.jpg" alt="Image" class="img-fluid">
-
-              <div class="text">
-
-                <h2 class="mb-2 font-weight-light h4">Brooke Cagle</h2>
-                <span class="d-block mb-2 text-white-opacity-05">Creative Director</span>
-                <p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit ullam reprehenderit nemo.</p>
-                <p>
-                  <a href="#" class="text-white p-2"><span class="icon-facebook"></span></a>
-                  <a href="#" class="text-white p-2"><span class="icon-twitter"></span></a>
-                  <a href="#" class="text-white p-2"><span class="icon-linkedin"></span></a>
-                </p>
-              </div>
-
-            </div>
-          </div>
-
-          <div class="col-md-6 col-lg-4 mb-5 mb-lg-5">
-            <div class="team-member">
-
-              <img src="${pageContext.request.contextPath}/ej/images/person_3.jpg" alt="Image" class="img-fluid">
-
-              <div class="text">
-
-                <h2 class="mb-2 font-weight-light h4">Philip Martin</h2>
-                <span class="d-block mb-2 text-white-opacity-05">Creative Director</span>
-                <p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit ullam reprehenderit nemo.</p>
-                <p>
-                  <a href="#" class="text-white p-2"><span class="icon-facebook"></span></a>
-                  <a href="#" class="text-white p-2"><span class="icon-twitter"></span></a>
-                  <a href="#" class="text-white p-2"><span class="icon-linkedin"></span></a>
-                </p>
-              </div>
-
-            </div>
-          </div>
-
-          <div class="col-md-6 col-lg-4 mb-5 mb-lg-5">
-            <div class="team-member">
-
-              <img src="${pageContext.request.contextPath}/ej/images/person_4.jpg" alt="Image" class="img-fluid">
-
-              <div class="text">
-
-                <h2 class="mb-2 font-weight-light h4">Steven Ericson</h2>
-                <span class="d-block mb-2 text-white-opacity-05">Creative Director</span>
-                <p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit ullam reprehenderit nemo.</p>
-                <p>
-                  <a href="#" class="text-white p-2"><span class="icon-facebook"></span></a>
-                  <a href="#" class="text-white p-2"><span class="icon-twitter"></span></a>
-                  <a href="#" class="text-white p-2"><span class="icon-linkedin"></span></a>
-                </p>
-              </div>
-
-            </div>
-          </div>
-
-          <div class="col-md-6 col-lg-4 mb-5 mb-lg-5">
-            <div class="team-member">
-
-              <img src="${pageContext.request.contextPath}/ej/images/person_5.jpg" alt="Image" class="img-fluid">
-
-              <div class="text">
-
-                <h2 class="mb-2 font-weight-light h4">Nathan Dumlao</h2>
-                <span class="d-block mb-2 text-white-opacity-05">Creative Director</span>
-                <p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit ullam reprehenderit nemo.</p>
-                <p>
-                  <a href="#" class="text-white p-2"><span class="icon-facebook"></span></a>
-                  <a href="#" class="text-white p-2"><span class="icon-twitter"></span></a>
-                  <a href="#" class="text-white p-2"><span class="icon-linkedin"></span></a>
-                </p>
-              </div>
-
-            </div>
-          </div>
-
-          <div class="col-md-6 col-lg-4 mb-5 mb-lg-5">
-            <div class="team-member">
-
-              <img src="${pageContext.request.contextPath}/ej/images/person_6.jpg" alt="Image" class="img-fluid">
-
-              <div class="text">
-
-                <h2 class="mb-2 font-weight-light h4">Brooke Cagle</h2>
-                <span class="d-block mb-2 text-white-opacity-05">Creative Director</span>
-                <p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit ullam reprehenderit nemo.</p>
-                <p>
-                  <a href="#" class="text-white p-2"><span class="icon-facebook"></span></a>
-                  <a href="#" class="text-white p-2"><span class="icon-twitter"></span></a>
-                  <a href="#" class="text-white p-2"><span class="icon-linkedin"></span></a>
-                </p>
-              </div>
-
-            </div>
-          </div>
-
-
-        </div>
-      </div>
-    </div> -->
 
 		<div class="site-section bg-light block-13">
 			<div class="container">
 				<div class="row mb-5">
 					<div class="col-md-12 text-center">
-						<h2 class="font-weight-bold text-black">Featured Guests</h2>
+						<h2 class="font-weight-bold text-black">최근 당첨자</h2>
 					</div>
 				</div>
 				<div class="nonloop-block-13 owl-carousel">

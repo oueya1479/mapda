@@ -6,14 +6,57 @@
 <html lang="kr">
 
 <head>
-<script type="text/javascript"> 
-
-
-
+<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery-3.3.1.min.js">  </script>
+<script>
+$(function() {
+	let curLike = '${requestScope.like}';
+	let total = Number('${goods.gdLike}');
+	
+	let loading = "<img src='img/bean.gif' style='width: 40px'>";
+	
+	$(document).on('click', '#like-button',function() {
+		let str = '';
+		console.log(curLike);
+		$("#likey").html(loading);
+		$.ajax({
+			url : '${pageContext.request.contextPath}/event/isLike',
+			method : 'get',
+			data : {
+				evpNo : '${}',
+				isLike: curLike
+			},
+			success : function(value) {
+				console.log(value);
+				if(value === "1") {
+					total += 1;
+					str += "<a class='icon_btn' id='like-button'><i class='fas fa-heart' style='color: red'></i></a>";
+					str += "<span id='like-total'>" + total + "<span>";
+					$("#likey").html(str);
+				} else {
+					total -= 1;
+					str += "<a class='icon_btn' id='like-button'><i class='lnr lnr lnr-heart'></i></a>";
+					str += "<span id='like-total'>" + total + "<span>";
+					$("#likey").html(str);
+				}
+				curLike = value;
+			},
+			fail : function() {
+				console.log(item);
+			}
+		});
+	});
 </script>
+
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<br><br><br><br><br><br><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <title>Snow | Blog</title>
 
 <meta name="description"
@@ -37,7 +80,6 @@
 
 
 </head>
-
 
 <body>
 
@@ -64,7 +106,8 @@
 					<div class="nk-nav-header">
 
 						<div class="nk-nav-logo">
-							<a href="${pageContext.request.contextPath}/event/singlePosting" class="nk-nav-logo"> <img
+							<a href="${pageContext.request.contextPath}/event/singlePosting"
+								class="nk-nav-logo"> <img
 								src="${pageContext.request.contextPath}/ej/images/logo-light.svg"
 								alt="" width="85">
 							</a>
@@ -129,7 +172,7 @@
 					<!-- END: Filter -->
 
 					<!-- START: Posts List -->
-					
+
 					<div
 						class="nk-blog-isotope nk-isotope nk-isotope-gap nk-isotope-1-cols">
 
@@ -138,7 +181,7 @@
 
 							<div class="card text-center card-product">
 								<div class="card-product__img"></div>
-								
+
 							</div>
 						</div>
 
@@ -146,68 +189,79 @@
 
 
 						<!-- START: Post -->
-						<c:forEach items="${eventPostList.content}" var="post"> 
-						<div class="nk-isotope-item" data-filter="Nature">
-							<div class="nk-blog-post">
-								<div class="nk-post-thumb">
-									<a href="${pageContext.request.contextPath}/event/singlePosting/${post.evpNo}">
-									<img src="${post.evpImg}"
-										alt="" class="nk-img-stretch">
-									</a>
-									
-									<!-- 
+						<c:forEach items="${eventPostList.content}" var="post">
+							<div class="nk-isotope-item" data-filter="Nature">
+								<div class="nk-blog-post">
+									<div class="nk-post-thumb">
+										<a
+											href="${pageContext.request.contextPath}/event/singlePosting/${post.evpNo}">
+											<img src="${post.evpImg}" alt="" class="nk-img-stretch">
+										</a>
+
+										<!-- 
 									<div class="nk-post-category">
 										<a href="#">후기 이벤트 참여</a>
 									</div>
 									-->
-								</div>
-								<h2 class="nk-post-title h4">
-									<a href="blog-single.html">${post.evpTitle}</a>
-								</h2>
+									</div>
+									<h2 class="nk-post-title h4">
+										<a href="blog-single.html">${post.evpTitle}</a>
+									</h2>
 
-								<div class="nk-post-date">${post.evpRegdate}</div>
+									<div class="nk-post-date">${post.evpRegdate}</div>
 
-								<div class="nk-post-text">
-									${post.evpContent}
-								</div>
-								
-							<c:if test="${memNo eq post.member.memNo}" >
-								<div class="row">
-								<form action="${pageContext.request.contextPath}/event/posting/${post.event.evNo}" method="post" style="margin-left: 10px">
-									<input type="hidden" name="title" value="${post.evpTitle}">
-									<input type="hidden" name="content" value="${post.evpContent}">
-									<input type="hidden" name="evpNo" value="${post.evpNo}">
-									<input class="btn btn-default" type="submit" value="수정" style="background-color: #bbbbff ">
-								</form>
-								
-								<form action="${pageContext.request.contextPath}/event/deletePost" method="post" style="margin-left: 10px">
-									<input type="hidden" name="evNo" value="${post.event.evNo}">
-									<input type="hidden" name="evpNo" value="${post.evpNo}">
-									<input class="btn btn-default" type="submit" value="삭제 " style = "background-color: rgba(255, 0, 0, 0.1);">
-								</form>
-								</div>
-								</c:if>
+									<div class="nk-post-text">${post.evpContent}</div>
+
+									<c:if test="${memNo eq post.member.memNo}">
+										<div class="row">
+											<form
+												action="${pageContext.request.contextPath}/event/posting/${post.event.evNo}"
+												method="post" style="margin-left: 10px">
+												<input type="hidden" name="title" value="${post.evpTitle}">
+												<input type="hidden" name="content"
+													value="${post.evpContent}"> <input type="hidden"
+													name="evpNo" value="${post.evpNo}"> <input
+													class="btn btn-default" type="submit" value="수정"
+													style="background-color: #bbbbff">
+											</form>
+
+											<form
+												action="${pageContext.request.contextPath}/event/deletePost"
+												method="post" style="margin-left: 10px">
+												<input type="hidden" name="evNo" value="${post.event.evNo}">
+												<input type="hidden" name="evpNo" value="${post.evpNo}">
+												<input class="btn btn-default" type="submit" value="삭제 "
+													style="background-color: rgba(255, 0, 0, 0.1);">
+											</form>
+										</div>
+
+
+									</c:if>
 
 									<div class="list__posting__text__info">
 										<div class="list__post__text__info__left">
-											<img
-												src="${pageContext.request.contextPath}/img/map/heart.png"
-												alt=""> <span>${event.eventLike}</span>
-										</div>
-										<div class="listing__item__text__info__right">
 											<p style="text-align: right;">
-												<img
-													src="${pageContext.request.contextPath}/img/map/view.png"
-													alt="" style="height: 20px; width: 20px;">
-												${map.mapReadnum}
-											</p>
+												<div class="card_area d-flex align-items-center" id="likey">
+							<c:choose>
+								<c:when test="${requestScope.like eq '0'}">
+									<button class="icon_btn" id="like-button"  name="${post.evpNo}"><i class="lnr lnr lnr-heart"></i></button>
+									<span id="like-total">1</span>
+								</c:when>
+								<c:otherwise>
+									<button class="icon_btn" id="like-button"><i class="fas fa-heart" style="color: red"></i></button>
+									<span id="like-total">1</span>
+								</c:otherwise>
+							</c:choose>
+						</div>
 										</div>
+
 									</div>
 
 								</div>
-							
-						</div>
-					 </c:forEach>
+
+							</div>
+
+						</c:forEach>
 						<!-- END: Post -->
 
 					</div>
@@ -255,7 +309,7 @@
 				</div>
 			</div>
 		</footer>
-		<!-- END: Footer --> 
+		<!-- END: Footer -->
 
 
 	</div>

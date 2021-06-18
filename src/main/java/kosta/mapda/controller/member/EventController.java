@@ -176,15 +176,18 @@ public class EventController {
 	}
 	
 	/**
-	 * 한 사람 당 게시물을 하나씩만 작성할 수 있도록 제
+	 * 한 사람 당 게시물을 하나씩만 작성할 수 있도록 제한하기 
+	 * ---------->AjaxEventController
 	 */
 	
 	
 	/**
 	 * 좋아요
 	 */
-	@ExceptionHandler(RuntimeException.class)
+	/*
+	 * @ExceptionHandler(RuntimeException.class)
 	public ModelAndView error(RuntimeException e) {
 		return new ModelAndView("error/errorView", "errMsg", e.getMessage());
-	}
+		*/
+	
 }
