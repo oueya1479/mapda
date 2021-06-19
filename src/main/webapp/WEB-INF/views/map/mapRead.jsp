@@ -123,7 +123,6 @@ $(function(){
 		</div>
 		<div class="listing__list">
 
-
 			<c:forEach items="${requestScope.themeMap.place}" var="place"
 				varStatus="state">
 				<div class="listing__item">
@@ -136,23 +135,6 @@ $(function(){
 							<a
 								href="${pageContext.request.contextPath}/place/read/${place.placeNo}">See
 								Details</a>
-
-			
-					<c:forEach items="${requestScope.themeMap.place}" var="place" varStatus="state">
-						<div class="listing__item">
-						
-						
-						<div class="listing__item__pic set-bg"
-							data-setbg="${pageContext.request.contextPath}/save/map/${place.ppList[0].ppPath}">
-							<img
-								src="${pageContext.request.contextPath}/save/placeicon/${place.placeIconPath}" style=""
-								alt="">
-							<div class="listing__item__pic__tag top_rate">
-								<a
-									href="${pageContext.request.contextPath}/place/read/${place.placeNo}">See
-									Details</a>
-							</div>
-
 						</div>
 
 					</div>
