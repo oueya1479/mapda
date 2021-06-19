@@ -19,7 +19,6 @@
 	color: white;
 }
 
-
 </style>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=dedf9592b51a78be2b5d3ec39a2a2199&libraries=services"></script>
 <script type="text/javascript">
@@ -45,21 +44,9 @@
 				
 			}
 		  });
-		
-		//$("#allForms>div>span> img").on("click", function(){
-				/* $("#allForms>div>span:nth-child(1) >img").on("click", function(){
-					$("#allForms>div>span:nth-child(2) >img").css("opacity", "0.5");
-					$("#allForms>div>span:nth-child(3) >img").css("opacity", "0.5");
-				}); */
 				
-		//		$(this).css("border", "none");
-				
-				//#allForms > div:nth-child(2)
-		//});		
-		
 		/* 파일 업로드 미리보기 */
 		$("#file").on("change", handleImgFileSelect);
-		
 	});
  	
  	function selectForm(frm){
@@ -109,14 +96,20 @@
  		
  	}
  	
-/*  	function checkValid(){
+	function checkValid(){
  		var f = window.document.f;
- 		alert(1);
- 		if(f.hashTag1.value==""){
- 			alert(3);
+ 		
+ 		if(f.placeContent.value==""){
+ 			alert("장소에 대한 간략한 소개를 적어 주세요!!");
+ 			return false;
  		}
  		
- 	} */
+ 		if(f.placeStar.value==""){
+ 			alert("Place 에 대한 점수를 부여해 주세요 !!");
+ 			return false;
+ 		}
+ 	
+ 	}
  	 	
   </script>
 
@@ -127,12 +120,10 @@
 	<sec:authentication property="principal.memNo" var="memNo"/>
 	<sec:authentication property="principal.memImage" var="memImage"/>
 	
-	<form name="f" action="${pageContext.request.contextPath}/place/placeInsert" method="post" enctype="multipart/form-data">
+	<form name="f" action="${pageContext.request.contextPath}/place/placeUpdate" method="post" enctype="multipart/form-data" onsubmit="return checkValid()">
 			 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">						
 			 <input type="hidden" name="memNo" value="${memNo}">
-			 <input type="hidden" name="mapNo" value="${mapNo}">
-																																					<!--  onsubmit="return checkValid()" -->
-			
+			 
     <!-- Listing Section Begin -->
     <section class="listing-hero set-bg" data-setbg="${pageContext.request.contextPath}/img/listing/details/listing-hero.jpg"><!-- 무슨 사진 넣을지 고민 -->
         <div class="container">
@@ -140,7 +131,7 @@
                 <div class="col-lg-12">
                     <div class="listing__hero__option">
                         <div class="listing__hero__icon">
-                            <img src="${memImage}" alt="" style="width:120px; height:120px;"><!-- 아이콘 모양? user프로필? -->
+                            <img src="${pageContext.request.contextPath}/save/placeicon/5115237.png" alt="" style="width:120px; height:120px;"><!-- 아이콘 모양? user프로필? -->
                         </div>
                         <div class="listing__hero__text">
                             <h2>Place Modify</h2>
@@ -163,10 +154,13 @@
                            <div class="col-lg-12">
 	                           <div class="listing__details__amenities">
                         			<div class="listing__details__about">
-	                           					<h4>장소 변경은 불가능 합니다.</h4>
+	                           					<h4>장소 변경은 불가능 합니다.
+	                           					<input type="hidden" name="placeNo" value="${place.placeNo}">
+	                           					
+	                           					</h4>
 	                           					<input type="hidden" id="placeLatitude" name="placeLatitude" value="${place.placeLatitude}">
 												<input type="hidden" id="placeLongitude" name="placeLongitude" value="${place.placeLongitude}">
-													<input type ="hidden" name="placeStatus" value = "1">
+												<input type ="hidden" name="placeStatus" value = "1">
 													
 											<div class="blog__item__text">
 										<img src="${pageContext.request.contextPath}/img/placeimges/dadadadada.png" style="float:left; width: 100px; height: 100px; margin-right: 10px;" >
@@ -242,71 +236,45 @@
 						<div id="allForms" style="margin-left: 130px">
 										<div style="display: none;">
 											<img src="${pageContext.request.contextPath}/img/placeicon/food1.png" style="width: 120px; height: 120px; background-color: black;">
-											<img src="${pageContext.request.contextPath}/img/placeicon/food2.png" style="width: 120px; height: 120px; background-color: black;">
-											<img src="${pageContext.request.contextPath}/img/placeicon/food3.png" style="width: 120px; height: 120px; background-color: black;">
 										</div>
 										<div style="display: none;">
 											<img src="${pageContext.request.contextPath}/img/placeicon/travel1.png" style="width: 120px; height: 120px; background-color: black;">
-											<img src="${pageContext.request.contextPath}/img/placeicon/travel2.png" style="width: 120px; height: 120px; background-color: black;">
-											<img src="${pageContext.request.contextPath}/img/placeicon/travel3.png" style="width: 120px; height: 120px; background-color: black;">
 										</div>
 										<div style="display: none;">
 											<img src="${pageContext.request.contextPath}/img/placeicon/cafe1.png" style="width: 120px; height: 120px; background-color: black;">
-											<img src="${pageContext.request.contextPath}/img/placeicon/cafe2.png" style="width: 120px; height: 120px; background-color: black;">
-											<img src="${pageContext.request.contextPath}/img/placeicon/cafe3.png" style="width: 120px; height: 120px; background-color: black;">
 										</div>
 										<div style="display: none;">
 											<img src="${pageContext.request.contextPath}/img/placeicon/healing1.png" style="width: 120px; height: 120px; background-color: black;">
-											<img src="${pageContext.request.contextPath}/img/placeicon/healing2.png" style="width: 120px; height: 120px; background-color: black;">
-											<img src="${pageContext.request.contextPath}/img/placeicon/healing3.png" style="width: 120px; height: 120px; background-color: black;">
 										</div>
 										<div style="display: none;">
 											<img src="${pageContext.request.contextPath}/img/placeicon/nature1.png" style="width: 120px; height: 120px; background-color: black;">
-											<img src="${pageContext.request.contextPath}/img/placeicon/nature2.png" style="width: 120px; height: 120px; background-color: black;">
-											<img src="${pageContext.request.contextPath}/img/placeicon/nature3.png" style="width: 120px; height: 120px; background-color: black;">
 										</div>
 										<div style="display: none;">
 											<img src="${pageContext.request.contextPath}/img/placeicon/activity1.png" style="width: 120px; height: 120px; background-color: black;">
-											<img src="${pageContext.request.contextPath}/img/placeicon/activity2.png" style="width: 120px; height: 120px; background-color: black;">
-											<img src="${pageContext.request.contextPath}/img/placeicon/activity3.png" style="width: 120px; height: 120px; background-color: black;">
 										</div>
 										<div style="display: none;">
 											<img src="${pageContext.request.contextPath}/img/placeicon/shopping1.png" style="width: 120px; height: 120px; background-color: black;">
-											<img src="${pageContext.request.contextPath}/img/placeicon/shopping2.png" style="width: 120px; height: 120px; background-color: black;">
-											<img src="${pageContext.request.contextPath}/img/placeicon/shopping3.png" style="width: 120px; height: 120px; background-color: black;">
 										</div>
 										<div style="display: none;">
 											<img src="${pageContext.request.contextPath}/img/placeicon/culture1.png" style="width: 120px; height: 120px; background-color: black;">
-											<img src="${pageContext.request.contextPath}/img/placeicon/culture2.png" style="width: 120px; height: 120px; background-color: black;">
-											<img src="${pageContext.request.contextPath}/img/placeicon/culture3.png" style="width: 120px; height: 120px; background-color: black;">
 										</div>
 										<div style="display: none;">
 											<img src="${pageContext.request.contextPath}/img/placeicon/walking1.png" style="width: 120px; height: 120px; background-color: black;">
-											<img src="${pageContext.request.contextPath}/img/placeicon/walking2.png" style="width: 120px; height: 120px; background-color: black;">
-											<img src="${pageContext.request.contextPath}/img/placeicon/walking3.png" style="width: 120px; height: 120px; background-color: black;">
 										</div>
 										<div style="display: none;">
 											<img src="${pageContext.request.contextPath}/img/placeicon/night1.png" style="width: 120px; height: 120px; background-color: black;">
-											<img src="${pageContext.request.contextPath}/img/placeicon/night2.png" style="width: 120px; height: 120px; background-color: black;">
-											<img src="${pageContext.request.contextPath}/img/placeicon/night3.png" style="width: 120px; height: 120px; background-color: black;">
 										</div>
 										<div style="display: none;">
 											<img src="${pageContext.request.contextPath}/img/placeicon/attraction1.png" style="width: 120px; height: 120px; background-color: black;">
-											<img src="${pageContext.request.contextPath}/img/placeicon/attraction2.png" style="width: 120px; height: 120px; background-color: black;">
-											<img src="${pageContext.request.contextPath}/img/placeicon/attraction3.png" style="width: 120px; height: 120px; background-color: black;">
 										</div>
 										<div style="display: none;">
 											<img src="${pageContext.request.contextPath}/img/placeicon/pet1.png" style="width: 120px; height: 120px; background-color: black;">
-											<img src="${pageContext.request.contextPath}/img/placeicon/pet2.png" style="width: 120px; height: 120px; background-color: black;">
-											<img src="${pageContext.request.contextPath}/img/placeicon/pet3.png" style="width: 120px; height: 120px; background-color: black;">
 										</div>
 										<div style="display: none;">
 											<img src="${pageContext.request.contextPath}/img/placeicon/date1.png" style="width: 120px; height: 120px; background-color: black;">
-											<img src="${pageContext.request.contextPath}/img/placeicon/date2.png" style="width: 120px; height: 120px; background-color: black;">
 										</div>
 										<div style="display: none;">
 											<img src="${pageContext.request.contextPath}/img/placeicon/drive1.png" style="width: 120px; height: 120px; background-color: black;">
-											<img src="${pageContext.request.contextPath}/img/placeicon/drive2.png" style="width: 120px; height: 120px; background-color: black;">
 										</div>
 									</div>
 								</div>
@@ -318,7 +286,9 @@
                         <div class="listing__details__amenities">
                             <h4>HashTag를 수정해 주세요!</h4>
                             <div class="row">
-									<c:forEach items="${tagStr}" var="tagStr">
+                            <c:choose>
+                            <c:when test="${tagStrLen eq 1}">
+                            <c:forEach items="${tagStr}" var="tagStr">
 			      							<div class="col-lg-3 col-md-3 col-6">
 			                                    <div class="listing__details__amenities__item">
 			                                        <p id="tagImg1"><img src="${pageContext.request.contextPath}/img/placeimges/hashtag.png" style="width: 30px; height: 30px;"></p>
@@ -326,6 +296,233 @@
 			                                    </div>
 			                                </div>
 			      				   </c:forEach>
+			      				   <div class="col-lg-3 col-md-3 col-6">
+			                                    <div class="listing__details__amenities__item">
+			                                        <p id="tagImg1"><img src="${pageContext.request.contextPath}/img/placeimges/hashtag.png" style="width: 30px; height: 30px;"></p>
+														<h5><input type="text" id="hashTag1" name="hashTag1" value=""></h5>
+			                                    </div>
+			                                </div>
+			                                <div class="col-lg-3 col-md-3 col-6">
+			                                    <div class="listing__details__amenities__item">
+			                                        <p id="tagImg1"><img src="${pageContext.request.contextPath}/img/placeimges/hashtag.png" style="width: 30px; height: 30px;"></p>
+														<h5><input type="text" id="hashTag1" name="hashTag1" value=""></h5>
+			                                    </div>
+			                                </div>
+			                                <div class="col-lg-3 col-md-3 col-6">
+			                                    <div class="listing__details__amenities__item">
+			                                        <p id="tagImg1"><img src="${pageContext.request.contextPath}/img/placeimges/hashtag.png" style="width: 30px; height: 30px;"></p>
+														<h5><input type="text" id="hashTag1" name="hashTag1" value=""></h5>
+			                                    </div>
+			                                </div>
+			                                <div class="col-lg-3 col-md-3 col-6">
+			                                    <div class="listing__details__amenities__item">
+			                                        <p id="tagImg1"><img src="${pageContext.request.contextPath}/img/placeimges/hashtag.png" style="width: 30px; height: 30px;"></p>
+														<h5><input type="text" id="hashTag1" name="hashTag1" value=""></h5>
+			                                    </div>
+			                                </div>
+			                                <div class="col-lg-3 col-md-3 col-6">
+			                                    <div class="listing__details__amenities__item">
+			                                        <p id="tagImg1"><img src="${pageContext.request.contextPath}/img/placeimges/hashtag.png" style="width: 30px; height: 30px;"></p>
+														<h5><input type="text" id="hashTag1" name="hashTag1" value=""></h5>
+			                                    </div>
+			                                </div>
+			                                <div class="col-lg-3 col-md-3 col-6">
+			                                    <div class="listing__details__amenities__item">
+			                                        <p id="tagImg1"><img src="${pageContext.request.contextPath}/img/placeimges/hashtag.png" style="width: 30px; height: 30px;"></p>
+														<h5><input type="text" id="hashTag1" name="hashTag1" value=""></h5>
+			                                    </div>
+			                                </div>
+			                                <div class="col-lg-3 col-md-3 col-6">
+			                                    <div class="listing__details__amenities__item">
+			                                        <p id="tagImg1"><img src="${pageContext.request.contextPath}/img/placeimges/hashtag.png" style="width: 30px; height: 30px;"></p>
+														<h5><input type="text" id="hashTag1" name="hashTag1" value=""></h5>
+			                                    </div>
+			                                </div>
+                            	</c:when>
+                            	<c:when test="${tagStrLen eq 2}">
+                            	<c:forEach items="${tagStr}" var="tagStr">
+			      							<div class="col-lg-3 col-md-3 col-6">
+			                                    <div class="listing__details__amenities__item">
+			                                        <p id="tagImg1"><img src="${pageContext.request.contextPath}/img/placeimges/hashtag.png" style="width: 30px; height: 30px;"></p>
+														<h5><input type="text" id="hashTag1" name="hashTag1" value="${tagStr}"></h5>
+			                                    </div>
+			                                </div>
+			      				   </c:forEach>
+			      				   <div class="col-lg-3 col-md-3 col-6">
+			                                    <div class="listing__details__amenities__item">
+			                                        <p id="tagImg1"><img src="${pageContext.request.contextPath}/img/placeimges/hashtag.png" style="width: 30px; height: 30px;"></p>
+														<h5><input type="text" id="hashTag1" name="hashTag1" value=""></h5>
+			                                    </div>
+			                                </div>
+			                                <div class="col-lg-3 col-md-3 col-6">
+			                                    <div class="listing__details__amenities__item">
+			                                        <p id="tagImg1"><img src="${pageContext.request.contextPath}/img/placeimges/hashtag.png" style="width: 30px; height: 30px;"></p>
+														<h5><input type="text" id="hashTag1" name="hashTag1" value=""></h5>
+			                                    </div>
+			                                </div>
+			                                <div class="col-lg-3 col-md-3 col-6">
+			                                    <div class="listing__details__amenities__item">
+			                                        <p id="tagImg1"><img src="${pageContext.request.contextPath}/img/placeimges/hashtag.png" style="width: 30px; height: 30px;"></p>
+														<h5><input type="text" id="hashTag1" name="hashTag1" value=""></h5>
+			                                    </div>
+			                                </div>
+			                                <div class="col-lg-3 col-md-3 col-6">
+			                                    <div class="listing__details__amenities__item">
+			                                        <p id="tagImg1"><img src="${pageContext.request.contextPath}/img/placeimges/hashtag.png" style="width: 30px; height: 30px;"></p>
+														<h5><input type="text" id="hashTag1" name="hashTag1" value=""></h5>
+			                                    </div>
+			                                </div>
+			                                <div class="col-lg-3 col-md-3 col-6">
+			                                    <div class="listing__details__amenities__item">
+			                                        <p id="tagImg1"><img src="${pageContext.request.contextPath}/img/placeimges/hashtag.png" style="width: 30px; height: 30px;"></p>
+														<h5><input type="text" id="hashTag1" name="hashTag1" value=""></h5>
+			                                    </div>
+			                                </div>
+			                                <div class="col-lg-3 col-md-3 col-6">
+			                                    <div class="listing__details__amenities__item">
+			                                        <p id="tagImg1"><img src="${pageContext.request.contextPath}/img/placeimges/hashtag.png" style="width: 30px; height: 30px;"></p>
+														<h5><input type="text" id="hashTag1" name="hashTag1" value=""></h5>
+			                                    </div>
+			                                </div>
+                       			     </c:when>
+                        			    <c:when test="${tagStrLen eq 3}">
+                       			     <c:forEach items="${tagStr}" var="tagStr">
+			      							<div class="col-lg-3 col-md-3 col-6">
+			                                    <div class="listing__details__amenities__item">
+			                                        <p id="tagImg1"><img src="${pageContext.request.contextPath}/img/placeimges/hashtag.png" style="width: 30px; height: 30px;"></p>
+														<h5><input type="text" id="hashTag1" name="hashTag1" value="${tagStr}"></h5>
+			                                    </div>
+			                                </div>
+			      				   </c:forEach>
+			      				   <div class="col-lg-3 col-md-3 col-6">
+			                                    <div class="listing__details__amenities__item">
+			                                        <p id="tagImg1"><img src="${pageContext.request.contextPath}/img/placeimges/hashtag.png" style="width: 30px; height: 30px;"></p>
+														<h5><input type="text" id="hashTag1" name="hashTag1" value=""></h5>
+			                                    </div>
+			                                </div>
+			                                <div class="col-lg-3 col-md-3 col-6">
+			                                    <div class="listing__details__amenities__item">
+			                                        <p id="tagImg1"><img src="${pageContext.request.contextPath}/img/placeimges/hashtag.png" style="width: 30px; height: 30px;"></p>
+														<h5><input type="text" id="hashTag1" name="hashTag1" value=""></h5>
+			                                    </div>
+			                                </div>
+			                                <div class="col-lg-3 col-md-3 col-6">
+			                                    <div class="listing__details__amenities__item">
+			                                        <p id="tagImg1"><img src="${pageContext.request.contextPath}/img/placeimges/hashtag.png" style="width: 30px; height: 30px;"></p>
+														<h5><input type="text" id="hashTag1" name="hashTag1" value=""></h5>
+			                                    </div>
+			                                </div>
+			                                <div class="col-lg-3 col-md-3 col-6">
+			                                    <div class="listing__details__amenities__item">
+			                                        <p id="tagImg1"><img src="${pageContext.request.contextPath}/img/placeimges/hashtag.png" style="width: 30px; height: 30px;"></p>
+														<h5><input type="text" id="hashTag1" name="hashTag1" value=""></h5>
+			                                    </div>
+			                                </div>
+			                                <div class="col-lg-3 col-md-3 col-6">
+			                                    <div class="listing__details__amenities__item">
+			                                        <p id="tagImg1"><img src="${pageContext.request.contextPath}/img/placeimges/hashtag.png" style="width: 30px; height: 30px;"></p>
+														<h5><input type="text" id="hashTag1" name="hashTag1" value=""></h5>
+			                                    </div>
+			                                </div>
+                   			      </c:when>
+                   			       <c:when test="${tagStrLen eq 4}">
+               			        	<c:forEach items="${tagStr}" var="tagStr">
+			      							<div class="col-lg-3 col-md-3 col-6">
+			                                    <div class="listing__details__amenities__item">
+			                                        <p id="tagImg1"><img src="${pageContext.request.contextPath}/img/placeimges/hashtag.png" style="width: 30px; height: 30px;"></p>
+														<h5><input type="text" id="hashTag1" name="hashTag1" value="${tagStr}"></h5>
+			                                    </div>
+			                                </div>
+			      				   </c:forEach>
+			      				   <div class="col-lg-3 col-md-3 col-6">
+			                                    <div class="listing__details__amenities__item">
+			                                        <p id="tagImg1"><img src="${pageContext.request.contextPath}/img/placeimges/hashtag.png" style="width: 30px; height: 30px;"></p>
+														<h5><input type="text" id="hashTag1" name="hashTag1" value=""></h5>
+			                                    </div>
+			                                </div><div class="col-lg-3 col-md-3 col-6">
+			                                    <div class="listing__details__amenities__item">
+			                                        <p id="tagImg1"><img src="${pageContext.request.contextPath}/img/placeimges/hashtag.png" style="width: 30px; height: 30px;"></p>
+														<h5><input type="text" id="hashTag1" name="hashTag1" value=""></h5>
+			                                    </div>
+			                                </div><div class="col-lg-3 col-md-3 col-6">
+			                                    <div class="listing__details__amenities__item">
+			                                        <p id="tagImg1"><img src="${pageContext.request.contextPath}/img/placeimges/hashtag.png" style="width: 30px; height: 30px;"></p>
+														<h5><input type="text" id="hashTag1" name="hashTag1" value=""></h5>
+			                                    </div>
+			                                </div><div class="col-lg-3 col-md-3 col-6">
+			                                    <div class="listing__details__amenities__item">
+			                                        <p id="tagImg1"><img src="${pageContext.request.contextPath}/img/placeimges/hashtag.png" style="width: 30px; height: 30px;"></p>
+														<h5><input type="text" id="hashTag1" name="hashTag1" value=""></h5>
+			                                    </div>
+			                                </div>
+                            </c:when>
+                            <c:when test="${tagStrLen eq 5}">
+                            <c:forEach items="${tagStr}" var="tagStr">
+			      							<div class="col-lg-3 col-md-3 col-6">
+			                                    <div class="listing__details__amenities__item">
+			                                        <p id="tagImg1"><img src="${pageContext.request.contextPath}/img/placeimges/hashtag.png" style="width: 30px; height: 30px;"></p>
+														<h5><input type="text" id="hashTag1" name="hashTag1" value="${tagStr}"></h5>
+			                                    </div>
+			                                </div>
+			      				   </c:forEach>
+			      				   <div class="col-lg-3 col-md-3 col-6">
+			                                    <div class="listing__details__amenities__item">
+			                                        <p id="tagImg1"><img src="${pageContext.request.contextPath}/img/placeimges/hashtag.png" style="width: 30px; height: 30px;"></p>
+														<h5><input type="text" id="hashTag1" name="hashTag1" value=""></h5>
+			                                    </div>
+			                                </div>
+			                                <div class="col-lg-3 col-md-3 col-6">
+			                                    <div class="listing__details__amenities__item">
+			                                        <p id="tagImg1"><img src="${pageContext.request.contextPath}/img/placeimges/hashtag.png" style="width: 30px; height: 30px;"></p>
+														<h5><input type="text" id="hashTag1" name="hashTag1" value=""></h5>
+			                                    </div>
+			                                </div>
+			                                <div class="col-lg-3 col-md-3 col-6">
+			                                    <div class="listing__details__amenities__item">
+			                                        <p id="tagImg1"><img src="${pageContext.request.contextPath}/img/placeimges/hashtag.png" style="width: 30px; height: 30px;"></p>
+														<h5><input type="text" id="hashTag1" name="hashTag1" value=""></h5>
+			                                    </div>
+			                                </div>
+                            </c:when>
+                            <c:when test="${tagStrLen eq 6}">
+                            <c:forEach items="${tagStr}" var="tagStr">
+			      							<div class="col-lg-3 col-md-3 col-6">
+			                                    <div class="listing__details__amenities__item">
+			                                        <p id="tagImg1"><img src="${pageContext.request.contextPath}/img/placeimges/hashtag.png" style="width: 30px; height: 30px;"></p>
+														<h5><input type="text" id="hashTag1" name="hashTag1" value="${tagStr}"></h5>
+			                                    </div>
+			                                </div>
+			      				   </c:forEach>
+			      				   <div class="col-lg-3 col-md-3 col-6">
+			                                    <div class="listing__details__amenities__item">
+			                                        <p id="tagImg1"><img src="${pageContext.request.contextPath}/img/placeimges/hashtag.png" style="width: 30px; height: 30px;"></p>
+														<h5><input type="text" id="hashTag1" name="hashTag1" value=""></h5>
+			                                    </div>
+			                                </div>
+			                                <div class="col-lg-3 col-md-3 col-6">
+			                                    <div class="listing__details__amenities__item">
+			                                        <p id="tagImg1"><img src="${pageContext.request.contextPath}/img/placeimges/hashtag.png" style="width: 30px; height: 30px;"></p>
+														<h5><input type="text" id="hashTag1" name="hashTag1" value=""></h5>
+			                                    </div>
+			                                </div>
+                            </c:when>
+                            <c:otherwise>
+                            <c:forEach items="${tagStr}" var="tagStr">
+			      							<div class="col-lg-3 col-md-3 col-6">
+			                                    <div class="listing__details__amenities__item">
+			                                        <p id="tagImg1"><img src="${pageContext.request.contextPath}/img/placeimges/hashtag.png" style="width: 30px; height: 30px;"></p>
+														<h5><input type="text" id="hashTag1" name="hashTag1" value="${tagStr}"></h5>
+			                                    </div>
+			                                </div>
+			      				   </c:forEach>
+			      				   <div class="col-lg-3 col-md-3 col-6">
+			                                    <div class="listing__details__amenities__item">
+			                                        <p id="tagImg1"><img src="${pageContext.request.contextPath}/img/placeimges/hashtag.png" style="width: 30px; height: 30px;"></p>
+														<h5><input type="text" id="hashTag1" name="hashTag1" value=""></h5>
+			                                    </div>
+			                                </div>
+                            </c:otherwise>
+                            </c:choose> 
 	                       </div>
                          </div>
                         </div>

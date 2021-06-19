@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import kosta.mapda.domain.map.PhotoReviewDTO;
@@ -13,11 +15,16 @@ import kosta.mapda.domain.map.PlacePhotoReview;
 import kosta.mapda.domain.map.PlacePhotoReviewPhoto;
 import kosta.mapda.domain.map.PlaceReview;
 import kosta.mapda.domain.map.ReviewDTO;
+import kosta.mapda.domain.member.Member;
 import kosta.mapda.service.place.PlaceReviewService;
+import kosta.mapda.service.place.PlaceService;
 
 @RestController
 @RequestMapping("/place")
 public class PlaceAjaxController {
+	
+	@Autowired
+	private PlaceService placeService;
 	
 	@Autowired
 	private PlaceReviewService prService;
@@ -56,5 +63,19 @@ public class PlaceAjaxController {
 			dbList.add(new ReviewDTO(pr.getPrRegdate(), pr.getPrContent(), pr.getMember().getMemName(), prList.size()));
 		}
 		return dbList;
+	}
+	
+	@RequestMapping("/influencerCheck")
+	public String influencerCheck(@RequestParam("memNo")Long memNo) {
+		// influencer 이면 777 리턴 ======= 아니면 0 리턴
+		//Member mem = (Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//		Member member = placeService.findMemberMemNo(memNo);
+//		if(member.getMemGrade()=="Influencer") {
+//			return "yes";
+//		}
+		
+		
+		
+		return "no";	//"yes"
 	}
 }

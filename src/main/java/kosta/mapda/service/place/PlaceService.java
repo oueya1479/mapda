@@ -7,6 +7,7 @@ import org.springframework.data.domain.Pageable;
 
 import kosta.mapda.domain.map.Place;
 import kosta.mapda.domain.map.PlacePhoto;
+import kosta.mapda.domain.member.Member;
 
 public interface PlaceService {
 	/**
@@ -48,5 +49,15 @@ public interface PlaceService {
 	 * 		플레이스 사진 등록하기
 	 * */
 //	void insertPlacePhoto(List<PlacePhoto> photoList);
+	
+	/**
+	 * 		히든 플레이스 가져오기
+	 * */
+	List<Place> selectByHidden(Long mapNo);
+
+	/**
+	 * 		인플루 언서인지 확인하기
+	 * */
+	boolean findMemberMemNo(Long memNo);
 	
 }

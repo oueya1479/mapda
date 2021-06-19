@@ -51,7 +51,7 @@ public class Place {
 	private String placeTag;
 	private int placeLike;
 	private int placeStar;
-	private int placeHidden;	// default 1,  0 hidden 으로 전환
+	private int placeHidden;	// default 0,  1 hidden 으로 전환
 	private int placeIconNo;
 	private String placeIconName;
 	private String placeIconPath;

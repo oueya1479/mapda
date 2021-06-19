@@ -49,7 +49,7 @@
       				  		str+="<p> 별점 : <span class='icon_star'></span><span class='icon_star'></span><span class='icon_star'></span><span class='icon_star'></span><span class='icon_star'></span></p>";
       				  		}
       				  			for(var j=0; j<result[i].pathList.length; j++){
-      				  				str+="<img src='${pageContext.request.contextPath}/"+result[i].pathList[j].pprpPath+"' style='width: 200px; height: 200px;'>";
+      				  				str+="<img src='${pageContext.request.contextPath}/save/placephotoreview/"+result[i].pathList[j].pprpPath+"' style='width: 200px; height: 200px;'>";
       				  			};
       				  		str+="<ul>";
       				  		str+=" <li><i class='fa fa-ellipsis-h'></i><i class='fa fa-ellipsis-h'></i><i class='fa fa-ellipsis-h'></i><i class='fa fa-ellipsis-h'></i></li>";
@@ -140,14 +140,13 @@
       	//alert(${placeNo});
       	
       	function deleteValid(){
-      		confirm("30일이 지난 게시물의 경우 삭제가 가능합니다. 삭제하시겠습니까?");
+    		confirm("삭제하시겠습니까?");
       	}
+    		
       	
   </script>
 
-
 </head>
-
 
 <body>
 
@@ -159,7 +158,7 @@
                 <div class="col-lg-8">
                     <div class="listing__hero__option">
                         <div class="listing__hero__icon">
-                            <img src="${pageContext.request.contextPath}/save/placeicon/${place.placeIconPath}" alt="" style="width: 150px; height: 150px;" ><!-- 아이콘 모양? user프로필? -->
+                            <img src="${pageContext.request.contextPath}/save/placeicon/${place.placeIconPath}" style="width: 150px; height: 150px;" ><!-- 아이콘 모양? user프로필? -->
                         </div>
                         <div class="listing__hero__text">
                             <h2>${requestScope.place.placeTitle}</h2>
@@ -193,21 +192,21 @@
 <sec:authorize access="isAuthenticated()">
 				<sec:authentication property="principal.memNo" var="loginMemNo"/>
 					<c:if test="${place.member.memNo== loginMemNo}">
-					
+					<span>
 						<form action="${pageContext.request.contextPath}/place/placeUpdateForm" method="post">
 							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 							<input type="hidden" name="memNo" value="${place.member.memNo}">
 							<input type="hidden" name ="placeNo" value="${placeNo}">
 							 <button type="submit" class="btn btn-outline-danger" id="prUpdated" style="width: 150px">Place Modify</button>
 						</form>
-						
+						<br><br>
 						<form action="${pageContext.request.contextPath}/place/placeDelete" method="post">
 							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 							<input type="hidden" name="memNo" value="${place.member.memNo}">
 							<input type="hidden" name ="placeNo" value="${placeNo}">
-							 <button type="submit" class="btn btn-outline-dark" id="prDelete" style="width: 150px; float: right;" onclick="deleteValid();">Place Delete</button>
+							 <button type="submit" class="btn btn-outline-dark" id="prDelete" style="width: 150px/* ; float: right */;" onclick="deleteValid();">Place Delete</button>
 						</form>
-						
+						</span>
 					</c:if>
 	</sec:authorize>                            
 
@@ -219,7 +218,7 @@
                             <!-- ============================================================ -->
 						<div class="w3-content w3-display-container">
 								<c:forEach items="${ppList}" var="ppList">
-								  	 <img class="mySlides" src="${pageContext.request.contextPath}/${ppList.ppPath}" style="height: 400px; width: 100%;">
+								  	 <img class="mySlides" src="${pageContext.request.contextPath}/save/placeimges/${ppList.ppPath}" style="height: 400px; width: 100%;">
 								  <%-- 	<img class="mySlides" src="C:\\KostaEdu\\thirdProject\\fileSave/${ppList.ppPath}" style="height: 400px; width: 100%;"> --%>
 								  </c:forEach>
 								 <button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
@@ -255,7 +254,7 @@
                             	<c:forEach items="${tagStr}" var="tagStr">
 	                                <div class="col-lg-3 col-md-3 col-6">
 	                                    <div class="listing__details__amenities__item">
-	                                        <img src="${pageContext.request.contextPath}/img/placeimges/hashtag.png" alt="" style="width: 30px; height: 30px;">
+	                                        <img src="${pageContext.request.contextPath}/img/placeimges/hashtag.png" style="width: 30px; height: 30px;">
 	                                        <h6 style="font-weight: bolder; font-size: 20px;">${tagStr}</h6>
 	                                    </div>
 	                                </div>
@@ -291,7 +290,7 @@
                                 	<tr>
                                 	<c:forEach items="${pp.pprpList}" var="ppp">
 											<td style="color: black;">
-												 <img src="${pageContext.request.contextPath}/save/${ppp.pprpPath}" style="width: 50px; height: 50px;">
+												 <img src="${pageContext.request.contextPath}/save/placephotoreview/${ppp.pprpPath}" style="width: 50px; height: 50px;">
 											</td>
 									</c:forEach>
 									</tr>
@@ -369,7 +368,20 @@
                             <div class="listing__sidebar__contact__map">
                                <!-- <div id="kakaoMap" style="width:100%;height:350px;"></div> -->
                                 <div id="staticMap" style="width:100%;height:350px;"></div>  
-                                <div><h4>주소 : ${place.placeAddr }</h4></div>
+                                <div>
+                                	<table style="text-align:center; width:100%;">
+                                		<tr>
+                                			<td style="height:50px; background-color:#ffffff; ">
+                                				<h4 style="color:#199e9a; font-family:Arial Black, Gadget, sans-serif ;">입력하신 장소의 주소 입니다.</h4>
+                                			</td>
+                                		</tr>
+                                		<tr>
+                                			<td style="background-color:#199e9a; border-color:inherit; text-align:left; vertical-align:top">
+                                				<h5 style="font-weight:bold; color:#FFF">${place.placeAddr }</h5>
+                                			</td>
+                                		</tr>
+                                	</table>
+                                </div>
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=dedf9592b51a78be2b5d3ec39a2a2199"></script>                              
     <script type="text/javascript">
 			var mapContainer = document.getElementById('staticMap'), // 지도를 표시할 div 
@@ -400,7 +412,7 @@
 		// 아래 코드는 지도 위의 마커를 제거하는 코드입니다
 		// marker.setMap(null);    
      </script>                
-                                <img src="img/listing/details/map-icon.png" alt="">
+                               
                             </div>
                         </div>
                       </div>
