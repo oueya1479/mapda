@@ -2,11 +2,16 @@ package kosta.mapda.controller.point;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import kosta.mapda.domain.map.Place;
@@ -14,6 +19,9 @@ import kosta.mapda.domain.map.PlacePhotoReview;
 import kosta.mapda.domain.map.Theme;
 import kosta.mapda.domain.member.Member;
 import kosta.mapda.domain.service.SavingHistory;
+import kosta.mapda.repository.place.PlacePhotoReviewRepository;
+import kosta.mapda.repository.place.PlaceRepository;
+import kosta.mapda.repository.young.MapRepository;
 import kosta.mapda.service.service.PointService;
 
 /**
@@ -26,20 +34,30 @@ public class PointRestController {
 	@Autowired
 	private PointService pointService;
 	
+	@Autowired
+	private MapRepository mrepository;
+	
+	@Autowired
+	private PlaceRepository prepository;
+	
+	@Autowired
+	private PlacePhotoReviewRepository rrepository;
+	
 	
 	/**
 	 *  포인트 적립처리 
 	 * */
 	@RequestMapping(value= "/pointPlus")
-	public int pointPlus(Theme theme, Place place, PlacePhotoReview review, Model model) {
+	public int pointPlus(String classNo, String className, Model model) {
 	
 		Member mem = (Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		
 		int resultCode = 1;
 		
+		Long classNum = Long.parseLong(classNo);
 		
 		try {
-		if(theme != null) {
+		if(className.equals("theme")) {
+			Theme theme = mrepository.findById(classNum).orElse(null);
 			SavingHistory sh = new SavingHistory();
 			sh.setShPay(100);
 			sh.setShWhere(theme.getMapTitle());
@@ -49,7 +67,8 @@ public class PointRestController {
 			
 			resultCode = 1;
 			
-		}else if(place != null) {
+		}else if(className.equals("place")) {
+			Place place = prepository.findById(classNum).orElse(null);
 			SavingHistory sh = new SavingHistory();
 			sh.setShPay(50);
 			sh.setShWhere(place.getPlaceTitle());
@@ -59,7 +78,8 @@ public class PointRestController {
 			pointService.pointSum(sh.getShPay(), 0, mem.getMemNo());
 			
 			resultCode = 1;
-		}else if(review != null) {
+		}else{
+			PlacePhotoReview review = rrepository.findById(classNum).orElse(null);
 			SavingHistory sh = new SavingHistory();
 			sh.setShPay(10);
 			sh.setShWhere(review.getPlace().getPlaceTitle());

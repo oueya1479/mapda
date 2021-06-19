@@ -1,6 +1,7 @@
 package kosta.mapda.service.service;
 
 import java.io.File;
+
 import java.util.List;
 import java.util.Random;
 
@@ -21,9 +22,9 @@ import kosta.mapda.repository.CouponCategoryRepository;
 import kosta.mapda.repository.CouponRepository;
 import kosta.mapda.repository.MyCouponRepository;
 import kosta.mapda.repository.member.MemberRepository;
-import net.sourceforge.barbecue.Barcode;
-import net.sourceforge.barbecue.BarcodeFactory;
-import net.sourceforge.barbecue.BarcodeImageHandler;
+//import net.sourceforge.barbecue.Barcode;
+//import net.sourceforge.barbecue.BarcodeFactory;
+//import net.sourceforge.barbecue.BarcodeImageHandler;
 
 @Service
 @Transactional

@@ -109,8 +109,6 @@ public class EnterprisePostController {
 	@RequestMapping("/post/{epNo}")
 	public String post(Model model, @PathVariable Long epNo) {
 		EnterprisePost post = postService.getPost(epNo);
-		System.out.println("---------");
-		System.out.println(post.getImageList());
 		List<EnterpriseReply> replyList = replyService.getReply(epNo);
 		model.addAttribute("post", post);
 		model.addAttribute("replyList", replyList);

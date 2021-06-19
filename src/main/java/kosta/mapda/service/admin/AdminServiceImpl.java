@@ -1,6 +1,7 @@
 package kosta.mapda.service.admin;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.transaction.Transactional;
 
@@ -20,6 +21,7 @@ import kosta.mapda.domain.member.Member;
 import kosta.mapda.domain.member.RPay;
 import kosta.mapda.repository.admin.AdminMemberRepository;
 import kosta.mapda.repository.admin.InfluenceReqRepositiry;
+import kosta.mapda.repository.admin.ManagementRepository;
 import kosta.mapda.repository.admin.RPayRepository;
 import kosta.mapda.repository.enterprise.EnterprisePostRepository;
 import kosta.mapda.repository.enterprise.EnterpriseReplyRepository;
@@ -37,6 +39,9 @@ public class AdminServiceImpl implements AdminService {
 	
 	@Autowired
 	private InfluenceReqRepositiry influenceReqRepository;
+	
+	@Autowired
+	private ManagementRepository managementRepository;
 	
 	@Autowired
 	private RPayRepository rPayRepository;
@@ -125,4 +130,10 @@ public class AdminServiceImpl implements AdminService {
 	public Page<EnterpriseReply> getEnterpriseReply(Pageable pageable) {
 		return enterpriseReplyRepository.findAll(pageable);
 	}
+
+	@Override
+	public Long getMemberCount() {
+		return memberRepository.count();
+	}
 }
+

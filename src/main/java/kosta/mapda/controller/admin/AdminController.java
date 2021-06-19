@@ -1,6 +1,7 @@
 package kosta.mapda.controller.admin;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -30,6 +31,11 @@ public class AdminController {
 	
 	@Autowired
 	private AdminService adminService;
+	
+	@RequestMapping("index")
+	public void index() {
+		Long memberCount = adminService.getMemberCount();
+	}
 	
 	@RequestMapping("/member")
 	public void member(Model model, @RequestParam(defaultValue = "0") int nowPage, String contain, String content) {
