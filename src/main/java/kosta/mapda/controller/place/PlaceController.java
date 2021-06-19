@@ -55,12 +55,16 @@ public class PlaceController {
 		
 		// hidden place 인지 확인
 		Member mem = (Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		System.out.println("mem.getMemId() =  " + mem.getMemId());
 		System.out.println("mem.getMemPaystatus() = " + mem.getMemPaystatus());
-		//
-		
-		
+
 		
 		Place place = placeService.selectBy(placeNo);
+		
+		if(mem.getMemPaystatus()==0 && place.getPlaceHidden()==1) {
+			throw new RuntimeException("히든플레이스의 경우, 결제회원만 접근 가능합니다!");
+		}
+		
 		List<PlacePhoto> ppList = placeService.selectAllPlacePhoto(placeNo);
 		List<PlaceReview> prList = prService.selectAllPlaceReview(placeNo);
 		List<PlacePhotoReview> pprList = prService.selectAllPhotoReview(placeNo);

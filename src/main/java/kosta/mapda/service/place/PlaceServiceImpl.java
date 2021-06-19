@@ -49,11 +49,6 @@ public class PlaceServiceImpl implements PlaceService {
 
 	@Override
 	public void insert(Place place, List<PlacePhoto> ppList) {
-		System.out.println("place.getPlaceHidden() = " + place.getPlaceHidden());
-		
-		
-		
-		
 		placeRepository.save(place);
 		placePhotoRepository.saveAll(ppList);
 	}
@@ -81,6 +76,7 @@ public class PlaceServiceImpl implements PlaceService {
 			
 		}
 */		
+		
 		return placeRepository.findById(placeNo).orElse(null);
 	}
 
