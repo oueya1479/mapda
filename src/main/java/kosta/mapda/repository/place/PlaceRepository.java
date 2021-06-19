@@ -28,6 +28,7 @@ public interface PlaceRepository extends JpaRepository<Place, Long> {
 	@Query("select p from Place p where p.placeHidden=1")
 	Place isHiddenPlace(Long placeNo);
 	
+	
 	/*
 select p.*
 from map m

@@ -11,6 +11,12 @@
 <style type="text/css">
 .mySlides {display:none;}
 </style>
+
+<sec:authorize access="isAuthenticated()">
+				<sec:authentication property="principal.memNo" var="memNo"/>
+</sec:authorize>
+
+
 <script type="text/javascript">
     	$(function(){
         	 $(document).on("click","#photoReview",function(){
@@ -49,7 +55,7 @@
       				  		str+="<p> 별점 : <span class='icon_star'></span><span class='icon_star'></span><span class='icon_star'></span><span class='icon_star'></span><span class='icon_star'></span></p>";
       				  		}
       				  			for(var j=0; j<result[i].pathList.length; j++){
-      				  				str+="<img src='${pageContext.request.contextPath}/save/placephotoreview/"+result[i].pathList[j].pprpPath+"' style='width: 200px; height: 200px;'>";
+      				  				str+="<img src='${pageContext.request.contextPath}/save/place/"+result[i].pathList[j].pprpPath+"' style='width: 200px; height: 200px;'>";
       				  			};
       				  		str+="<ul>";
       				  		str+=" <li><i class='fa fa-ellipsis-h'></i><i class='fa fa-ellipsis-h'></i><i class='fa fa-ellipsis-h'></i><i class='fa fa-ellipsis-h'></i></li>";
@@ -123,7 +129,28 @@
       		 	var url = "${pageContext.request.contextPath}/place/myReplyReview?placeNo="+placeNo+"&memId="+userId;
       		 	$(location).attr('href', url);
       	 	});  
-*/
+*/				
+			
+	 		$(document).on("click", ".primary-btn", function(){
+				$.ajax({
+					url:"${pageContext.request.contextPath}/place/likelikePlace",
+					type:"get",
+					dateType:"json",
+					data:{"placeNo":$(this).attr("id"), "memNo":${memNo}},
+					success:function(result){
+						if(result== -1){
+							alert("구독에 오류가 발생했습니다.");
+						}else if(result==1){
+							$("#fullHeart").attr("class", "fa fa-heart");
+						}else if(result==0){
+							$("#fullHeart").attr("class", "fa fa-heart-o");
+						}
+					},
+					error:function(err){
+						console.log(err+"가 발생함");
+					}
+				});
+			});
 
       	}); 
     	
@@ -149,16 +176,13 @@
 </head>
 
 <body>
-
-    <!-- Listing Section Begin -->
-    <%-- <section class="listing-hero set-bg" data-setbg="${pageContext.request.contextPath}/img/placeimges/test1.png"> --%><!-- 무슨 사진 넣을지 고민 -->
     <section class="listing-hero set-bg" data-setbg="https://www.journey4.co.uk/wp-content/uploads/2020/04/about-us-2-1920x420.jpg">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8">
                     <div class="listing__hero__option">
                         <div class="listing__hero__icon">
-                            <img src="${pageContext.request.contextPath}/save/placeicon/${place.placeIconPath}" style="width: 150px; height: 150px;" ><!-- 아이콘 모양? user프로필? -->
+                            <img src="${pageContext.request.contextPath}/save/place/${place.placeIconPath}" style="width: 150px; height: 150px;" ><!-- 아이콘 모양? user프로필? -->
                         </div>
                         <div class="listing__hero__text">
                             <h2>${requestScope.place.placeTitle}</h2>
@@ -173,7 +197,23 @@
                 </div>
                 <div class="col-lg-4">
                     <div class="listing__hero__btns">
-                        <a href="#" class="primary-btn"><i class="fa fa-heart-o"></i> Like</a><i class="fa fa-heart"></i>
+                    	<c:set var="heart" value="0"/>
+                    	<c:forEach items="${placeStorage}" var="storage">
+                    		<c:if test="${storage.place.placeNo eq place.placeNo}">
+                    			<c:set var="heart" value="1"/>
+                    		</c:if>
+                    	</c:forEach>
+						<c:choose>
+							<c:when test="${heart eq 1}">
+								<a href="#" class="primary-btn" id="${place.placeNo}">
+								<i class="fa fa-heart" is="likeButton" id="fullHeart"></i>Like</a>
+							</c:when>
+							<c:otherwise>
+								<a href="#" class="primary-btn" id="${place.placeNo}">
+								<i class="fa fa-heart-o" is="likeButton" id="fullHeart"></i>Like</a>
+							</c:otherwise>
+						</c:choose>
+						    <c:set var="heart" value="0"/>               	
                     </div>
                 </div>
             </div>
@@ -218,8 +258,7 @@
                             <!-- ============================================================ -->
 						<div class="w3-content w3-display-container">
 								<c:forEach items="${ppList}" var="ppList">
-								  	 <img class="mySlides" src="${pageContext.request.contextPath}/save/placeimges/${ppList.ppPath}" style="height: 400px; width: 100%;">
-								  <%-- 	<img class="mySlides" src="C:\\KostaEdu\\thirdProject\\fileSave/${ppList.ppPath}" style="height: 400px; width: 100%;"> --%>
+								  	 <img class="mySlides" src="${pageContext.request.contextPath}/save/place/${ppList.ppPath}" style="height: 400px; width: 100%;">
 								  </c:forEach>
 								 <button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
 							 	 <button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">&#10095;</button>
@@ -290,7 +329,7 @@
                                 	<tr>
                                 	<c:forEach items="${pp.pprpList}" var="ppp">
 											<td style="color: black;">
-												 <img src="${pageContext.request.contextPath}/save/placephotoreview/${ppp.pprpPath}" style="width: 50px; height: 50px;">
+												 <img src="${pageContext.request.contextPath}/save/place/${ppp.pprpPath}" style="width: 50px; height: 50px;">
 											</td>
 									</c:forEach>
 									</tr>
@@ -366,7 +405,6 @@
                     <div class="listing__sidebar">
                         <div class="listing__sidebar__contact">
                             <div class="listing__sidebar__contact__map">
-                               <!-- <div id="kakaoMap" style="width:100%;height:350px;"></div> -->
                                 <div id="staticMap" style="width:100%;height:350px;"></div>  
                                 <div>
                                 	<table style="text-align:center; width:100%;">

@@ -7,7 +7,7 @@ import org.springframework.data.domain.Pageable;
 
 import kosta.mapda.domain.map.Place;
 import kosta.mapda.domain.map.PlacePhoto;
-import kosta.mapda.domain.member.Member;
+import kosta.mapda.domain.map.PlaceStorage;
 
 public interface PlaceService {
 	/**
@@ -59,5 +59,26 @@ public interface PlaceService {
 	 * 		인플루 언서인지 확인하기
 	 * */
 	boolean findMemberMemNo(Long memNo);
+	
+	/**
+	 * 		로그인한 멤버의 PlaceStorage 목록 받아오기
+	 * */
+	List<PlaceStorage> selectByMemPlace(Long memNo);
+	
+	/**
+	 * 		좋아요 체크
+	 * */
+	PlaceStorage likeCheck(Long placeNo, Long memNo);
+	
+	/**
+	 * 		좋아요 insert
+	 * */
+	void insertPlaceStorage(Long placeNo, Long memNo);
+	
+	/**
+	 * 		좋아요 delete
+	 * */
+	void deletePlaceStorage(Long placeNo, Long memNo);
+	
 	
 }

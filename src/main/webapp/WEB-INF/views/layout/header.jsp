@@ -44,6 +44,8 @@
                                  My Maps</a></li>
                            <li><a
                               href="${pageContext.request.contextPath}/map/subMaps">Subscribed Maps</a></li>      
+                           <li><a
+                              href="${pageContext.request.contextPath}/place/likePlaces">Like Places</a></li>      
 
                         </ul></li>
 

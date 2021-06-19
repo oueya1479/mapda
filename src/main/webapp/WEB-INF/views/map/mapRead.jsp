@@ -84,15 +84,6 @@ $(function(){
 	</div>
 	<!-- Filter End -->
 
-
-
-
-
-
-
-
-
-
 	<!-- Listing Section Begin -->
 	<section class="listing nice-scroll">
 		<div class="listing__text__top">
@@ -164,18 +155,13 @@ $(function(){
 
 							</div>
 							<div class="listing__item__text__info__right closed">
-								<img src="${pageContext.request.contextPath}/img/map/ribbon.png"
-									style="height: 20px; width: 20px;"">
+								<%-- <img src="${pageContext.request.contextPath}/img/map/ribbon.png"
+									style="height: 20px; width: 20px;""> --%>
 							</div>
 						</div>
 					</div>
 				</div>
 			</c:forEach>
-
-
-
-
-
 
 			<!-- 확인하려고 띄운 폼 지울 것 -->
 	</section>

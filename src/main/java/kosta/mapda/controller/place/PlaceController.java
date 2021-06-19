@@ -26,6 +26,7 @@ import kosta.mapda.domain.map.PlacePhoto;
 import kosta.mapda.domain.map.PlacePhotoReview;
 import kosta.mapda.domain.map.PlacePhotoReviewPhoto;
 import kosta.mapda.domain.map.PlaceReview;
+import kosta.mapda.domain.map.PlaceStorage;
 import kosta.mapda.domain.map.Theme;
 import kosta.mapda.domain.member.Member;
 import kosta.mapda.service.place.PlaceReviewService;
@@ -377,4 +378,16 @@ public class PlaceController {
 		return "redirect:/place/read/"+placeNo;
 	}
 	
+	/**
+	 * 		좋아요(구독한) 플레이스 목록 출력
+	 * */
+	@RequestMapping("/likePlaces")
+	public void likePlaces(Model model) {
+		Member mem = (Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Long memNo = mem.getMemNo();
+		List<PlaceStorage> psList = placeService.selectByMemPlace(memNo);
+		String memId = psList.get(0).getMember().getMemId();
+		model.addAttribute("psList", psList);
+		model.addAttribute("memId", memId);
+	}
 }

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,8 +13,8 @@ import kosta.mapda.domain.map.PhotoReviewDTO;
 import kosta.mapda.domain.map.PlacePhotoReview;
 import kosta.mapda.domain.map.PlacePhotoReviewPhoto;
 import kosta.mapda.domain.map.PlaceReview;
+import kosta.mapda.domain.map.PlaceStorage;
 import kosta.mapda.domain.map.ReviewDTO;
-import kosta.mapda.domain.member.Member;
 import kosta.mapda.service.place.PlaceReviewService;
 import kosta.mapda.service.place.PlaceService;
 
@@ -67,15 +66,36 @@ public class PlaceAjaxController {
 	
 	@RequestMapping("/influencerCheck")
 	public String influencerCheck(@RequestParam("memNo")Long memNo) {
-		// influencer 이면 777 리턴 ======= 아니면 0 리턴
 		//Member mem = (Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//		Member member = placeService.findMemberMemNo(memNo);
-//		if(member.getMemGrade()=="Influencer") {
-//			return "yes";
-//		}
-		
-		
-		
-		return "no";	//"yes"
+		Boolean yesOrNo = placeService.findMemberMemNo(memNo);
+		if(yesOrNo) {
+			return "yes";	//influencer 이다
+		}else {
+			return "no";		//influencer 아니다
+		}
 	}
+	
+	@RequestMapping("/likelikePlace")
+	public int likelikePlace(String placeNo, String memNo) {
+		Long pNo = Long.parseLong(placeNo);
+		Long mNo = Long.parseLong(memNo);
+		
+		int resultCode = 1;
+		
+		try {
+			PlaceStorage ps = placeService.likeCheck(pNo, mNo);
+			if(ps==null) {
+				placeService.insertPlaceStorage(pNo, mNo);
+				resultCode=1;
+			}else if(ps!=null) {
+				placeService.deletePlaceStorage(pNo, mNo);
+				resultCode=0;
+			}
+		}catch(Exception e) {
+			resultCode = -1;
+		}
+
+		return resultCode;
+	}
+	
 }

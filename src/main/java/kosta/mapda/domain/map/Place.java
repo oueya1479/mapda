@@ -79,7 +79,9 @@ public class Place {
 
 //	@OneToMany(mappedBy = "place", cascade = CascadeType.ALL)
 //	private List<PlacePhotoReview> pprList;		// place photo review
-
+	
+	@OneToMany(mappedBy="place", cascade = CascadeType.ALL)
+	private List<PlaceStorage> psList;
 	
 	public Place(Long placeNo) {
 		this.placeNo = placeNo;

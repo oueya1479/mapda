@@ -12,10 +12,12 @@ import org.springframework.stereotype.Service;
 
 import kosta.mapda.domain.map.Place;
 import kosta.mapda.domain.map.PlacePhoto;
+import kosta.mapda.domain.map.PlaceStorage;
 import kosta.mapda.domain.member.Member;
 import kosta.mapda.repository.member.MemberRepository;
 import kosta.mapda.repository.place.PlacePhotoRepository;
 import kosta.mapda.repository.place.PlaceRepository;
+import kosta.mapda.repository.place.PlaceStorageRepository;
 
 @Service
 @Transactional
@@ -29,6 +31,9 @@ public class PlaceServiceImpl implements PlaceService {
 	
 	@Autowired
 	private MemberRepository memberRepository;
+	
+	@Autowired
+	private PlaceStorageRepository placeStorageRepository;
 
 	@Override
 	public List<Place> selectAll() {
@@ -127,6 +132,36 @@ public class PlaceServiceImpl implements PlaceService {
 		}else {
 			return false;	// Influencer 아니다
 		}
+	}
+
+	@Override
+	public List<PlaceStorage> selectByMemPlace(Long memNo) {
+		return placeStorageRepository.selectByMemPlace(memNo);
+	}
+
+	@Override
+	public PlaceStorage likeCheck(Long placeNo, Long memNo) {
+		return placeStorageRepository.findStorage(placeNo, memNo);
+	}
+
+	@Override
+	public void insertPlaceStorage(Long placeNo, Long memNo) {
+		Member member = new Member();
+		Place place = new Place();
+		
+		member.setMemNo(memNo);
+		place.setPlaceNo(placeNo);
+		PlaceStorage placeStorage = new PlaceStorage();
+		
+		placeStorage.setMember(member);
+		placeStorage.setPlace(place);
+		
+		placeStorageRepository.save(placeStorage);
+	}
+
+	@Override
+	public void deletePlaceStorage(Long placeNo, Long memNo) {
+		placeStorageRepository.deleteSub(placeNo, memNo);
 	}
 
 //	@Override
