@@ -126,10 +126,11 @@ $(function(){
 					<c:forEach items="${requestScope.themeMap.place}" var="place" varStatus="state">
 						<div class="listing__item">
 						
+						
 						<div class="listing__item__pic set-bg"
-							data-setbg="${pageContext.request.contextPath}/save/${ppList.ppPath}">
+							data-setbg="${pageContext.request.contextPath}/save/${themeMap.mapImg}<%-- ${ppList.ppPath} --%>">
 							<img
-								src="${pageContext.request.contextPath}/img/listing/list_icon-2.png"
+								src="${pageContext.request.contextPath}/img/placeicon/${place.placeIconPath}" style=""
 								alt="">
 							<div class="listing__item__pic__tag top_rate">
 								<a
@@ -149,7 +150,7 @@ $(function(){
 									<div class="listing__item__text__rating"></div>
 									<ul>
 										<li><span class="icon_zoom-in_alt"></span>
-											${place.placeContent}</li>
+											${place.placeContent} </li>
 										<li><span class="icon_pin_alt"></span> ${place.placeAddr}</li>
 									</ul>
 								</div>
