@@ -128,9 +128,9 @@ $(function(){
 						
 						
 						<div class="listing__item__pic set-bg"
-							data-setbg="${pageContext.request.contextPath}/save/${themeMap.mapImg}<%-- ${ppList.ppPath} --%>">
+							data-setbg="${pageContext.request.contextPath}/save/map/${ppList.ppPath}">
 							<img
-								src="${pageContext.request.contextPath}/img/placeicon/${place.placeIconPath}" style=""
+								src="${pageContext.request.contextPath}/save/placeicon/${place.placeIconPath}" style=""
 								alt="">
 							<div class="listing__item__pic__tag top_rate">
 								<a
