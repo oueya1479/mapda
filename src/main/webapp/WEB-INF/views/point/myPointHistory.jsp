@@ -62,38 +62,7 @@
 </style>
 
 <SCRIPT>
-$(document).on('click','#plus',function(){
-	
-	let name = $(this).attr('name');
-	let value = $(this).val();
-	
-	alert(value + " " + name);
-	if(confirm("적립 해당 게시물은 30일간 삭제불가합니다. 적립하시겠습니까?") == true){
-		$.ajax({
-			url: "${pageContext.request.contextPath}/point/pointPlus",
-			type: "get",
-			dataType: "json",
-			data: {value : name},
-			success: function(data){
-				if(data == -1){
-                    alert("적립 오류","error","확인",function(){});
-                } else if(data==1){
-					alert("적립 완료")
-				} 
-			},
-			error : function(err) {
-				console.log(err + "에러 발생");
-			}
-			
-			
-		})
-	}else{
-		return;
-	}
-	
-	
-	
-});
+
 
 </SCRIPT>
 
@@ -148,21 +117,18 @@ $(document).on('click','#plus',function(){
 						</tr>
 						</thead>
 						<tbody>
-						<c:forEach items="${requestScope.myThemeList}" var="myTheme" varStatus="status">
+						<c:forEach items="${requestScope.mySavingList}" var="mySaving" varStatus="status">
 						
-						<fmt:parseDate value="${myTheme.mapRegdate}" pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime" type="both"/>
-						
-						<fmt:formatDate value="${parsedDateTime}" pattern="yyyy-MM-dd" var="writeDate"/>
 
 						<tr>
 						
-						<c:if test="${today == writeDate }">
+						
 							<td>${status.count}</td>
-							<td>&nbsp;${myTheme.mapTitle}</td>
-							<td></td>
-							<td></td>
+							<td>&nbsp;${mySaving.shWhere}</td>
+							<td>${mySaving.shWhen}</td>
+							<td>${mySaving.shPay}</td>
 
-							</c:if>
+							
 						</tr>				
 						</c:forEach>
 						</tbody>
@@ -183,20 +149,16 @@ $(document).on('click','#plus',function(){
 						</tr>
 						</thead>
 						<tbody>
-						<c:forEach items="${requestScope.myPhotoReviewList}" var="myReview" varStatus="status">
+						<c:forEach items="${requestScope.myUsingList}" var="myUsing" varStatus="status">
 						
-						<fmt:parseDate value="${myReview.pprRegdate}" pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime3" type="both"/>
-						
-						<fmt:formatDate value="${parsedDateTime3}" pattern="yyyy-MM-dd" var="writeDate3"/>
-
 						<tr>
-						<c:if test="${today == writeDate3 }">
+						
 							<td>${status.count}</td>
-							<td>&nbsp;${myReview.place.placeTitle} 에 대한 포토리뷰</td>
-							<td></td>
-							<td></td>
+							<td>&nbsp;${myUsing.uhWhere}</td>
+							<td>${myUsing.uhWhen}</td>
+							<td>${myUsing.uhPay}</td>
 
-							</c:if>
+						
 						</tr>				
 						</c:forEach>
 						</tbody>

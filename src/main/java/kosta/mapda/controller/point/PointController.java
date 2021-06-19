@@ -49,7 +49,6 @@ public class PointController {
 		model.addAttribute("myPlaceList" , myPlaceList);
 		model.addAttribute("myPhotoReviewList" , myPhotoReviewList);
 		
-		
 		return "point/myPoint";
 	}
 	
@@ -65,11 +64,11 @@ public class PointController {
 		
 		List<SavingHistory> mySavingList = pointService.selectSavingHistory(mem.getMemNo());
 		
-		List<UsingHistory> myHistoryList = pointService.selectUsingHistory(mem.getMemNo());
+		List<UsingHistory> myUsingList = pointService.selectUsingHistory(mem.getMemNo());
 		
 		model.addAttribute("myPoint", myPoint);
 		model.addAttribute("mySavingList", mySavingList);
-		model.addAttribute("myHistoryList", myHistoryList);
+		model.addAttribute("myUsingList", myUsingList);
 		
 		return "point/myPointHistory";
 	}
