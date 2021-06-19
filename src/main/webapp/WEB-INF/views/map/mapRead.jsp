@@ -3,7 +3,7 @@
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -122,57 +122,57 @@ $(function(){
 
 		</div>
 		<div class="listing__list">
-			
-					<c:forEach items="${requestScope.themeMap.place}" var="place" varStatus="state">
-						<div class="listing__item">
-						
-						
-						<div class="listing__item__pic set-bg"
-							data-setbg="${pageContext.request.contextPath}/save/map/${ppList.ppPath}">
-							<img
-								src="${pageContext.request.contextPath}/save/placeicon/${place.placeIconPath}" style=""
-								alt="">
-							<div class="listing__item__pic__tag top_rate">
-								<a
-									href="${pageContext.request.contextPath}/place/read/${place.placeNo}">See
-									Details</a>
+
+			<c:forEach items="${requestScope.themeMap.place}" var="place"
+				varStatus="state">
+				<div class="listing__item">
+					<div class="listing__item__pic set-bg"
+						data-setbg="${pageContext.request.contextPath}/img/map/${place.ppList[0].ppPath}">
+						<%-- <img
+								src="${pageContext.request.contextPath}/img/placeicon/${place.placeIconPath}" style="width:60px; height:60px"
+								alt=""> --%>
+						<div class="listing__item__pic__tag top_rate">
+							<a
+								href="${pageContext.request.contextPath}/place/read/${place.placeNo}">See
+								Details</a>
+						</div>
+
+					</div>
+
+
+					<div class="listing__item__text">
+						<div class="listing__item__text__inside">
+							<a
+								href="${pageContext.request.contextPath}/place/read/${place.placeNo}"><h5>
+									${place.placeTitle}</h5> <br></a> <a href="#">
+									<img
+								src="${pageContext.request.contextPath}/img/map/star.png" alt=""
+								style="height: 20px; width: 20px;"></a>&nbsp;&nbsp;&nbsp;${place.placeStar}
+							<div class="listing__item__text__rating"></div>
+							<ul>
+								<li><span class="icon_zoom-in_alt"></span>
+									${place.placeContent}</li>
+								<li><span class="icon_pin_alt"></span> ${place.placeAddr}</li>
+							</ul>
+						</div>
+						<p>
+						<div class="listing__item__text__info">
+							<div class="listing__item__text__info__left">
+								<a href=""><img
+									src="${pageContext.request.contextPath}/img/map/heart.png"
+									style="height: 20px; width: 20px;""> </a><span>${place.placeLike}</span>
+
+							</div>
+							<div class="listing__item__text__info__right closed">
+								<img src="${pageContext.request.contextPath}/img/map/ribbon.png"
+									style="height: 20px; width: 20px;"">
 							</div>
 						</div>
-					
-								
-							<div class="listing__item__text">
-								<div class="listing__item__text__inside">
-									<a
-										href="${pageContext.request.contextPath}/place/read/${place.placeNo}"><h5>
-											${place.placeTitle}</h5> <br></a> <a href="#"><img
-										src="${pageContext.request.contextPath}/img/map/star.png"
-										alt="" style="height: 20px; width: 20px;"></a>&nbsp;&nbsp;&nbsp;${place.placeStar}
-									<div class="listing__item__text__rating"></div>
-									<ul>
-										<li><span class="icon_zoom-in_alt"></span>
-											${place.placeContent} </li>
-										<li><span class="icon_pin_alt"></span> ${place.placeAddr}</li>
-									</ul>
-								</div>
-								<p>
-								<div class="listing__item__text__info">
-									<div class="listing__item__text__info__left">
-										<a href=""><img
-											src="${pageContext.request.contextPath}/img/map/heart.png"
-											style="height: 20px; width: 20px;""> </a><span>${place.placeLike}</span>
+					</div>
+				</div>
+			</c:forEach>
 
-									</div>
-									<div class="listing__item__text__info__right closed">
-										<img
-											src="${pageContext.request.contextPath}/img/map/ribbon.png"
-											style="height: 20px; width: 20px;"">
-									</div>
-								</div>
-							</div>
-						</div>
-					</c:forEach>
 
-				
 
 
 
@@ -250,11 +250,11 @@ $(function(){
 
 			</c:when>
 			<c:otherwise>
-			<c:forEach items="${themeMap.place}" var="place">
-				<script type="text/javascript"
-							src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a72fc6d2575e28fbd026e0a4b7f8c331"></script>
-						
-						<script>
+				<c:forEach items="${themeMap.place}" var="place">
+					<script type="text/javascript"
+						src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a72fc6d2575e28fbd026e0a4b7f8c331"></script>
+
+					<script>
 							var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
 							mapOption = {
 								center : new kakao.maps.LatLng( 37.52057532965539,
@@ -317,9 +317,9 @@ $(function(){
 								
 							}
 						</script>
-				
-			
-			</c:forEach>
+
+
+				</c:forEach>
 			</c:otherwise>
 		</c:choose>
 	</div>

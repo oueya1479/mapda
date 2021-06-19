@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import kosta.mapda.domain.map.MapStorage;
+import kosta.mapda.domain.map.Place;
 import kosta.mapda.domain.map.Theme;
 import kosta.mapda.domain.member.Member;
 
@@ -85,6 +86,6 @@ public interface MapService {
 	 * 키워드로 + 카테고리 검색
 	 */
 	List<Theme> selectByKeyAndCategory(String keyWord, Long categoryNo);
-	
 
+	
 }
