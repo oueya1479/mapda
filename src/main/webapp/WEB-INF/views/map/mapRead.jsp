@@ -113,37 +113,31 @@ $(function(){
 
 		</div>
 		<div class="listing__list">
-
-			<c:forEach items="${requestScope.themeMap.place}" var="place"
-				varStatus="state">
+<!-- ============================================추가 =========hidden==========================-->
+			<c:forEach items="${hidden}" var="hidden" 	varStatus="state">
 				<div class="listing__item">
 					<div class="listing__item__pic set-bg"
-						data-setbg="${pageContext.request.contextPath}/img/map/${place.ppList[0].ppPath}">
-						<%-- <img
-								src="${pageContext.request.contextPath}/img/placeicon/${place.placeIconPath}" style="width:60px; height:60px"
-								alt=""> --%>
+						data-setbg="${pageContext.request.contextPath}/save/place/lockimage.png">
 						<div class="listing__item__pic__tag top_rate">
 							<a
-								href="${pageContext.request.contextPath}/place/read/${place.placeNo}">See
+								href="${pageContext.request.contextPath}/place/read/${hidden.placeNo}">See
 								Details</a>
 						</div>
 
 					</div>
-
-
 					<div class="listing__item__text">
 						<div class="listing__item__text__inside">
 							<a
-								href="${pageContext.request.contextPath}/place/read/${place.placeNo}"><h5>
-									${place.placeTitle}</h5> <br></a> <a href="#">
+								href="${pageContext.request.contextPath}/place/read/${hidden.placeNo}"><h5>
+									Hidden Place</h5> <br></a> <a href="#">
 									<img
 								src="${pageContext.request.contextPath}/img/map/star.png" alt=""
-								style="height: 20px; width: 20px;"></a>&nbsp;&nbsp;&nbsp;${place.placeStar}
+								style="height: 20px; width: 20px;"></a>&nbsp;&nbsp;&nbsp;${hidden.placeStar}
 							<div class="listing__item__text__rating"></div>
 							<ul>
 								<li><span class="icon_zoom-in_alt"></span>
-									${place.placeContent}</li>
-								<li><span class="icon_pin_alt"></span> ${place.placeAddr}</li>
+									Hidden Content</li>
+								<li><span class="icon_pin_alt"></span>Hidden Address</li>
 							</ul>
 						</div>
 						<p>
@@ -151,7 +145,7 @@ $(function(){
 							<div class="listing__item__text__info__left">
 								<a href=""><img
 									src="${pageContext.request.contextPath}/img/map/heart.png"
-									style="height: 20px; width: 20px;""> </a><span>${place.placeLike}</span>
+									style="height: 20px; width: 20px;""> </a><span>${hidden.placeLike}</span>
 
 							</div>
 							<div class="listing__item__text__info__right closed">
@@ -162,6 +156,56 @@ $(function(){
 					</div>
 				</div>
 			</c:forEach>
+			
+			<!-- ============================================추가 ========nohidden===========================-->
+			<c:forEach items="${nohidden}" var="nohidden" 	varStatus="state">
+				<div class="listing__item">
+					<div class="listing__item__pic set-bg"
+						data-setbg="${pageContext.request.contextPath}/img/map/${nohidden.ppList[0].ppPath}">
+						<%-- <img
+								src="${pageContext.request.contextPath}/img/placeicon/${place.placeIconPath}" style="width:60px; height:60px"
+								alt=""> --%>
+						<div class="listing__item__pic__tag top_rate">
+							<a
+								href="${pageContext.request.contextPath}/place/read/${nohidden.placeNo}">See
+								Details</a>
+						</div>
+
+					</div>
+					<div class="listing__item__text">
+						<div class="listing__item__text__inside">
+							<a
+								href="${pageContext.request.contextPath}/place/read/${nohidden.placeNo}"><h5>
+									${nohidden.placeTitle}</h5> <br></a> <a href="#">
+									<img
+								src="${pageContext.request.contextPath}/img/map/star.png" alt=""
+								style="height: 20px; width: 20px;"></a>&nbsp;&nbsp;&nbsp;${nohidden.placeStar}
+							<div class="listing__item__text__rating"></div>
+							<ul>
+								<li><span class="icon_zoom-in_alt"></span>
+									${nohidden.placeContent}</li>
+								<li><span class="icon_pin_alt"></span> ${nohidden.placeAddr}</li>
+							</ul>
+						</div>
+						<p>
+						<div class="listing__item__text__info">
+							<div class="listing__item__text__info__left">
+								<a href=""><img
+									src="${pageContext.request.contextPath}/img/map/heart.png"
+									style="height: 20px; width: 20px;""> </a><span>${nohidden.placeLike}</span>
+
+							</div>
+							<div class="listing__item__text__info__right closed">
+								<%-- <img src="${pageContext.request.contextPath}/img/map/ribbon.png"
+									style="height: 20px; width: 20px;""> --%>
+							</div>
+						</div>
+					</div>
+				</div>
+			</c:forEach>
+			
+			
+			
 
 			<!-- 확인하려고 띄운 폼 지울 것 -->
 	</section>

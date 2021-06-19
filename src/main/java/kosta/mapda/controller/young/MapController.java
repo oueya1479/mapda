@@ -2,6 +2,7 @@ package kosta.mapda.controller.young;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -119,9 +120,26 @@ public class MapController {
 		//조회수
 		boolean state = flag==null?true : false;
 		Theme theme = mapService.selectBy(mapNo, true);
+		
+		//hidden
+		List<Place> placeList =  theme.getPlace();
+		
+		List<Place> hiddenList = new ArrayList<Place>();
+		List<Place> noHiddenList = new ArrayList<Place>();
+		
+		for(Place p : placeList) {
+			if(p.getPlaceHidden()==1) {
+				hiddenList.add(p);
+			}else {
+				noHiddenList.add(p);
+			}
+		}
+		
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("map/mapRead");
 		mv.addObject("themeMap", theme);
+		mv.addObject("hidden", hiddenList);
+		mv.addObject("nohidden", noHiddenList);
 		
 		return mv;
 	}

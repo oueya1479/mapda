@@ -54,7 +54,8 @@ public class PlaceController {
 		int starAvgPer=0;
 		
 		// hidden place 인지 확인
-		
+		Member mem = (Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		System.out.println("mem.getMemPaystatus() = " + mem.getMemPaystatus());
 		//
 		
 		
