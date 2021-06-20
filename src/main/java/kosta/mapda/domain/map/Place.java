@@ -35,7 +35,7 @@ public class Place {
 	private MultipartFile file;
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PL_placeNo_seq")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PL_placeNo_seq")	//pl_place_no_seq
 	@SequenceGenerator(sequenceName = "PL_placeNo_seq",allocationSize = 1,name = "PL_placeNo_seq")
 	private Long placeNo;
 	
@@ -51,7 +51,7 @@ public class Place {
 	private String placeTag;
 	private int placeLike;
 	private int placeStar;
-	private int placeHidden;	// default 1,  0 hidden 으로 전환
+	private int placeHidden;	// default 0,  1 hidden 으로 전환
 	private int placeIconNo;
 	private String placeIconName;
 	private String placeIconPath;
@@ -80,7 +80,9 @@ public class Place {
 
 //	@OneToMany(mappedBy = "place", cascade = CascadeType.ALL)
 //	private List<PlacePhotoReview> pprList;		// place photo review
-
+	
+	@OneToMany(mappedBy="place", cascade = CascadeType.ALL)
+	private List<PlaceStorage> psList;
 	
 	public Place(Long placeNo) {
 		this.placeNo = placeNo;

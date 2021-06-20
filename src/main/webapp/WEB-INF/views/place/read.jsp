@@ -1,17 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
-
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="zxx">
 <head>
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=dedf9592b51a78be2b5d3ec39a2a2199"></script>
 <style type="text/css">
 .mySlides {display:none;}
 </style>
+
+<sec:authorize access="isAuthenticated()">
+				<sec:authentication property="principal.memNo" var="memNo"/>
+</sec:authorize>
+
+
 <script type="text/javascript">
     	$(function(){
         	 $(document).on("click","#photoReview",function(){
@@ -50,7 +55,7 @@
       				  		str+="<p> 별점 : <span class='icon_star'></span><span class='icon_star'></span><span class='icon_star'></span><span class='icon_star'></span><span class='icon_star'></span></p>";
       				  		}
       				  			for(var j=0; j<result[i].pathList.length; j++){
-      				  				str+="<img src='${pageContext.request.contextPath}/"+result[i].pathList[j].pprpPath+"' style='width: 200px; height: 200px;'>";
+      				  				str+="<img src='${pageContext.request.contextPath}/save/place/"+result[i].pathList[j].pprpPath+"' style='width: 200px; height: 200px;'>";
       				  			};
       				  		str+="<ul>";
       				  		str+=" <li><i class='fa fa-ellipsis-h'></i><i class='fa fa-ellipsis-h'></i><i class='fa fa-ellipsis-h'></i><i class='fa fa-ellipsis-h'></i></li>";
@@ -75,8 +80,7 @@
        				  dataType: "json", //서버가 보내오는 데이터타입(응답 - text ,html, xml, json)
        				 // data:{placeNo:1} , //서버에게 보낼 parameter정보
        				  success: function(result){ //item 데이터 ==> ["name":값, subject:값, ... ,customer:{id:값, name:값....}]
-       				  			//console.log(result);
-           				  		var str="";
+            				  		var str="";
            				  	if(result==""){
       				  			str+="<p>등록된 댓글이 없습니다.</p>";
       				  		}else{
@@ -124,7 +128,28 @@
       		 	var url = "${pageContext.request.contextPath}/place/myReplyReview?placeNo="+placeNo+"&memId="+userId;
       		 	$(location).attr('href', url);
       	 	});  
-*/
+*/				
+			
+	 		$(document).on("click", ".primary-btn", function(){
+				$.ajax({
+					url:"${pageContext.request.contextPath}/place/likelikePlace",
+					type:"get",
+					dateType:"json",
+					data:{"placeNo":$(this).attr("id"), "memNo":${memNo}},
+					success:function(result){
+						if(result== -1){
+							alert("구독에 오류가 발생했습니다.");
+						}else if(result==1){
+							$("#fullHeart").attr("class", "fa fa-heart");
+						}else if(result==0){
+							$("#fullHeart").attr("class", "fa fa-heart-o");
+						}
+					},
+					error:function(err){
+						console.log(err+"가 발생함");
+					}
+				});
+			});
 
       	}); 
     	
@@ -139,23 +164,24 @@
       	}
       	
       	//alert(${placeNo});
+      	
+      	function deleteValid(){
+    		confirm("삭제하시겠습니까?");
+      	}
+    		
+      	
   </script>
-
 
 </head>
 
-
 <body>
-
-    <!-- Listing Section Begin -->
-    <%-- <section class="listing-hero set-bg" data-setbg="${pageContext.request.contextPath}/img/placeimges/test1.png"> --%><!-- 무슨 사진 넣을지 고민 -->
     <section class="listing-hero set-bg" data-setbg="https://www.journey4.co.uk/wp-content/uploads/2020/04/about-us-2-1920x420.jpg">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8">
                     <div class="listing__hero__option">
                         <div class="listing__hero__icon">
-                            <img src="${pageContext.request.contextPath}/${place.placeIconPath}" alt="" style="width: 150px; height: 150px;" ><!-- 아이콘 모양? user프로필? -->
+                            <img src="${pageContext.request.contextPath}/save/place/${place.placeIconPath}" style="width: 150px; height: 150px;" ><!-- 아이콘 모양? user프로필? -->
                         </div>
                         <div class="listing__hero__text">
                             <h2>${requestScope.place.placeTitle}</h2>
@@ -170,7 +196,23 @@
                 </div>
                 <div class="col-lg-4">
                     <div class="listing__hero__btns">
-                        <a href="#" class="primary-btn"><i class="fa fa-heart-o"></i> Like</a><i class="fa fa-heart"></i>
+                    	<c:set var="heart" value="0"/>
+                    	<c:forEach items="${placeStorage}" var="storage">
+                    		<c:if test="${storage.place.placeNo eq place.placeNo}">
+                    			<c:set var="heart" value="1"/>
+                    		</c:if>
+                    	</c:forEach>
+						<c:choose>
+							<c:when test="${heart eq 1}">
+								<a href="#" class="primary-btn" id="${place.placeNo}">
+								<i class="fa fa-heart" is="likeButton" id="fullHeart"></i>Like</a>
+							</c:when>
+							<c:otherwise>
+								<a href="#" class="primary-btn" id="${place.placeNo}">
+								<i class="fa fa-heart-o" is="likeButton" id="fullHeart"></i>Like</a>
+							</c:otherwise>
+						</c:choose>
+						    <c:set var="heart" value="0"/>               	
                     </div>
                 </div>
             </div>
@@ -185,7 +227,29 @@
                 <div class="col-lg-8">
                     <div class="listing__details__text">
                         <div class="listing__details__about">
-                            <h4>Overview</h4>
+                            
+<sec:authorize access="isAuthenticated()">
+				<sec:authentication property="principal.memNo" var="loginMemNo"/>
+					<c:if test="${place.member.memNo== loginMemNo}">
+					<span>
+						<form action="${pageContext.request.contextPath}/place/placeUpdateForm" method="post">
+							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+							<input type="hidden" name="memNo" value="${place.member.memNo}">
+							<input type="hidden" name ="placeNo" value="${placeNo}">
+							 <button type="submit" class="btn btn-outline-danger" id="prUpdated" style="width: 150px">Place Modify</button>
+						</form>
+						<br><br>
+						<form action="${pageContext.request.contextPath}/place/placeDelete" method="post">
+							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+							<input type="hidden" name="memNo" value="${place.member.memNo}">
+							<input type="hidden" name ="placeNo" value="${placeNo}">
+							 <button type="submit" class="btn btn-outline-dark" id="prDelete" style="width: 150px/* ; float: right */;" onclick="deleteValid();">Place Delete</button>
+						</form>
+						</span>
+					</c:if>
+	</sec:authorize>                            
+
+                            <br><br><h4>Overview</h4>
                             <p> ${requestScope.place.placeContent}</p>
                         </div>
                         <div class="listing__details__gallery">
@@ -193,11 +257,10 @@
                             <!-- ============================================================ -->
 						<div class="w3-content w3-display-container">
 								<c:forEach items="${ppList}" var="ppList">
-								  	<%-- <img class="mySlides" src="${pageContext.request.contextPath}/${ppList.ppPath}" style="height: 400px; width: 100%;"> --%>
-								  	<img class="mySlides" src="C:\\KostaEdu\\thirdProject\\fileSave/${ppList.ppPath}" style="height: 400px; width: 100%;">
+								  	 <img class="mySlides" src="${pageContext.request.contextPath}/save/place/${ppList.ppPath}" style="height: 400px; width: 100%;">
 								  </c:forEach>
-							 <button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
-							  <button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">&#10095;</button>
+								 <button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
+							 	 <button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">&#10095;</button>
 						</div>
 
 					<script>
@@ -229,7 +292,7 @@
                             	<c:forEach items="${tagStr}" var="tagStr">
 	                                <div class="col-lg-3 col-md-3 col-6">
 	                                    <div class="listing__details__amenities__item">
-	                                        <img src="${pageContext.request.contextPath}/img/placeimges/hashtag.png" alt="" style="width: 30px; height: 30px;">
+	                                        <img src="${pageContext.request.contextPath}/img/placeimges/hashtag.png" style="width: 30px; height: 30px;">
 	                                        <h6 style="font-weight: bolder; font-size: 20px;">${tagStr}</h6>
 	                                    </div>
 	                                </div>
@@ -255,18 +318,11 @@
                                     </div>
                                     <span class="right"></span>
                                 </div> 
-                                	<table border="1">
-                                	<tr>
-                                		<td></td>
-                                		<td></td>
-                                		<td></td>
-                                	</tr>
+                                	<table>
                                 <c:forEach items="${pprList}" var="pp">
                                 	<tr>
                                 	<c:forEach items="${pp.pprpList}" var="ppp">
-											<td style="color: black;">
-												 <img src="${pageContext.request.contextPath}/${ppp.pprpPath}" style="width: 50px; height: 50px;">
-											</td>
+												 <img src="${pageContext.request.contextPath}/save/place/${ppp.pprpPath}" style="width: 50px; height: 50px;">
 									</c:forEach>
 									</tr>
 									</c:forEach>
@@ -319,7 +375,7 @@
                             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
                             <input type="hidden" name="placeNo" value="${placeNo}"/>
                             <input type="hidden" name="memNo" value="${userNo}"/>
-               				 <button type="submit" class="btn" id="prSubmit" style="background-color: teal; font-weight: bolder;">Photo Review 작성하기</button>
+               				 <button type="submit" class="btn btn-outline-dark" id="prSubmit" style=" font-weight: bolder;">Photo Review 작성하기</button>
                         </form>
                 </h4>
                          <form name="replyForm" method="post" action="${pageContext.request.contextPath}/place/replyWrite">
@@ -341,9 +397,21 @@
                     <div class="listing__sidebar">
                         <div class="listing__sidebar__contact">
                             <div class="listing__sidebar__contact__map">
-                               <!-- <div id="kakaoMap" style="width:100%;height:350px;"></div> -->
                                 <div id="staticMap" style="width:100%;height:350px;"></div>  
-                                <div><h4>주소 : ${place.placeAddr }</h4></div>
+                                <div>
+                                	<table style="text-align:center; width:100%;">
+                                		<tr>
+                                			<td style="height:50px; background-color:#ffffff; ">
+                                				<h4 style="color:#199e9a; font-family:Arial Black, Gadget, sans-serif ;">입력하신 장소의 주소 입니다.</h4>
+                                			</td>
+                                		</tr>
+                                		<tr>
+                                			<td style="background-color:#199e9a; border-color:inherit; text-align:left; vertical-align:top">
+                                				<h5 style="font-weight:bold; color:#FFF">${place.placeAddr }</h5>
+                                			</td>
+                                		</tr>
+                                	</table>
+                                </div>
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=dedf9592b51a78be2b5d3ec39a2a2199"></script>                              
     <script type="text/javascript">
 			var mapContainer = document.getElementById('staticMap'), // 지도를 표시할 div 
@@ -374,45 +442,7 @@
 		// 아래 코드는 지도 위의 마커를 제거하는 코드입니다
 		// marker.setMap(null);    
      </script>                
- 				<div class="col-lg-4" style="margin-top: 100px;">
-                    <div class="listing__sidebar">
-                        <div class="listing__sidebar__contact">
-                            <div class="listing__sidebar__contact__map">
-                            	<div>
-                            	
-<input type="button" class="btn btn-outline-danger" value="Modify" id="${map.mapNo}" name="modifyMap" style="width: 100px" />
-<input type="button" class="btn btn-outline-dark" value="Delete" name="deleteMap" id="${map.mapNo}" style="width: 100px; float: right;" />
-  <sec:authorize access="isAuthenticated()">
-				<sec:authentication property="principal.memNo" var="loginMemNo"/>
-					<c:if test="${place.member.memNo== loginMemNo}">
-						<form action="${pageContext.request.contextPath}/place/placeUpdateForm" method="post">
-							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-							<input type="hidden" name="memNo" value="${place.member.memNo}">
-							<input type="hidden" name ="mapNo" value="${place.mapNo}">
-								<div class="listing__text__top__right">
-									<input type=submit class="btn btn-outline-danger" value="Modify" id="${map.mapNo}" name="modifyMap" style="width: 100px" />
-									 <button type="submit" class="btn btn-outline-danger" id="prUpdated" style="background-color: teal; font-weight: bolder;">Modify</button>
-								</div>
-						</form>
-					</c:if>
-			</sec:authorize>	        
-			
-			<form name=prForm method="post" action="${pageContext.request.contextPath}/place/photoReviewForm" style="text-align: right;">
-                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-                            <input type="hidden" name="placeNo" value="${placeNo}"/>
-                            <input type="hidden" name="memNo" value="${userNo}"/>
-               				 <button type="submit" class="btn" id="prSubmit" style="background-color: teal; font-weight: bolder;">Photo Review 작성하기</button>
-                        </form>                  	
-
-          
-          
-                            		
-                            	</div>
-                  			</div>
-                  		</div>
-                  	</div>
-                  </div>	       
-                                <img src="img/listing/details/map-icon.png" alt="">
+                               
                             </div>
                         </div>
                       </div>

@@ -3,9 +3,7 @@ package kosta.mapda.service.service;
 import java.io.File;
 
 import java.util.List;
-import java.util.Random;
 
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 

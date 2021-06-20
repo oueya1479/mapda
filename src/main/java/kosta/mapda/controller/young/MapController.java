@@ -2,6 +2,7 @@ package kosta.mapda.controller.young;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -38,7 +39,7 @@ public class MapController {
 	@Autowired
 	private  MapService mapService;
 	
-	private final String path = "/Users/soyoung/Desktop/fileSave";	
+	//private final String path = "/Users/soyoung/Desktop/fileSave";	
 
 	/**
 	 * 테마지도 등록 폼
@@ -70,7 +71,6 @@ public class MapController {
 			
 			String fileName = file.getOriginalFilename();
 			theme.setMapImg(fileName);
-			ServletContext application = session.getServletContext();
 			
 //			String webPath = "/static/save";
 //			String realPath = application.getRealPath(webPath);
@@ -81,6 +81,8 @@ public class MapController {
 //			realPath += File.separator +fileName;
 //			File saveFile = new File(realPath);
 			
+			ServletContext application =session.getServletContext();
+			String path = application.getRealPath("/WEB-INF/save");
 			file.transferTo(new File(path+"/"+fileName));
 		}
 		
@@ -98,7 +100,7 @@ public class MapController {
 	@RequestMapping("/mapList")
 	public void list(HttpServletRequest request, Model model, @RequestParam(defaultValue = "0") int nowPage) {
 		
-		Pageable pageable = PageRequest.of(nowPage, 10, Direction.DESC, "mapNo");
+		Pageable pageable = PageRequest.of(nowPage, 9, Direction.DESC, "mapNo");
 		Page<Theme> mapList = mapService.selectAll(pageable);
 		
 		Member mem = (Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -118,9 +120,26 @@ public class MapController {
 		//조회수
 		boolean state = flag==null?true : false;
 		Theme theme = mapService.selectBy(mapNo, true);
+		
+		//hidden
+		List<Place> placeList =  theme.getPlace();
+		
+		List<Place> hiddenList = new ArrayList<Place>();
+		List<Place> noHiddenList = new ArrayList<Place>();
+		
+		for(Place p : placeList) {
+			if(p.getPlaceHidden()==1) {
+				hiddenList.add(p);
+			}else {
+				noHiddenList.add(p);
+			}
+		}
+		
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("map/mapRead");
 		mv.addObject("themeMap", theme);
+		mv.addObject("hidden", hiddenList);
+		mv.addObject("nohidden", noHiddenList);
 		
 		return mv;
 	}
@@ -130,15 +149,6 @@ public class MapController {
 	 */
 	@RequestMapping("/modifyForm")
 	public ModelAndView modifyMap(Long mapNo, HttpSession session/*, Theme theme*/)throws IOException {
-//		MultipartFile file=theme.getFile();
-//		if(file.getSize()>0) {
-//			String fileName = file.getOriginalFilename();
-//			theme.setMapImg(fileName);
-//			ServletContext application = session.getServletContext();
-//			String path = application.getRealPath("/img/save");
-//			file.transferTo(new File(path+"/"+fileName));
-//		}
-		
 		Theme theme= mapService.selectBy(mapNo, false);
 		return new ModelAndView("map/modifyMap", "theme", theme);
 	}
@@ -156,7 +166,7 @@ public class MapController {
 	 * 삭제 
 	 */
 	@RequestMapping("/deleteMap")
-	public String delete(Long mapNo,  String pwd ) throws Exception {
+	public String delete( Long mapNo ) throws Exception {
 		mapService.deleteMap(mapNo);
 		return "redirect:/map/mapList";
 	}
@@ -175,14 +185,6 @@ public class MapController {
 		
 	}
 	
-	
-	/**
-	 * 좋아요한 지도 목록 출력
-	 */
-	@RequestMapping("/likeMaps")
-	public void likeMaps(Long memId, HttpServletRequest request, Model model, @RequestParam(defaultValue = "0") int nowPage) {
-		
-	}
 	
 	/**
 	 * 구독하는 지도 목록 출력
@@ -217,6 +219,8 @@ public class MapController {
 		model.addAttribute("mapList", mapList);
 	}
 
+	
+	
 	
 }
 

@@ -58,10 +58,10 @@
 							<div class="listing__details__gallery__pic">
 								<div class="listing__details__gallery__item">
 									<img class="listing__details__gallery__item__large"
-										src="${pageContext.request.contextPath}/save/${storage.theme.mapImg}
-										alt=""> <span><i class="fa fa-camera"></i> 개수
-										Places</span>
+										src="${pageContext.request.contextPath}/img/map/${storage.theme.mapImg}"
+										alt="" style="height:750px"> <span><i class="fa fa-camera"></i> </span>
 								</div>
+								
 								<div class="listing__details__gallery__slider owl-carousel">
 									<img data-imgbigurl="img/listing/details/listing-details-1.jpg"
 										src="${pageContext.request.contextPath}/img/listing/details/thumb-1.jpg"
@@ -76,6 +76,7 @@
 										src="${pageContext.request.contextPath}/img/listing/details/thumb-4.jpg"
 										alt="">
 								</div>
+								
 							</div>
 						</div>
 						<div class="listing__details__amenities">
@@ -84,7 +85,7 @@
 								<div class="col-lg-3 col-md-3 col-6">
 									<div class="listing__details__amenities__item">
 										<img
-											src="${pageContext.request.contextPath}/img/placeicon/activity1.png"
+											src="${pageContext.request.contextPath}/save/icons/activity1.png"
 											alt="" style="width:40px; height:40px;">
 										<h6>Activity</h6>
 									</div>
@@ -92,7 +93,7 @@
 								<div class="col-lg-3 col-md-3 col-6">
 									<div class="listing__details__amenities__item">
 										<img
-											src="${pageContext.request.contextPath}/img/placeicon/attraction1.png"
+											src="${pageContext.request.contextPath}/save/icons/attraction1.png"
 											alt="" style="width:40px; height:40px;">
 										<h6>Attraction</h6>
 									</div>
@@ -100,7 +101,7 @@
 								<div class="col-lg-3 col-md-3 col-6">
 									<div class="listing__details__amenities__item">
 										<img
-											src="${pageContext.request.contextPath}/img/placeicon/cafe1.png"
+											src="${pageContext.request.contextPath}/save/icons/cafe1.png"
 											alt="" style="width:40px; height:40px;">
 										<h6>Cafe</h6>
 									</div>
@@ -108,7 +109,7 @@
 								<div class="col-lg-3 col-md-3 col-6">
 									<div class="listing__details__amenities__item">
 										<img
-											src="${pageContext.request.contextPath}/img/placeicon/culture1.png"
+											src="${pageContext.request.contextPath}/save/icons/culture1.png"
 											alt="" style="width:40px; height:40px;">
 										<h6>Culture</h6>
 									</div>
@@ -116,15 +117,15 @@
 								<div class="col-lg-3 col-md-3 col-6">
 									<div class="listing__details__amenities__item">
 										<img
-											src="${pageContext.request.contextPath}/img/placeicon/date1.png"
+											src="${pageContext.request.contextPath}/save/icons/date1.png"
 											alt="" style="width:40px; height:40px;">
-										<h6>Couple</h6>
+										<h6>Date</h6>
 									</div>
 								</div>
 								<div class="col-lg-3 col-md-3 col-6">
 									<div class="listing__details__amenities__item">
 										<img
-											src="${pageContext.request.contextPath}/img/placeicon/food1.png"
+											src="${pageContext.request.contextPath}/save/icons/food1.png"
 											alt="" style="width:40px; height:40px;">
 										<h6>Food</h6>
 									</div>
@@ -132,7 +133,7 @@
 								<div class="col-lg-3 col-md-3 col-6">
 									<div class="listing__details__amenities__item">
 										<img
-											src="${pageContext.request.contextPath}/img/placeicon/travel1.png"
+											src="${pageContext.request.contextPath}/save/icons/travel1.png"
 											alt="" style="width:40px; height:40px;">
 										<h6>Travel</h6>
 									</div>
@@ -140,7 +141,7 @@
 								<div class="col-lg-3 col-md-3 col-6">
 									<div class="listing__details__amenities__item">
 										<img
-											src="${pageContext.request.contextPath}/img/placeicon/pet1.png"
+											src="${pageContext.request.contextPath}/save/icons/pet1.png"
 											alt="" style="width:40px; height:40px;">
 										<h6>Pet</h6>
 									</div>

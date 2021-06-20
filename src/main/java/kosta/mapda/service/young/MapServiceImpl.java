@@ -181,6 +181,14 @@ public class MapServiceImpl implements MapService {
 		return maprepository.selectByKeyAndCategory(keyWord,categoryNo);
 	}
 
+	/**
+	 * 조회수 별 지도 출력
+	 */
+	@Override
+	public List<Theme> mainList() {
+		return maprepository.selectByRead();
+	}
+
 
 
 }

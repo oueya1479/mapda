@@ -98,13 +98,19 @@ public class PlaceReviewServiceImpl implements PlaceReviewService {
 	public PlacePhotoReview prrUpdate(PlacePhotoReview placePhotoReview) {
 		PlacePhotoReview dbPpr = pprRepository.findById(placePhotoReview.getPprNo()).orElse(null);
 		dbPpr.setPprContent(placePhotoReview.getPprContent().replace("<", "&lt;"));
-		return dbPpr;	}
+		return dbPpr;
+	}
+
+//	@Override
+//	public Page<PlaceReview> pageSelectAllpr(Pageable pageable) {
+//		return prRepository.findAll(pageable);
+//	}
 	
 	// 사용 안됨
-	@Override
-	public void insertPprPhoto(List<PlacePhotoReviewPhoto> pprpList) {
-		 List<PlacePhotoReviewPhoto> pppp= pprpRepository.saveAll(pprpList);
-	}
+//	@Override
+//	public void insertPprPhoto(List<PlacePhotoReviewPhoto> pprpList) {
+//		 List<PlacePhotoReviewPhoto> pppp= pprpRepository.saveAll(pprpList);
+//	}
 
 //	@Override
 //	public List<PlacePhotoReviewPhoto> selectAllPhotoReviewPhotoPlaceNo(Long placeNo) {

@@ -17,6 +17,27 @@ public interface PlaceRepository extends JpaRepository<Place, Long> {
 	 * 마이페이지 - 나의 게시 플레이스 조회 (마이포인트 메뉴에서 사용목적)
 	 * */
 	List<Place> findBymember_memNo(Long memNo);
+	
+	/**
+	 * 		히든플레이스 찾기 ( 안쓸거같고)
+	 * */
+	@Query("select p from Place p join p.theme t where p.placeHidden=1 and p.theme.mapNo=?1")
+	List<Place> selectByHiddenMapNo(Long mapNo);
+	
+	/**
+	 * 		해당하는 Place(No) 가 HiddenPlace 냐??
+	 * */
+	@Query("select p from Place p where p.placeHidden=1")
+	Place isHiddenPlace(Long placeNo);
+	
+	
+	/*
+select p.*
+from map m
+join place p
+on m.map_no=p.map_no
+where m.map_no=21 and p.place_hidden=1;
+	*/
 
 	@Query("select count(p) from Place p where p.placeRegdate between ?1 and ?2")
 	int getPlaceDateBetween(LocalDateTime startDatetime, LocalDateTime endDatetime);

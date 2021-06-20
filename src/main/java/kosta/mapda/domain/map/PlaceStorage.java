@@ -3,9 +3,12 @@ package kosta.mapda.domain.map;
 import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -23,18 +26,18 @@ import lombok.Setter;
 public class PlaceStorage {
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "place_psno_seq")
+	@SequenceGenerator(sequenceName = "place_psno_seq", allocationSize = 1, name = "place_psno_seq")
 	private Long psNo;
 	
 	@ManyToOne
 	@JoinColumn(name="mem_no")
 	private Member member;
 	
-	
 	@ManyToOne
 	@JoinColumn(name="place_no")
 	private Place place;
 	
 	@CreationTimestamp
-	//@DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
 	private LocalDateTime placeStorageRegdate;
 }

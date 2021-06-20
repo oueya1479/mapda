@@ -19,7 +19,7 @@ public interface MapStorageRepository extends JpaRepository<MapStorage, Long> {
 	void deleteSub(Long memNo, Long mapNo);
 	
 	
-	@Query("select m from MapStorage m where m.member.memNo=?1")
+	@Query("select m from MapStorage m where m.member.memNo=?1 order by m.theme.mapRegdate DESC")
 	List<MapStorage> selectByMapNo(Long memNo);
 	
 	

@@ -76,5 +76,10 @@ public interface PlaceReviewService {
 	/**
 	 * 		플레이스 포토리뷰 포토 사진 등록하기
 	 * */
-	void insertPprPhoto(List<PlacePhotoReviewPhoto> pprpList);
+//	void insertPprPhoto(List<PlacePhotoReviewPhoto> pprpList);
+	
+	/**
+	 * 		플레이스 리뷰 - Page 처리
+	 * */
+	//Page<PlaceReview> pageSelectAllpr(Pageable pageable);
 }
