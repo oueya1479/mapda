@@ -270,6 +270,35 @@
 			<input type=hidden name="mapNo" value="" id="mapNo">
 		</form>
 	</section>
+	<hr>
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+
+	
+	<div style="text-align: center">
+<!-- 페이징 처리 -->
+ <c:forEach begin="0" end="${mapList.totalPages-1}" var="i"><!-- pageList.getTotalPages() 호출 -->
+   <c:choose>
+     <c:when test="${mapList.number==i}"><!-- pageList.getNumber() 호출 -->
+         <a href="${pageContext.request.contextPath}/map/mapList?nowPage=${i}" style="color:red"> [ ${i+1} ] </a><!-- 현재페이지만 빨간색으로 표시해주는거 -->
+     </c:when>
+     <c:otherwise>
+         <a href="${pageContext.request.contextPath}/map/mapList?nowPage=${i}"> [ ${i+1} ] </a>
+     </c:otherwise>
+   </c:choose>
+   
+ </c:forEach>
+</div>
 </body>
 
 </html>

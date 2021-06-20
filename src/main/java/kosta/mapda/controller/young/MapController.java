@@ -100,7 +100,7 @@ public class MapController {
 	@RequestMapping("/mapList")
 	public void list(HttpServletRequest request, Model model, @RequestParam(defaultValue = "0") int nowPage) {
 		
-		Pageable pageable = PageRequest.of(nowPage, 10, Direction.DESC, "mapNo");
+		Pageable pageable = PageRequest.of(nowPage, 9, Direction.DESC, "mapNo");
 		Page<Theme> mapList = mapService.selectAll(pageable);
 		
 		Member mem = (Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -149,15 +149,6 @@ public class MapController {
 	 */
 	@RequestMapping("/modifyForm")
 	public ModelAndView modifyMap(Long mapNo, HttpSession session/*, Theme theme*/)throws IOException {
-//		MultipartFile file=theme.getFile();
-//		if(file.getSize()>0) {
-//			String fileName = file.getOriginalFilename();
-//			theme.setMapImg(fileName);
-//			ServletContext application = session.getServletContext();
-//			String path = application.getRealPath("/img/save");
-//			file.transferTo(new File(path+"/"+fileName));
-//		}
-		
 		Theme theme= mapService.selectBy(mapNo, false);
 		return new ModelAndView("map/modifyMap", "theme", theme);
 	}
@@ -196,14 +187,6 @@ public class MapController {
 	
 	
 	/**
-	 * 좋아요한 지도 목록 출력
-	 */
-	@RequestMapping("/likeMaps")
-	public void likeMaps(Long memId, HttpServletRequest request, Model model, @RequestParam(defaultValue = "0") int nowPage) {
-		
-	}
-	
-	/**
 	 * 구독하는 지도 목록 출력
 	 */
 	@RequestMapping("/subMaps")
@@ -236,6 +219,8 @@ public class MapController {
 		model.addAttribute("mapList", mapList);
 	}
 
+	
+	
 	
 }
 

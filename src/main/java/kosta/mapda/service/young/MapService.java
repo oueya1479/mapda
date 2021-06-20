@@ -87,5 +87,10 @@ public interface MapService {
 	 */
 	List<Theme> selectByKeyAndCategory(String keyWord, Long categoryNo);
 
+	/**
+	 * 조회수로 지도 출력
+	 */
+	List<Theme> mainList();
+
 	
 }
