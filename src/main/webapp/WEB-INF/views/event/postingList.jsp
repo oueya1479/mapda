@@ -6,14 +6,22 @@
 <html lang="kr">
 
 <head>
-<script type="text/javascript"> 
-
-
-
+<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+<script type="text/javascript"
+	src="${pageContext.request.contextPath }/js/jquery-3.3.1.min.js">
+	
 </script>
+</script>
+
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<br><br><br><br><br><br><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <title>Snow | Blog</title>
 
 <meta name="description"
@@ -37,7 +45,6 @@
 
 
 </head>
-
 
 <body>
 
@@ -64,7 +71,8 @@
 					<div class="nk-nav-header">
 
 						<div class="nk-nav-logo">
-							<a href="${pageContext.request.contextPath}/event/singlePosting" class="nk-nav-logo"> <img
+							<a href="${pageContext.request.contextPath}/event/singlePosting"
+								class="nk-nav-logo"> <img
 								src="${pageContext.request.contextPath}/ej/images/logo-light.svg"
 								alt="" width="85">
 							</a>
@@ -121,15 +129,12 @@
 			<div class="row">
 				<div class="col-lg-8 offset-lg-2">
 					<!-- START: Filter -->
-					<div class="nk-pagination nk-pagination-nobg nk-pagination-center">
-						<a href="#nk-toggle-filter"> <span class="nk-icon-squares"></span>
-						</a>
-					</div>
+					
 
 					<!-- END: Filter -->
 
 					<!-- START: Posts List -->
-					
+
 					<div
 						class="nk-blog-isotope nk-isotope nk-isotope-gap nk-isotope-1-cols">
 
@@ -138,76 +143,80 @@
 
 							<div class="card text-center card-product">
 								<div class="card-product__img"></div>
-								
+
 							</div>
 						</div>
 
 
 
-
+					
 						<!-- START: Post -->
-						<c:forEach items="${eventPostList.content}" var="post"> 
-						<div class="nk-isotope-item" data-filter="Nature">
-							<div class="nk-blog-post">
-								<div class="nk-post-thumb">
-									<a href="${pageContext.request.contextPath}/event/singlePosting/${post.evpNo}">
-									<img src="${post.evpImg}"
-										alt="" class="nk-img-stretch">
-									</a>
-									
-									<!-- 
+						<c:forEach items="${eventPostList.content}" var="post">
+							<div class="nk-isotope-item" data-filter="Nature">
+				
+								<div class="nk-blog-post" style="padding :50px">
+									<div class="nk-post-thumb">
+									<!-- 	<a
+											href="${pageContext.request.contextPath}/event/detail/${post.evpNo}">
+											<img src="${post.evpImg}" alt="" class="nk-img-stretch">
+										</a>  -->
+										<!-- 
 									<div class="nk-post-category">
 										<a href="#">후기 이벤트 참여</a>
 									</div>
 									-->
-								</div>
-								<h2 class="nk-post-title h4">
-									<a href="blog-single.html">${post.evpTitle}</a>
-								</h2>
+									</div>
+									<h2 class="nk-post-title h4">
+										<a href="/event/detail/${post.evpNo}">${post.evpTitle}</a>
+									</h2>
 
-								<div class="nk-post-date">${post.evpRegdate}</div>
+									<div class="nk-post-date">${post.evpRegdate}</div>
 
-								<div class="nk-post-text">
-									${post.evpContent}
-								</div>
-								
-							<c:if test="${memNo eq post.member.memNo}" >
-								<div class="row">
-								<form action="${pageContext.request.contextPath}/event/posting/${post.event.evNo}" method="post" style="margin-left: 10px">
-									<input type="hidden" name="title" value="${post.evpTitle}">
-									<input type="hidden" name="content" value="${post.evpContent}">
-									<input type="hidden" name="evpNo" value="${post.evpNo}">
-									<input class="btn btn-default" type="submit" value="수정" style="background-color: #bbbbff ">
-								</form>
-								
-								<form action="${pageContext.request.contextPath}/event/deletePost" method="post" style="margin-left: 10px">
-									<input type="hidden" name="evNo" value="${post.event.evNo}">
-									<input type="hidden" name="evpNo" value="${post.evpNo}">
-									<input class="btn btn-default" type="submit" value="삭제 " style = "background-color: rgba(255, 0, 0, 0.1);">
-								</form>
-								</div>
-								</c:if>
+									<div class="nk-post-text">${post.evpContent}</div>
+
+									<c:if test="${memNo eq post.member.memNo}">
+										<div class="row">
+											<form
+												action="${pageContext.request.contextPath}/event/posting/${post.event.evNo}"
+												method="post" style="margin-left: 10px">
+												<input type="hidden" name="title" value="${post.evpTitle}">
+												<input type="hidden" name="content"
+													value="${post.evpContent}"> <input type="hidden"
+													name="evpNo" value="${post.evpNo}"> <input
+													class="btn btn-default" type="submit" value="수정"
+													style="background-color: #bbbbff">
+											</form>
+
+											<form
+												action="${pageContext.request.contextPath}/event/deletePost"
+												method="post" style="margin-left: 10px">
+												<input type="hidden" name="evNo" value="${post.event.evNo}">
+												<input type="hidden" name="evpNo" value="${post.evpNo}">
+												<input class="btn btn-default" type="submit" value="삭제 "
+													style="background-color: rgba(255, 0, 0, 0.1);">
+											</form>
+										</div>
+
+
+									</c:if>
 
 									<div class="list__posting__text__info">
 										<div class="list__post__text__info__left">
-											<img
-												src="${pageContext.request.contextPath}/img/map/heart.png"
-												alt=""> <span>${event.eventLike}</span>
-										</div>
-										<div class="listing__item__text__info__right">
 											<p style="text-align: right;">
-												<img
-													src="${pageContext.request.contextPath}/img/map/view.png"
-													alt="" style="height: 20px; width: 20px;">
-												${map.mapReadnum}
-											</p>
+											<div style="float: right;" class="card_area d-flex align-items-center" id="likey">
+												<a class="icon_btn" id="like-button"><i
+													class="fas fa-heart" style="color: red; width: 25px; height: 25px"></i></a> <span
+													id="like-total" style="font-size: 20px"> &nbsp; ${post.evpLikes}</span>
+											</div>
 										</div>
+
 									</div>
 
 								</div>
-							
-						</div>
-					 </c:forEach>
+
+							</div>
+
+						</c:forEach>
 						<!-- END: Post -->
 
 					</div>
@@ -220,11 +229,6 @@
 
 		</div>
 
-		<!-- START: Pagination -->
-		<div class="nk-pagination nk-pagination-center">
-			<a href="#">Load More Posts</a>
-		</div>
-		<!-- END: Pagination -->
 
 
 
@@ -255,7 +259,7 @@
 				</div>
 			</div>
 		</footer>
-		<!-- END: Footer --> 
+		<!-- END: Footer -->
 
 
 	</div>

@@ -37,6 +37,7 @@ public class EventPost {
 	private String evpTitle;
 	private String evpContent;
 	private String evpImg;
+	private int evpLikes;
 	
 	@CreationTimestamp
 	private LocalDateTime evpRegdate;

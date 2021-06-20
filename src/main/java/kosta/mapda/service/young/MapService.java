@@ -87,6 +87,9 @@ public interface MapService {
 	 */
 	List<Theme> selectByKeyAndCategory(String keyWord, Long categoryNo);
 
+	Member getMember(Long memNo);
+	
+
 	/**
 	 * 조회수로 지도 출력
 	 */

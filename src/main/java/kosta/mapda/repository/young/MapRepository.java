@@ -45,6 +45,12 @@ public interface MapRepository extends JpaRepository<Theme, Long> {
 	List<Theme> selectByKeyAndCategory(String keyWord, Long categoryNo);
 	
 	/**
+	 * 최근 테마지도 리스트_김성희
+	 * */
+	@Query("select t from Theme t where t.member.memNo=?1 order by t.mapRegdate desc")
+	List<Theme> selectByMemNoOrderRegDesc(Long memNo);
+
+  /**
 	 * 조회수 10위 지도 목록
 	 */
 	@Query("select t from Theme t order by t.mapReadnum desc")

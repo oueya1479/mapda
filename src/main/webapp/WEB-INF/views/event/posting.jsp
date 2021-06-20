@@ -102,14 +102,14 @@
                 <label for="company-website-tw d-block">Upload Featured Image</label> <br>
                 <input type="hidden" name="evpNo" value="${evpNo }">
                 <label class="btn btn-primary btn-md btn-file">
-                  Browse File<input type="file" name = "file">
+                  <input type="file" name = "file">
                 </label>
               </div>
 
               
               <div class="form-group">
                 <label for="job-title">제목</label>
-                <input type="text" class="form-control" id="job-title" placeholder="제목을 입력해주세요" name="evpTitle" value="${title }">
+                <input type="text" class="form-control" id="job-title" placeholder="제목을 입력해주세요" name="evpTitle" value="${title}">
               </div>
               <!-- <div class="form-group">
                 <label for="job-location">지역</label>
