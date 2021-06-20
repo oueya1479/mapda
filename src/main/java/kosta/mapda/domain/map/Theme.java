@@ -55,6 +55,7 @@ public class Theme{
 	
 	private int mapStatus;
 	private int mapIsopen;
+	private int mapPoint; //포인트 적립여부 //적립한 상태 : 1 미적립상태 :0
 	
 	@ManyToOne
 	@JoinColumn(name="mng_no")

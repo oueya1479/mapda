@@ -8,8 +8,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import kosta.mapda.domain.member.Member;
 import kosta.mapda.domain.service.MyPoint;
+import kosta.mapda.domain.service.SavingHistory;
+import kosta.mapda.domain.service.UsingHistory;
 
-public interface MyPointRepository extends JpaRepository<MyPoint, Long> {
+public interface UsingHistoryRepository extends JpaRepository<UsingHistory, Long> {
 
-	MyPoint findBymember_memNo(Long memNo);
+	List<UsingHistory> findBymyPoint_memNo(Long memNo);
 }

@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -30,6 +32,7 @@ import kosta.mapda.domain.member.Member;
 import kosta.mapda.domain.service.Coupon;
 import kosta.mapda.domain.service.CouponCategory;
 import kosta.mapda.domain.service.MyCoupon;
+import kosta.mapda.domain.service.MyPoint;
 import kosta.mapda.repository.CouponRepository;
 import kosta.mapda.service.service.CouponService;
 import kosta.mapda.service.service.PointService;
@@ -56,7 +59,9 @@ public class CouponController {
 		Pageable pageable = PageRequest.of(nowPage, 10, Direction.ASC, "cpNo");
 		Page<Coupon> couponList; 
 		
+		Member mem = (Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
+		MyPoint myPoint = pointService.selectMyPoint(mem.getMemNo());
 		
 		/*if(keyword.isEmpty()==false || keyword!=null) {
 			couponList = service.selectByName(pageable, keyword);
@@ -71,7 +76,7 @@ public class CouponController {
 		
 		List<CouponCategory> categoryList = service.couponCategory();
 		
-	
+		
 		
 		System.out.println("---------------");
 		//System.out.println(couponList.getContent().);
@@ -79,6 +84,7 @@ public class CouponController {
 		
 		model.addAttribute("couponList", couponList);
 		model.addAttribute("categoryList", categoryList);
+		model.addAttribute("myPoint", myPoint);
 	
 		
 		return "coupon/list";
@@ -111,7 +117,8 @@ public class CouponController {
 	
 	
 	@RequestMapping("/insert")
-	public String insert() {
+	public String insert(Coupon coupon) {
+		service.insertCoupon(null);
 		return "coupon/couponAdd";
 	}
 	
@@ -192,9 +199,10 @@ public class CouponController {
 	/**
 	 * 수정 form insert 후 다시 목록으로 가는 메소드
 	 */
-	@RequestMapping("/updateCoupon")
+	@RequestMapping("/updateCoupon/coupon={coupon}/cpNo={cpNo}")
 	public String couponAdminUpdate(@RequestParam("file") MultipartFile file,
-									@ModelAttribute("coupon") Coupon coupon,
+								    @PathVariable Coupon coupon,
+								    @PathVariable String cpNo,
 									Model model,
 									HttpServletRequest request) {
 //		CouponCategory newCouponCategory = coupon.getCouponCategory();
@@ -203,8 +211,12 @@ public class CouponController {
 //		CouponCategory dbCouponCategory = service.getCouponCategory(newCpca);
 //		
 //		coupon.setCouponCategory(dbCouponCategory);
-//		
+		System.out.println(coupon.getMember().toString());
 //		coupon.getCouponCategory();
+		
+		Long cpNoo = Long.parseLong(cpNo);
+		coupon.setCpNo(cpNoo);
+		
 		Coupon dbCoupon = new Coupon();
 		
 //		try {
@@ -218,17 +230,27 @@ public class CouponController {
 //				
 //			} else {
 //				coupon.setCpImgpath("www.naver.com");
-				dbCoupon = service.updateCoupon(coupon);
+				service.updateCoupon(coupon);
 //			}
 			
 //		} catch(IOException e) {
 //			e.printStackTrace();
 //		}
 		
+//		model.addAttribute("coupon", dbCoupon);	
 		
-		model.addAttribute("coupon", dbCoupon);
-		
-		return "main/index";
+		return "redirect:/coupon/admin";
 	}
+	
+	
+	@RequestMapping("/stop/cpNo={cpNo}")
+	public String couponStop(Model model, @PathVariable Long cpNo) {
+		
+		
+		service.stop(cpNo);
+		
+		return "redirect:/coupon/admin";
+	}
+	
 	
 }

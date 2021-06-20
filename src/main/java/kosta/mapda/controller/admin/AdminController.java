@@ -31,6 +31,18 @@ public class AdminController {
 	@Autowired
 	private AdminService adminService;
 	
+	@RequestMapping("index")
+	public void index(Model model) {
+		Long memberCount = adminService.getMemberCount();
+		List<Integer> memberCountList = adminService.getMemberCountList();
+		List<Integer> postCountList = adminService.getPostCountList();
+		List<Integer> replyCountList = adminService.getReplyCountList();
+		model.addAttribute("memberCountList", memberCountList);
+		model.addAttribute("postCountList", postCountList);
+		model.addAttribute("replyCountList", replyCountList);
+		System.out.println(memberCountList);
+	}
+	
 	@RequestMapping("/member")
 	public void member(Model model, @RequestParam(defaultValue = "0") int nowPage, String contain, String content) {
 		Pageable pageable = PageRequest.of(nowPage, 10, Direction.ASC, "memNo");
@@ -51,6 +63,7 @@ public class AdminController {
 	public String updateMember(Model model, Member member) {
 		System.out.println(member.getMemRegdate());
 		adminService.updateMember(member);
+		model.addAttribute("where", "member");
 		return "admin/exit";
 	}
 	
@@ -66,11 +79,9 @@ public class AdminController {
 	
 	@RequestMapping("/regular_payment")
 	public void regularPayment(Model model) {
-		List<RPay> regular = adminService.getRegularReq();
 		List<Member> memberList = adminService.getRegular();
 		model.addAttribute("title", "정기결제");
 		model.addAttribute("content", "정기결제자 들의 목록과 신청을 관리합니다.");
-		model.addAttribute("regular", regular);
 		model.addAttribute("memberList", memberList);
 	}
 	
@@ -90,6 +101,20 @@ public class AdminController {
 		model.addAttribute("title", "플레이스");
 		model.addAttribute("content", "플레이스 게시물에 관련한 페이지입니다.");
 		model.addAttribute("placeList", placeList);
+	}
+	
+	@RequestMapping("/place_post_modify/{placeNo}")
+	public String placeModify(Model model, @PathVariable Long placeNo) {
+		Place place = adminService.getOnePlace(placeNo);
+		model.addAttribute("place", place);
+		return "admin/place_post_modify";
+	}
+	
+	@RequestMapping("/update_place")
+	public String updatePlace(Model model, Place place) {
+		adminService.updatePlace(place);
+		model.addAttribute("where", "place_post");
+		return "admin/exit";
 	}
 	
 	@RequestMapping("/enterprise_post")
@@ -140,5 +165,23 @@ public class AdminController {
 	@RequestMapping("/report")
 	public void report() {
 		
+	}
+	
+	@RequestMapping("/levelUp/{memNo}")
+	public String levelUp(@PathVariable Long memNo) {
+		adminService.levelUp(memNo);
+		return "redirect:/admin/influence";
+	}
+	
+	@RequestMapping("/levelDown/{memNo}")
+	public String levelDown(@PathVariable Long memNo) {
+		adminService.levelDown(memNo);
+		return "redirect:/admin/influence";
+	}
+	
+	@RequestMapping("/cancelRpay/{memNo}")
+	public String cancelRpay(@PathVariable Long memNo) {
+		adminService.cancelRpay(memNo);
+		return "redirect:/admin/regular_payment";
 	}
 }

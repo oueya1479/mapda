@@ -1,11 +1,13 @@
 package kosta.mapda.repository.place;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import kosta.mapda.domain.map.Place;
+import kosta.mapda.domain.member.Member;
 
 public interface PlaceRepository extends JpaRepository<Place, Long> {
 	
@@ -36,4 +38,7 @@ join place p
 on m.map_no=p.map_no
 where m.map_no=21 and p.place_hidden=1;
 	*/
+
+	@Query("select count(p) from Place p where p.placeRegdate between ?1 and ?2")
+	int getPlaceDateBetween(LocalDateTime startDatetime, LocalDateTime endDatetime);
 }

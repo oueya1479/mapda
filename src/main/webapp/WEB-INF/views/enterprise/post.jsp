@@ -14,7 +14,7 @@
 			<div class="row">
 				<div class="col-lg-7">
 					<div class="blog__hero__text">
-						<div class="label">Trending</div>
+						<div class="label">${post.epTag}</div>
 						<h2>${post.epTitle}</h2>
 						<ul>
 							<li><i class="fa fa-clock-o"></i>${post.epRegdate}</li>

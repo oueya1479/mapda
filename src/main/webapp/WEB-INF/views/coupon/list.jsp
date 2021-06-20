@@ -8,6 +8,7 @@
 
 <head>
 
+<sec:authentication property="principal.memNo" var="mno" />
 
 <SCRIPT>
 
@@ -22,6 +23,32 @@
 		return true;
 	}
 </SCRIPT>
+
+<script> $(function(){ 
+					var $win = $(window); 
+					var top = $(window).scrollTop();   
+					var speed = 500; 
+					var easing = 'linear';  
+					var $layer = $('.blog__sidebar');
+					var layerTopOffset = 0;  
+					$layer.css('position', 'relative').css('z-index', '1');
+					
+					
+					if (top > 50 ) 
+						$win.scrollTop(layerTopOffset+top); 
+					else 
+						$win.scrollTop(0); 
+					
+					$(window).scroll(function(){ 
+						yPosition = $win.scrollTop() - 400; 
+						if (yPosition < 460) 
+						{ 
+							yPosition = 0; 
+						} 
+						$layer.animate({"top":yPosition }, {duration:speed, easing:easing, queue:false}); 
+						}); 
+					}); 
+				</script>
 
 </head>
 
@@ -150,7 +177,12 @@
                         </div>
                         
                         <div class="blog__sidebar__categories" style =" width : 250px; text-align: center;">
-                            <h4>Categories</h4>&nbsp;
+                            <h3><i class="fa fa-money">&nbsp;&nbsp;</i>내 포인트</h3><hr>
+                            <h5>: ${myPoint.myPoint} P </h5>
+                        </div>
+                        
+                        <div class="blog__sidebar__categories" style =" width : 250px; text-align: center;">
+                            <h4>Categories</h4>&nbsp;<hr>
                             <ul style="font-size: 25px;">
                                 <li><a href="/coupon/list">전체</a></li>
                                 <c:forEach items="${requestScope.categoryList}" var="cate">
@@ -160,21 +192,7 @@
                             </ul>
                         </div>
                         
-                        <div class="blog__sidebar__categories" style =" width : 250px; text-align: center;">
-                            <h4>My Point</h4>&nbsp;
-                            
-                            <h4><i class="fa fa-money"></i> </h4>
-                            <ul>
-                        		
-                                <c:forEach items="${requestScope.myPointList}" var="myPo">
-                                <li>${myPo.myPoint}포인트<span></span></li>
-                                </c:forEach>
-
-
-                                
-                                
-                            </ul>
-                        </div>
+                        
                        
                     </div>
                 </div>

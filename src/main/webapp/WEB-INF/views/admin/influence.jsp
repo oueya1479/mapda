@@ -13,19 +13,22 @@ tr{
 <script src="${pageContext.request.contextPath}/js/jquery-3.3.1.min.js"></script>
 <script>
 	$(function() {
-		$(document).on("click", "#modify", function(event) { //버튼을 클릭 했을시 popupOpen 함수 출력 
-			console.log('click');
-			popupOpen($(this).val());
+		$(document).on("click", "#confirm", function(event) {
+			if(confirm("인플루언서로 등급을 올리시겠습니까?") == true){
+				alert('확인되었습니다.');
+				$(location).attr('href','${pageContext.request.contextPath}/admin/levelUp/' + $(this).val());
+			} else {
+			}
 		});
-	})
-	function popupOpen(val) {
-		var url = "${pageContext.request.contextPath}/admin/member_modify/"
-				+ val; //팝업창에 출력될 페이지 URL
-		var winWidth = 700;
-		var winHeight = 600;
-		var popupOption = "width=" + winWidth + ", height=" + winHeight; //팝업창 옵션(optoin)
-		var myWindow = window.open(url, "회원 정보 수정", popupOption);
-	}
+		
+		$(document).on("click", "#levelDown", function(event) {
+			if(confirm("유저로 등급을 강등시키겠습니까?") == true){
+				alert('확인되었습니다.');
+				$(location).attr('href','${pageContext.request.contextPath}/admin/levelDown/' + $(this).val());
+			} else {
+			}
+		});
+	});
 </script>
 </head>
 <body>
@@ -84,7 +87,7 @@ tr{
 												
 												<td>
 													<button class="btn btn-default" style="margin-right: 5px"
-														id="modify">확인</button>
+														id="confirm" value="${influence.member.memNo}">확인</button>
 													<button class="btn btn-danger">취소</button>
 												</td>
 											</tr>
@@ -138,7 +141,7 @@ tr{
 												<td><c:out value="${likes}"/></td>
 												
 												<td>
-													<button class="btn btn-danger">강등</button>
+													<button class="btn btn-danger" id="levelDown" value="${member.memNo}">강등</button>
 												</td>
 											</tr>
 										</c:forEach>

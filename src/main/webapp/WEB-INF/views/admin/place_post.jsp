@@ -7,6 +7,21 @@
 
 <head>
 <script src="${pageContext.request.contextPath}/js/jquery-3.3.1.min.js"></script>
+<script>
+$(function() {
+	$(document).on("click", "#modify", function(event) {
+		popupOpen($(this).val());
+	});
+})
+function popupOpen(val) {
+	var url = "${pageContext.request.contextPath}/admin/place_post_modify/"
+			+ val; 
+	var winWidth = 700;
+	var winHeight = 600;
+	var popupOption = "width=" + winWidth + ", height=" + winHeight; //팝업창 옵션(optoin)
+	var myWindow = window.open(url, "플레이스 정보 수정", popupOption);
+}
+</script>
 </head>
 <body>
 	<!-- Page-header end -->
