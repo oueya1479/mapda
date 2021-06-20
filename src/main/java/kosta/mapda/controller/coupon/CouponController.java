@@ -30,6 +30,7 @@ import kosta.mapda.domain.member.Member;
 import kosta.mapda.domain.service.Coupon;
 import kosta.mapda.domain.service.CouponCategory;
 import kosta.mapda.domain.service.MyCoupon;
+import kosta.mapda.domain.service.MyPoint;
 import kosta.mapda.repository.CouponRepository;
 import kosta.mapda.service.service.CouponService;
 import kosta.mapda.service.service.PointService;
@@ -56,7 +57,9 @@ public class CouponController {
 		Pageable pageable = PageRequest.of(nowPage, 10, Direction.ASC, "cpNo");
 		Page<Coupon> couponList; 
 		
+		Member mem = (Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
+		MyPoint myPoint = pointService.selectMyPoint(mem.getMemNo());
 		
 		/*if(keyword.isEmpty()==false || keyword!=null) {
 			couponList = service.selectByName(pageable, keyword);
@@ -71,7 +74,7 @@ public class CouponController {
 		
 		List<CouponCategory> categoryList = service.couponCategory();
 		
-	
+		
 		
 		System.out.println("---------------");
 		//System.out.println(couponList.getContent().);
@@ -79,6 +82,7 @@ public class CouponController {
 		
 		model.addAttribute("couponList", couponList);
 		model.addAttribute("categoryList", categoryList);
+		model.addAttribute("myPoint", myPoint);
 	
 		
 		return "coupon/list";

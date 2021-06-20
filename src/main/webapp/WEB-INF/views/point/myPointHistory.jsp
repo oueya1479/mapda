@@ -97,14 +97,18 @@
      
     
     <jsp:useBean id="now" class="java.util.Date" />
-    <fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="today" />  
-    <h3 style="font-weight: bold">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TODAY : <c:out value="${today}"/> </h3>&nbsp;
+   
+    
     
         <div class="container">
             <div class="row">
                 <div class="col-lg-8">
                     <div class="row">
+                    
+                    
                     <div align="center">
+                    
+                    
                     
                     <h3 style="font-weight: bold">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;포인트 적립내역</h3>&nbsp;
                     
@@ -125,8 +129,11 @@
 						
 							<td>${status.count}</td>
 							<td>&nbsp;${mySaving.shWhere}</td>
-							<td>${mySaving.shWhen}</td>
-							<td>${mySaving.shPay}</td>
+							<td>
+							 <fmt:parseDate value="${mySaving.shWhen}" pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime" type="both"/>        
+	                         <fmt:formatDate value="${parsedDateTime}" pattern="yyyy.MM.dd"/>
+							</td>
+							<td>+ ${mySaving.shPay}</td>
 
 							
 						</tr>				
@@ -155,8 +162,11 @@
 						
 							<td>${status.count}</td>
 							<td>&nbsp;${myUsing.uhWhere}</td>
-							<td>${myUsing.uhWhen}</td>
-							<td>${myUsing.uhPay}</td>
+							<td>
+							<fmt:parseDate value="${myUsing.uhWhen}" pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime" type="both"/>        
+	                         <fmt:formatDate value="${parsedDateTime}" pattern="yyyy.MM.dd"/>
+							</td>
+							<td>- ${myUsing.uhPay}</td>
 
 						
 						</tr>				
@@ -179,8 +189,13 @@
                  
                  
                     <div class="blog__sidebar">
-                        
-                        
+                    	<div class="blog__sidebar__categories" style =" width : 250px; text-align: center;">
+                            <h3><i class="fa fa-money">&nbsp;&nbsp;</i>총 포인트</h3><hr>
+                            <h5>: ${myPoint.myPoint} P </h5>
+                        </div>
+                    	
+
+                  
                         
                         <div class="blog__sidebar__categories" style =" width : 250px; text-align: center;">
                             <h3>Menu</h3><hr>

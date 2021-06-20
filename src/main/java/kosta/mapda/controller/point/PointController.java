@@ -45,6 +45,10 @@ public class PointController {
 		
 		List<PlacePhotoReview> myPhotoReviewList = pointService.selectMyPlacePhotoMyPoint(mem.getMemNo());
 		
+		MyPoint myPoint = pointService.selectMyPoint(mem.getMemNo());
+		
+		model.addAttribute("myPoint", myPoint);
+		
 		model.addAttribute("myThemeList" , myThemeList);
 		model.addAttribute("myPlaceList" , myPlaceList);
 		model.addAttribute("myPhotoReviewList" , myPhotoReviewList);

@@ -24,6 +24,7 @@ import kosta.mapda.domain.map.MapStorage;
 import kosta.mapda.domain.map.Theme;
 import kosta.mapda.domain.member.Member;
 import kosta.mapda.service.member.MemberService;
+import kosta.mapda.service.service.PointService;
 import kosta.mapda.service.young.MapService;
 
 @Controller

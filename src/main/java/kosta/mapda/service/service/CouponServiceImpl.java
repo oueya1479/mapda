@@ -175,12 +175,12 @@ public class CouponServiceImpl implements CouponService {
 			  BarcodeImageHandler.savePNG(barcode, file);
 			  
 			  MyCoupon mc = new MyCoupon();
-				//mc.setMycpNo(null);
+				
 				mc.setBarcoNo("1234");
 				mc.setMember(memberRepository.findById(memNo).orElse(null));
 				mc.setMycpState(1);
 				mc.setBarcoImgPath(couponNum);
-				//mc.setMycpDate(null);
+				
 				mc.setCoupon(coupon);
 				
 				myCouponRepository.save(mc);

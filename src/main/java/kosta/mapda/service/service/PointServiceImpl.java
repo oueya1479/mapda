@@ -48,6 +48,9 @@ public class PointServiceImpl implements PointService {
 	@Autowired
 	private UsingHistoryRepository usingHistoryRepository;
 	
+	@Autowired
+	private MemberRepository memberRepository;
+	
 	@Override
 	public MyPoint selectMyPoint(Long memNo) {
 		
@@ -110,6 +113,34 @@ public class PointServiceImpl implements PointService {
 	public List<UsingHistory> selectUsingHistory(Long memNo) {
 		
 		return usingHistoryRepository.findBymyPoint_memNo(memNo);
+	}
+
+	@Override
+	public void createMyPoint(Long memNo) {
+		
+		MyPoint mp = new MyPoint();
+		
+		mp.setMyPoint(0);
+		
+		mp.setMember(memberRepository.findBymemNo(memNo));
+		
+		System.out.println(memNo);
+		
+		myPointRepository.save(mp);
+		
+	}
+
+	@Override
+	public void updateMyPoint(Long memNo, int point) {
+		
+		MyPoint mp = myPointRepository.findBymember_memNo(memNo);
+		int originPoint = mp.getMyPoint();
+		int newPoint = originPoint + point;
+		mp.setMyPoint(newPoint);
+		
+		myPointRepository.save(mp);
+		
+		
 	}
 	
 	

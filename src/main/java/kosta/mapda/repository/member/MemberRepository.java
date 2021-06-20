@@ -36,7 +36,7 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
 	@Query("select m from MapStorage m where m.member.memNo=?1")
 	List<MapStorage> selectByMapNo(Long memNo);
 	
-	
+	Member findBymemNo(Long memNo);
 	/**
 	 * 마이페이지 - 나의 게시 맵 조회 (마이포인트 메뉴에서 사용목적)
 	 * */

@@ -42,8 +42,10 @@ public class MyPoint {
 	@OneToMany(mappedBy = "myPoint")
 	private List<MyPoint> myPointList;
 	
+	@OneToMany(mappedBy = "myPoint")
+	private List<SavingHistory> savingHistoryList;
 	
-	
-	
+	@OneToMany(mappedBy = "myPoint")
+	private List<UsingHistory> usingHistoryList; 
 
 }

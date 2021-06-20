@@ -16,10 +16,6 @@ import kosta.mapda.domain.service.UsingHistory;
 
 public interface PointService {
 
-	/**
-	 * 내 누적 포인트 가져오기
-	 */
-	MyPoint selectMyPoint(Long memNo);
 	
 	/**
 	 * 마이포인트 - 나의 테마지도 리스트 가져오기
@@ -60,6 +56,21 @@ public interface PointService {
 	 * 마이포인트 - 사용내역조회
 	 * */
 	List<UsingHistory> selectUsingHistory (Long memNo);
+	
+	/**
+	 * 가입시 마이포인트 테이블 생성
+	 * */
+	void createMyPoint (Long memNo);
+	
+	/**
+	 * 마이포인트의 포인트 조회하기
+	 * */
+	MyPoint selectMyPoint(Long memNo);
+	
+	/**
+	 * 내포인트- 잔여포인트 업데이트
+	 * */
+	void updateMyPoint(Long memNo, int point);
 	
 	
 }

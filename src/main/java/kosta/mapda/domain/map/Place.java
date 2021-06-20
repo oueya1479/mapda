@@ -56,6 +56,7 @@ public class Place {
 	private String placeIconName;
 	private String placeIconPath;
 	private int placeStatus;
+	private int placePoint; //포인트 적립여부 //적립한 상태 : 1 미적립상태 :0
 	
 	//////////////////////////////////////////////////////////////////////////////////////
 	
