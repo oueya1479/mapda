@@ -1,5 +1,6 @@
 package kosta.mapda.repository.young;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -42,4 +43,7 @@ public interface MapRepository extends JpaRepository<Theme, Long> {
 	 */
 	@Query("select t from Theme t where t.mapTitle like %?1% or t.mapContent like %?1% and t.mapCategory.categoryNo=?2")
 	List<Theme> selectByKeyAndCategory(String keyWord, Long categoryNo);
+
+	@Query("select count(t) from Theme t where t.mapRegdate between ?1 and ?2")
+	int getThemeDateBetween(LocalDateTime startDatetime, LocalDateTime endDatetime);
 }

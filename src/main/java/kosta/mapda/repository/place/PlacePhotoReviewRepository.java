@@ -1,5 +1,6 @@
 package kosta.mapda.repository.place;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -21,4 +22,7 @@ public interface PlacePhotoReviewRepository extends JpaRepository<PlacePhotoRevi
 	 * 마이페이지 - 나의 게시 포토리뷰 조회(마이포인트 메뉴에서 사용목적)
 	 * */
 	List<PlacePhotoReview> findBymember_memNo(Long memNo);
+
+	@Query("select count(p) from PlacePhotoReview p where pprRegdate between ?1 and ?2")
+	int getPhotoDateBetween(LocalDateTime startDatetime, LocalDateTime endDatetime);
 }

@@ -1,7 +1,10 @@
 package kosta.mapda.service.admin;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import javax.transaction.Transactional;
 
@@ -83,12 +86,12 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public List<InfluenceReq> getInfluenceReq() {
-		return influenceReqRepository.findAll();
+		return influenceReqRepository.getReq();
 	}
 	
 	@Override
 	public List<Member> getInfluence() {
-		return memberRepository.findAllByMemGrade("인플루언서");
+		return memberRepository.findAllByMemGrade("Influencer");
 	}
 
 	@Override
@@ -98,7 +101,7 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public List<Member> getRegular() {
-		return memberRepository.findAllByMemGrade("구독회원");
+		return memberRepository.getRegular(1);
 	}
 
 	@Override
@@ -135,5 +138,81 @@ public class AdminServiceImpl implements AdminService {
 	public Long getMemberCount() {
 		return memberRepository.count();
 	}
+
+	@Override
+	public List<Integer> getMemberCountList() {
+		List<Integer> list = new ArrayList<Integer>();
+		for(int i = 0; i < 8; i++) {
+			LocalDateTime startDatetime = LocalDateTime.of(LocalDate.now().minusDays(i), LocalTime.of(0,0,0));
+			LocalDateTime endDatetime = LocalDateTime.of(LocalDate.now().minusDays(i),  LocalTime.of(23,59,59));
+			List<Member> mList = memberRepository.getDateBetween(startDatetime, endDatetime);
+			list.add(mList.size());
+		}
+		return list;
+	}
+	
+	@Override
+	public List<Integer> getPostCountList() {
+		List<Integer> list = new ArrayList<Integer>();
+		for(int i = 0; i < 8; i++) {
+			LocalDateTime startDatetime = LocalDateTime.of(LocalDate.now().minusDays(i), LocalTime.of(0,0,0));
+			LocalDateTime endDatetime = LocalDateTime.of(LocalDate.now().minusDays(i),  LocalTime.of(23,59,59));
+			int p = placeRepository.getPlaceDateBetween(startDatetime, endDatetime);
+			int t = mapRepository.getThemeDateBetween(startDatetime, endDatetime);
+			int e = enterprisePostRepository.getEnterpriseDateBetween(startDatetime, endDatetime);
+			list.add(p + t + e);
+		}
+		return list;
+	}
+	
+	@Override
+	public List<Integer> getReplyCountList() {
+		List<Integer> list = new ArrayList<Integer>();
+		for(int i = 0; i < 8; i++) {
+			LocalDateTime startDatetime = LocalDateTime.of(LocalDate.now().minusDays(i), LocalTime.of(0,0,0));
+			LocalDateTime endDatetime = LocalDateTime.of(LocalDate.now().minusDays(i),  LocalTime.of(23,59,59));
+			int p = reviewRepository.getReviewDateBetween(startDatetime, endDatetime);
+			int pp = photoReviewRepository.getPhotoDateBetween(startDatetime, endDatetime);
+			int e = enterpriseReplyRepository.getReplyDateBetween(startDatetime, endDatetime);
+			list.add(p + pp + e);
+		}
+		return list;
+	}
+
+	@Override
+	public void levelUp(Long memNo) {
+		Member member = memberRepository.findById(memNo).orElse(null);
+		memberRepository.levelUp(member.getMemNo());
+		influenceReqRepository.setState(member.getMemNo());
+	}
+
+	@Override
+	public void levelDown(Long memNo) {
+		Member member = memberRepository.findById(memNo).orElse(null);
+		memberRepository.levelDown(member.getMemNo());
+		influenceReqRepository.deleteRecord(member.getMemNo());		
+	}
+
+	@Override
+	public void cancelRpay(Long memNo) {
+		Member member = memberRepository.findById(memNo).orElse(null);
+		memberRepository.cancelRpay(memNo);
+	}
+
+	@Override
+	public Place getOnePlace(Long placeNo) {
+		return placeRepository.findById(placeNo).orElse(null);
+	}
+
+	@Override
+	public void updatePlace(Place place) {
+		Place dbPlace = placeRepository.findById(place.getPlaceNo()).orElse(null);
+		place.setPlaceRegdate(dbPlace.getPlaceRegdate());
+		place.setMember(dbPlace.getMember());
+		place.setManagement(dbPlace.getManagement());
+		place.setTheme(dbPlace.getTheme());
+		placeRepository.save(place);
+	}
+
 }
 

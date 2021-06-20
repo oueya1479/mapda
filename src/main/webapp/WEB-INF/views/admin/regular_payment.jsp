@@ -13,19 +13,14 @@ tr{
 <script src="${pageContext.request.contextPath}/js/jquery-3.3.1.min.js"></script>
 <script>
 	$(function() {
-		$(document).on("click", "#modify", function(event) { //버튼을 클릭 했을시 popupOpen 함수 출력 
-			console.log('click');
-			popupOpen($(this).val());
+		$(document).on("click", "#cancel", function(event) {
+			if(confirm("정기 결제를 취소시키겠습니까?") == true){
+				alert('확인되었습니다.');
+				$(location).attr('href','${pageContext.request.contextPath}/admin/cancelRpay/' + $(this).val());
+			} else {
+			}
 		});
 	})
-	function popupOpen(val) {
-		var url = "${pageContext.request.contextPath}/admin/member_modify/"
-				+ val; //팝업창에 출력될 페이지 URL
-		var winWidth = 700;
-		var winHeight = 600;
-		var popupOption = "width=" + winWidth + ", height=" + winHeight; //팝업창 옵션(optoin)
-		var myWindow = window.open(url, "회원 정보 수정", popupOption);
-	}
 </script>
 </head>
 <body>
@@ -37,63 +32,6 @@ tr{
 				<!-- Page-body start -->
 				<div class="page-body">
 					<!-- Basic table card start -->
-					<div class="card">
-						<div class="card-header">
-							<h5>정기 결제 요청 정보</h5>
-							<span>정기 결제 신청 정보를 확인할 수 있습니다.</span>
-							<div class="card-header-right">
-								<ul class="list-unstyled card-option">
-									<li><i class="fa fa fa-wrench open-card-option"></i></li>
-									<li><i class="fa fa-window-maximize full-card"></i></li>
-									<li><i class="fa fa-minus minimize-card"></i></li>
-									<li><i class="fa fa-refresh reload-card"></i></li>
-									<li><i class="fa fa-trash close-card"></i></li>
-								</ul>
-							</div>
-						</div>
-						<div class="card-block table-border-style">
-							<div class="table-responsive">
-								<table class="table">
-									<thead>
-										<tr>
-											<th>신청 번호</th>
-											<th>아이디</th>
-											<th>신청 날짜</th>
-											<th>팔로워</th>
-											<th>총 조회수</th>
-											<th>총 좋아요수</th>
-											<th>요청 정보 확인</th>
-										</tr>
-									</thead>
-									<tbody>
-										<c:forEach items="${influence}" var="influence">
-											<tr>
-												<th scope="row">${influence.irNo}</th>
-												<td>${influence.member.memId}</td>
-												<td>${influence.irReqdate}</td>
-												<td>${influence.member.memFollower}</td>
-												
-												<c:set var = "hits" value = "0" />
-												<c:set var = "likes" value = "0" />
-												<c:forEach items="${influence.member.mapList}" var="map">
-													<c:set var= "hits" value="${total + map.mapReadnum}"/>
-													<c:set var= "likes" value="${total + map.mapLike}"/>
-												</c:forEach>
-												<td><c:out value="${hits}"/></td>
-												<td><c:out value="${likes}"/></td>
-												
-												<td>
-													<button class="btn btn-default" style="margin-right: 5px"
-														id="modify">확인</button>
-													<button class="btn btn-danger">취소</button>
-												</td>
-											</tr>
-										</c:forEach>
-									</tbody>
-								</table>
-							</div>
-						</div>
-					</div>
 					<div class="card">
 						<div class="card-header">
 							<h5>정기 결제자 리스트</h5>
@@ -113,12 +51,13 @@ tr{
 								<table class="table">
 									<thead>
 										<tr>
-											<th>회원 번호</th>
-											<th>아이디</th>
-											<th>팔로워</th>
-											<th>총 조회수</th>
-											<th>총 좋아요수</th>
-											<th>요청 정보 확인</th>
+											<th>No</th>
+											<th>Id</th>
+											<th>Address</th>
+											<th>Username</th>
+											<th>Age</th>
+											<th>Grade</th>
+											<th>회원 정보 수정</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -126,19 +65,13 @@ tr{
 											<tr>
 												<th scope="row">${member.memNo}</th>
 												<td>${member.memId}</td>
-												<td>${member.memFollower}</td>
-												
-												<c:set var = "hits" value = "0" />
-												<c:set var = "likes" value = "0" />
-												<c:forEach items="${member.mapList}" var="map">
-													<c:set var= "hits" value="${total + map.mapReadnum}"/>
-													<c:set var= "likes" value="${total + map.mapLike}"/>
-												</c:forEach>
-												<td><c:out value="${hits}"/></td>
-												<td><c:out value="${likes}"/></td>
-												
+												<td>${member.memName}</td>
+												<td>${member.memAddr}</td>
+												<td>${member.memAge}</td>
+												<td>${member.memGrade}</td>
 												<td>
-													<button class="btn btn-danger">강등</button>
+													<button class="btn btn-default" style="margin-right: 5px"
+														id="cancel" value="${member.memNo}">취소</button>
 												</td>
 											</tr>
 										</c:forEach>

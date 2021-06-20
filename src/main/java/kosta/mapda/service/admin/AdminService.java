@@ -47,4 +47,20 @@ public interface AdminService {
 
 	Long getMemberCount();
 
+	List<Integer> getMemberCountList();
+
+	void levelUp(Long memNo);
+
+	void levelDown(Long memNo);
+
+	void cancelRpay(Long memNo);
+
+	Place getOnePlace(Long placeNo);
+
+	void updatePlace(Place place);
+	
+	List<Integer> getPostCountList();
+
+	List<Integer> getReplyCountList();
+
 }

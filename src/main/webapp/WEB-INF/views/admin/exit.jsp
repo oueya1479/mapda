@@ -7,7 +7,7 @@
 </head>
 <body>
 <script>
-	window.opener.location.href = "${pageContext.request.contextPath}/admin/member";
+	window.opener.location.href = "${pageContext.request.contextPath}/admin/" + '${where}';
 	window.close();
 </script>
 hi~

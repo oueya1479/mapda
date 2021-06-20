@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,8 +12,25 @@
 <script src="https://code.highcharts.com/modules/export-data.js"></script>
 <script src="https://code.highcharts.com/modules/accessibility.js"></script>
 <script>
-	$(function() {
-		$('#containers').highcharts({
+
+
+
+$(function() {
+	
+	var lista = [];
+	var listb = [];
+	var listc = [];
+	<c:forEach items="${memberCountList}" var="c">
+	lista.push(Number("${c}"));
+	</c:forEach>
+	<c:forEach items="${postCountList}" var="c">
+	listb.push(Number("${c}"));
+	</c:forEach>
+	<c:forEach items="${replyCountList}" var="c">
+	listc.push(Number("${c}"));
+	</c:forEach>
+	
+	$('#containers').highcharts({
 
 			  title: {
 			    text: 'Mapda 전체 통계표'
@@ -48,16 +66,16 @@
 			      pointStart: 316
 			    }
 			  },
-
+			  
 			  series: [{
 			    name: 'member',
-			    data: [43934, 52503, 57177, 69658, 97031, 119931, 137133, 154175]
+			    data: lista.reverse()
 			  }, {
 			    name: 'posting',
-			    data: [24916, 24064, 29742, 29851, 32490, 30282, 38121, 40434]
+			    data: listb.reverse()
 			  }, {
 			    name: 'reply',
-			    data: [11744, 17722, 16005, 19771, 20185, 24377, 32147, 39387]
+			    data: listc.reverse()
 			  }],
 
 			  responsive: {
@@ -75,7 +93,7 @@
 			    }]
 			  }
 		})
-	})
+})
 </script>
 <style>
 .highcharts-figure, .highcharts-data-table table {
