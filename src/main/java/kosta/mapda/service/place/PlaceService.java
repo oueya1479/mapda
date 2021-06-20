@@ -71,6 +71,11 @@ public interface PlaceService {
 	Page<PlaceStorage> selectAllPagePS(Long memNo, Pageable pageable);
 	
 	/**
+	 * 		PlaceStorage delete
+	 * */
+	void psDelete(Long psNo);
+	
+	/**
 	 * 		좋아요 체크
 	 * */
 	PlaceStorage likeCheck(Long placeNo, Long memNo);

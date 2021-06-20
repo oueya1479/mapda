@@ -475,19 +475,19 @@ public class PlaceController {
 	/**
 	 * 		좋아요(구독한) 플레이스 목록 출력
 	 * */
-	@RequestMapping("/likePlaces")
-	public void likePlaces(Model model) {
-		Member mem = (Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		Long memNo = mem.getMemNo();
-		List<PlaceStorage> psList = placeService.selectByMemPlace(memNo);
-		if(psList==null) {
-			throw new RuntimeException("좋아요 하신 Place 가 없습니다! 추가해주세요");
-		}
-		
-		String memId = psList.get(0).getMember().getMemId();
-		model.addAttribute("psList", psList);
-		model.addAttribute("memId", memId);
-	}
+//	@RequestMapping("/likePlaces")
+//	public void likePlaces(Model model) {
+//		Member mem = (Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//		Long memNo = mem.getMemNo();
+//		List<PlaceStorage> psList = placeService.selectByMemPlace(memNo);
+//		if(psList==null) {
+//			throw new RuntimeException("좋아요 하신 Place 가 없습니다! 추가해주세요");
+//		}
+//		
+//		String memId = psList.get(0).getMember().getMemId();
+//		model.addAttribute("psList", psList);
+//		model.addAttribute("memId", memId);
+//	}
 	
 	/**
 	 * 		좋아요(구독한) 플레이스 목록 페이징 처리
@@ -502,6 +502,14 @@ public class PlaceController {
 	//	 List<PlaceStorage> psList= pageList.getContent();
 		model.addAttribute("psList", pageList);
 		model.addAttribute("memId", memId);
+	}
+	/**
+	 * 		좋아요(구독한) 플레이스 목록에서 삭제
+	 * */
+	@RequestMapping("/likePlaceDelete/{psNo}")
+	public String likePlaceDelete(@PathVariable Long psNo) {
+		placeService.psDelete(psNo);
+		return "redirect:/place/likePlace";
 	}
 	
 	

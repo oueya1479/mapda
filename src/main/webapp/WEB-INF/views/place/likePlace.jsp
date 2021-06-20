@@ -56,7 +56,8 @@
 									<td>
 										<h2 style="font-weight: bolder;">
 											<a href="${pageContext.request.contextPath}/place/read/${storage.place.placeNo}" style=" text-decoration: none; color: black;">
-											${storage.place.placeTitle}</a>
+											${storage.place.placeTitle}</a><%-- ${storage.psNo} --%>
+											
 										</h2>
 									</td>
 								</tr>
@@ -65,7 +66,9 @@
 										<h6 style="color: navy;">*이름을 클릭하시면 상세보기로 이동합니다.</h6>
 										<br><h5 style="text-align: left;">주소 : ${storage.place.placeAddr }</h5>
 									</td>
-									<td>
+									<td style="text-align: right;">
+									<a href="${pageContext.request.contextPath}/place/likePlaceDelete/${storage.psNo}" 
+                        			 class="btn" id="likePlaceDelete" style="text-decoration: none; color: white; background-color: gray; ">DELETE</a>
 										<h5 style="text-align: right;">플레이스 등록일 : ${storage.place.placeRegdate}</h5>
 										<h5 style="text-align: right">좋아요 등록일 : ${storage.placeStorageRegdate}</h5>
 									</td>
@@ -95,7 +98,21 @@
 	</section>
 	<!-- Listing Details Section End -->
 
-
+	
+	<div style="text-align: center">
+<!-- 페이징 처리 -->
+ <c:forEach begin="0" end="${psList.totalPages-1}" var="i"><!-- psList.getTotalPages() 호출 -->
+   <c:choose>
+     <c:when test="${psList.number==i}"><!-- psList.getNumber() 호출 -->
+         <a href="${pageContext.request.contextPath}/place/likePlace?nowPage=${i}" style="color:red"> [ ${i+1} ] </a><!-- 현재페이지만 빨간색으로 표시해주는거 -->
+     </c:when>
+     <c:otherwise>
+         <a href="${pageContext.request.contextPath}/place/likePlace?nowPage=${i}"> [ ${i+1} ] </a>
+     </c:otherwise>
+   </c:choose>
+   
+ </c:forEach>
+</div>
 
 </body>
 

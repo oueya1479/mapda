@@ -173,9 +173,15 @@ public class PlaceServiceImpl implements PlaceService {
 		placeStorageRepository.deleteSub(placeNo, memNo);
 	}
 
+	@Override
+	public void psDelete(Long psNo) {
+		placeStorageRepository.deleteById(psNo);
+	}
+
 //	@Override
 //	public void insertPlacePhoto(List<PlacePhoto> photoList) {
 //		placePhotoRepository.saveAll(photoList);
 //	}
+	
 	
 }
