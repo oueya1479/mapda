@@ -106,35 +106,6 @@
                 
                     
                 </div>
-                <div class="col-lg-4">
-                    <div class="blog__sidebar">
-                        
-                        
-                        <div class="blog__sidebar__categories">
-                            <h5>My Point</h5>
-                            <ul>
-                                <li><a href="#">Finance <span>18</span></a></li>
-                                <li><a href="#">Business <span>20</span></a></li>
-                                <li><a href="#">Loan <span>07</span></a></li>
-                                <li><a href="#">Consulting <span>22</span></a></li>
-                                <li><a href="#">Credit <span>19</span></a></li>
-                            </ul>
-                        </div>
-                        <div class="blog__sidebar__tags">
-                            <h5>Popular Tag</h5>
-                            <a href="#">Business</a>
-                            <a href="#">Marketing</a>
-                            <a href="#">Payment</a>
-                            <a href="#">Travel</a>
-                            <a href="#">Finance</a>
-                            <a href="#">Videos</a>
-                            <a href="#">Ideas</a>
-                            <a href="#">Unique</a>
-                            <a href="#">Music</a>
-                            <a href="#">Key</a>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </section>

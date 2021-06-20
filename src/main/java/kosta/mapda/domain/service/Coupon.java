@@ -36,10 +36,10 @@ public class Coupon {
 	private String cpName; //쿠폰명
 	private String cpPlace; //쿠폰이용매장
 	private String cpImgpath; //쿠폰이미지 경로
-	private int cpPrice; //쿠폰가격
+	private Integer cpPrice; //쿠폰가격
 	private String cpDetail; //쿠폰설명
 	private String cpUsingdetail; //사용유의사항
-	private int cpState; //쿠폰 발급상태 (0:발급중단, 1: 발급가능)
+	private Integer cpState; //쿠폰 발급상태 (0:발급중단, 1: 발급가능)
 	
 	@ManyToOne
 	@JoinColumn(name = "mem_no") //회원번호

@@ -98,8 +98,7 @@ public class PlaceReviewServiceImpl implements PlaceReviewService {
 	public PlacePhotoReview prrUpdate(PlacePhotoReview placePhotoReview) {
 		PlacePhotoReview dbPpr = pprRepository.findById(placePhotoReview.getPprNo()).orElse(null);
 		dbPpr.setPprContent(placePhotoReview.getPprContent().replace("<", "&lt;"));
-		return dbPpr;
-	}
+		return dbPpr;	}
 	
 	// 사용 안됨
 	@Override
