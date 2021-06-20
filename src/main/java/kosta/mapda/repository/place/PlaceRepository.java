@@ -7,7 +7,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import kosta.mapda.domain.map.Place;
-import kosta.mapda.domain.member.Member;
 
 public interface PlaceRepository extends JpaRepository<Place, Long> {
 	

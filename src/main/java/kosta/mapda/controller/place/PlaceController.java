@@ -113,9 +113,11 @@ public class PlaceController {
 		// 해쉬태그 #기준으로 나눔
 		List<String> tagStr=new ArrayList<String>();
 		String str = place.getPlaceTag();	//#kosta#한식#맛#강추#꼭가요#가즈아#다있어
-		String [] hashStr = str.split("#");
-		for(int i=1; i<hashStr.length; i++) {
-			tagStr.add(hashStr[i]);
+		if(str!=null) {
+			String [] hashStr = str.split("#");
+			for(int i=1; i<hashStr.length; i++) {
+				tagStr.add(hashStr[i]);
+			}
 		}
 		
 		//총 리뷰수
@@ -235,9 +237,12 @@ public class PlaceController {
 		// 해쉬태그 #기준으로 나눔
 		List<String> tagStr=new ArrayList<String>();
 		String dbTag =place.getPlaceTag();	//db에서 꺼낸거 //#kosta#한식#맛#강추#꼭가요#가즈아#다있어
-		String [] hashStr = dbTag.split("#");
-		for(int i=1; i<hashStr.length; i++) {
-			tagStr.add(hashStr[i]);
+		
+		if(dbTag!=null) {
+			String [] hashStr = dbTag.split("#");
+			for(int i=1; i<hashStr.length; i++) {
+				tagStr.add(hashStr[i]);
+			}
 		}
 		model.addAttribute("tagStrLen", tagStr.size());
 		model.addAttribute("tagStr", tagStr);
@@ -248,19 +253,78 @@ public class PlaceController {
 	 * 		플레이스 수정하기 완료
 	 * */
 	@RequestMapping("/placeUpdate")
-	public String placeUpdate(Place place) {
+	public String placeUpdate(Place place, HttpServletRequest request, PlacePhoto placePhoto,HttpSession session)throws IllegalStateException, IOException {
 		place.setManagement(new Management(3L));
 		
-		System.out.println("PlaceController placeUpdate place = " + place);
-		Place dbPlace = placeService.update(place);
+		String t1 = request.getParameter("hashTag1");
+		String t2 = request.getParameter("hashTag2");
+		String t3 = request.getParameter("hashTag3");
+		String t4 = request.getParameter("hashTag4");
+		String t5 = request.getParameter("hashTag5");
+		String t6 = request.getParameter("hashTag6");
+		String t7 = request.getParameter("hashTag7");
+		String t8 = request.getParameter("hashTag8");
 		
+		String[] tagArr = {t1, t2, t3, t4, t5, t6, t7, t8};
+		String totalTag="";
+		for(int i=0; i<8; i++) {
+				if(tagArr[i]=="") {
+					tagArr[i]="";
+				}else{
+					tagArr[i]= "#"+tagArr[i];
+				}
+				if(!tagArr[i].equals("#")) {
+					totalTag+=tagArr[i];
+				}
+		}
+		place.setPlaceTag(totalTag);
+		
+		switch(place.getPlaceIconNo()) {
+		case 1: place.setPlaceIconName("맛집"); place.setPlaceIconPath("food1.png"); break;
+		case 2: place.setPlaceIconName("여행"); place.setPlaceIconPath("travel1.png"); break;
+		case 3: place.setPlaceIconName("카페"); place.setPlaceIconPath("cafe1.png"); break;
+		case 4: place.setPlaceIconName("힐링"); place.setPlaceIconPath("healing1.png"); break;
+		case 5: place.setPlaceIconName("자연"); place.setPlaceIconPath("nature1.png"); break;
+		case 6: place.setPlaceIconName("액티비티"); place.setPlaceIconPath("activity1.png"); break;
+		case 7: place.setPlaceIconName("쇼핑"); place.setPlaceIconPath("shopping1.png"); break;
+		case 8: place.setPlaceIconName("문화"); place.setPlaceIconPath("culture1.png"); break;
+		case 9: place.setPlaceIconName("산책"); place.setPlaceIconPath("walking1.png"); break;
+		case 10: place.setPlaceIconName("야경"); place.setPlaceIconPath("night1.png"); break;
+		case 11: place.setPlaceIconName("명소"); place.setPlaceIconPath("attraction1.png"); break;
+		case 12: place.setPlaceIconName("반려동물"); place.setPlaceIconPath("pet1.png"); break;
+		case 13: place.setPlaceIconName("데이트"); place.setPlaceIconPath("date1.png"); break;
+		case 14: place.setPlaceIconName("드라이브"); place.setPlaceIconPath("drive1.png"); break;
+		default: System.out.println("오류 place.getPlaceIconNo()"); break;
+	}
+		
+		List<MultipartFile> fileList = placePhoto.getFiles();
+		List<PlacePhoto> photoList = new ArrayList<PlacePhoto>();
+		
+		ServletContext application = session.getServletContext();
+		String path = application.getRealPath("/WEB-INF/save");
+		
+		for(MultipartFile mf : fileList) {
+			if(mf.getSize()>0) {
+				PlacePhoto photo = new PlacePhoto();
+				photo.setPlace(place);
+				
+				String fileName = mf.getOriginalFilename();
+				photo.setPpPath(fileName);
+				//mf.transferTo(new File(SAVE_PATH + "/" + fileName));
+				mf.transferTo(new File(path + "/" + fileName));
+				photoList.add(photo);
+			}
+		}
+		
+		System.out.println("PlaceController placeUpdate place = " + place);
+		Place dbPlace = placeService.update(place, photoList);
 		
 		System.out.println("PlaceController placeUpdate dbPlace = " + dbPlace);
 		System.out.println("dbPlace.getPlaceNo() = " + dbPlace.getPlaceNo() );
 		//"place/read/"+dbPlace.getPlaceNo()
 		//return new ModelAndView("place/read", "place", dbPlace);
 		return "redirect:/place/read/"+dbPlace.getPlaceNo();
-	}
+	}//update 끝
 	
 	/**
 	 * 		플레이스 등록하기

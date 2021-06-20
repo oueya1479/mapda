@@ -33,7 +33,7 @@ public interface PlaceService {
 	/**
 	 * 		수정하기
 	 * */
-	Place update(Place place);
+	Place update(Place place, List<PlacePhoto> ppList);
 	
 	/**
 	 * 		삭제하기

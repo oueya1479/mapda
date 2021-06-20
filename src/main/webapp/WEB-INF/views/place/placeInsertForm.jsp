@@ -290,6 +290,11 @@
 									<div class="imgs_wrap">
 										<img id ="img"/>
 									</div>
+									<br>
+									<div style="font-size: 7px; font-family: serif; font-weight: bolder;">
+									※플레이스 수정 시 등록한 사진 수 보다 적거나 같은 수의 사진으로 수정됩니다. <br>이 점 양해 부탁 드리며, 플레이스 등록시
+									많은 사진을 첨부하여 다양한 정보를 제공해 주세요.※
+									</div>
 							</div>
 	                    </div>
                 	</div>
@@ -433,14 +438,18 @@
 	                                </div>
                             </div>
                         </div>
- <!-- 여기에 security Role 추가해서 넣어야 하나...??? -->                       
+ <!-- 여기에 security Role 추가해서 넣어야 하나...??? security Role 에 하나 추가해서 influencer 만 보여질수 있도록 -->                       
                         <div class="row">
 	                    	<div class="col-lg-12">
 		                    	<div class="listing__details__amenities">
 		                    		<h4>Influencer 만의 특별한 혜택!!</h4>
-			                    		<h5>Hidden Place 지정</h5>
-			                    		security Role 에 하나 추가해서 influencer 만 보여질수 있도록
-			                    		히든플레이스에 대한 설명 아주 희귀한 곳만...
+			                    		<span style="margin-top:20px;font-size:18px;" >
+										  <span style="color: brown;">Hidden Place 로 지정하시면 맵多를 이용하는 특별 고객분들에게만 정보를 제공합니다.</span><p>
+										 모두에게 공개하는 것이 아닌 특별한 고객분들에게 정보를 제공해주고 싶은 특별한 장소라면, Hidden Place로 설정해 주시기 바랍니다.
+										 Hidden Place로 지정한 장소를 열람하기 위해서는 별도의 포인트가 필요하며, 고객분들이 포인트를 사용하게 되면 Influencer 분에게 포인트가
+										 제공되어집니다. <br>많은 HiddenPlace 설정을 부탁 드리며, 저희 <span style="font-weight: bolder; font-size: 20px; color: blue;">맵多</span>
+										 를 이용해 주셔서 감사합니다.</span>
+			                    		
 			                    		<br><input type='checkbox' name="placeHidden" id="${memNo}" value='1'  style="width: 20px; height: 20px;"/>
 		                    		<div id="placeHiddenChecked" name="placeHiddenChecked">
 		                    		</div>
