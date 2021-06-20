@@ -68,19 +68,19 @@ public class MemberController {
 		return "/member/loginForm";
 	}
 
-	// 회원 검색 폼
-	@RequestMapping("/findForm")
-	public String findIdMember() {
-		return "/member/findForm";
-	}
-
-	// 특정 회원 검색하기
-	@RequestMapping("/findMember")
-	public ModelAndView findMember(HttpServletRequest request) {
-		String memId = request.getParameter("memId");
-		Member member = memService.findMemberById(memId);
-		return new ModelAndView("/member/findMember_result", "member", member);
-	}
+//	// 회원 검색 폼
+//	@RequestMapping("/findForm")
+//	public String findIdMember() {
+//		return "/member/findForm";
+//	}
+//
+//	// 특정 회원 검색하기
+//	@RequestMapping("/findMember")
+//	public ModelAndView findMember(HttpServletRequest request) {
+//		String memId = request.getParameter("memId");
+//		Member member = memService.findMemberById(memId);
+//		return new ModelAndView("/member/findMember_result", "member", member);
+//	}
 
 	// 아이디 중복확인
 	@RequestMapping("/idcheckAjax")
