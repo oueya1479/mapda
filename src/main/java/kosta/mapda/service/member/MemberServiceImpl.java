@@ -16,10 +16,12 @@ import kosta.mapda.domain.map.PlaceReview;
 import kosta.mapda.domain.map.Theme;
 import kosta.mapda.domain.member.Member;
 import kosta.mapda.domain.member.MemberRole;
+import kosta.mapda.domain.service.MyPoint;
 //import kosta.mapda.domain.member.MemberRole;
 import kosta.mapda.repository.member.MemberRepository;
 import kosta.mapda.repository.place.PlaceReviewRepository;
 import kosta.mapda.repository.young.MapRepository;
+import kosta.mapda.service.service.PointService;
 
 @Service
 @Transactional
@@ -34,6 +36,9 @@ public class MemberServiceImpl implements MemberService {
 	@Autowired
 	private PlaceReviewRepository placeReviewRepository;
 	
+	//마이포인트 테이블 생성
+	@Autowired
+	private PointService pointService;
 	
 	/*
 	 * 비밀번호 암호화를 위한 객체를 주입받는다
@@ -73,7 +78,10 @@ public class MemberServiceImpl implements MemberService {
 		String encodedPassword = passwordEncoder.encode(member.getMemPw());
 		member.setMemPw(encodedPassword);
 		memRepository.save(member);
-
+		
+		//가입시 마이포인트 테이블 생성
+		pointService.createMyPoint(member.getMemNo());
+		
 		// 권한등록
 		/*
 		 * AuthorityVO authority=new AuthorityVO(vo.getId(),"ROLE_MEMBER");

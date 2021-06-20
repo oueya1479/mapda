@@ -12,11 +12,16 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -26,6 +31,7 @@ import kosta.mapda.domain.map.PlacePhoto;
 import kosta.mapda.domain.map.PlacePhotoReview;
 import kosta.mapda.domain.map.PlacePhotoReviewPhoto;
 import kosta.mapda.domain.map.PlaceReview;
+import kosta.mapda.domain.map.PlaceStorage;
 import kosta.mapda.domain.map.Theme;
 import kosta.mapda.domain.member.Member;
 import kosta.mapda.service.place.PlaceReviewService;
@@ -48,11 +54,44 @@ public class PlaceController {
 	 * 		상세보기
 	 * */
 	@RequestMapping("/read/{placeNo}")
-	public ModelAndView read(@PathVariable Long placeNo) {
+	public ModelAndView read(@PathVariable Long placeNo, HttpServletResponse response) {
 		int starAvg=0;
 		int starAvgPer=0;
 		
+		// hidden place 인지 확인
+		Member mem = (Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		System.out.println("mem.getMemPaystatus() = " + mem.getMemPaystatus());
+		
 		Place place = placeService.selectBy(placeNo);
+		System.out.println("place.getPlaceHidden() = " +place.getPlaceHidden());
+		
+		/**
+		 * 		mem.getMemPaystatus()
+		 * 		유료회원 (1)	// 무료회원 (0)
+		 * 
+		 * 		place.getPlaceHidden()
+		 * 		히든플레이스(1) // 일반게시물 (0)
+		 * 
+		 * 		==> 유료회원은 모두 접근가능 1-> 0 (가능) / 1->1 (가능) 
+		 * 		==> 무료회원읜 히든플레이스 접근 불가 / 일반게시물 접근가능 0->1(불가능) / 0->0(가능)     따라서 무료회원(0) / 
+		 * */
+		if(mem.getMemPaystatus()==0 && place.getPlaceHidden()==1) {
+			throw new RuntimeException("히든플레이스의 경우, 결제회원만 접근 가능합니다!");
+		}else if(mem.getMemPaystatus()==1 && place.getPlaceHidden()==1) {
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out;
+			try {
+				out = response.getWriter();
+				out.println("<script>");
+				out.println("if(!confirm('포인트를 사용하시겠습니까?'))");
+				out.println("history.back();");
+				out.println("</script>");
+				out.flush();
+			}catch(IOException e) {
+				e.printStackTrace();
+			}
+		}
+		
 		List<PlacePhoto> ppList = placeService.selectAllPlacePhoto(placeNo);
 		List<PlaceReview> prList = prService.selectAllPlaceReview(placeNo);
 		List<PlacePhotoReview> pprList = prService.selectAllPhotoReview(placeNo);
@@ -163,18 +202,16 @@ public class PlaceController {
 				PlacePhotoReviewPhoto photo = new PlacePhotoReviewPhoto();
 				photo.setPpr(placePhotoReview);
 				String fileName = mf.getOriginalFilename();
-				photo.setPprpPath(path + "/" + fileName);
+				photo.setPprpPath(fileName);
 				mf.transferTo(new File(path + "/" + fileName));
 				pprpList.add(photo);
 			}
 		}
 		System.out.println("pprpList = " + pprpList);
 		
-		prService.prInsert(placePhotoReview , pprpList);//부모님
+		prService.prInsert(placePhotoReview , pprpList);//부모
 		
 		//prService.insertPprPhoto(pprpList);
-		
-		
 		
 		return "redirect:/place/read/"+placeNo;
 	}
@@ -192,9 +229,37 @@ public class PlaceController {
 	 * 		플레이스 수정하기 폼
 	 * */
 	@RequestMapping("/placeUpdateForm")
-	public void placeUpdateForm(Model model, Long mapNo, Long memNo) {
-		model.addAttribute("mapNo", mapNo);
-		model.addAttribute("memNo", memNo);
+	public ModelAndView placeUpdateForm(Model model ,Long placeNo) {
+		Place place = placeService.selectBy(placeNo);	//db에서 꺼내옴
+		
+		// 해쉬태그 #기준으로 나눔
+		List<String> tagStr=new ArrayList<String>();
+		String dbTag =place.getPlaceTag();	//db에서 꺼낸거 //#kosta#한식#맛#강추#꼭가요#가즈아#다있어
+		String [] hashStr = dbTag.split("#");
+		for(int i=1; i<hashStr.length; i++) {
+			tagStr.add(hashStr[i]);
+		}
+		model.addAttribute("tagStrLen", tagStr.size());
+		model.addAttribute("tagStr", tagStr);
+		return new ModelAndView("place/placeUpdateForm", "place", place);
+	}
+	
+	/**
+	 * 		플레이스 수정하기 완료
+	 * */
+	@RequestMapping("/placeUpdate")
+	public String placeUpdate(Place place) {
+		place.setManagement(new Management(3L));
+		
+		System.out.println("PlaceController placeUpdate place = " + place);
+		Place dbPlace = placeService.update(place);
+		
+		
+		System.out.println("PlaceController placeUpdate dbPlace = " + dbPlace);
+		System.out.println("dbPlace.getPlaceNo() = " + dbPlace.getPlaceNo() );
+		//"place/read/"+dbPlace.getPlaceNo()
+		//return new ModelAndView("place/read", "place", dbPlace);
+		return "redirect:/place/read/"+dbPlace.getPlaceNo();
 	}
 	
 	/**
@@ -203,6 +268,7 @@ public class PlaceController {
 	@RequestMapping("/placeInsert")
 	public String placeInsert(Place place, Long mapNo, HttpServletRequest request, Member member, 
 			PlacePhoto placePhoto,HttpSession session) throws IllegalStateException, IOException{
+		
 		String t1 = request.getParameter("hashTag1");
 		String t2 = request.getParameter("hashTag2");
 		String t3 = request.getParameter("hashTag3");
@@ -227,26 +293,27 @@ public class PlaceController {
 		place.setPlaceTag(totalTag);
 		
 		switch(place.getPlaceIconNo()) {
-			case 1: place.setPlaceIconName("맛집"); place.setPlaceIconPath("img/placeicon/food1.png"); break;
-			case 2: place.setPlaceIconName("여행"); place.setPlaceIconPath("img/placeicon/travel1.png"); break;
-			case 3: place.setPlaceIconName("카페"); place.setPlaceIconPath("img/placeicon/cafe1.png"); break;
-			case 4: place.setPlaceIconName("힐링"); place.setPlaceIconPath("img/placeicon/healing1.png"); break;
-			case 5: place.setPlaceIconName("자연"); place.setPlaceIconPath("img/placeicon/nature1.png"); break;
-			case 6: place.setPlaceIconName("액티비티"); place.setPlaceIconPath("img/placeicon/activity1.png"); break;
-			case 7: place.setPlaceIconName("쇼핑"); place.setPlaceIconPath("img/placeicon/shopping1.png"); break;
-			case 8: place.setPlaceIconName("문화"); place.setPlaceIconPath("img/placeicon/culture1.png"); break;
-			case 9: place.setPlaceIconName("산책"); place.setPlaceIconPath("img/placeicon/walking1.png"); break;
-			case 10: place.setPlaceIconName("야경"); place.setPlaceIconPath("img/placeicon/night1.png"); break;
-			case 11: place.setPlaceIconName("명소"); place.setPlaceIconPath("img/placeicon/attraction1.png"); break;
-			case 12: place.setPlaceIconName("반려동물"); place.setPlaceIconPath("img/placeicon/pet1.png"); break;
-			case 13: place.setPlaceIconName("데이트"); place.setPlaceIconPath("img/placeicon/date1.png"); break;
-			case 14: place.setPlaceIconName("드라이브"); place.setPlaceIconPath("img/placeicon/drive1.png"); break;
-			default: System.out.println("오류place.getPlaceIconNo()"); break;
+			case 1: place.setPlaceIconName("맛집"); place.setPlaceIconPath("food1.png"); break;
+			case 2: place.setPlaceIconName("여행"); place.setPlaceIconPath("travel1.png"); break;
+			case 3: place.setPlaceIconName("카페"); place.setPlaceIconPath("cafe1.png"); break;
+			case 4: place.setPlaceIconName("힐링"); place.setPlaceIconPath("healing1.png"); break;
+			case 5: place.setPlaceIconName("자연"); place.setPlaceIconPath("nature1.png"); break;
+			case 6: place.setPlaceIconName("액티비티"); place.setPlaceIconPath("activity1.png"); break;
+			case 7: place.setPlaceIconName("쇼핑"); place.setPlaceIconPath("shopping1.png"); break;
+			case 8: place.setPlaceIconName("문화"); place.setPlaceIconPath("culture1.png"); break;
+			case 9: place.setPlaceIconName("산책"); place.setPlaceIconPath("walking1.png"); break;
+			case 10: place.setPlaceIconName("야경"); place.setPlaceIconPath("night1.png"); break;
+			case 11: place.setPlaceIconName("명소"); place.setPlaceIconPath("attraction1.png"); break;
+			case 12: place.setPlaceIconName("반려동물"); place.setPlaceIconPath("pet1.png"); break;
+			case 13: place.setPlaceIconName("데이트"); place.setPlaceIconPath("date1.png"); break;
+			case 14: place.setPlaceIconName("드라이브"); place.setPlaceIconPath("drive1.png"); break;
+			default: System.out.println("오류 place.getPlaceIconNo()"); break;
 		}
 		
 		place.setManagement(new Management(3L));
 		place.setTheme(new Theme(mapNo));
 		place.setMember(new Member(member.getMemNo()));
+		place.setPlaceStatus(1);
 		// 플레이스 사진 등록
 		
 		List<MultipartFile> fileList = placePhoto.getFiles();
@@ -261,15 +328,15 @@ public class PlaceController {
 				photo.setPlace(place);
 				
 				String fileName = mf.getOriginalFilename();
-				photo.setPpPath(path + "/" + fileName);
+				photo.setPpPath(fileName);
 				//mf.transferTo(new File(SAVE_PATH + "/" + fileName));
 				mf.transferTo(new File(path + "/" + fileName));
 				photoList.add(photo);
 			}
 		}
 		
-		placeService.insert(place);
-		placeService.insertPlacePhoto(photoList);
+		placeService.insert(place, photoList);
+		//placeService.insertPlacePhoto(photoList);
 		return "redirect:/map/mapRead/"+mapNo;
 	}
 	
@@ -310,6 +377,17 @@ public class PlaceController {
 	}
 	
 	/**
+	 * 		플레이스 삭제하기
+	 * */
+	@RequestMapping("/placeDelete")
+	public String placeDelete(Long placeNo) {
+		placeService.delete(placeNo);
+		
+		//return "redirect:/map/mapRead/"+mapNo;		//수정하기
+		return "redirect:/";		//수정하기
+	}
+	
+	/**
 	 * 		내 댓글 수정하기
 	 * */
 	@RequestMapping("/placeReplyUpdate/placeNo={placeNo}&memId={memId}/{prNo}")
@@ -318,7 +396,7 @@ public class PlaceController {
 		System.out.println("placeReview = " + placeReview.getPrNo());
 		System.out.println("dbPlaceReview.getPrNo() = " +dbPlaceReview.getPrNo());
 		System.out.println("dbPlaceReview.getPrContent() = "+dbPlaceReview.getPrContent());
-		return "redirect:/place/myReplyReview/placeNo="+placeNo+"&memId="+memId;
+		return "redirect:/place/read/"+placeNo;
 	}
 	
 	/**
@@ -326,12 +404,42 @@ public class PlaceController {
 	 * */
 	@RequestMapping("/placePhotoReviewUpdate/placeNo={placeNo}&memId={memId}/{pprNo}")
 	public String placePhotoReviewUpdate(@PathVariable Long placeNo, @PathVariable String memId,@PathVariable Long pprNo, PlacePhotoReview placePhotoReview) {
-		/* PlacePhotoReview dbPpr = */ 
 		prService.prrUpdate(placePhotoReview);
-//		System.out.println("placePhotoReview = " + placePhotoReview.getPprNo());
-//		System.out.println("dbPpr.getPprNo() = " +dbPpr.getPprNo());
-//		System.out.println("dbPpr.getPprContent() = "+dbPpr.getPprContent());
-		return "redirect:/place/myReplyReview/placeNo="+placeNo+"&memId="+memId;
+		return "redirect:/place/read/"+placeNo;
 	}
+	
+	/**
+	 * 		좋아요(구독한) 플레이스 목록 출력
+	 * */
+	@RequestMapping("/likePlaces")
+	public void likePlaces(Model model) {
+		Member mem = (Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Long memNo = mem.getMemNo();
+		List<PlaceStorage> psList = placeService.selectByMemPlace(memNo);
+		if(psList==null) {
+			throw new RuntimeException("좋아요 하신 Place 가 없습니다! 추가해주세요");
+		}
+		
+		String memId = psList.get(0).getMember().getMemId();
+		model.addAttribute("psList", psList);
+		model.addAttribute("memId", memId);
+	}
+	
+	/**
+	 * 		좋아요(구독한) 플레이스 목록 페이징 처리
+	 * */
+	@RequestMapping("/likePlace")
+	public void likePlace(Model model, @RequestParam(defaultValue = "0") int nowPage) {
+		Member mem = (Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Long memNo = mem.getMemNo();
+		Pageable pageable = PageRequest.of(nowPage, 4, Direction.DESC,"placeStorageRegdate");
+		Page<PlaceStorage> pageList = placeService.selectAllPagePS(memNo, pageable);
+		String memId = pageList.getContent().get(0).getMember().getMemId();
+	//	 List<PlaceStorage> psList= pageList.getContent();
+		model.addAttribute("psList", pageList);
+		model.addAttribute("memId", memId);
+	}
+	
+	
 	
 }

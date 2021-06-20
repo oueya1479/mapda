@@ -22,41 +22,39 @@
 </style>
 <script src="${pageContext.request.contextPath}/js/jquery-3.3.1.min.js"></script>
 <script>
-	$(function() {
-
-		$("input[value=Modify]").click(function() {
-							var mapNo = $(this).attr("id")
-							var url = "${pageContext.request.contextPath}/map/modifyForm?mapNo="+ mapNo;
-							$(location).attr('href', url);
-						})
-						
-		            $(document).on("click","input[value=Delete]", function() {
-							var mapNo = $(this).attr("id")
-							var pwd = prompt("비밀번호를 입력하세요.");
-							
-							$.ajax({
-								url:"${pageContext.request.contextPath}/map/check",
-								type:"post",
-								dataType:"text",
-								data: {"pwd" : pwd},
-								success: function(data){
-									if(data=='ok'){
-										$("#requestForm")
-										.attr("action",
-												"${pageContext.request.contextPath}/map/deleteMap?" + mapNo);
-										$("#requestForm").submit();
-									
-									}else{
-										alert("비밀번호가 일치하지 않습니다. 다시 확인해주세요")
-									}
-								},	
-								error : function(err) {
-									alert("지도 삭제 오류. 다시 시도해주세요")
+$(function() {
+	$("input[value=Modify]").click(function() {
+						var mapNo = $(this).attr("id")
+						var url = "${pageContext.request.contextPath}/map/modifyForm?mapNo="+ mapNo;
+						$(location).attr('href', url);
+					})
+					
+	            $(document).on("click","input[value=Delete]", function() {
+						var mapNo = $(this).attr("id")
+						var pwd = prompt("비밀번호를 입력하세요.");
+						$.ajax({
+							url:"${pageContext.request.contextPath}/map/check",
+							type:"post",
+							dataType:"text",
+							data: {"pwd" : pwd},
+							success: function(data){
+								if(data=='ok'){
+									$("#mapNo").val(mapNo)
+									$("#requestForm")
+									.attr("action",
+											"${pageContext.request.contextPath}/map/deleteMap");
+									$("#requestForm").submit();
+								}else{
+									alert("비밀번호가 일치하지 않습니다. 다시 확인해주세요")
 								}
-							});
-							
-						})
-	});
+							},	
+							error : function(err) {
+								alert("지도 삭제 오류. 다시 시도해주세요")
+							}
+						});
+						
+					})
+});
 </script>
 <script type="text/javascript">
 	$(function(){
@@ -162,13 +160,13 @@
 
 										<p align="center">
 											<b><span style="font-size: 15pt; text-align: center;">
-											&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-														&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-														&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-														&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-														&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-														&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-											일치하는 지도가 없습니다.</span></b>
+													&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+													&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+													&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+													&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+													&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+													&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+													일치하는 지도가 없습니다.</span></b>
 										</p>
 									</c:when>
 									<c:otherwise>
@@ -176,7 +174,7 @@
 											<div class="col-lg-4 col-md-6">
 												<div class="listing__item">
 													<div class="listing__item__pic set-bg"
-														data-setbg="${pageContext.request.contextPath}/save/${map.mapImg}">
+														data-setbg="${pageContext.request.contextPath}/save/map/${map.mapImg}">
 
 														<div class="listing__item__pic__tag">
 															${map.mapCategory.categoryName}</div>
@@ -220,16 +218,11 @@
 
 														<br>
 														<div class="listing__item__text__inside">
-
 															<h5>
-
 																<a
 																	href="${pageContext.request.contextPath}/map/mapRead/${map.mapNo}">${map.mapTitle}</a>
 															</h5>
-
 															<div class="listing__item__text__rating">
-
-
 																<div class="listing__item__rating__star">
 																	<p id="this">${map.mapContent}</p>
 																</div>
@@ -256,9 +249,6 @@
 													</div>
 												</div>
 
-
-
-
 												<c:if
 													test="${not empty pageContext.request.userPrincipal.principal.mapList}">
 													<c:set var="doneloop" value="false" />
@@ -277,24 +267,8 @@
 															</c:if>
 														</c:if>
 													</c:forEach>
-
 												</c:if>
-
-
-
-
-
-
-
-
-
 											</div>
-											<form name="requestForm" method="post" id="requestForm">
-												<input type=hidden name="mapNo" value="${map.mapNo}">
-
-												<input type=hidden name="memPw" value="${map.member.memPw}"
-													id="memPw">
-											</form>
 										</c:forEach>
 									</c:otherwise>
 								</c:choose>
@@ -305,8 +279,9 @@
 
 			</div>
 		</div>
-
-
+		<form name="requestForm" method="post" id="requestForm">
+			<input type=hidden name="mapNo" value="" id="mapNo">
+		</form>
 	</section>
 
 </body>

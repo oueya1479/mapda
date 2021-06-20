@@ -11,5 +11,5 @@ import kosta.mapda.domain.service.MyPoint;
 
 public interface MyPointRepository extends JpaRepository<MyPoint, Long> {
 
-	List<MyPoint> findBymember_memNo(Long memNo);
+	MyPoint findBymember_memNo(Long memNo);
 }

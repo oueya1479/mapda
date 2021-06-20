@@ -1,0 +1,7 @@
+/**
+ * 
+ */
+Highcharts.chart('containers', {
+
+
+	});

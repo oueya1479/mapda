@@ -56,7 +56,7 @@
 							</div>
 							<div class="form-group form-default">
 								<input type="text" class="form-control" name="memImage"
-									value="${member.memImage}" required=""> <span
+									value="${member.memImage}"> <span
 									class="form-bar"></span> <label class="float-label">Image</label>
 							</div>
 							<button class="btn btn-default" style="margin-right: 5px"

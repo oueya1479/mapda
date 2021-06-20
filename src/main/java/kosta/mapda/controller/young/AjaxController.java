@@ -51,19 +51,10 @@ public class AjaxController {
 	}
 	
 	/**
-	 * 테마지도 좋아요
-	 */
-	@RequestMapping("/map/like")
-	public String like(Long mapNo) {
-		return null;
-	}
-	
-	/**
 	 * 테마지도 삭제시 입력한 비밀번호와 실제 비밀번호 비교
 	 */
 	@RequestMapping("/map/check")
 	public String check(@RequestParam("pwd") String pwd) {
-		System.out.println(pwd);
 		Member mem = (Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		String memId = mem.getMemId();
 		Member member = mapService.findInform(memId);

@@ -95,6 +95,35 @@
 		/* 파일 업로드 미리보기 */
 		$("#file").on("change", handleImgFileSelect);
 		
+ 		$(document).on("change","input[type=checkbox]", function(){
+			var memNo = $(this).attr("id");
+ 			$.ajax({
+				url: "${pageContext.request.contextPath}/place/influencerCheck",
+				type:"post",
+				dataType:"text",
+				data: {"memNo" : memNo},
+				success: function(result){
+					if(result=='yes'){
+						alert("Influencer로 확인 되셨습니다. 많은 홍보 부탁드립니다.");
+					}else{
+						alert("해당 옵션은 Influencer 만 사용 가능합니다.");
+						 $("input[type=checkbox]").prop("checked", false);
+					}
+				},
+				error : function(err){
+					alert("Influencer 확인 오류 , 다시 시도해 주세요.");
+				}
+			})
+		});
+		
+		
+/* 		if($("placeHidden").is(":checked")==true){
+			alert("체크됨");
+		}else{
+			alert("체크안됨");
+		} */
+		
+		
 	});
  	
  	function selectForm(frm){
@@ -114,6 +143,13 @@
  		console.log("fileUploadAction");
  		$("#file").trigger('click');
  	}
+ 	
+	function deleteImageAction(index){
+			sel_files.splice(index, 1);
+			
+			var img_id = "#img_id_" + index;
+			$(img_id).remove();
+		}
  	
  	function handleImgFileSelect(e){
  		sel_files = [];
@@ -144,14 +180,38 @@
  		
  	}
  	
-/*  	function checkValid(){
+  	function checkValid(){
  		var f = window.document.f;
- 		alert(1);
- 		if(f.hashTag1.value==""){
- 			alert(3);
+ 		if(f.resultAddress.value==""){
+ 			alert("Place 를 등록해 주세요!!");
+ 			f.resultAddress.focus();
+ 			return false;
  		}
  		
- 	} */
+
+ 		
+ 		
+ 		if(f.placeAddr.value==""){
+ 			document.getElementById("placeAddr").value= document.getElementById("resultAddress").value;
+ 		}
+ 		
+ 		if(f.resultAddress==""){
+ 			document.getElementById("resultAddress").value= document.getElementById("placeAddr").value;
+ 		}
+ 		
+ 		
+ 		if(f.placeContent.value==""){
+ 			alert("장소에 대한 간략한 소개를 적어 주세요!!");
+ 			return false;
+ 		}
+ 		
+ 		if(f.hashTag1.value=="" && f.hashTag2.value=="" && f.hashTag3.value=="" && f.hashTag4.value=="" && f.hashTag5.value=="" &&
+ 				f.hashTag6.value=="" && f.hashTag7.value=="" && f.hashTag8.value==""){
+ 			alert("최소 한개 이상의 해쉬태그를 생성해 주세요!!");
+ 			f.hashTag1.focus();
+ 			return false; 			
+ 		}
+ 	}
  	 	
   </script>
 
@@ -162,11 +222,10 @@
 	<sec:authentication property="principal.memNo" var="memNo"/>
 	<sec:authentication property="principal.memImage" var="memImage"/>
 	
-	<form name="f" action="${pageContext.request.contextPath}/place/placeInsert" method="post" enctype="multipart/form-data">
+	<form name="f" action="${pageContext.request.contextPath}/place/placeInsert" method="post" enctype="multipart/form-data" onSubmit="return checkValid()">
 			 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">						
 			 <input type="hidden" name="memNo" value="${memNo}">
 			 <input type="hidden" name="mapNo" value="${mapNo}">
-																																					<!--  onsubmit="return checkValid()" -->
 			
     <!-- Listing Section Begin -->
     <section class="listing-hero set-bg" data-setbg="${pageContext.request.contextPath}/img/listing/details/listing-hero.jpg"><!-- 무슨 사진 넣을지 고민 -->
@@ -175,7 +234,7 @@
                 <div class="col-lg-12">
                     <div class="listing__hero__option">
                         <div class="listing__hero__icon">
-                            <img src="${memImage}" alt="" style="width:120px; height:120px;"><!-- 아이콘 모양? user프로필? -->
+                            <img src="${pageContext.request.contextPath}/save/place/5115237.png" alt="" style="width:120px; height:120px;"><!-- 아이콘 모양? user프로필? -->
                         </div>
                         <div class="listing__hero__text">
                             <h2><input type="text" id="placeTitle" name="placeTitle" readonly="readonly" placeholder="장소명 : 지도 등록시 자동으로 입력됩니다."></h2>
@@ -249,7 +308,7 @@
                         </div>
  <div class="col-md-12">                       
                         <div class="listing__details__gallery">
-                            <h4>Place Icon</h4>
+                            <h4>플레이스 아이콘</h4>
 							<div class="listing__details__about">
 								<div class="nice-select" style="padding: 0px; width: 0px; width: 0px;">
 								  <select name="placeIconNo" id="placeIconNo" onchange="selectForm(this.options[this.selectedIndex].value)">
@@ -273,72 +332,46 @@
 							
 						<div id="allForms" style="margin-left: 130px">
 										<div style="display: none;">
-											<img src="${pageContext.request.contextPath}/img/placeicon/food1.png" style="width: 120px; height: 120px; background-color: black;">
-											<img src="${pageContext.request.contextPath}/img/placeicon/food2.png" style="width: 120px; height: 120px; background-color: black;">
-											<img src="${pageContext.request.contextPath}/img/placeicon/food3.png" style="width: 120px; height: 120px; background-color: black;">
+											<img src="${pageContext.request.contextPath}/save/place/food1.png" style="width: 120px; height: 120px; background-color: black;">
 										</div>
 										<div style="display: none;">
-											<img src="${pageContext.request.contextPath}/img/placeicon/travel1.png" style="width: 120px; height: 120px; background-color: black;">
-											<img src="${pageContext.request.contextPath}/img/placeicon/travel2.png" style="width: 120px; height: 120px; background-color: black;">
-											<img src="${pageContext.request.contextPath}/img/placeicon/travel3.png" style="width: 120px; height: 120px; background-color: black;">
+											<img src="${pageContext.request.contextPath}/save/place/travel1.png" style="width: 120px; height: 120px; background-color: black;">
 										</div>
 										<div style="display: none;">
-											<img src="${pageContext.request.contextPath}/img/placeicon/cafe1.png" style="width: 120px; height: 120px; background-color: black;">
-											<img src="${pageContext.request.contextPath}/img/placeicon/cafe2.png" style="width: 120px; height: 120px; background-color: black;">
-											<img src="${pageContext.request.contextPath}/img/placeicon/cafe3.png" style="width: 120px; height: 120px; background-color: black;">
+											<img src="${pageContext.request.contextPath}/save/place/cafe1.png" style="width: 120px; height: 120px; background-color: black;">
 										</div>
 										<div style="display: none;">
-											<img src="${pageContext.request.contextPath}/img/placeicon/healing1.png" style="width: 120px; height: 120px; background-color: black;">
-											<img src="${pageContext.request.contextPath}/img/placeicon/healing2.png" style="width: 120px; height: 120px; background-color: black;">
-											<img src="${pageContext.request.contextPath}/img/placeicon/healing3.png" style="width: 120px; height: 120px; background-color: black;">
+											<img src="${pageContext.request.contextPath}/save/place/healing1.png" style="width: 120px; height: 120px; background-color: black;">
 										</div>
 										<div style="display: none;">
-											<img src="${pageContext.request.contextPath}/img/placeicon/nature1.png" style="width: 120px; height: 120px; background-color: black;">
-											<img src="${pageContext.request.contextPath}/img/placeicon/nature2.png" style="width: 120px; height: 120px; background-color: black;">
-											<img src="${pageContext.request.contextPath}/img/placeicon/nature3.png" style="width: 120px; height: 120px; background-color: black;">
+											<img src="${pageContext.request.contextPath}/save/place/nature1.png" style="width: 120px; height: 120px; background-color: black;">
 										</div>
 										<div style="display: none;">
-											<img src="${pageContext.request.contextPath}/img/placeicon/activity1.png" style="width: 120px; height: 120px; background-color: black;">
-											<img src="${pageContext.request.contextPath}/img/placeicon/activity2.png" style="width: 120px; height: 120px; background-color: black;">
-											<img src="${pageContext.request.contextPath}/img/placeicon/activity3.png" style="width: 120px; height: 120px; background-color: black;">
+											<img src="${pageContext.request.contextPath}/save/place/activity1.png" style="width: 120px; height: 120px; background-color: black;">
 										</div>
 										<div style="display: none;">
-											<img src="${pageContext.request.contextPath}/img/placeicon/shopping1.png" style="width: 120px; height: 120px; background-color: black;">
-											<img src="${pageContext.request.contextPath}/img/placeicon/shopping2.png" style="width: 120px; height: 120px; background-color: black;">
-											<img src="${pageContext.request.contextPath}/img/placeicon/shopping3.png" style="width: 120px; height: 120px; background-color: black;">
+											<img src="${pageContext.request.contextPath}/save/place/shopping1.png" style="width: 120px; height: 120px; background-color: black;">
 										</div>
 										<div style="display: none;">
-											<img src="${pageContext.request.contextPath}/img/placeicon/culture1.png" style="width: 120px; height: 120px; background-color: black;">
-											<img src="${pageContext.request.contextPath}/img/placeicon/culture2.png" style="width: 120px; height: 120px; background-color: black;">
-											<img src="${pageContext.request.contextPath}/img/placeicon/culture3.png" style="width: 120px; height: 120px; background-color: black;">
+											<img src="${pageContext.request.contextPath}/save/place/culture1.png" style="width: 120px; height: 120px; background-color: black;">
 										</div>
 										<div style="display: none;">
-											<img src="${pageContext.request.contextPath}/img/placeicon/walking1.png" style="width: 120px; height: 120px; background-color: black;">
-											<img src="${pageContext.request.contextPath}/img/placeicon/walking2.png" style="width: 120px; height: 120px; background-color: black;">
-											<img src="${pageContext.request.contextPath}/img/placeicon/walking3.png" style="width: 120px; height: 120px; background-color: black;">
+											<img src="${pageContext.request.contextPath}/save/place/walking1.png" style="width: 120px; height: 120px; background-color: black;">
 										</div>
 										<div style="display: none;">
-											<img src="${pageContext.request.contextPath}/img/placeicon/night1.png" style="width: 120px; height: 120px; background-color: black;">
-											<img src="${pageContext.request.contextPath}/img/placeicon/night2.png" style="width: 120px; height: 120px; background-color: black;">
-											<img src="${pageContext.request.contextPath}/img/placeicon/night3.png" style="width: 120px; height: 120px; background-color: black;">
+											<img src="${pageContext.request.contextPath}/save/place/night1.png" style="width: 120px; height: 120px; background-color: black;">
 										</div>
 										<div style="display: none;">
-											<img src="${pageContext.request.contextPath}/img/placeicon/attraction1.png" style="width: 120px; height: 120px; background-color: black;">
-											<img src="${pageContext.request.contextPath}/img/placeicon/attraction2.png" style="width: 120px; height: 120px; background-color: black;">
-											<img src="${pageContext.request.contextPath}/img/placeicon/attraction3.png" style="width: 120px; height: 120px; background-color: black;">
+											<img src="${pageContext.request.contextPath}/save/place/attraction1.png" style="width: 120px; height: 120px; background-color: black;">
 										</div>
 										<div style="display: none;">
-											<img src="${pageContext.request.contextPath}/img/placeicon/pet1.png" style="width: 120px; height: 120px; background-color: black;">
-											<img src="${pageContext.request.contextPath}/img/placeicon/pet2.png" style="width: 120px; height: 120px; background-color: black;">
-											<img src="${pageContext.request.contextPath}/img/placeicon/pet3.png" style="width: 120px; height: 120px; background-color: black;">
+											<img src="${pageContext.request.contextPath}/save/place/pet1.png" style="width: 120px; height: 120px; background-color: black;">
 										</div>
 										<div style="display: none;">
-											<img src="${pageContext.request.contextPath}/img/placeicon/date1.png" style="width: 120px; height: 120px; background-color: black;">
-											<img src="${pageContext.request.contextPath}/img/placeicon/date2.png" style="width: 120px; height: 120px; background-color: black;">
+											<img src="${pageContext.request.contextPath}/save/place/date1.png" style="width: 120px; height: 120px; background-color: black;">
 										</div>
 										<div style="display: none;">
-											<img src="${pageContext.request.contextPath}/img/placeicon/drive1.png" style="width: 120px; height: 120px; background-color: black;">
-											<img src="${pageContext.request.contextPath}/img/placeicon/drive2.png" style="width: 120px; height: 120px; background-color: black;">
+											<img src="${pageContext.request.contextPath}/save/place/drive1.png" style="width: 120px; height: 120px; background-color: black;">
 										</div>
 									</div>
 								</div>
@@ -352,54 +385,69 @@
                             <div class="row">
 	                                <div class="col-lg-3 col-md-3 col-6">
 	                                    <div class="listing__details__amenities__item">
-	                                        <p id="tagImg1"><img src="${pageContext.request.contextPath}/img/placeimges/hashtag.png" style="width: 30px; height: 30px;"></p>
+	                                        <p id="tagImg1"><img src="${pageContext.request.contextPath}/save/place/hashtag.png" style="width: 30px; height: 30px;"></p>
 												<h5><input type="text" id="hashTag1" name="hashTag1"></h5>
 	                                    </div>
 	                                </div>
 	                                <div class="col-lg-3 col-md-3 col-6">
 	                                    <div class="listing__details__amenities__item">
-	                                        <p id="tagImg2"><img src="${pageContext.request.contextPath}/img/placeimges/hashtag.png" style="width: 30px; height: 30px;"></p>
+	                                        <p id="tagImg2"><img src="${pageContext.request.contextPath}/save/place/hashtag.png" style="width: 30px; height: 30px;"></p>
 											<h5><input type="text" id="hashTag2" name="hashTag2"></h5>
 	                                    </div>
 	                                </div>
 	                                <div class="col-lg-3 col-md-3 col-6">
 	                                    <div class="listing__details__amenities__item">
-	                                        <p id="tagImg3"><img src="${pageContext.request.contextPath}/img/placeimges/hashtag.png" style="width: 30px; height: 30px;"></p>
+	                                        <p id="tagImg3"><img src="${pageContext.request.contextPath}/save/place/hashtag.png" style="width: 30px; height: 30px;"></p>
 												<h5><input type="text" id="hashTag3" name="hashTag3"></h5>
 	                                    </div>
 	                                </div>
 	                                <div class="col-lg-3 col-md-3 col-6">
 	                                    <div class="listing__details__amenities__item">
-	                                        <p id="tagImg4"><img src="${pageContext.request.contextPath}/img/placeimges/hashtag.png" style="width: 30px; height: 30px;"></p>
+	                                        <p id="tagImg4"><img src="${pageContext.request.contextPath}/save/place/hashtag.png" style="width: 30px; height: 30px;"></p>
 												<h5><input type="text" id="hashTag4" name="hashTag4"></h5>
 	                                    </div>
 	                                </div>
 	                                <div class="col-lg-3 col-md-3 col-6">
 	                                    <div class="listing__details__amenities__item">
-	                                        <p id="tagImg5"><img src="${pageContext.request.contextPath}/img/placeimges/hashtag.png" style="width: 30px; height: 30px;"></p>
+	                                        <p id="tagImg5"><img src="${pageContext.request.contextPath}/save/place/hashtag.png" style="width: 30px; height: 30px;"></p>
 												<h5><input type="text" id="hashTag5" name="hashTag5"></h5>
 	                                    </div>
 	                                </div>
 	                                <div class="col-lg-3 col-md-3 col-6">
 	                                    <div class="listing__details__amenities__item">
-	                                        <p id="tagImg6"><img src="${pageContext.request.contextPath}/img/placeimges/hashtag.png" style="width: 30px; height: 30px;"></p>
+	                                        <p id="tagImg6"><img src="${pageContext.request.contextPath}/save/place/hashtag.png" style="width: 30px; height: 30px;"></p>
 												<h5><input type="text" id="hashTag6" name="hashTag6"></h5>
 	                                    </div>
 	                                </div>
 	                                <div class="col-lg-3 col-md-3 col-6">
 	                                    <div class="listing__details__amenities__item">
-	                                        <p id="tagImg7"><img src="${pageContext.request.contextPath}/img/placeimges/hashtag.png" style="width: 30px; height: 30px;"></p>
+	                                        <p id="tagImg7"><img src="${pageContext.request.contextPath}/save/place/hashtag.png" style="width: 30px; height: 30px;"></p>
 												<h5><input type="text" id="hashTag7" name="hashTag7"></h5>
 	                                    </div>
 	                                </div>
 	                                <div class="col-lg-3 col-md-3 col-6">
 	                                    <div class="listing__details__amenities__item">
-	                                        <p id="tagImg8"><img src="${pageContext.request.contextPath}/img/placeimges/hashtag.png" style="width: 30px; height: 30px;"></p>
+	                                        <p id="tagImg8"><img src="${pageContext.request.contextPath}/save/place/hashtag.png" style="width: 30px; height: 30px;"></p>
 												<h5><input type="text" id="hashTag8" name="hashTag8"></h5>
 	                                    </div>
 	                                </div>
                             </div>
                         </div>
+ <!-- 여기에 security Role 추가해서 넣어야 하나...??? -->                       
+                        <div class="row">
+	                    	<div class="col-lg-12">
+		                    	<div class="listing__details__amenities">
+		                    		<h4>Influencer 만의 특별한 혜택!!</h4>
+			                    		<h5>Hidden Place 지정</h5>
+			                    		security Role 에 하나 추가해서 influencer 만 보여질수 있도록
+			                    		히든플레이스에 대한 설명 아주 희귀한 곳만...
+			                    		<br><input type='checkbox' name="placeHidden" id="${memNo}" value='1'  style="width: 20px; height: 20px;"/>
+		                    		<div id="placeHiddenChecked" name="placeHiddenChecked">
+		                    		</div>
+		                    	</div>
+	                    	</div>
+                    	</div>
+  <!-- 여기에 security Role 추가해서 넣어야 하나...??? -->               	
                     	<div class="row">
 	                    	<div class="col-lg-12">
 		                    	<div class="listing__details__amenities">

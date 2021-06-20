@@ -2,11 +2,19 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt"%>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
 
 <!DOCTYPE html>
 <html lang="zxx">
 
 <head>
+
+<!-- memNo 변수설정 -->
+<sec:authorize access="isAuthenticated()">
+<sec:authentication property="principal.memNo" var="mno" />
+</sec:authorize>
+
 <style type="text/css">
 	table {
 		width: 45em;
@@ -89,101 +97,78 @@
      
     
     <jsp:useBean id="now" class="java.util.Date" />
-    <fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="today" />  
-    <h3 style="font-weight: bold">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TODAY : <c:out value="${today}"/> </h3>&nbsp;
+   
+    
     
         <div class="container">
             <div class="row">
                 <div class="col-lg-8">
                     <div class="row">
+                    
+                    
                     <div align="center">
                     
-                    <h3 style="font-weight: bold">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;테마지도</h3>&nbsp;
+                    
+                    
+                    <h3 style="font-weight: bold">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;포인트 적립내역</h3>&nbsp;
                     
 
                     <table style="text-align: center;">
                     
                     	<thead>
                     	<tr>
-						<th>No.</th><th>내용</th><th>적립</th>
+						<th>No.</th><th>내용</th><th>날짜</th><th>포인트</th>
 						</tr>
 						</thead>
 						<tbody>
-						<c:forEach items="${requestScope.myThemeList}" var="myTheme" varStatus="status">
+						<c:forEach items="${requestScope.mySavingList}" var="mySaving" varStatus="status">
 						
-						<fmt:parseDate value="${myTheme.mapRegdate}" pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime" type="both"/>
-						
-						<fmt:formatDate value="${parsedDateTime}" pattern="yyyy-MM-dd" var="writeDate"/>
 
 						<tr>
 						
-						<c:if test="${today == writeDate }">
+						
 							<td>${status.count}</td>
-							<td>&nbsp;${myTheme.mapTitle}</td>
-							<td><button id="plus"> 적립 </button></td>
+							<td>&nbsp;${mySaving.shWhere}</td>
+							<td>
+							 <fmt:parseDate value="${mySaving.shWhen}" pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime" type="both"/>        
+	                         <fmt:formatDate value="${parsedDateTime}" pattern="yyyy.MM.dd"/>
+							</td>
+							<td>+ ${mySaving.shPay}</td>
 
-							</c:if>
+							
 						</tr>				
 						</c:forEach>
 						</tbody>
                     </table>
                     
                     
-                    <hr>
-                    <br>
-                    <h3 style="font-weight: bold">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;플레이스</h3>&nbsp;
-                    <br>
-                    <table style="text-align: center;">
                    
-                    	<thead>
-                    	<tr>
-						<th>No.</th><th>내용</th><th>적립</th>
-						</tr>
-						</thead>
-						<tbody>
-						<c:forEach items="${requestScope.myPlaceList}" var="myPlace" varStatus="status">
-						
-						<fmt:parseDate value="${myPlace.placeRegdate}" pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime2" type="both"/>
-						
-						<fmt:formatDate value="${parsedDateTime2}" pattern="yyyy-MM-dd" var="writeDate2"/>
-
-						<tr>
-						<c:if test="${today == writeDate2 }">
-							<td>${status.count}</td>
-							<td>&nbsp;${myPlace.placeTitle}</td>
-							<td><button id="plus"> 적립 </button></td>
-
-							</c:if>
-						</tr>				
-						</c:forEach>
-						</tbody>
-                    </table>
                     
                     <hr>
                     <br>
-                    <h3 style="font-weight: bold">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;포토후기</h3>&nbsp;
+                    <h3 style="font-weight: bold">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;포인트 사용내역</h3>&nbsp;
                     <br>
                     <table style="text-align: center;">
                    
                     	<thead>
                     	<tr>
-						<th>No.</th><th>내용</th><th>적립</th>
+						<th>No.</th><th>내용</th><th>날짜</th><th>포인트</th>
 						</tr>
 						</thead>
 						<tbody>
-						<c:forEach items="${requestScope.myPhotoReviewList}" var="myReview" varStatus="status">
+						<c:forEach items="${requestScope.myUsingList}" var="myUsing" varStatus="status">
 						
-						<fmt:parseDate value="${myReview.pprRegdate}" pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime3" type="both"/>
-						
-						<fmt:formatDate value="${parsedDateTime3}" pattern="yyyy-MM-dd" var="writeDate3"/>
-
 						<tr>
-						<c:if test="${today == writeDate3 }">
+						
 							<td>${status.count}</td>
-							<td>&nbsp;${myReview.place.placeTitle} 에 대한 포토리뷰</td>
-							<td><button id="plus"> 적립 </button></td>
+							<td>&nbsp;${myUsing.uhWhere}</td>
+							<td>
+							<fmt:parseDate value="${myUsing.uhWhen}" pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime" type="both"/>        
+	                         <fmt:formatDate value="${parsedDateTime}" pattern="yyyy.MM.dd"/>
+							</td>
+							<td>- ${myUsing.uhPay}</td>
 
-							</c:if>
+						
 						</tr>				
 						</c:forEach>
 						</tbody>
@@ -199,37 +184,32 @@
                 
                 
                  <div class="col-lg-4">
-                    <!-- <div class="blog__sidebar">
-                        
-                        
-                        <div class="blog__sidebar__categories" style =" width : 250px; text-align: center;">
-                            <h4>Categories</h4>&nbsp;
-                            <ul style="font-size: 25px;">
-                                <li><a href="#">전체</a></li>
-                                <c:forEach items="${requestScope.categoryList}" var="cate">
-                                <li><a href="/coupon/list/?cetegory=${cate.cpcaNo}">${cate.cpcaName}<span></span></a></li>
-                                </c:forEach>
-                                
-                            </ul>
+                 
+         
+                 
+                 
+                    <div class="blog__sidebar">
+                    	<div class="blog__sidebar__categories" style =" width : 250px; text-align: center;">
+                            <h3><i class="fa fa-money">&nbsp;&nbsp;</i>총 포인트</h3><hr>
+                            <h5>: ${myPoint.myPoint} P </h5>
                         </div>
+                    	
+
+                  
                         
                         <div class="blog__sidebar__categories" style =" width : 250px; text-align: center;">
-                            <h4>My Point</h4>&nbsp;
+                            <h3>Menu</h3><hr>
                             
-                            <h4><i class="fa fa-money"></i> </h4>
-                            <ul>
-                        		
-                                <c:forEach items="${requestScope.myPointList}" var="myPo">
-                                <li>${myPo.myptRem}<span></span></li>
-                                </c:forEach>
-
-
-                                
-                                
+                            
+                            <ul style="font-size: 25px;">
+                                <li><a href="/point/myPoint"><h5>My Point</h5></a></li>
+                                <li><a href="/point/myPointHistory"><h5>My Point History</h5></a></li> 
                             </ul>
                         </div>
+                        
+                    
                        
-                    </div> -->
+                    </div> 
                 </div>
             </div>
         </div>

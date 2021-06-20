@@ -14,21 +14,25 @@
 		$(document).on('click', '.site-btn', function() {
 			
 			$.ajax({
-				url:"${pageContext.request.contextPath}/couponAjax/issue",
-				type:"get",
-				dataType:"json",
-				data: {"couponNoStr" : $(this).attr('name')},
-				success: function(data){
-					if(data == -1){
-	                    alert("발급 오류","error","확인",function(){});
-	                } else if(data==1){
-						alert("발급 완료")
-					} 
-				},
-				error : function(err) {
-					console.log(err + "에러 발생");
-				}
-			});
+				if(confirm("발급하시겠습니까?") == true){
+					url:"${pageContext.request.contextPath}/couponAjax/issue",
+					type:"get",
+					dataType:"json",
+					data: {"couponNoStr" : $(this).attr('name')},
+					success: function(data){
+						if(data == -1){
+		                    alert("발급 오류","error","확인",function(){});
+		                } else if(data==1){
+							alert("발급 완료")
+						} 
+					},
+					error : function(err) {
+						console.log(err + "에러 발생");
+					}
+				});
+			}else{
+				return;
+			}
 		});//클릭function 끝
 	});//script 끝
 </script>

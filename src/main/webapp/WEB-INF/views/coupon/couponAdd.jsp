@@ -109,8 +109,10 @@
 	                        				<li>
 											사진 업로드 : <input type="file" name="file"/>                 				
 	                        				</li>
-	                 		    			<li>		
-	                 		    			카테고리 : 
+	                 		    			<div style="text-align: center; margin-bottom: 10px;">카테고리 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-circle-fill" viewBox="0 0 16 16" style="color: #F03250;">
+  <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V4.5z"/>
+</svg></div>
+	                 		    			<div class="nice-select" style="margin-left: 280px">
 	                 		    			<select class="form-control" name="cpcaNo" id="cpcaNo" size="8" required="required" style="display: inline-block; text-align: right; margin-left: 500px;">
 			                 					<option selected="selected">선택</option>
 			                 					<option value="1">카페</option>
@@ -121,7 +123,8 @@
 			                 					<option value="6">스포츠</option>
 			                 					<option value="7">미용</option>
 	                 				       </select> 
-	                 				       </li> <br><br>
+	                 				       </div>
+	                 				       <br><br>
 		                 			<li>
 	                 				<input type="hidden" name="cpNo" value="1"/>
 	                 				</li>

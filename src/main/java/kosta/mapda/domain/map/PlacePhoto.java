@@ -30,8 +30,8 @@ public class PlacePhoto {	//Place_Photo
 	private List<MultipartFile> files;
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PP_PPNo_seq")
-	@SequenceGenerator(sequenceName = "PP_PPNo_seq", allocationSize = 1, name = "PP_PPNo_seq")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "pp_ppno_seq")
+	@SequenceGenerator(sequenceName = "pp_ppno_seq", allocationSize = 1, name = "pp_ppno_seq")
 	private Long ppNo;
 	private String ppPath;
 	

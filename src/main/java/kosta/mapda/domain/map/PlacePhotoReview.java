@@ -44,6 +44,7 @@ public class PlacePhotoReview {	// Place_Photo_Review
 	
 	private int pprStar;
 	private int pprStatus;
+	private int pprPoint; ////포인트 적립여부 //적립한 상태 : 1 미적립상태 :0
 	
 	@ManyToOne
 	@JoinColumn(name = "place_no")

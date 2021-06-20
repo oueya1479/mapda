@@ -35,7 +35,6 @@ public class MyPoint {
 	private Long memNo;
 	private int myPoint;
 	
-	
 	@OneToOne
 	@JoinColumn(name = "mem_no")
 	private Member member;
@@ -43,8 +42,10 @@ public class MyPoint {
 	@OneToMany(mappedBy = "myPoint")
 	private List<MyPoint> myPointList;
 	
+	@OneToMany(mappedBy = "myPoint")
+	private List<SavingHistory> savingHistoryList;
 	
-	
-	
+	@OneToMany(mappedBy = "myPoint")
+	private List<UsingHistory> usingHistoryList; 
 
 }

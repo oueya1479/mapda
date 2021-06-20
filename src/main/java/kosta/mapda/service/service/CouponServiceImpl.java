@@ -1,10 +1,9 @@
 package kosta.mapda.service.service;
 
 import java.io.File;
-import java.util.List;
-import java.util.Random;
 
-import javax.servlet.ServletContext;
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 
@@ -20,6 +19,7 @@ import kosta.mapda.domain.service.MyCoupon;
 import kosta.mapda.repository.CouponCategoryRepository;
 import kosta.mapda.repository.CouponRepository;
 import kosta.mapda.repository.MyCouponRepository;
+import kosta.mapda.repository.enterprise.EnterpriseRepository;
 import kosta.mapda.repository.member.MemberRepository;
 //import net.sourceforge.barbecue.Barcode;
 //import net.sourceforge.barbecue.BarcodeFactory;
@@ -40,6 +40,9 @@ public class CouponServiceImpl implements CouponService {
 	
 	@Autowired
 	private MemberRepository memberRepository;
+	
+	@Autowired
+	private EnterpriseRepository enterpriseRepository;
 	
 	@Override
 	public Page<Coupon> selectAll(Pageable pageable, String couponName, Long category) {
@@ -97,11 +100,19 @@ public class CouponServiceImpl implements CouponService {
 	 * 발급상태 변경하는 ajax 메소드
 	 */
 	@Override
-	public int stop(Long cpNo) {
-//		return couponRepository.stop(cpNo);
-		return 0;
+	public void stop(Long cpNo) {
+//		couponRepository.deleteById(cpNo);
+		Coupon dbCoupon = couponRepository.findById(cpNo).orElse(null);
+		if(dbCoupon.getCpState()==1) {
+			dbCoupon.setCpState(0);
+		} else {
+			dbCoupon.setCpState(1);
+		}
+		
+		couponRepository.save(dbCoupon);
 	}
 
+	
 	@Override
 	public Page<Coupon> selectByCategory(Pageable pageable, Long category) {
 		
@@ -174,12 +185,12 @@ public class CouponServiceImpl implements CouponService {
 			  BarcodeImageHandler.savePNG(barcode, file);
 			  
 			  MyCoupon mc = new MyCoupon();
-				//mc.setMycpNo(null);
+				
 				mc.setBarcoNo("1234");
 				mc.setMember(memberRepository.findById(memNo).orElse(null));
 				mc.setMycpState(1);
 				mc.setBarcoImgPath(couponNum);
-				//mc.setMycpDate(null);
+				
 				mc.setCoupon(coupon);
 				
 				myCouponRepository.save(mc);
@@ -190,20 +201,36 @@ public class CouponServiceImpl implements CouponService {
 				  e.printStackTrace();
 		}*/
 		
-		
-		
-		
 	}
 	
-	public Coupon updateCoupon(Coupon coupon) {
+	public void updateCoupon(Coupon coupon) {
+		Coupon dbCoupon = couponRepository.findById(coupon.getCpNo()).orElse(null);
+		Long cpcaNo = coupon.getCouponCategory().getCpcaNo();
+		CouponCategory dbCate = couponCategoryRepository.findById(cpcaNo).orElse(null);
+		Long memNo = coupon.getMember().getMemNo();
+		Enterprise dbEnter = enterpriseRepository.findById(memNo).orElse(null);
 		
-		return couponRepository.save(coupon); 
+		dbCoupon.setCouponCategory(dbCate);
+		dbCoupon.setMember(dbEnter);
+		dbCoupon.setCpImgpath(coupon.getCpImgpath());
+		dbCoupon.setCpName(coupon.getCpName());
+		dbCoupon.setCpPlace(coupon.getCpPlace());
+		dbCoupon.setCpPrice(coupon.getCpPrice());
+		dbCoupon.setCpDetail(coupon.getCpDetail());
+		dbCoupon.setCpUsingdetail(coupon.getCpUsingdetail());
+		couponRepository.save(dbCoupon);
+		
 	}
 	
 	@Override
 	public CouponCategory getCouponCategory(Long cpcaNo) {
 		
+		
 		return couponCategoryRepository.findById(cpcaNo).orElse(null);
+		
 	}
+	
+
+	
 	
 }

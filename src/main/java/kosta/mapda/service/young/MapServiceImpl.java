@@ -184,6 +184,13 @@ public class MapServiceImpl implements MapService {
 	@Override
 	public Member getMember(Long memNo) {
 		return memberRepository.findById(memNo).orElse(null);
+  }
+	/**
+	 * 조회수 별 지도 출력
+	 */
+	@Override
+	public List<Theme> mainList() {
+		return maprepository.selectByRead();
 	}
 
 

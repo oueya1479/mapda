@@ -1,6 +1,7 @@
 package kosta.mapda.service.admin;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -43,5 +44,23 @@ public interface AdminService {
 	Page<PlaceReview> getReview(Pageable pageable);
 
 	Page<EnterpriseReply> getEnterpriseReply(Pageable pageable);
+
+	Long getMemberCount();
+
+	List<Integer> getMemberCountList();
+
+	void levelUp(Long memNo);
+
+	void levelDown(Long memNo);
+
+	void cancelRpay(Long memNo);
+
+	Place getOnePlace(Long placeNo);
+
+	void updatePlace(Place place);
+	
+	List<Integer> getPostCountList();
+
+	List<Integer> getReplyCountList();
 
 }
