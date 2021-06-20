@@ -65,4 +65,10 @@ public interface EventService {
 	void deleteLike(EventPost eventPost, Member member);
 	
 	int checkLike(EventPost eventPost ,Member member);
+	
+	/**
+	 *  이벤트 끝났을 때 보이지 않게 하기 
+	 */
+	
+	List<Event> findAllByEventStatus(); 
 }

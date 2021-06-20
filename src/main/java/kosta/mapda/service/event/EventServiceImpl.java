@@ -45,7 +45,6 @@ public class EventServiceImpl implements EventService {
 
 	@Override
 	public Page<Event> selectAll(Pageable pageable) {
-	
 		return eventRepository.findAll(pageable);
 	}
 
@@ -115,6 +114,14 @@ public class EventServiceImpl implements EventService {
 		return result;
 	}
 
+	
+	@Override
+	public List<Event> findAllByEventStatus() {
+		//return  eventRepository.findAllByEventStatus();
+		return null;
+	}
+
+	
 
 	
 }
