@@ -134,6 +134,11 @@ public class PlaceServiceImpl implements PlaceService {
 	public List<PlaceStorage> selectByMemPlace(Long memNo) {
 		return placeStorageRepository.selectByMemPlace(memNo);
 	}
+	
+	@Override
+	public Page<PlaceStorage> selectAllPagePS(Long memNo, Pageable pageable) {
+		return placeStorageRepository.selectByMemPage(memNo, pageable);
+	}
 
 	@Override
 	public PlaceStorage likeCheck(Long placeNo, Long memNo) {

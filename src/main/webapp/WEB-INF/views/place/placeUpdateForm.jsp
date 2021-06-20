@@ -51,9 +51,6 @@
  	
  	function selectForm(frm){
 		theForm = document.getElementById("allForms").getElementsByTagName("div");
-	//	alert(theForm);
-		//console.log(theForm);
-		//console.log(theForm[3].style.display);
 		for(x=0; x<theForm.length; x++){
 			theForm[x].style.display = "none";
 		}
@@ -66,6 +63,13 @@
  		console.log("fileUploadAction");
  		$("#file").trigger('click');
  	}
+ 	
+	function deleteImageAction(index){
+		sel_files.splice(index, 1);
+		
+		var img_id = "#img_id_" + index;
+		$(img_id).remove();
+	}
  	
  	function handleImgFileSelect(e){
  		sel_files = [];

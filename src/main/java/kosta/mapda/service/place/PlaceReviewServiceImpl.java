@@ -100,6 +100,11 @@ public class PlaceReviewServiceImpl implements PlaceReviewService {
 		dbPpr.setPprContent(placePhotoReview.getPprContent().replace("<", "&lt;"));
 		return dbPpr;
 	}
+
+//	@Override
+//	public Page<PlaceReview> pageSelectAllpr(Pageable pageable) {
+//		return prRepository.findAll(pageable);
+//	}
 	
 	// 사용 안됨
 //	@Override

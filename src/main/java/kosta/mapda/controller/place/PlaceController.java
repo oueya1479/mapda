@@ -12,11 +12,16 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -49,20 +54,42 @@ public class PlaceController {
 	 * 		상세보기
 	 * */
 	@RequestMapping("/read/{placeNo}")
-	public ModelAndView read(@PathVariable Long placeNo) {
+	public ModelAndView read(@PathVariable Long placeNo, HttpServletResponse response) {
 		int starAvg=0;
 		int starAvgPer=0;
 		
 		// hidden place 인지 확인
 		Member mem = (Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		System.out.println("mem.getMemId() =  " + mem.getMemId());
 		System.out.println("mem.getMemPaystatus() = " + mem.getMemPaystatus());
-
 		
 		Place place = placeService.selectBy(placeNo);
+		System.out.println("place.getPlaceHidden() = " +place.getPlaceHidden());
 		
+		/**
+		 * 		mem.getMemPaystatus()
+		 * 		유료회원 (1)	// 무료회원 (0)
+		 * 
+		 * 		place.getPlaceHidden()
+		 * 		히든플레이스(1) // 일반게시물 (0)
+		 * 
+		 * 		==> 유료회원은 모두 접근가능 1-> 0 (가능) / 1->1 (가능) 
+		 * 		==> 무료회원읜 히든플레이스 접근 불가 / 일반게시물 접근가능 0->1(불가능) / 0->0(가능)     따라서 무료회원(0) / 
+		 * */
 		if(mem.getMemPaystatus()==0 && place.getPlaceHidden()==1) {
 			throw new RuntimeException("히든플레이스의 경우, 결제회원만 접근 가능합니다!");
+		}else if(mem.getMemPaystatus()==1 && place.getPlaceHidden()==1) {
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out;
+			try {
+				out = response.getWriter();
+				out.println("<script>");
+				out.println("if(!confirm('포인트를 사용하시겠습니까?'))");
+				out.println("history.back();");
+				out.println("</script>");
+				out.flush();
+			}catch(IOException e) {
+				e.printStackTrace();
+			}
 		}
 		
 		List<PlacePhoto> ppList = placeService.selectAllPlacePhoto(placeNo);
@@ -185,8 +212,6 @@ public class PlaceController {
 		prService.prInsert(placePhotoReview , pprpList);//부모
 		
 		//prService.insertPprPhoto(pprpList);
-		
-		
 		
 		return "redirect:/place/read/"+placeNo;
 	}
@@ -391,8 +416,30 @@ public class PlaceController {
 		Member mem = (Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		Long memNo = mem.getMemNo();
 		List<PlaceStorage> psList = placeService.selectByMemPlace(memNo);
+		if(psList==null) {
+			throw new RuntimeException("좋아요 하신 Place 가 없습니다! 추가해주세요");
+		}
+		
 		String memId = psList.get(0).getMember().getMemId();
 		model.addAttribute("psList", psList);
 		model.addAttribute("memId", memId);
 	}
+	
+	/**
+	 * 		좋아요(구독한) 플레이스 목록 페이징 처리
+	 * */
+	@RequestMapping("/likePlace")
+	public void likePlace(Model model, @RequestParam(defaultValue = "0") int nowPage) {
+		Member mem = (Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Long memNo = mem.getMemNo();
+		Pageable pageable = PageRequest.of(nowPage, 4, Direction.DESC,"placeStorageRegdate");
+		Page<PlaceStorage> pageList = placeService.selectAllPagePS(memNo, pageable);
+		String memId = pageList.getContent().get(0).getMember().getMemId();
+	//	 List<PlaceStorage> psList= pageList.getContent();
+		model.addAttribute("psList", pageList);
+		model.addAttribute("memId", memId);
+	}
+	
+	
+	
 }

@@ -80,8 +80,7 @@
        				  dataType: "json", //서버가 보내오는 데이터타입(응답 - text ,html, xml, json)
        				 // data:{placeNo:1} , //서버에게 보낼 parameter정보
        				  success: function(result){ //item 데이터 ==> ["name":값, subject:값, ... ,customer:{id:값, name:값....}]
-       				  			//console.log(result);
-           				  		var str="";
+            				  		var str="";
            				  	if(result==""){
       				  			str+="<p>등록된 댓글이 없습니다.</p>";
       				  		}else{
@@ -319,18 +318,11 @@
                                     </div>
                                     <span class="right"></span>
                                 </div> 
-                                	<table border="1">
-                                	<tr>
-                                		<td></td>
-                                		<td></td>
-                                		<td></td>
-                                	</tr>
+                                	<table>
                                 <c:forEach items="${pprList}" var="pp">
                                 	<tr>
                                 	<c:forEach items="${pp.pprpList}" var="ppp">
-											<td style="color: black;">
 												 <img src="${pageContext.request.contextPath}/save/place/${ppp.pprpPath}" style="width: 50px; height: 50px;">
-											</td>
 									</c:forEach>
 									</tr>
 									</c:forEach>

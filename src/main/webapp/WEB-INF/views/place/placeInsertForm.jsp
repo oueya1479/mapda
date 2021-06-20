@@ -144,6 +144,13 @@
  		$("#file").trigger('click');
  	}
  	
+	function deleteImageAction(index){
+			sel_files.splice(index, 1);
+			
+			var img_id = "#img_id_" + index;
+			$(img_id).remove();
+		}
+ 	
  	function handleImgFileSelect(e){
  		sel_files = [];
  		$(".imgs_wrap").empty();
@@ -180,6 +187,8 @@
  			f.resultAddress.focus();
  			return false;
  		}
+ 		
+
  		
  		
  		if(f.placeAddr.value==""){

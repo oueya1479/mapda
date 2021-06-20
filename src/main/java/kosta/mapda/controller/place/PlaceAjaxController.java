@@ -4,6 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort.Direction;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -97,5 +102,12 @@ public class PlaceAjaxController {
 
 		return resultCode;
 	}
+	
+//	@RequestMapping("/pagingReply/{placeNo}")
+//	public void replyList(Model model, @RequestParam(defaultValue = "0") int nowPage, @PathVariable Long placeNo) {
+//		Pageable pageable = PageRequest.of(nowPage, 5, Direction.DESC, "prRegdate");
+//		Page<PlaceReview> pageReplyList = prService.pageSelectAllpr(pageable);
+//		model.addAttribute("pageList", pageReplyList);
+//	}
 	
 }
