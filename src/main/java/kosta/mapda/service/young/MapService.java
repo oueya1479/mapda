@@ -85,6 +85,8 @@ public interface MapService {
 	 * 키워드로 + 카테고리 검색
 	 */
 	List<Theme> selectByKeyAndCategory(String keyWord, Long categoryNo);
+
+	Member getMember(Long memNo);
 	
 
 }

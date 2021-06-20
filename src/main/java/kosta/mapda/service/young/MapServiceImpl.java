@@ -181,6 +181,11 @@ public class MapServiceImpl implements MapService {
 		return maprepository.selectByKeyAndCategory(keyWord,categoryNo);
 	}
 
+	@Override
+	public Member getMember(Long memNo) {
+		return memberRepository.findById(memNo).orElse(null);
+	}
+
 
 
 }

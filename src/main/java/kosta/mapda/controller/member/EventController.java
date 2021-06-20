@@ -21,7 +21,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import kosta.mapda.domain.member.Member;
 import kosta.mapda.domain.service.Event;
+import kosta.mapda.domain.service.EventLike;
 import kosta.mapda.domain.service.EventPost;
+import kosta.mapda.repository.member.LikesRepository;
 import kosta.mapda.service.event.EventService;
 
 
@@ -160,6 +162,7 @@ public class EventController {
 	/**
 	 * postListing 으로 이동
 	 */
+	
 	@RequestMapping("/postingList/{evNo}")
 	public String postingList(Model model, @RequestParam(defaultValue="0") int nowPage, @PathVariable Long evNo) {
 		Pageable pageable = PageRequest.of(nowPage, 10, Direction.DESC, "evpNo");
@@ -168,6 +171,7 @@ public class EventController {
 		
 		Member mem = (Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		//현재 로그인한 멤버의 정보 가져오기 
+		
 		
 		//postinglist로 가기 전에 . memNo
 		model.addAttribute("memNo", mem.getMemNo());   
@@ -182,12 +186,18 @@ public class EventController {
 	
 	
 	/**
-	 * 좋아요
+	 * 상세페이지로 이동 (개별게시물) 
 	 */
-	/*
-	 * @ExceptionHandler(RuntimeException.class)
-	public ModelAndView error(RuntimeException e) {
-		return new ModelAndView("error/errorView", "errMsg", e.getMessage());
-		*/
+	
+	@RequestMapping("/detail/{evpNo}")
+	public String detail(Model model, @PathVariable Long evpNo) {
+		EventPost eventPost = eventService.getEventPost(evpNo);
+		model.addAttribute("eventPost", eventPost);
+		Member mem = (Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		int result = eventService.checkLike(eventPost, mem);
+		model.addAttribute("curLike", result);
+		return "event/detail";
+	}
+
 	
 }

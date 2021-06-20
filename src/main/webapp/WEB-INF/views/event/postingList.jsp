@@ -7,45 +7,10 @@
 
 <head>
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery-3.3.1.min.js">  </script>
-<script>
-$(function() {
-	let curLike = '${requestScope.like}';
-	let total = Number('${goods.gdLike}');
+<script type="text/javascript"
+	src="${pageContext.request.contextPath }/js/jquery-3.3.1.min.js">
 	
-	let loading = "<img src='img/bean.gif' style='width: 40px'>";
-	
-	$(document).on('click', '#like-button',function() {
-		let str = '';
-		console.log(curLike);
-		$("#likey").html(loading);
-		$.ajax({
-			url : '${pageContext.request.contextPath}/event/isLike',
-			method : 'get',
-			data : {
-				evpNo : '${}',
-				isLike: curLike
-			},
-			success : function(value) {
-				console.log(value);
-				if(value === "1") {
-					total += 1;
-					str += "<a class='icon_btn' id='like-button'><i class='fas fa-heart' style='color: red'></i></a>";
-					str += "<span id='like-total'>" + total + "<span>";
-					$("#likey").html(str);
-				} else {
-					total -= 1;
-					str += "<a class='icon_btn' id='like-button'><i class='lnr lnr lnr-heart'></i></a>";
-					str += "<span id='like-total'>" + total + "<span>";
-					$("#likey").html(str);
-				}
-				curLike = value;
-			},
-			fail : function() {
-				console.log(item);
-			}
-		});
-	});
+</script>
 </script>
 
 <meta charset="utf-8">
@@ -164,10 +129,7 @@ $(function() {
 			<div class="row">
 				<div class="col-lg-8 offset-lg-2">
 					<!-- START: Filter -->
-					<div class="nk-pagination nk-pagination-nobg nk-pagination-center">
-						<a href="#nk-toggle-filter"> <span class="nk-icon-squares"></span>
-						</a>
-					</div>
+					
 
 					<!-- END: Filter -->
 
@@ -187,17 +149,17 @@ $(function() {
 
 
 
-
+					
 						<!-- START: Post -->
 						<c:forEach items="${eventPostList.content}" var="post">
 							<div class="nk-isotope-item" data-filter="Nature">
-								<div class="nk-blog-post">
+				
+								<div class="nk-blog-post" style="padding :50px">
 									<div class="nk-post-thumb">
-										<a
-											href="${pageContext.request.contextPath}/event/singlePosting/${post.evpNo}">
+									<!-- 	<a
+											href="${pageContext.request.contextPath}/event/detail/${post.evpNo}">
 											<img src="${post.evpImg}" alt="" class="nk-img-stretch">
-										</a>
-
+										</a>  -->
 										<!-- 
 									<div class="nk-post-category">
 										<a href="#">후기 이벤트 참여</a>
@@ -205,7 +167,7 @@ $(function() {
 									-->
 									</div>
 									<h2 class="nk-post-title h4">
-										<a href="blog-single.html">${post.evpTitle}</a>
+										<a href="/event/detail/${post.evpNo}">${post.evpTitle}</a>
 									</h2>
 
 									<div class="nk-post-date">${post.evpRegdate}</div>
@@ -241,18 +203,11 @@ $(function() {
 									<div class="list__posting__text__info">
 										<div class="list__post__text__info__left">
 											<p style="text-align: right;">
-												<div class="card_area d-flex align-items-center" id="likey">
-							<c:choose>
-								<c:when test="${requestScope.like eq '0'}">
-									<button class="icon_btn" id="like-button"  name="${post.evpNo}"><i class="lnr lnr lnr-heart"></i></button>
-									<span id="like-total">1</span>
-								</c:when>
-								<c:otherwise>
-									<button class="icon_btn" id="like-button"><i class="fas fa-heart" style="color: red"></i></button>
-									<span id="like-total">1</span>
-								</c:otherwise>
-							</c:choose>
-						</div>
+											<div style="float: right;" class="card_area d-flex align-items-center" id="likey">
+												<a class="icon_btn" id="like-button"><i
+													class="fas fa-heart" style="color: red; width: 25px; height: 25px"></i></a> <span
+													id="like-total" style="font-size: 20px"> &nbsp; ${post.evpLikes}</span>
+											</div>
 										</div>
 
 									</div>
@@ -274,11 +229,6 @@ $(function() {
 
 		</div>
 
-		<!-- START: Pagination -->
-		<div class="nk-pagination nk-pagination-center">
-			<a href="#">Load More Posts</a>
-		</div>
-		<!-- END: Pagination -->
 
 
 

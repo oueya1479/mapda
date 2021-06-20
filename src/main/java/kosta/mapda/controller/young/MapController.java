@@ -42,11 +42,25 @@ public class MapController {
 
 	/**
 	 * 테마지도 등록 폼
+	 * -> 정기결제 payStatus 1 or 0 
 	 */
 	@RequestMapping("/insertForm")
-	public void insertForm() {
+	public String insertForm() {
+		Member mem = (Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Member member = mapService.getMember(mem.getMemNo());
+		System.out.println("@@@@@@@@@@");
+		System.out.println(member.getMemNo());
+		System.out.println(member.getMapList());
+		if(member.getMemPaystatus()==1) {
+			return "map/insertForm"; 
+		}else if(member.getMapList().size() >= 3) {
+			return "member/pay";
+		}else {
+			return "map/insertForm"; 
+		}
 		
 	}
+	
 	/**
 	 * 테마지도 등록하기
 	 */

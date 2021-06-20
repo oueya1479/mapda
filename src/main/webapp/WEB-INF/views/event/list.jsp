@@ -17,7 +17,7 @@ $(function(){
 	            	location.href='${pageContext.request.contextPath}/event/posting/'+evNo;
 	            },
 	            error: function(err) {
-	            	alert("이미 참가하셨습니다.");
+	            	alert("이미 참여하셨습니다.");
 	            }
 	        })
 	});

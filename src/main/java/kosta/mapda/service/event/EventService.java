@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import kosta.mapda.domain.member.Member;
 import kosta.mapda.domain.service.Event;
 import kosta.mapda.domain.service.EventPost;
 
@@ -55,6 +56,13 @@ public interface EventService {
 
 	void deletePost(Long evpNo);
 
+	EventPost getEventPost(Long evpNo);
+
+	void increaseLikes(Long evpNo);
 	
+	void decreaseLikes(Long evpNo);
 	
+	void deleteLike(EventPost eventPost, Member member);
+	
+	int checkLike(EventPost eventPost ,Member member);
 }
