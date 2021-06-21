@@ -78,12 +78,17 @@ public class PlaceReviewServiceImpl implements PlaceReviewService {
 	public void prDelete(Long id) {
 		//pprpRepository.deletePprp(id);
 		PlacePhotoReview ppr =pprRepository.findById(id).orElse(null);
-		LocalDateTime validRegdate =ppr.getPprRegdate().plusDays(30);
-		LocalDateTime nowRegdate = ppr.getPprRegdate();
-		if(nowRegdate.isBefore(validRegdate)) {//nowRegdate <validRegdate
-			throw new RuntimeException("30일 이후에 삭제가 가능합니다.");
-		}else {
+		
+		LocalDateTime regDate =ppr.getPprRegdate(); //등록일
+		
+		LocalDateTime plusRegDate = ppr.getPprRegdate().plusDays(30);
+		
+		LocalDateTime nowDate = LocalDateTime.now();
+		
+		if(plusRegDate.isBefore(nowDate)) {//nowRegdate <validRegdate
 			pprRepository.deleteById(id);	
+		}else {
+			throw new RuntimeException("30일 이후에 삭제가 가능합니다.");
 		}
 	}
 
