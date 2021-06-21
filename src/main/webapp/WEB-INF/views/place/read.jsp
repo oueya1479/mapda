@@ -61,7 +61,7 @@ h2{font-family: 'Nanum Myeongjo', serif; font-weight: bold;}
       				  		str+="<p> 별점 : <span class='icon_star'></span><span class='icon_star'></span><span class='icon_star'></span><span class='icon_star'></span><span class='icon_star'></span></p>";
       				  		}
       				  			for(var j=0; j<result[i].pathList.length; j++){
-      				  				str+="<img src='${pageContext.request.contextPath}/save/place/"+result[i].pathList[j].pprpPath+"' style='width: 200px; height: 200px;'>";
+      				  				str+="<img src='${pageContext.request.contextPath}/resources/"+result[i].pathList[j].pprpPath+"' style='width: 200px; height: 200px;'>";
       				  			};
       				  		str+="<ul>";
       				  		str+=" <li><i class='fa fa-ellipsis-h'></i><i class='fa fa-ellipsis-h'></i><i class='fa fa-ellipsis-h'></i><i class='fa fa-ellipsis-h'></i></li>";
@@ -187,7 +187,7 @@ h2{font-family: 'Nanum Myeongjo', serif; font-weight: bold;}
                 <div class="col-lg-8">
                     <div class="listing__hero__option">
                         <div class="listing__hero__icon">
-                            <img src="${pageContext.request.contextPath}/save/place/${place.placeIconPath}" style="width: 150px; height: 150px;" ><!-- 아이콘 모양? user프로필? -->
+                            <img src="${pageContext.request.contextPath}/resources/${place.placeIconPath}" style="width: 150px; height: 150px;" ><!-- 아이콘 모양? user프로필? -->
                         </div>
                         <div class="listing__hero__text">
                             <h2>${requestScope.place.placeTitle}</h2>
@@ -263,7 +263,7 @@ h2{font-family: 'Nanum Myeongjo', serif; font-weight: bold;}
                             <!-- ============================================================ -->
 						<div class="w3-content w3-display-container">
 								<c:forEach items="${ppList}" var="ppList">
-								  	 <img class="mySlides" src="${pageContext.request.contextPath}/save/place/${ppList.ppPath}" style="height: 400px; width: 100%;">
+								  	 <img class="mySlides" src="${pageContext.request.contextPath}/resources/${ppList.ppPath}" style="height: 400px; width: 100%;">
 								  </c:forEach>
 								 <button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
 							 	 <button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">&#10095;</button>
@@ -298,7 +298,7 @@ h2{font-family: 'Nanum Myeongjo', serif; font-weight: bold;}
                             	<c:forEach items="${tagStr}" var="tagStr">
 	                                <div class="col-lg-3 col-md-3 col-6">
 	                                    <div class="listing__details__amenities__item">
-	                                        <img src="${pageContext.request.contextPath}/img/placeimges/hashtag.png" style="width: 30px; height: 30px;">
+	                                        <img src="${pageContext.request.contextPath}/resources/hashtag.png" style="width: 30px; height: 30px;">
 	                                        <h6 style="font-weight: bolder; font-size: 20px;">${tagStr}</h6>
 	                                    </div>
 	                                </div>
@@ -328,7 +328,7 @@ h2{font-family: 'Nanum Myeongjo', serif; font-weight: bold;}
                                 <c:forEach items="${pprList}" var="pp">
                                 	<tr>
                                 	<c:forEach items="${pp.pprpList}" var="ppp">
-												 <img src="${pageContext.request.contextPath}/save/place/${ppp.pprpPath}" style="width: 50px; height: 50px;">
+												 <img src="${pageContext.request.contextPath}/resources/${ppp.pprpPath}" style="width: 50px; height: 50px;">
 									</c:forEach>
 									</tr>
 									</c:forEach>
@@ -343,7 +343,7 @@ h2{font-family: 'Nanum Myeongjo', serif; font-weight: bold;}
                         	<a href="javascript:;" class="btn" id="photoReview" style="text-decoration: none; color: black;">PhotoReview</a>
                         	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;
-                        	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <sec:authorize access="isAuthenticated()">
 	<sec:authentication property="principal.memId" var="memId"/>
                         	 <a href="${pageContext.request.contextPath}/place/myReplyReview/placeNo=${placeNo}&memId=${memId}" 

@@ -198,7 +198,7 @@ public class PlaceController {
 		List<PlacePhotoReviewPhoto> pprpList = new ArrayList<PlacePhotoReviewPhoto>();
 		
 		ServletContext application = session.getServletContext();
-		String path = application.getRealPath("/WEB-INF/save");
+		String path = application.getRealPath("/resources");	//src=pageContext / resources/파일 이름
 		for(MultipartFile mf : fileList) {
 			if(mf.getSize()>0) {
 				PlacePhotoReviewPhoto photo = new PlacePhotoReviewPhoto();
@@ -301,7 +301,7 @@ public class PlaceController {
 		List<PlacePhoto> photoList = new ArrayList<PlacePhoto>();
 		
 		ServletContext application = session.getServletContext();
-		String path = application.getRealPath("/WEB-INF/save");
+		String path = application.getRealPath("/resources");
 		
 		for(MultipartFile mf : fileList) {
 			if(mf.getSize()>0) {
@@ -384,7 +384,7 @@ public class PlaceController {
 		List<PlacePhoto> photoList = new ArrayList<PlacePhoto>();
 		
 		ServletContext application = session.getServletContext();
-		String path = application.getRealPath("/WEB-INF/save");
+		String path = application.getRealPath("/resources");
 		
 		for(MultipartFile mf : fileList) {
 			if(mf.getSize()>0) {

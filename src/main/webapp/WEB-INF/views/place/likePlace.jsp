@@ -88,8 +88,8 @@ h2{font-family: 'Nanum Myeongjo', serif; font-weight: bold;}
 							<div class="listing__details__gallery__pic">
 								<div class="listing__details__gallery__slider owl-carousel">
 									<c:forEach var="ppList" items="${storage.place.ppList}">
-									<img data-imgbigurl="${pageContext.request.contextPath}/save/place/${ppList.ppPath}"
-									src="${pageContext.request.contextPath}/save/place/${ppList.ppPath}" style="width: 300px; height: 200px;">
+									<img data-imgbigurl="${pageContext.request.contextPath}/resources/${ppList.ppPath}"
+									src="${pageContext.request.contextPath}/resources/${ppList.ppPath}" style="width: 300px; height: 200px;">
 									</c:forEach>
 								</div>
 							</div>

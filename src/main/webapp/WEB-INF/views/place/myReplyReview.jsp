@@ -149,7 +149,7 @@ h2{font-family: 'Nanum Myeongjo', serif; font-weight: bold;}
 		                                    <p>${pprList.member.memName}</p>
 		                                    <h6>${pprList.pprContent}</h6>
 			                                    <c:forEach items="${pprList.pprpList}" var="pprpList">
-	      				  							<img src="${pageContext.request.contextPath}/save/place/${pprpList.pprpPath}" style="width: 200px; height: 200px;">
+	      				  							<img src="${pageContext.request.contextPath}/resources/${pprpList.pprpPath}" style="width: 200px; height: 200px;">
 	      				  						</c:forEach>
 		                                    <ul>
 		                                        <li><i class="fa fa-pencil" aria-hidden="true"></i>
