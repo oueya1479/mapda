@@ -7,21 +7,18 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
-import kosta.mapda.domain.map.MapStorage;
 import kosta.mapda.domain.map.PlaceReview;
 import kosta.mapda.domain.map.Theme;
 import kosta.mapda.domain.member.Member;
-import kosta.mapda.domain.member.MemberRole;
 import kosta.mapda.domain.service.MyPoint;
+import kosta.mapda.repository.MyPointRepository;
 //import kosta.mapda.domain.member.MemberRole;
 import kosta.mapda.repository.member.MemberRepository;
 import kosta.mapda.repository.place.PlaceReviewRepository;
 import kosta.mapda.repository.young.MapRepository;
-import kosta.mapda.service.service.PointService;
 
 @Service
 @Transactional
@@ -38,7 +35,7 @@ public class MemberServiceImpl implements MemberService {
 	
 	//마이포인트 테이블 생성
 	@Autowired
-	private PointService pointService;
+	private MyPointRepository myPointRepository;
 	
 	/*
 	 * 비밀번호 암호화를 위한 객체를 주입받는다
@@ -78,6 +75,14 @@ public class MemberServiceImpl implements MemberService {
 		String encodedPassword = passwordEncoder.encode(member.getMemPw());
 		member.setMemPw(encodedPassword);
 		Member m = memRepository.save(member);
+		
+		MyPoint mp = new MyPoint();
+		mp.setMyPoint(0);
+		mp.setMember(m);
+		
+		//System.out.println("mem_no=" + m.getMemNo());
+		
+		myPointRepository.save(mp);
 		
 		// 권한등록
 		/*

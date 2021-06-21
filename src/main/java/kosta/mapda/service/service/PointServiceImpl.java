@@ -79,13 +79,13 @@ public class PointServiceImpl implements PointService {
 
 	@Override
 	public void pointSum(int savePoint, int usePoint, Long memNo) {
-		int myPoint = savePoint - usePoint;
-		
-		MyPoint mp = new MyPoint();
-		mp.setMemNo(memNo);
-		mp.setMyPoint(myPoint);
-		
-		myPointRepository.save(mp);
+//		int myPoint = savePoint - usePoint;
+//		
+//		MyPoint mp = new MyPoint();
+//		mp.setMemNo(memNo);
+//		mp.setMyPoint(myPoint);
+//		
+//		myPointRepository.save(mp);
 		
 	}
 
@@ -122,9 +122,9 @@ public class PointServiceImpl implements PointService {
 		
 		mp.setMyPoint(0);
 		
-		//mp.setMember(member);
+		mp.setMember(member);
 		
-		mp.setMemNo(member.getMemNo());
+		//mp.setMemNo(member.getMemNo());
 		
 		System.out.println(member.getMemNo());
 		

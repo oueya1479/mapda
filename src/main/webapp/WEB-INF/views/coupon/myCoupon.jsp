@@ -115,7 +115,7 @@ $(document).mouseup(function (e){
 							<c:when test="${empty requestScope.myCouponList.content}">
 								
 								<p align="center">
-									<b><span style="font-size: 9pt;">등록된 상품이 없습니다.</span></b>
+									<b><span style="font-size: 9pt;">등록된 나의 쿠폰이 없습니다.</span></b>
 								</p>
 							</c:when>
 							<c:otherwise>
