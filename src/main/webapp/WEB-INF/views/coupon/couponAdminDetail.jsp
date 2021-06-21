@@ -82,7 +82,7 @@
                            
                            		<h5><i class="fa fa-sliders" aria-hidden="true"></i>&nbsp;<span>카테고리 : </span> ${coupon.couponCategory.cpcaName}</h5>  
                             
-                                <hr><button type="button" class="site-btn" style="background-color:#3498DB" id="updateBtn" onclick="update(${coupon.cpNo});">수정</button>
+                                <%-- <hr><button type="button" class="site-btn" style="background-color:#3498DB" id="updateBtn" onclick="update(${coupon.cpNo});">수정</button> --%>
                                 	&nbsp;&nbsp;&nbsp;
                         </div>
                     </div>
