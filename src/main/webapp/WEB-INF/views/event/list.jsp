@@ -132,7 +132,7 @@ $(function(){
 									<c:when test="${event.evStatus eq '1'}"> 
 									<button  id ="participate" value="${event.evNo}" type="submit" style="border-color: #bbbbff; color: #4444ff">참여하기</button>
 									</c:when>
-									<c:otherwise>
+									<c:otherwise test != "${event.evStatus eq '1'}">
 										<button  id ="participate" disabled="disabled" value="${event.evNo}" type="submit" style="border-color: #bbbbff; color: #4444ff">참여불가</button>
 									</c:otherwise>
 									</c:choose>
@@ -161,9 +161,8 @@ $(function(){
 								alt="Image" class="w-50 mx-auto img-fluid rounded-circle">
 						</div>
 						<div class="">
-							<h3 class="font-weight-light h5">Megan Smith</h3>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-								Et, iusto. Aliquam illo, cum sed ea? Ducimus quos, ea?</p>
+							<h3 class="font-weight-light h5">스미스</h3>
+							<p>(베스트포토) 경복궁에 다녀왔어요~ 미국에는 이런 문화를 찾아볼 수 없는데 너무 좋은여행하고갑니다.</p>
 						</div>
 					</div>
 
@@ -174,9 +173,8 @@ $(function(){
 								alt="Image" class="w-50 mx-auto img-fluid rounded-circle">
 						</div>
 						<div class="">
-							<h3 class="font-weight-light h5">Brooke Cagle</h3>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-								Et, iusto. Aliquam illo, cum sed ea? Ducimus quos, ea?</p>
+							<h3 class="font-weight-light h5">메건 리 </h3>
+							<p>(베스트후기)성수동에 카멜커피 다녀왔습니다. 카페 내부 분위기가 포근하고 좋더라구요. 앙버터 어우 .. 기가 막혀요 !! 버터가 느끼하지 않고 고소하게 너무 맛있었고 커피도 고소하고 뒤집어집니다 </p>
 						</div>
 					</div>
 
@@ -187,9 +185,8 @@ $(function(){
 								alt="Image" class="w-50 mx-auto img-fluid rounded-circle">
 						</div>
 						<div class="">
-							<h3 class="font-weight-light h5">Philip Martin</h3>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-								Et, iusto. Aliquam illo, cum sed ea? Ducimus quos, ea?</p>
+							<h3 class="font-weight-light h5">필립 마틴</h3>
+							<p>deu di eo wa ba sseo yo. Hong-dae e neun jae mi it neun geot deul yi mana yo. student do mana yo! jeul geo wo sseo yo! ddo ol lae yo!</p>
 						</div>
 					</div>
 

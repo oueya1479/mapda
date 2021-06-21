@@ -3,7 +3,20 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+<style>
+@import url('https://fonts.googleapis.com/css?family=Nanum+Myeongjo&display=swap');
+
+
+h2{font-family: 'Nanum Myeongjo', serif; font-weight: bold;}
+
+
+</style>
+
 <script>
+
+
+}
 	$(function() {
 		$(document).on("click", "#iamport", function(event) { //버튼을 클릭 했을시 popupOpen 함수 출력 
 			popupOpen();
@@ -21,6 +34,7 @@
 	
 	})
 </script>
+
 <style type="text/css">
 #mu-pricing {
 	background-color: #f8f8f8;
