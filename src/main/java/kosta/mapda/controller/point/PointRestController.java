@@ -67,16 +67,14 @@ public class PointRestController {
 		
 		LocalDateTime startDatetime = LocalDateTime.of(LocalDate.now(), LocalTime.of(0,0,0));
 		LocalDateTime endDatetime = LocalDateTime.of(LocalDate.now(),  LocalTime.of(23,59,59));
-		if(myPointRepository.findBymember_memNo(mem.getMemNo()) == null) {
-			pointService.createMyPoint(mem);
-		}
+		
 		
 		try {
 			
 			
-			
-			
 		if(className.equals("theme")) {
+			
+			
 			
 			int count = mrepository.getInfoBetween(mem.getMemNo(), startDatetime, endDatetime);
 			if(count >= 3) {
@@ -101,6 +99,7 @@ public class PointRestController {
 			
 		}else if(className.equals("place")) {
 			
+			
 			int count = prepository.getInfoBetween(mem.getMemNo(), startDatetime, endDatetime);
 			if(count >= 3) {
 				throw new Exception("각 게시물의 적립은 3번만 가능합니다.");
@@ -124,6 +123,8 @@ public class PointRestController {
 			
 			resultCode = 1;
 		}else{
+			System.out.println(myPointRepository.findBymember_memNo(mem.getMemNo()));
+			
 			
 			int count = rrepository.getInfoBetween(mem.getMemNo(), startDatetime, endDatetime);
 			if(count >= 3) {

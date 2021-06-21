@@ -10,6 +10,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
@@ -59,6 +60,8 @@ public class Member implements UserDetails{
 	@CreationTimestamp
 	private LocalDateTime memRegdate;
 	
+	
+	
 	@OneToMany(mappedBy = "mapNo", fetch = FetchType.EAGER)
 	private List<Theme> mapList;
 	
@@ -76,6 +79,9 @@ public class Member implements UserDetails{
 	
 	@OneToMany(mappedBy="member")
 	private List<PlaceStorage> placeStorageList;
+	
+	@OneToOne(mappedBy = "member")
+	private MyPoint myPoint;
 	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -133,8 +139,7 @@ public class Member implements UserDetails{
 		// TODO Auto-generated method stub
 		return false;
 	}
-	@OneToOne(mappedBy = "member")
-	private MyPoint myPoint;
+	
 	
 	public Member(Long memNo) {
 		this.memNo = memNo;
