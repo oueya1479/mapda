@@ -9,8 +9,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import kosta.mapda.domain.member.Member;
 import kosta.mapda.domain.service.Coupon;
+import kosta.mapda.domain.service.MyPoint;
+import kosta.mapda.domain.service.UsingHistory;
 import kosta.mapda.repository.MyCouponRepository;
+import kosta.mapda.repository.MyPointRepository;
 import kosta.mapda.service.service.CouponService;
+import kosta.mapda.service.service.PointService;
 
 /**
  * 비동기화 통신용 controller
@@ -23,7 +27,13 @@ public class CouponRestController {
 	private CouponService couponservice;
 	
 	@Autowired
+	private PointService pointService;
+	
+	@Autowired
 	private MyCouponRepository myCouponRepository;
+	
+	@Autowired
+	private MyPointRepository myPointRepository;
 	
 	/**
 	 * 해당 쿠폰번호에 해당하는 쿠폰 발급상태 변경하기
@@ -43,13 +53,30 @@ public class CouponRestController {
 		Long cpNo = Long.parseLong(couponNoStr);
 		
 		Member mem = (Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		MyPoint mp = myPointRepository.findBymember_memNo(mem.getMemNo());
+		Coupon coupon = couponservice.selectCoupon(cpNo);
+		
+		System.out.println(coupon.getCpPrice());
+		System.out.println("//////");
+		System.out.println(mp.getMyPoint());
 		
 		int resultCode = 1;
 		try {//발급완료
+			if(mp.getMyPoint() >= coupon.getCpPrice()) {
+		
+			UsingHistory uh = new UsingHistory();
+			uh.setUhPay(coupon.getCpPrice());
+			uh.setUhWhere(coupon.getCpName());
+			uh.setMyPoint(mp);
+			pointService.pointMinus(uh);
 			
-			Coupon coupon = couponservice.selectCoupon(cpNo);
+			pointService.updateMyPoint(mem.getMemNo(), -coupon.getCpPrice());
+				
 			couponservice.insertMyCoupon(coupon, mem.getMemNo(), session);
 			resultCode = 1;
+			}else {
+				resultCode= -1;
+			}
 		}catch(Exception e){//발급실패
 			System.out.println(e.getMessage());
 			resultCode= -1;

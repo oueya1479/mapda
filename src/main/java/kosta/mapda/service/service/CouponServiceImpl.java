@@ -1,7 +1,7 @@
 package kosta.mapda.service.service;
 
 import java.io.File;
-
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -11,8 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import kosta.mapda.domain.enterprise.Enterprise;
+import kosta.mapda.domain.enterprise.EnterprisePostImage;
 import kosta.mapda.domain.service.Coupon;
 import kosta.mapda.domain.service.CouponCategory;
 import kosta.mapda.domain.service.MyCoupon;
@@ -145,22 +147,18 @@ public class CouponServiceImpl implements CouponService {
 	
 	@Override
 	public void insertCoupon(Coupon coupon) {
-		Enterprise member = new Enterprise();
-		member.setMemNo(1L);
-		coupon.setMember(member);
-		
-		Coupon dbCoupon = new Coupon(); 	
-		
-		dbCoupon = couponRepository.save(coupon);
-		
+//		Enterprise member = new Enterprise();
+//		member.setMemNo(1L);
+//		coupon.setMember(member);
+		couponRepository.save(coupon);
 	}
 
 	@Override
 	public void insertMyCoupon(Coupon coupon, Long memNo, HttpSession session) {
 		
 		
-		/*try {
-			int couponSize = 16;
+		try {
+			/*int couponSize = 16;
 			final char[] possibleCharacters =
 			    {'1','2','3','4','5','6','7','8','9','0'};
 			  
@@ -183,23 +181,24 @@ public class CouponServiceImpl implements CouponService {
 			  File file = new File("c:/barcode1.png");
 			  
 			  BarcodeImageHandler.savePNG(barcode, file);
+			  */
+			
 			  
 			  MyCoupon mc = new MyCoupon();
 				
-				mc.setBarcoNo("1234");
-				mc.setMember(memberRepository.findById(memNo).orElse(null));
+				//mc.setBarcoNo("1234");
+				mc.setMember(memberRepository.findBymemNo(memNo));
 				mc.setMycpState(1);
-				mc.setBarcoImgPath(couponNum);
+				mc.setBarcoImgPath("https://cdn.epnc.co.kr/news/photo/201905/90484_80504_5553.jpg");
 				
 				mc.setCoupon(coupon);
 				
 				myCouponRepository.save(mc);
 			  
-			  }
 			  
 			  }catch(Exception e) {
 				  e.printStackTrace();
-		}*/
+		}
 		
 	}
 	

@@ -6,6 +6,15 @@
 
 <head>
  <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/star-rating-svg.css">
+ 
+ <style>
+@import url('https://fonts.googleapis.com/css?family=Nanum+Myeongjo&display=swap');
+
+
+h2{font-family: 'Nanum Myeongjo', serif; font-weight: bold;}
+
+
+</style>
 </head>
 <script type="text/javascript">
 $(function(){

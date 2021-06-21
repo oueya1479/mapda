@@ -192,7 +192,7 @@ $(function(){
 							<div class="listing__item__text__info__left">
 								<a href=""><img
 									src="${pageContext.request.contextPath}/img/map/heart.png"
-									style="height: 20px; width: 20px;""> </a><span>${nohidden.placeLike}</span>
+									style="height: 20px; width: 20px;""> </a><span></span>
 
 							</div>
 							<div class="listing__item__text__info__right closed">
@@ -290,6 +290,7 @@ $(function(){
 								center : new kakao.maps.LatLng( 37.52057532965539,
 										127.02430963130959), // 지도의 중심좌표
 								level : 8
+								
 							// 지도의 확대 레벨
 							};
 
@@ -299,11 +300,30 @@ $(function(){
 							// 마커를 표시할 위치와 내용을 가지고 있는 객체 배열입니다 
 							var positions = [
 									{
-										content : '<div>${place.placeTitle}</div>',
+										content : '<div>버터북</div>',
 										latlng : new kakao.maps.LatLng(
-												${place.placeLatitude}, ${place.placeLongitude})
-									}
-									];
+												37.544129137044, 126.985706102883 )
+									},
+									{
+										content : '<div>레이어드 연남점</div>',
+										latlng : new kakao.maps.LatLng(
+												 37.5649763702769,  126.924182307844 )
+									},
+									{
+										content : '<div>카멜 성수점</div>',
+										latlng : new kakao.maps.LatLng(
+												37.5372403433519, 127.055894041178  )
+									},
+									{
+										content : '<div>빅토리아 베이커리</div>',
+										latlng : new kakao.maps.LatLng(
+												37.5469485457655, 127.040629148252)
+									},
+									{
+										content : '<div>선데이아보</div>',
+										latlng : new kakao.maps.LatLng(
+												37.541606859531136, 126.99098854006806)
+									}];
 
 							for (var i = 0; i < positions.length; i++) {
 								// 마커를 생성합니다

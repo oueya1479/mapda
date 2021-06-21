@@ -116,15 +116,17 @@ public class PointServiceImpl implements PointService {
 	}
 
 	@Override
-	public void createMyPoint(Long memNo) {
+	public void createMyPoint(Member member) {
 		
 		MyPoint mp = new MyPoint();
 		
 		mp.setMyPoint(0);
 		
-		mp.setMember(memberRepository.findBymemNo(memNo));
+		//mp.setMember(member);
 		
-		System.out.println(memNo);
+		mp.setMemNo(member.getMemNo());
+		
+		System.out.println(member.getMemNo());
 		
 		myPointRepository.save(mp);
 		

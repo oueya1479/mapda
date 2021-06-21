@@ -63,4 +63,8 @@ public interface AdminService {
 
 	List<Integer> getReplyCountList();
 
+	Long getPostCount();
+
+	Long getReplyCount();
+
 }

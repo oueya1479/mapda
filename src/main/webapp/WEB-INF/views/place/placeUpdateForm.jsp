@@ -19,6 +19,11 @@
 	color: white;
 }
 
+@import url('https://fonts.googleapis.com/css?family=Nanum+Myeongjo&display=swap');
+
+
+h2{font-family: 'Nanum Myeongjo', serif; font-weight: bold;}
+
 </style>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=dedf9592b51a78be2b5d3ec39a2a2199&libraries=services"></script>
 <script type="text/javascript">
@@ -191,7 +196,7 @@
 								<textarea id="placeContent" name="placeContent" style="width: 500px; height: 163px" value="${place.placeContent}"></textarea>
                         </div>
 	                    <div class="listing__details__gallery">
-	                            <h4>장소의 사진을 넣어 주세요 !</h4>
+	                            <h4>장소의 사진을 변경해 주세요 !</h4>
 							<div class="w3-content w3-display-container">
 									<input multiple="multiple" type="file" name="files" id="file"/><p>
 									<div class="imgs_wrap">
@@ -290,243 +295,54 @@
                         <div class="listing__details__amenities">
                             <h4>HashTag를 수정해 주세요!</h4>
                             <div class="row">
-                            <c:choose>
-                            <c:when test="${tagStrLen eq 1}">
-                            <c:forEach items="${tagStr}" var="tagStr">
-			      							<div class="col-lg-3 col-md-3 col-6">
+                          	  <div class="col-lg-3 col-md-3 col-6">
 			                                    <div class="listing__details__amenities__item">
 			                                        <p id="tagImg1"><img src="${pageContext.request.contextPath}/save/place/hashtag.png" style="width: 30px; height: 30px;"></p>
-														<h5><input type="text" id="hashTag1" name="hashTag1" value="${tagStr}"></h5>
+														<h5><input type="text" id="hashTag1" name="hashTag1" value="${tagStr[0]}"></h5>
 			                                    </div>
 			                                </div>
-			      				   </c:forEach>
-			      				   <div class="col-lg-3 col-md-3 col-6">
+			                                 <div class="col-lg-3 col-md-3 col-6">
 			                                    <div class="listing__details__amenities__item">
 			                                        <p id="tagImg1"><img src="${pageContext.request.contextPath}/save/place/hashtag.png" style="width: 30px; height: 30px;"></p>
-														<h5><input type="text" id="hashTag1" name="hashTag1" value=""></h5>
+														<h5><input type="text" id="hashTag2" name="hashTag2" value="${tagStr[1]}"></h5>
 			                                    </div>
 			                                </div>
-			                                <div class="col-lg-3 col-md-3 col-6">
+			                                 <div class="col-lg-3 col-md-3 col-6">
 			                                    <div class="listing__details__amenities__item">
 			                                        <p id="tagImg1"><img src="${pageContext.request.contextPath}/save/place/hashtag.png" style="width: 30px; height: 30px;"></p>
-														<h5><input type="text" id="hashTag1" name="hashTag1" value=""></h5>
+														<h5><input type="text" id="hashTag3" name="hashTag3" value="${tagStr[2]}"></h5>
 			                                    </div>
 			                                </div>
-			                                <div class="col-lg-3 col-md-3 col-6">
+			                                 <div class="col-lg-3 col-md-3 col-6">
 			                                    <div class="listing__details__amenities__item">
 			                                        <p id="tagImg1"><img src="${pageContext.request.contextPath}/save/place/hashtag.png" style="width: 30px; height: 30px;"></p>
-														<h5><input type="text" id="hashTag1" name="hashTag1" value=""></h5>
+														<h5><input type="text" id="hashTag4" name="hashTag4" value="${tagStr[3]}"></h5>
 			                                    </div>
 			                                </div>
-			                                <div class="col-lg-3 col-md-3 col-6">
+			                                 <div class="col-lg-3 col-md-3 col-6">
 			                                    <div class="listing__details__amenities__item">
 			                                        <p id="tagImg1"><img src="${pageContext.request.contextPath}/save/place/hashtag.png" style="width: 30px; height: 30px;"></p>
-														<h5><input type="text" id="hashTag1" name="hashTag1" value=""></h5>
+														<h5><input type="text" id="hashTag5" name="hashTag5" value="${tagStr[4]}"></h5>
 			                                    </div>
 			                                </div>
-			                                <div class="col-lg-3 col-md-3 col-6">
+			                                 <div class="col-lg-3 col-md-3 col-6">
 			                                    <div class="listing__details__amenities__item">
 			                                        <p id="tagImg1"><img src="${pageContext.request.contextPath}/save/place/hashtag.png" style="width: 30px; height: 30px;"></p>
-														<h5><input type="text" id="hashTag1" name="hashTag1" value=""></h5>
+														<h5><input type="text" id="hashTag6" name="hashTag6" value="${tagStr[5]}"></h5>
 			                                    </div>
 			                                </div>
-			                                <div class="col-lg-3 col-md-3 col-6">
+			                                 <div class="col-lg-3 col-md-3 col-6">
 			                                    <div class="listing__details__amenities__item">
 			                                        <p id="tagImg1"><img src="${pageContext.request.contextPath}/save/place/hashtag.png" style="width: 30px; height: 30px;"></p>
-														<h5><input type="text" id="hashTag1" name="hashTag1" value=""></h5>
+														<h5><input type="text" id="hashTag7" name="hashTag7" value="${tagStr[6]}"></h5>
 			                                    </div>
 			                                </div>
-			                                <div class="col-lg-3 col-md-3 col-6">
+			                                 <div class="col-lg-3 col-md-3 col-6">
 			                                    <div class="listing__details__amenities__item">
 			                                        <p id="tagImg1"><img src="${pageContext.request.contextPath}/save/place/hashtag.png" style="width: 30px; height: 30px;"></p>
-														<h5><input type="text" id="hashTag1" name="hashTag1" value=""></h5>
+														<h5><input type="text" id="hashTag8" name="hashTag8" value="${tagStr[7]}"></h5>
 			                                    </div>
 			                                </div>
-                            	</c:when>
-                            	<c:when test="${tagStrLen eq 2}">
-                            	<c:forEach items="${tagStr}" var="tagStr">
-			      							<div class="col-lg-3 col-md-3 col-6">
-			                                    <div class="listing__details__amenities__item">
-			                                        <p id="tagImg1"><img src="${pageContext.request.contextPath}/save/place/hashtag.png" style="width: 30px; height: 30px;"></p>
-														<h5><input type="text" id="hashTag1" name="hashTag1" value="${tagStr}"></h5>
-			                                    </div>
-			                                </div>
-			      				   </c:forEach>
-			      				   <div class="col-lg-3 col-md-3 col-6">
-			                                    <div class="listing__details__amenities__item">
-			                                        <p id="tagImg1"><img src="${pageContext.request.contextPath}/save/place/hashtag.png" style="width: 30px; height: 30px;"></p>
-														<h5><input type="text" id="hashTag1" name="hashTag1" value=""></h5>
-			                                    </div>
-			                                </div>
-			                                <div class="col-lg-3 col-md-3 col-6">
-			                                    <div class="listing__details__amenities__item">
-			                                        <p id="tagImg1"><img src="${pageContext.request.contextPath}/save/place/hashtag.png" style="width: 30px; height: 30px;"></p>
-														<h5><input type="text" id="hashTag1" name="hashTag1" value=""></h5>
-			                                    </div>
-			                                </div>
-			                                <div class="col-lg-3 col-md-3 col-6">
-			                                    <div class="listing__details__amenities__item">
-			                                        <p id="tagImg1"><img src="${pageContext.request.contextPath}/save/place/hashtag.png" style="width: 30px; height: 30px;"></p>
-														<h5><input type="text" id="hashTag1" name="hashTag1" value=""></h5>
-			                                    </div>
-			                                </div>
-			                                <div class="col-lg-3 col-md-3 col-6">
-			                                    <div class="listing__details__amenities__item">
-			                                        <p id="tagImg1"><img src="${pageContext.request.contextPath}/save/place/hashtag.png" style="width: 30px; height: 30px;"></p>
-														<h5><input type="text" id="hashTag1" name="hashTag1" value=""></h5>
-			                                    </div>
-			                                </div>
-			                                <div class="col-lg-3 col-md-3 col-6">
-			                                    <div class="listing__details__amenities__item">
-			                                        <p id="tagImg1"><img src="${pageContext.request.contextPath}/save/place/hashtag.png" style="width: 30px; height: 30px;"></p>
-														<h5><input type="text" id="hashTag1" name="hashTag1" value=""></h5>
-			                                    </div>
-			                                </div>
-			                                <div class="col-lg-3 col-md-3 col-6">
-			                                    <div class="listing__details__amenities__item">
-			                                        <p id="tagImg1"><img src="${pageContext.request.contextPath}/save/place/hashtag.png" style="width: 30px; height: 30px;"></p>
-														<h5><input type="text" id="hashTag1" name="hashTag1" value=""></h5>
-			                                    </div>
-			                                </div>
-                       			     </c:when>
-                        			    <c:when test="${tagStrLen eq 3}">
-                       			     <c:forEach items="${tagStr}" var="tagStr">
-			      							<div class="col-lg-3 col-md-3 col-6">
-			                                    <div class="listing__details__amenities__item">
-			                                        <p id="tagImg1"><img src="${pageContext.request.contextPath}/save/place/hashtag.png" style="width: 30px; height: 30px;"></p>
-														<h5><input type="text" id="hashTag1" name="hashTag1" value="${tagStr}"></h5>
-			                                    </div>
-			                                </div>
-			      				   </c:forEach>
-			      				   <div class="col-lg-3 col-md-3 col-6">
-			                                    <div class="listing__details__amenities__item">
-			                                        <p id="tagImg1"><img src="${pageContext.request.contextPath}/save/place/hashtag.png" style="width: 30px; height: 30px;"></p>
-														<h5><input type="text" id="hashTag1" name="hashTag1" value=""></h5>
-			                                    </div>
-			                                </div>
-			                                <div class="col-lg-3 col-md-3 col-6">
-			                                    <div class="listing__details__amenities__item">
-			                                        <p id="tagImg1"><img src="${pageContext.request.contextPath}/save/place/hashtag.png" style="width: 30px; height: 30px;"></p>
-														<h5><input type="text" id="hashTag1" name="hashTag1" value=""></h5>
-			                                    </div>
-			                                </div>
-			                                <div class="col-lg-3 col-md-3 col-6">
-			                                    <div class="listing__details__amenities__item">
-			                                        <p id="tagImg1"><img src="${pageContext.request.contextPath}/save/place/hashtag.png" style="width: 30px; height: 30px;"></p>
-														<h5><input type="text" id="hashTag1" name="hashTag1" value=""></h5>
-			                                    </div>
-			                                </div>
-			                                <div class="col-lg-3 col-md-3 col-6">
-			                                    <div class="listing__details__amenities__item">
-			                                        <p id="tagImg1"><img src="${pageContext.request.contextPath}/save/place/hashtag.png" style="width: 30px; height: 30px;"></p>
-														<h5><input type="text" id="hashTag1" name="hashTag1" value=""></h5>
-			                                    </div>
-			                                </div>
-			                                <div class="col-lg-3 col-md-3 col-6">
-			                                    <div class="listing__details__amenities__item">
-			                                        <p id="tagImg1"><img src="${pageContext.request.contextPath}/save/place/hashtag.png" style="width: 30px; height: 30px;"></p>
-														<h5><input type="text" id="hashTag1" name="hashTag1" value=""></h5>
-			                                    </div>
-			                                </div>
-                   			      </c:when>
-                   			       <c:when test="${tagStrLen eq 4}">
-               			        	<c:forEach items="${tagStr}" var="tagStr">
-			      							<div class="col-lg-3 col-md-3 col-6">
-			                                    <div class="listing__details__amenities__item">
-			                                        <p id="tagImg1"><img src="${pageContext.request.contextPath}/save/place/hashtag.png" style="width: 30px; height: 30px;"></p>
-														<h5><input type="text" id="hashTag1" name="hashTag1" value="${tagStr}"></h5>
-			                                    </div>
-			                                </div>
-			      				   </c:forEach>
-			      				   <div class="col-lg-3 col-md-3 col-6">
-			                                    <div class="listing__details__amenities__item">
-			                                        <p id="tagImg1"><img src="${pageContext.request.contextPath}/save/place/hashtag.png" style="width: 30px; height: 30px;"></p>
-														<h5><input type="text" id="hashTag1" name="hashTag1" value=""></h5>
-			                                    </div>
-			                                </div><div class="col-lg-3 col-md-3 col-6">
-			                                    <div class="listing__details__amenities__item">
-			                                        <p id="tagImg1"><img src="${pageContext.request.contextPath}/save/place/hashtag.png" style="width: 30px; height: 30px;"></p>
-														<h5><input type="text" id="hashTag1" name="hashTag1" value=""></h5>
-			                                    </div>
-			                                </div><div class="col-lg-3 col-md-3 col-6">
-			                                    <div class="listing__details__amenities__item">
-			                                        <p id="tagImg1"><img src="${pageContext.request.contextPath}/save/place/hashtag.png" style="width: 30px; height: 30px;"></p>
-														<h5><input type="text" id="hashTag1" name="hashTag1" value=""></h5>
-			                                    </div>
-			                                </div><div class="col-lg-3 col-md-3 col-6">
-			                                    <div class="listing__details__amenities__item">
-			                                        <p id="tagImg1"><img src="${pageContext.request.contextPath}/save/place/hashtag.png" style="width: 30px; height: 30px;"></p>
-														<h5><input type="text" id="hashTag1" name="hashTag1" value=""></h5>
-			                                    </div>
-			                                </div>
-                            </c:when>
-                            <c:when test="${tagStrLen eq 5}">
-                            <c:forEach items="${tagStr}" var="tagStr">
-			      							<div class="col-lg-3 col-md-3 col-6">
-			                                    <div class="listing__details__amenities__item">
-			                                        <p id="tagImg1"><img src="${pageContext.request.contextPath}/save/place/hashtag.png" style="width: 30px; height: 30px;"></p>
-														<h5><input type="text" id="hashTag1" name="hashTag1" value="${tagStr}"></h5>
-			                                    </div>
-			                                </div>
-			      				   </c:forEach>
-			      				   <div class="col-lg-3 col-md-3 col-6">
-			                                    <div class="listing__details__amenities__item">
-			                                        <p id="tagImg1"><img src="${pageContext.request.contextPath}/save/place/hashtag.png" style="width: 30px; height: 30px;"></p>
-														<h5><input type="text" id="hashTag1" name="hashTag1" value=""></h5>
-			                                    </div>
-			                                </div>
-			                                <div class="col-lg-3 col-md-3 col-6">
-			                                    <div class="listing__details__amenities__item">
-			                                        <p id="tagImg1"><img src="${pageContext.request.contextPath}/save/place/hashtag.png" style="width: 30px; height: 30px;"></p>
-														<h5><input type="text" id="hashTag1" name="hashTag1" value=""></h5>
-			                                    </div>
-			                                </div>
-			                                <div class="col-lg-3 col-md-3 col-6">
-			                                    <div class="listing__details__amenities__item">
-			                                        <p id="tagImg1"><img src="${pageContext.request.contextPath}/save/place/hashtag.png" style="width: 30px; height: 30px;"></p>
-														<h5><input type="text" id="hashTag1" name="hashTag1" value=""></h5>
-			                                    </div>
-			                                </div>
-                            </c:when>
-                            <c:when test="${tagStrLen eq 6}">
-                            <c:forEach items="${tagStr}" var="tagStr">
-			      							<div class="col-lg-3 col-md-3 col-6">
-			                                    <div class="listing__details__amenities__item">
-			                                        <p id="tagImg1"><img src="${pageContext.request.contextPath}/save/place/hashtag.png" style="width: 30px; height: 30px;"></p>
-														<h5><input type="text" id="hashTag1" name="hashTag1" value="${tagStr}"></h5>
-			                                    </div>
-			                                </div>
-			      				   </c:forEach>
-			      				   <div class="col-lg-3 col-md-3 col-6">
-			                                    <div class="listing__details__amenities__item">
-			                                        <p id="tagImg1"><img src="${pageContext.request.contextPath}/save/place/hashtag.png" style="width: 30px; height: 30px;"></p>
-														<h5><input type="text" id="hashTag1" name="hashTag1" value=""></h5>
-			                                    </div>
-			                                </div>
-			                                <div class="col-lg-3 col-md-3 col-6">
-			                                    <div class="listing__details__amenities__item">
-			                                        <p id="tagImg1"><img src="${pageContext.request.contextPath}/save/place/hashtag.png" style="width: 30px; height: 30px;"></p>
-														<h5><input type="text" id="hashTag1" name="hashTag1" value=""></h5>
-			                                    </div>
-			                                </div>
-                            </c:when>
-                            <c:otherwise>
-                            <c:forEach items="${tagStr}" var="tagStr">
-			      							<div class="col-lg-3 col-md-3 col-6">
-			                                    <div class="listing__details__amenities__item">
-			                                        <p id="tagImg1"><img src="${pageContext.request.contextPath}/save/place/hashtag.png" style="width: 30px; height: 30px;"></p>
-														<h5><input type="text" id="hashTag1" name="hashTag1" value="${tagStr}"></h5>
-			                                    </div>
-			                                </div>
-			      				   </c:forEach>
-			      				   <div class="col-lg-3 col-md-3 col-6">
-			                                    <div class="listing__details__amenities__item">
-			                                        <p id="tagImg1"><img src="${pageContext.request.contextPath}/save/place/hashtag.png" style="width: 30px; height: 30px;"></p>
-														<h5><input type="text" id="hashTag1" name="hashTag1" value=""></h5>
-			                                    </div>
-			                                </div>
-                            </c:otherwise>
-                            </c:choose> 
 	                       </div>
                          </div>
                         </div>

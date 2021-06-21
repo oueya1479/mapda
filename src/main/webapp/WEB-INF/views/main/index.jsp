@@ -5,20 +5,28 @@
 <html lang="zxx">
 
 <head>
+<style>
+@import url('https://fonts.googleapis.com/css?family=Nanum+Myeongjo&display=swap');
+
+
+h1,h2,h3,h4,h5,h6,p,a{font-family: 'Nanum Myeongjo', serif; font-weight: bold;}
+
+
+</style>
 </head>
 
 <body>
 
 	<!-- Hero Section Begin -->
 	<section class="hero set-bg"
-		data-setbg="${pageContext.request.contextPath}/img/hero/hero-bg.jpg">
+		data-setbg="${pageContext.request.contextPath}/img/map/san.jpg">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="hero__text">
 						<div class="section-title">
-							<h2>Discover The Best Maps In Mapda</h2>
-							<p>1.118.940.376 The best service package is waiting for you</p>
+							<h1 style="color:white;">Make Your Own Maps In Mapda</h1>
+							<p style="color:black;">1.118.940.376 places are waiting for you</p><p><br><p><p>
 						</div>
 						<div class="hero__search__form">
 							<form action="${pageContext.request.contextPath}/map/selectedMaps" method="post">
@@ -47,7 +55,7 @@
 								
 								<button type="submit">Explore Now</button>
 							</form>
-						</div>
+						</div><%-- 
 						<ul class="hero__categories__tags">
 							<li><a href="#"><img
 									src="${pageContext.request.contextPath}/img/hero/cat-1.png"
@@ -67,7 +75,7 @@
 							<li><a href="${pageContext.request.contextPath}/map/mapList"><img
 									src="${pageContext.request.contextPath}/img/hero/cat-6.png"
 									alt=""> All Categories</a></li>
-						</ul>
+						</ul> --%>
 					</div>
 				</div>
 			</div>

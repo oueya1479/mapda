@@ -7,7 +7,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import kosta.mapda.domain.map.Place;
-import kosta.mapda.domain.member.Member;
 
 public interface PlaceRepository extends JpaRepository<Place, Long> {
 	
@@ -41,4 +40,7 @@ where m.map_no=21 and p.place_hidden=1;
 
 	@Query("select count(p) from Place p where p.placeRegdate between ?1 and ?2")
 	int getPlaceDateBetween(LocalDateTime startDatetime, LocalDateTime endDatetime);
+	
+	@Query("select count(p) from Place p where p.member.memNo = ?1 and p.placePoint = 1 and p.placeRegdate between ?2 and ?3")
+	int getInfoBetween(Long memNo, LocalDateTime startDatetime, LocalDateTime endDatetime);
 }

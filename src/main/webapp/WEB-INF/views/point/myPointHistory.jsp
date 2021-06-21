@@ -78,7 +78,7 @@
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <div class="breadcrumb__text">
-                        <h2>Point</h2>
+                        <h2>포인트 내역</h2>
                         <div class="breadcrumb__option">
                             <a href="#"><i class="fa fa-home"></i> Home</a>
                             <span>My Page</span>
@@ -110,8 +110,15 @@
                     
                     
                     
-                    <h3 style="font-weight: bold">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;포인트 적립내역</h3>&nbsp;
-                    
+                    <h3 style="font-weight: bold">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;포인트 적립내역</h3><hr>총 누적포인트 : 
+                      
+                 	<c:set var="sum" value="${0}"/>
+					   <c:forEach var="goods" items="${requestScope.mySavingList}">   
+					    <c:set var="sum" value="${sum+goods.shPay}"/> 
+					   </c:forEach> 
+					   <c:out value="${sum}"/> point
+					
+					
 
                     <table style="text-align: center;">
                     
@@ -146,7 +153,14 @@
                     
                     <hr>
                     <br>
-                    <h3 style="font-weight: bold">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;포인트 사용내역</h3>&nbsp;
+                    <h3 style="font-weight: bold">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;포인트 사용내역</h3><hr>총 사용포인트 :
+                  
+                  	<c:set var="sum" value="${0}"/>
+					   <c:forEach var="goods" items="${requestScope.myUsingList}">   
+					    <c:set var="sum" value="${sum+goods.uhPay}"/> 
+					   </c:forEach> 
+					   <c:out value="${sum}"/> point
+					
                     <br>
                     <table style="text-align: center;">
                    
@@ -218,22 +232,7 @@
 
     <!-- Newslatter Section Begin -->
     <section class="newslatter">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6 col-md-6">
-                    <div class="newslatter__text">
-                        <h3>Subscribe Newsletter</h3>
-                        <p>Subscribe to our newsletter and don’t miss anything</p>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-6">
-                    <form action="#" class="newslatter__form">
-                        <input type="text" placeholder="Your email">
-                        <button type="submit">Subscribe</button>
-                    </form>
-                </div>
-            </div>
-        </div>
+        
     </section>
     <!-- Newslatter Section End -->
 

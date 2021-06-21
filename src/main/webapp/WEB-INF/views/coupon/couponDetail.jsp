@@ -9,33 +9,41 @@
 
 <sec:authentication property="principal.memNo" var="mno" />
 
+
+
  <script type="text/javascript">
-	$(function(){
 		$(document).on('click', '.site-btn', function() {
-			
-			$.ajax({
-				if(confirm("발급하시겠습니까?") == true){
+			let p = '${coupon.cpPrice}';
+			if(confirm("발급하시겠습니까?") == true){
+				
+				$.ajax({	
 					url:"${pageContext.request.contextPath}/couponAjax/issue",
 					type:"get",
 					dataType:"json",
 					data: {"couponNoStr" : $(this).attr('name')},
 					success: function(data){
 						if(data == -1){
-		                    alert("발급 오류","error","확인",function(){});
+		                    alert("발급 오류! 포인트 잔액을 확인해주세요","error","확인",function(){});
 		                } else if(data==1){
-							alert("발급 완료")
+							alert("발급 완료");
+							$('#point').html($('#point').text() - p);
 						} 
 					},
 					error : function(err) {
 						console.log(err + "에러 발생");
 					}
-				});
+				})
+				
 			}else{
 				return;
 			}
-		});//클릭function 끝
-	});//script 끝
+		
+		});//script 끝
 </script>
+
+
+
+
 </head>
 
 <body>
@@ -47,10 +55,10 @@
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <div class="breadcrumb__text">
-                        <h2>Our Blog</h2>
+                        <h2>쿠폰 상세</h2>
                         <div class="breadcrumb__option">
-                            <a href="#"><i class="fa fa-home"></i> Home</a>
-                            <span>Our Blog</span>
+                            <a href="#"><i class="fa fa-home"></i> Coupon</a>
+                            <span></span>
                         </div>
                     </div>
                 </div>
@@ -66,7 +74,7 @@
                 <div class="col-lg-8">
                     <div class="blog__item__large">
                         <div class="blog__item__pic set-bg">
-                           <img src="${coupon.cpImgpath}">
+                           <img src="${coupon.cpImgpath}" style="width: 300px; height: 300px;">
                         </div>
                         <div class="blog__item__text" style = "text-align : center;">
                             <ul class="blog__item__tags">
@@ -108,29 +116,13 @@
                     <div class="blog__sidebar">
                         
                         
-                        <div class="blog__sidebar__categories">
-                            <h5>My Point</h5>
-                            <ul>
-                                <li><a href="#">Finance <span>18</span></a></li>
-                                <li><a href="#">Business <span>20</span></a></li>
-                                <li><a href="#">Loan <span>07</span></a></li>
-                                <li><a href="#">Consulting <span>22</span></a></li>
-                                <li><a href="#">Credit <span>19</span></a></li>
-                            </ul>
+                        <div class="blog__sidebar__categories" style =" width : 250px; text-align: center;">
+                            <h3><i class="fa fa-money">&nbsp;&nbsp;</i>내 포인트</h3><hr>
+                            <h5 style="display: inline">: </h5>
+                            <h5 style="display: inline" id="point">${myPoint.myPoint}</h5>
+                            <h5 style="display: inline"> P</h5>
                         </div>
-                        <div class="blog__sidebar__tags">
-                            <h5>Popular Tag</h5>
-                            <a href="#">Business</a>
-                            <a href="#">Marketing</a>
-                            <a href="#">Payment</a>
-                            <a href="#">Travel</a>
-                            <a href="#">Finance</a>
-                            <a href="#">Videos</a>
-                            <a href="#">Ideas</a>
-                            <a href="#">Unique</a>
-                            <a href="#">Music</a>
-                            <a href="#">Key</a>
-                        </div>
+                        
                     </div>
                 </div>
             </div>
@@ -140,22 +132,7 @@
 
     <!-- Newslatter Section Begin -->
     <section class="newslatter">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6 col-md-6">
-                    <div class="newslatter__text">
-                        <h3>Subscribe Newsletter</h3>
-                        <p>Subscribe to our newsletter and don’t miss anything</p>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-6">
-                    <form action="#" class="newslatter__form">
-                        <input type="text" placeholder="Your email">
-                        <button type="submit">Subscribe</button>
-                    </form>
-                </div>
-            </div>
-        </div>
+        
     </section>
     <!-- Newslatter Section End -->
 

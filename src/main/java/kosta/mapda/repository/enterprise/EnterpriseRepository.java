@@ -8,4 +8,6 @@ import kosta.mapda.domain.enterprise.Enterprise;
 
 public interface EnterpriseRepository extends JpaRepository<Enterprise, Long> {
 
+	Enterprise findByEntName(String entName);
+
 }

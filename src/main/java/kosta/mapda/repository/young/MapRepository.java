@@ -58,4 +58,7 @@ public interface MapRepository extends JpaRepository<Theme, Long> {
 
 	@Query("select count(t) from Theme t where t.mapRegdate between ?1 and ?2")
 	int getThemeDateBetween(LocalDateTime startDatetime, LocalDateTime endDatetime);
+	
+	@Query("select count(t) from Theme t where t.member.memNo = ?1 and t.mapPoint = 1 and t.mapRegdate between ?2 and ?3")
+	int getInfoBetween(Long memNo, LocalDateTime startDatetime, LocalDateTime endDatetime);
 }
