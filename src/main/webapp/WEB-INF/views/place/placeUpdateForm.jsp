@@ -253,13 +253,13 @@ h2{font-family: 'Nanum Myeongjo', serif; font-weight: bold;}
 											<img src="${pageContext.request.contextPath}/resources/placeicon/cafe1.png" style="width: 120px; height: 120px; background-color: black;">
 										</div>
 										<div style="display: none;">
-											<img src="${pageContext.request.contextPath}/resources/placeicon/healing1.png" style="width: 120px; height: 120px; background-color: black;">
+											<img src="${pageContext.request.contextPath}/resources/placeicon/healing1.PNG" style="width: 120px; height: 120px; background-color: black;">
 										</div>
 										<div style="display: none;">
-											<img src="${pageContext.request.contextPath}/resources/placeicon/nature1.png" style="width: 120px; height: 120px; background-color: black;">
+											<img src="${pageContext.request.contextPath}/resources/placeicon/nature1.PNG" style="width: 120px; height: 120px; background-color: black;">
 										</div>
 										<div style="display: none;">
-											<img src="${pageContext.request.contextPath}/resources/placeicon/activity1.png" style="width: 120px; height: 120px; background-color: black;">
+											<img src="${pageContext.request.contextPath}/resources/placeicon/activity1.PNG" style="width: 120px; height: 120px; background-color: black;">
 										</div>
 										<div style="display: none;">
 											<img src="${pageContext.request.contextPath}/resources/placeicon/shopping1.png" style="width: 120px; height: 120px; background-color: black;">

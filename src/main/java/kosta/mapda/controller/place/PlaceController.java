@@ -291,9 +291,9 @@ public class PlaceController {
 		case 1: place.setPlaceIconName("맛집"); place.setPlaceIconPath("food1.png"); break;
 		case 2: place.setPlaceIconName("여행"); place.setPlaceIconPath("travel1.png"); break;
 		case 3: place.setPlaceIconName("카페"); place.setPlaceIconPath("cafe1.png"); break;
-		case 4: place.setPlaceIconName("힐링"); place.setPlaceIconPath("healing1.png"); break;
-		case 5: place.setPlaceIconName("자연"); place.setPlaceIconPath("nature1.png"); break;
-		case 6: place.setPlaceIconName("액티비티"); place.setPlaceIconPath("activity1.png"); break;
+		case 4: place.setPlaceIconName("힐링"); place.setPlaceIconPath("healing1.PNG"); break;
+		case 5: place.setPlaceIconName("자연"); place.setPlaceIconPath("nature1.PNG"); break;
+		case 6: place.setPlaceIconName("액티비티"); place.setPlaceIconPath("activity1.PNG"); break;
 		case 7: place.setPlaceIconName("쇼핑"); place.setPlaceIconPath("shopping1.png"); break;
 		case 8: place.setPlaceIconName("문화"); place.setPlaceIconPath("culture1.png"); break;
 		case 9: place.setPlaceIconName("산책"); place.setPlaceIconPath("walking1.png"); break;
@@ -324,13 +324,8 @@ public class PlaceController {
 			}
 		}
 		
-		System.out.println("PlaceController placeUpdate place = " + place);
 		Place dbPlace = placeService.update(place, photoList);
 		
-		System.out.println("PlaceController placeUpdate dbPlace = " + dbPlace);
-		System.out.println("dbPlace.getPlaceNo() = " + dbPlace.getPlaceNo() );
-		//"place/read/"+dbPlace.getPlaceNo()
-		//return new ModelAndView("place/read", "place", dbPlace);
 		return "redirect:/place/read/"+dbPlace.getPlaceNo();
 	}//update 끝
 	
@@ -368,9 +363,9 @@ public class PlaceController {
 			case 1: place.setPlaceIconName("맛집"); place.setPlaceIconPath("food1.png"); break;
 			case 2: place.setPlaceIconName("여행"); place.setPlaceIconPath("travel1.png"); break;
 			case 3: place.setPlaceIconName("카페"); place.setPlaceIconPath("cafe1.png"); break;
-			case 4: place.setPlaceIconName("힐링"); place.setPlaceIconPath("healing1.png"); break;
-			case 5: place.setPlaceIconName("자연"); place.setPlaceIconPath("nature1.png"); break;
-			case 6: place.setPlaceIconName("액티비티"); place.setPlaceIconPath("activity1.png"); break;
+			case 4: place.setPlaceIconName("힐링"); place.setPlaceIconPath("healing1.PNG"); break;
+			case 5: place.setPlaceIconName("자연"); place.setPlaceIconPath("nature1.PNG"); break;
+			case 6: place.setPlaceIconName("액티비티"); place.setPlaceIconPath("activity1.PNG"); break;
 			case 7: place.setPlaceIconName("쇼핑"); place.setPlaceIconPath("shopping1.png"); break;
 			case 8: place.setPlaceIconName("문화"); place.setPlaceIconPath("culture1.png"); break;
 			case 9: place.setPlaceIconName("산책"); place.setPlaceIconPath("walking1.png"); break;

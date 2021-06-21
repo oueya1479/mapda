@@ -1,7 +1,7 @@
 package kosta.mapda.service.place;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -94,13 +94,12 @@ public class PlaceServiceImpl implements PlaceService {
 		dbPlace.setPlaceTag(place.getPlaceTag());
 		dbPlace.setPlaceIconName(place.getPlaceIconName());
 		dbPlace.setPlaceIconPath(place.getPlaceIconPath());
-		
+	
 		//dbPlacePhoto   ppList
-		for(PlacePhoto pp : dbPlacePhoto) {
-			for(PlacePhoto ppp : ppList) {
-				pp.setPpPath(ppp.getPpPath());
-			}
+		for(PlacePhoto db : dbPlacePhoto) {
+			//db.setPpPath();
 		}
+		
 		return dbPlace;
 	}
 

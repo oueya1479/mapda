@@ -181,7 +181,7 @@ h2{font-family: 'Nanum Myeongjo', serif; font-weight: bold;}
 </head>
 
 <body>
-    <section class="listing-hero set-bg" data-setbg="https://www.journey4.co.uk/wp-content/uploads/2020/04/about-us-2-1920x420.jpg">
+    <section class="listing-hero set-bg" data-setbg="https://www.travelmoney.co.nz/sites/v1.travelmoney.co.nz/files/fcl-blog/G_Portugal%20HBM%20%282%29.jpg">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8">
@@ -190,13 +190,13 @@ h2{font-family: 'Nanum Myeongjo', serif; font-weight: bold;}
                             <img src="${pageContext.request.contextPath}/resources/placeicon/${place.placeIconPath}" style="width: 150px; height: 150px;" ><!-- 아이콘 모양? user프로필? -->
                         </div>
                         <div class="listing__hero__text">
-                            <h2>${requestScope.place.placeTitle}</h2>
-                            <div class="listing__hero__widget">
-                                <div class="listing__details__rating__star"></div>
-                                <div>&nbsp;&nbsp; 포토후기평점 : ${starAvg}</div>
-                                <br> <div>${totalReviewCount} &nbsp;&nbsp;&nbsp;Total Reviews</div>
+                            <h2 style="color: black;">${requestScope.place.placeTitle}</h2>
+                            <div class="listing__hero__widget" style="color: black; font-weight: bolder;">
+                                <div class="listing__details__rating__star" style="color: black;"></div>
+                                <div style="color: black;  font-weight: bolder;">&nbsp;&nbsp; 포토후기평점 : ${starAvg}</div>
+                                <br> <div style="color: black; font-weight: bolder;">${totalReviewCount} &nbsp;&nbsp;&nbsp;Total Reviews</div>
                             </div>
-                            <p><span class="icon_pin_alt"></span> ${requestScope.place.placeAddr}</p>
+                            <p style="color: black; font-weight: bolder;"><span class="icon_pin_alt"></span> ${requestScope.place.placeAddr}</p>
                         </div>
                     </div>
                 </div>
