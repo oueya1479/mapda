@@ -1,13 +1,10 @@
 package kosta.mapda.repository.member;
 
-import java.util.List;
-
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import kosta.mapda.domain.map.MapStorage;
 import kosta.mapda.domain.member.Member;
 
 public interface MemberRepository extends JpaRepository<Member, Long> {
@@ -18,7 +15,6 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
 	@Query("select m from Member m where m.memId=?1 and m.memPw=?2")
 	Member login(String memId, String memPw);
 	
-	//다시체크해보기T^T
 	@Query("select m from Member m where m.memId=?1")
 	int idcheck(String memId);
 	
@@ -32,15 +28,8 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
 	@Modifying
 	void updatePayStatus(Long memNo);
 	
-//	@Query("select m from MapStorage m where m.member.memNo=?1")
-//	List<MapStorage> selectByMapNo(Long memNo);
-	
 	Member findBymemNo(Long memNo);
 
-//	@Query("")
-//	List<Theme> myRecenMaps(Long memNo);
-//	String recentlyList();
-	
 }
 
 
