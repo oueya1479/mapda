@@ -95,11 +95,17 @@ public class CouponController {
 	 * 쿠폰 상세보기 메소드
 	 * */
 	@RequestMapping("/couponDetail/{cpNo}")
-	public ModelAndView couponDetail(@PathVariable Long cpNo) {
+	public String couponDetail(@PathVariable Long cpNo, Model model) {
+		
+		Member mem = (Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		MyPoint myPoint = pointService.selectMyPoint(mem.getMemNo());
 		
 		Coupon coupon = service.selectCoupon(cpNo);
-		ModelAndView mv = new ModelAndView("coupon/couponDetail", "coupon", coupon);
-		return mv;
+		
+		model.addAttribute("coupon", coupon);
+		model.addAttribute("myPoint", myPoint);
+		
+		return "coupon/couponDetail";
 	}
 	
 //	/**

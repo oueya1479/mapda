@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import kosta.mapda.domain.map.Place;
 import kosta.mapda.domain.map.PlacePhotoReview;
 import kosta.mapda.domain.map.Theme;
+import kosta.mapda.domain.member.Member;
 import kosta.mapda.domain.service.MyPoint;
 import kosta.mapda.domain.service.SavingHistory;
 import kosta.mapda.domain.service.UsingHistory;
@@ -60,7 +61,7 @@ public interface PointService {
 	/**
 	 * 가입시 마이포인트 테이블 생성
 	 * */
-	void createMyPoint (Long memNo);
+	void createMyPoint (Member member);
 	
 	/**
 	 * 마이포인트의 포인트 조회하기

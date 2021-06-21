@@ -1,5 +1,8 @@
 package kosta.mapda.controller.point;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,6 +23,7 @@ import kosta.mapda.domain.map.Theme;
 import kosta.mapda.domain.member.Member;
 import kosta.mapda.domain.service.MyPoint;
 import kosta.mapda.domain.service.SavingHistory;
+import kosta.mapda.repository.MyPointRepository;
 import kosta.mapda.repository.place.PlacePhotoReviewRepository;
 import kosta.mapda.repository.place.PlaceRepository;
 import kosta.mapda.repository.young.MapRepository;
@@ -45,6 +49,10 @@ public class PointRestController {
 	@Autowired
 	private PlacePhotoReviewRepository rrepository;
 	
+	@Autowired
+	private MyPointRepository myPointRepository;
+	
+	
 	
 	/**
 	 *  포인트 적립처리 
@@ -57,8 +65,23 @@ public class PointRestController {
 		
 		Long classNum = Long.parseLong(classNo);
 		
+		LocalDateTime startDatetime = LocalDateTime.of(LocalDate.now(), LocalTime.of(0,0,0));
+		LocalDateTime endDatetime = LocalDateTime.of(LocalDate.now(),  LocalTime.of(23,59,59));
+		if(myPointRepository.findBymember_memNo(mem.getMemNo()) == null) {
+			pointService.createMyPoint(mem);
+		}
+		
 		try {
+			
+			
+			
+			
 		if(className.equals("theme")) {
+			
+			int count = mrepository.getInfoBetween(mem.getMemNo(), startDatetime, endDatetime);
+			if(count >= 3) {
+				throw new Exception("각 게시물의 적립은 3번만 가능합니다.");
+			}
 			Theme theme = mrepository.findById(classNum).orElse(null);
 			theme.setMapPoint(1); //적립상태 변경
 			
@@ -77,6 +100,12 @@ public class PointRestController {
 			resultCode = 1;
 			
 		}else if(className.equals("place")) {
+			
+			int count = prepository.getInfoBetween(mem.getMemNo(), startDatetime, endDatetime);
+			if(count >= 3) {
+				throw new Exception("각 게시물의 적립은 3번만 가능합니다.");
+			}
+			
 			Place place = prepository.findById(classNum).orElse(null);
 			place.setPlacePoint(1); //적립상태변경
 			
@@ -95,6 +124,12 @@ public class PointRestController {
 			
 			resultCode = 1;
 		}else{
+			
+			int count = rrepository.getInfoBetween(mem.getMemNo(), startDatetime, endDatetime);
+			if(count >= 3) {
+				throw new Exception("각 게시물의 적립은 3번만 가능합니다.");
+			}
+			
 			PlacePhotoReview review = rrepository.findById(classNum).orElse(null);
 			
 			review.setPprPoint(1);//적립상태변경

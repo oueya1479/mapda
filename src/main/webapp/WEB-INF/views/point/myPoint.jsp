@@ -59,15 +59,24 @@
 	.cpbtn {
 		text-shadow: 0 0 24px;
 	}
+	.readthis{
+		
+		border: 1px solid;
+		margin: 10px;
+		background-color: #DCDCDC;
+		position: relative;
+		width: 60%;
+		margin-left : 10%;
+		
+	}
 </style>
 
 <SCRIPT>
 $(document).on('click','#plus',function(){
-	
 	let name = $(this).attr('name');
 	let value = $(this).val();
 	
-	alert(value + " " + name);
+	//alert(value + " " + name);
 	if(confirm("적립 해당 게시물은 30일간 삭제불가합니다. 적립하시겠습니까?") == true){
 			$.ajax({
 				url: "${pageContext.request.contextPath}/point/pointPlus",
@@ -76,9 +85,10 @@ $(document).on('click','#plus',function(){
 				data: {'classNo' : name, 'className' : value},
 				success: function(data){
 					if(data == -1){
-	                    alert("적립 오류","error","확인",function(){});
+	                    alert("각 게시물의 적립은 3번만 가능합니다.");
 	                } else if(data==1){
 						alert("적립 완료")
+						location.reload();
 					} 
 				},
 				error : function(err) {
@@ -107,7 +117,7 @@ $(document).on('click','#plus',function(){
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <div class="breadcrumb__text">
-                        <h2>Point</h2>
+                        <h2>적립 가능 포인트</h2>
                         <div class="breadcrumb__option">
                             <a href="#"><i class="fa fa-home"></i> Home</a>
                             <span>My Page</span>
@@ -122,13 +132,23 @@ $(document).on('click','#plus',function(){
     <!-- Blog Section Begin -->
    
 
-    <section class="blog-section spad">
-     
-    
+    <section class="blog-section spad" style="text-align: center;">
+     <div class="readthis"  >
+     <h2>※안내사항※</h2><br>
+     포인트 적립은 해당일에 등록한 지도, 플레이스, 포토후기에 적용가능합니다.<br>
+     - 부적합한 행위의 포인트적립이 발견되면 페널티가 적용됩니다.(1번:경고, 2번: 포인트 차감, 3번: 탈퇴조치)<br>
+     - 최대 적립 가능한 포인트 적립기준은 다음과 같습니다.<br>
+     - 각 게시물당 3번씩 적립 가능 / 하루기준<br>
+     - 적립 1회당 지급 포인트 점수<br>
+     - 테마지도 : 100point, 플레이스: 50point, 포토후기 : 10point<br>
+     - 적립이 완료된 지도, 플레이스, 포토후기는 30일간 삭제가 어렵습니다.<br>
+       30일 경과 전에 삭제를 원하실 경우, 1:1문의를 이용해주세요.<br><br>
+     </div>
+    <br><br><br>
     <jsp:useBean id="now" class="java.util.Date" />
     <fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="today" />  
-    <h3 style="font-weight: bold">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TODAY : <c:out value="${today}"/> </h3>&nbsp;
-    
+    <h3 style="font-weight: bold">&nbsp;TODAY : <c:out value="${today}"/> </h3>&nbsp;
+    <br>
         <div class="container">
             <div class="row">
                 <div class="col-lg-8">
@@ -277,7 +297,12 @@ $(document).on('click','#plus',function(){
                  
                  
                     <div class="blog__sidebar">
-                        
+                        <div class="blog__sidebar__categories" style =" width : 250px; text-align: center;">
+                            <h3><i class="fa fa-money">&nbsp;&nbsp;</i>내 포인트</h3><hr>
+                            <h5 style="display: inline">: </h5>
+                            <h5 style="display: inline" id="point">${myPoint.myPoint}</h5>
+                            <h5 style="display: inline"> P</h5>
+                        </div>
                         
                         
                         <div class="blog__sidebar__categories" style =" width : 250px; text-align: center;">
@@ -301,22 +326,7 @@ $(document).on('click','#plus',function(){
 
     <!-- Newslatter Section Begin -->
     <section class="newslatter">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6 col-md-6">
-                    <div class="newslatter__text">
-                        <h3>Subscribe Newsletter</h3>
-                        <p>Subscribe to our newsletter and don’t miss anything</p>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-6">
-                    <form action="#" class="newslatter__form">
-                        <input type="text" placeholder="Your email">
-                        <button type="submit">Subscribe</button>
-                    </form>
-                </div>
-            </div>
-        </div>
+        
     </section>
     <!-- Newslatter Section End -->
 
