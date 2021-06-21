@@ -69,20 +69,6 @@ public class MemberController {
 		return "/member/loginForm";
 	}
 
-//	// 회원 검색 폼
-//	@RequestMapping("/findForm")
-//	public String findIdMember() {
-//		return "/member/findForm";
-//	}
-//
-//	// 특정 회원 검색하기
-//	@RequestMapping("/findMember")
-//	public ModelAndView findMember(HttpServletRequest request) {
-//		String memId = request.getParameter("memId");
-//		Member member = memService.findMemberById(memId);
-//		return new ModelAndView("/member/findMember_result", "member", member);
-//	}
-
 	// 아이디 중복확인
 	@RequestMapping("/idcheckAjax")
 	@ResponseBody
@@ -142,24 +128,13 @@ public class MemberController {
 	public String delete(HttpServletRequest request) {
 		Member pmember = (Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		memService.delete(pmember);
-		return "main/index";
+		
+		SecurityContextHolder.clearContext();
+		
+
+		return "redirect:/";
 	}
 	
-	//마이페이지 최근지도 리스트 가져오기
-	/*@RequestMapping("/profile")
-	public ModelAndView recenList() {
-		Member pmember = (Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		Long memNo = pmember.getMemNo();
-		
-		List<Theme> mapList = memService.myRecenMaps(memNo);
-		
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("member/profile");
-		mv.addObject("mapList", mapList);
-		return mv;
-		
-         
-	}*/
 
 	@RequestMapping("/pay")
 	public void pay() {

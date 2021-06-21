@@ -11,6 +11,8 @@
 <meta name="viewport"
    content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>MapDa</title>
+<script src="${pageContext.request.contextPath}/js/jquery-3.3.1.min.js"></script>
+
 <link rel="icon" href="<%=request.getContextPath()%>/img/favicon.png">
 <!-- Bootstrap CSS -->
 <link rel="stylesheet"
@@ -102,12 +104,12 @@
 					)
 				})
 				//비밀번호 일치 체크
-				$("#pw").keyup(function() {
+				 $("#pw").keyup(function() {
 					if($(this).val()==""){
 						$("#pwCheck").html("");
 						return;
 					}
-					$.ajax({
+					/*	$.ajax({
 						url:"member/pwCheck",
 						datatype:"text",
 						type:"post",
@@ -119,7 +121,7 @@
 					}	
 					)
 				})
-    	 	})				
+    	 	})				 */
 				
 		
     	 
@@ -156,7 +158,7 @@
         <h2>Member Register Form</h2><p>
         	<form name="joinForm" style="display:inline-block;" action="${pageContext.request.contextPath}/member/registerMember" method=post onsubmit="return validate();" accept-charset="UTF-8">
 				<br><br><br>
-				<input type="text" class="underline"  placeholder="ID" id="id" name="memId"><span id="idCheckAjax"></span><br><br>
+				<input type="text" class="underline"  placeholder="ID" id="id" name="memId"><span id="idCheck"></span><br><br>
 				<input type="password" class="underline" placeholder="PASSWORD" id="pw" name="memPw"> <br><br>
 				<input type="text" class="underline"  placeholder="NAME" id="name" name="memName"> <br><br>
 				<input type="text" class="underline" placeholder="AGE" id="age" name="memAge"><br><br>

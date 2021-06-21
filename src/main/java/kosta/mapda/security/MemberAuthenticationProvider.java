@@ -59,7 +59,7 @@ public class MemberAuthenticationProvider implements AuthenticationProvider {
 		//아이디에 해당하는 회원의 정보 검색...
 		Member member = memberRepository.findMemberById(memId);
 	
-		if(member==null) throw new UsernameNotFoundException(memId+"는 존재하지 않아 인증에 실패했습니다wwww.");
+		if(member==null) throw new UsernameNotFoundException("Invaild Username or Password");
 		
 		//DB에 있는 비번과 인수로 전달된 비번 비교...
 		String pass = authentication.getCredentials().toString();

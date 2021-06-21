@@ -116,11 +116,13 @@ h2 {
     <script src="https://kit.fontawesome.com/53a8c415f1.js" crossorigin="anonymous"></script>
 </head>
 <body>
+
 <form action="${pageContext.request.contextPath}/login" method="post">
 	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
     <div class="wrap">
         <div class="login">
             <h2>Log-In</h2>
+            
             <div class="login_id">
                 <h4>ID</h4>
                 <input type="text" name="id" id="id" placeholder="id">
@@ -137,9 +139,15 @@ h2 {
                 <a href="">Forgot Password?</a>
             </div>
             </div>
+            
+           <c:if test="${not empty requestScope.errorMessage}">
+			<span  class="alert alert-danger" style="color:red">${requestScope.errorMessage}</span>
+		   </c:if>
+            
             <div class="submit">
                 <input type="submit" value="Log-In">
             </div>
+            
         </div>
     </div>
     </form>

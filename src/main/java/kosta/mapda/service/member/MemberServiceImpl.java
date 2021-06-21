@@ -80,7 +80,7 @@ public class MemberServiceImpl implements MemberService {
 		memRepository.save(member);
 		
 		//가입시 마이포인트 테이블 생성
-		pointService.createMyPoint(member.getMemNo());
+		//pointService.createMyPoint(member.getMemNo());
 		
 		// 권한등록
 		/*
