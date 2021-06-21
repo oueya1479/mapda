@@ -2,7 +2,6 @@ package kosta.mapda.controller.coupon;
 
 import java.io.File;
 import java.io.IOException;
-import java.security.Principal;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,27 +12,24 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Direction;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestAttribute;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import kosta.mapda.domain.enterprise.Enterprise;
 import kosta.mapda.domain.member.Member;
 import kosta.mapda.domain.service.Coupon;
 import kosta.mapda.domain.service.CouponCategory;
 import kosta.mapda.domain.service.MyCoupon;
 import kosta.mapda.domain.service.MyPoint;
-import kosta.mapda.repository.CouponRepository;
+import kosta.mapda.repository.enterprise.EnterpriseRepository;
 import kosta.mapda.service.service.CouponService;
 import kosta.mapda.service.service.PointService;
 
@@ -47,14 +43,16 @@ public class CouponController {
 	@Autowired
 	private PointService pointService;
 	
+	@Autowired
+	private EnterpriseRepository enterpriseRepository;
+	
 	/**
 	 * 쿠폰 리스트를 가져오는 메소드
 	 */
 	@RequestMapping("/list")
 	public String couponList(HttpServletRequest request, Model model, @RequestParam(defaultValue = "0") int nowPage, 
 			@RequestParam(required = false, defaultValue = "") String keyword,
-			@RequestParam(required = false, defaultValue = "") Long cetegory)
-			 {
+			@RequestParam(required = false, defaultValue = "") Long category) {
 	
 		Pageable pageable = PageRequest.of(nowPage, 10, Direction.ASC, "cpNo");
 		Page<Coupon> couponList; 
@@ -71,7 +69,7 @@ public class CouponController {
 			couponList = service.selectAll(pageable);
 		}*/
 		
-		couponList = service.selectAll(pageable,keyword,cetegory);
+		couponList = service.selectAll(pageable,keyword,category);
 		
 		
 		List<CouponCategory> categoryList = service.couponCategory();
@@ -112,19 +110,28 @@ public class CouponController {
 //	 * 관리자 전체 쿠폰 조회
 //	 */
 	@RequestMapping("/admin")
-	public String allcouponList(Model model, @RequestParam(defaultValue = "0") int nowPage) {
+	public String allcouponList(Model model, @RequestParam(defaultValue = "0") int nowPage,
+			@RequestParam(required = false, defaultValue = "") String keyword,
+			@RequestParam(required = false, defaultValue = "") Long category
+			) {
 		
 		Pageable pageable = PageRequest.of(nowPage, 10, Direction.ASC, "cpNo");
 		Page<Coupon> couponList = service.viewAll(pageable);
 		
+		couponList = service.selectAll(pageable,keyword,category);
+		List<CouponCategory> categoryList = service.couponCategory();
+		
 		model.addAttribute("couponList", couponList);
+		model.addAttribute("categoryList", categoryList);
+		
 		return "coupon/couponManage";
 	}
 	
 	
 	@RequestMapping("/insert")
-	public String insert(Coupon coupon) {
-		service.insertCoupon(null);
+	public String insert(Model model, Coupon coupon) {
+		List<Enterprise> enterpriseList = enterpriseRepository.findAll();
+		model.addAttribute("enterpriseList", enterpriseList);
 		return "coupon/couponAdd";
 	}
 	
@@ -132,24 +139,53 @@ public class CouponController {
 	 * 관리자 쿠폰 등록
 	 */
 	@PostMapping("/insert/form")
-	public String insertCoupon(@RequestParam("file") MultipartFile file, Coupon coupon, HttpServletRequest request) {
+//	@NotFound(action=NotFoundAction.IGNORE)
+	public String insertCoupon(Coupon coupon, HttpServletRequest request, String entName, Long cpcaNo, HttpSession session) throws IOException {
+		Enterprise enterprise = enterpriseRepository.findByEntName(entName);
+		System.out.println(enterprise.getMemNo());
+		enterprise.setMemNo(enterprise.getMemNo());
+		coupon.setMember(enterprise);
 		
-		try {
-			String baseDir = request.getSession().getServletContext().getRealPath("/WEB-INF/static");
-			String filePath = baseDir + "/" + file.getOriginalFilename();
-			file.transferTo(new File(filePath));
-			Authentication user = SecurityContextHolder.getContext().getAuthentication();
-			String memId = user.getName();
-			System.out.println(memId);
-			coupon.setCpImgpath(filePath);
+		CouponCategory category = new CouponCategory();
+		category.setCpcaNo(cpcaNo);
+		coupon.setCouponCategory(category);
+		
+		MultipartFile file = coupon.getFile();
+		
+		if(file.getSize()>0) {
 			
-			service.insertCoupon(coupon);
+			String path = session.getServletContext().getRealPath("/WEB-INF/static");
 			
-		} catch(IOException e) {
-			e.printStackTrace();
+			String fileName = file.getOriginalFilename();
+			coupon.setCpImgpath(path+"/"+fileName);
+			
+			file.transferTo(new File(path+"/"+fileName));
+		} else {
+			Coupon dbCoupon = service.selectCoupon(coupon.getCpNo());
+			if(dbCoupon!=null) {
+				String originPath = dbCoupon.getCpImgpath();
+				coupon.setCpImgpath(originPath);
+			}
+				
 		}
 		
-		return "/coupon/admin";
+		service.insertCoupon(coupon);
+//		try {
+//			String baseDir = request.getSession().getServletContext().getRealPath("/WEB-INF/static");
+//			String filePath = baseDir + "/" + file.getOriginalFilename();
+//			file.transferTo(new File(filePath));
+//			Authentication user = SecurityContextHolder.getContext().getAuthentication();
+//			String memId = user.getName();
+//			System.out.println(memId);
+//			coupon.setCpImgpath(filePath);
+//			
+//			service.insertCoupon(coupon);
+//			
+//		} catch(IOException e) {
+//			e.printStackTrace();
+//		}
+		
+		return "redirect:/coupon/admin";
 	}
 	
 	/**
@@ -168,6 +204,7 @@ public class CouponController {
 		System.out.println("*************");
 		
 		
+
 		
 		Page<MyCoupon> myCouponList = service.selectByMyCoupon(pageable, mem.getMemNo());
 		System.out.println(myCouponList.getContent());
@@ -222,8 +259,6 @@ public class CouponController {
 		
 		Long cpNoo = Long.parseLong(cpNo);
 		coupon.setCpNo(cpNoo);
-		
-		Coupon dbCoupon = new Coupon();
 		
 //		try {
 //			
