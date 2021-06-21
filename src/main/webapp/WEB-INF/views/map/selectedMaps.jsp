@@ -174,7 +174,7 @@ $(function() {
 											<div class="col-lg-4 col-md-6">
 												<div class="listing__item">
 													<div class="listing__item__pic set-bg"
-														data-setbg="${pageContext.request.contextPath}/save/map/${map.mapImg}">
+														data-setbg="${pageContext.request.contextPath}/resources/${map.mapImg}">
 
 														<div class="listing__item__pic__tag">
 															${map.mapCategory.categoryName}</div>
@@ -235,7 +235,7 @@ $(function() {
 															<div class="listing__item__text__info__left">
 																<img
 																	src="${pageContext.request.contextPath}/img/map/heart.png"
-																	alt=""> <span>${map.mapLike}</span>
+																	alt=""> <span></span>
 															</div>
 															<div class="listing__item__text__info__right">
 																<p style="text-align: right;">

@@ -120,32 +120,7 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="most__search__tab">
-						<ul class="nav nav-tabs" role="tablist">
-							<li class="nav-item"><a class="nav-link active"
-								data-toggle="tab" href="#tabs-1" role="tab"> <span
-									class="flaticon-039-fork"></span> Restaurent
-							</a></li>
-							<li class="nav-item"><a class="nav-link" data-toggle="tab"
-								href="#tabs-2" role="tab"> <span class="flaticon-030-kebab"></span>
-									Shopping
-							</a></li>
-							<li class="nav-item"><a class="nav-link" data-toggle="tab"
-								href="#tabs-3" role="tab"> <span
-									class="flaticon-032-food-truck"></span> Travel
-							</a></li>
-							<li class="nav-item"><a class="nav-link" data-toggle="tab"
-								href="#tabs-4" role="tab"> <span
-									class="flaticon-017-croissant"></span> Beauty
-							</a></li>
-							<li class="nav-item"><a class="nav-link" data-toggle="tab"
-								href="#tabs-5" role="tab"> <span
-									class="flaticon-038-take-away"></span> Event
-							</a></li>
-							<li class="nav-item"><a class="nav-link" data-toggle="tab"
-								href="#tabs-6" role="tab"> <span
-									class="flaticon-031-delivery"></span> Rental
-							</a></li>
-						</ul>
+						
 					</div>
 
 
@@ -159,7 +134,7 @@
 									<div class="col-lg-4 col-md-6">
 										<div class="listing__item">
 											<div class="listing__item__pic set-bg"
-												data-setbg="${pageContext.request.contextPath}/img/map/${map.mapImg}">
+												data-setbg="${pageContext.request.contextPath}/resources/${map.mapImg}">
 
 												<div class="listing__item__pic__tag">
 													${map.mapCategory.categoryName}</div>
@@ -222,7 +197,7 @@
 													<div class="listing__item__text__info__left">
 														<img
 															src="${pageContext.request.contextPath}/img/map/heart.png"
-															alt=""> <span>${map.mapLike}</span>
+															alt=""> <span></span>
 													</div>
 													<div class="listing__item__text__info__right">
 														<p style="text-align: right;">

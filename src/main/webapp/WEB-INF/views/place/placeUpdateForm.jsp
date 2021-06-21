@@ -140,7 +140,7 @@ h2{font-family: 'Nanum Myeongjo', serif; font-weight: bold;}
                 <div class="col-lg-12">
                     <div class="listing__hero__option">
                         <div class="listing__hero__icon">
-                            <img src="${pageContext.request.contextPath}/save/place/5115237.png" alt="" style="width:120px; height:120px;"><!-- 아이콘 모양? user프로필? -->
+                            <img src="${pageContext.request.contextPath}/resources/5115237.png" alt="" style="width:120px; height:120px;"><!-- 아이콘 모양? user프로필? -->
                         </div>
                         <div class="listing__hero__text">
                             <h2>Place Modify</h2>
@@ -172,7 +172,7 @@ h2{font-family: 'Nanum Myeongjo', serif; font-weight: bold;}
 												<input type ="hidden" name="placeStatus" value = "1">
 													
 											<div class="blog__item__text">
-										<img src="${pageContext.request.contextPath}/save/place/dadadadada.png" style="float:left; width: 100px; height: 100px; margin-right: 10px;" >
+										<img src="${pageContext.request.contextPath}/resources/dadadadada.png" style="float:left; width: 100px; height: 100px; margin-right: 10px;" >
 										  <span style="margin-top:20px;font-size:18px;" >
 										  보다 공정하고 정확한 장소의 내용을 공유하기 위하여 처음 지정한 place 에서 많은 내용을 변경 할 수 없는 점 양해 부탁 드립니다.
                                          많은 플레이스 지정을 부탁 드리며, 저희 <span style="font-weight: bolder; font-size: 20px; color: blue;">맵多</span>를 이용해 주셔서 감사합니다.</span>
@@ -244,46 +244,46 @@ h2{font-family: 'Nanum Myeongjo', serif; font-weight: bold;}
 							
 						<div id="allForms" style="margin-left: 130px">
 										<div style="display: none;">
-											<img src="${pageContext.request.contextPath}/save/place/food1.png" style="width: 120px; height: 120px; background-color: black;">
+											<img src="${pageContext.request.contextPath}/resources/placeicon/food1.png" style="width: 120px; height: 120px; background-color: black;">
 										</div>
 										<div style="display: none;">
-											<img src="${pageContext.request.contextPath}/save/place/travel1.png" style="width: 120px; height: 120px; background-color: black;">
+											<img src="${pageContext.request.contextPath}/resources/placeicon/travel1.png" style="width: 120px; height: 120px; background-color: black;">
 										</div>
 										<div style="display: none;">
-											<img src="${pageContext.request.contextPath}/save/place/cafe1.png" style="width: 120px; height: 120px; background-color: black;">
+											<img src="${pageContext.request.contextPath}/resources/placeicon/cafe1.png" style="width: 120px; height: 120px; background-color: black;">
 										</div>
 										<div style="display: none;">
-											<img src="${pageContext.request.contextPath}/save/place/healing1.png" style="width: 120px; height: 120px; background-color: black;">
+											<img src="${pageContext.request.contextPath}/resources/placeicon/healing1.png" style="width: 120px; height: 120px; background-color: black;">
 										</div>
 										<div style="display: none;">
-											<img src="${pageContext.request.contextPath}/save/place/nature1.png" style="width: 120px; height: 120px; background-color: black;">
+											<img src="${pageContext.request.contextPath}/resources/placeicon/nature1.png" style="width: 120px; height: 120px; background-color: black;">
 										</div>
 										<div style="display: none;">
-											<img src="${pageContext.request.contextPath}/save/place/activity1.png" style="width: 120px; height: 120px; background-color: black;">
+											<img src="${pageContext.request.contextPath}/resources/placeicon/activity1.png" style="width: 120px; height: 120px; background-color: black;">
 										</div>
 										<div style="display: none;">
-											<img src="${pageContext.request.contextPath}/save/place/shopping1.png" style="width: 120px; height: 120px; background-color: black;">
+											<img src="${pageContext.request.contextPath}/resources/placeicon/shopping1.png" style="width: 120px; height: 120px; background-color: black;">
 										</div>
 										<div style="display: none;">
-											<img src="${pageContext.request.contextPath}/save/place/culture1.png" style="width: 120px; height: 120px; background-color: black;">
+											<img src="${pageContext.request.contextPath}/resources/placeicon/culture1.png" style="width: 120px; height: 120px; background-color: black;">
 										</div>
 										<div style="display: none;">
-											<img src="${pageContext.request.contextPath}/save/place/walking1.png" style="width: 120px; height: 120px; background-color: black;">
+											<img src="${pageContext.request.contextPath}/resources/placeicon/walking1.png" style="width: 120px; height: 120px; background-color: black;">
 										</div>
 										<div style="display: none;">
-											<img src="${pageContext.request.contextPath}/save/place/night1.png" style="width: 120px; height: 120px; background-color: black;">
+											<img src="${pageContext.request.contextPath}/resources/placeicon/night1.png" style="width: 120px; height: 120px; background-color: black;">
 										</div>
 										<div style="display: none;">
-											<img src="${pageContext.request.contextPath}/save/place/attraction1.png" style="width: 120px; height: 120px; background-color: black;">
+											<img src="${pageContext.request.contextPath}/resources/placeicon/attraction1.png" style="width: 120px; height: 120px; background-color: black;">
 										</div>
 										<div style="display: none;">
-											<img src="${pageContext.request.contextPath}/save/place/pet1.png" style="width: 120px; height: 120px; background-color: black;">
+											<img src="${pageContext.request.contextPath}/resources/placeicon/pet1.png" style="width: 120px; height: 120px; background-color: black;">
 										</div>
 										<div style="display: none;">
-											<img src="${pageContext.request.contextPath}/save/place/date1.png" style="width: 120px; height: 120px; background-color: black;">
+											<img src="${pageContext.request.contextPath}/resources/placeicon/date1.png" style="width: 120px; height: 120px; background-color: black;">
 										</div>
 										<div style="display: none;">
-											<img src="${pageContext.request.contextPath}/save/place/drive1.png" style="width: 120px; height: 120px; background-color: black;">
+											<img src="${pageContext.request.contextPath}/resources/placeicon/drive1.png" style="width: 120px; height: 120px; background-color: black;">
 										</div>
 									</div>
 								</div>
@@ -297,49 +297,49 @@ h2{font-family: 'Nanum Myeongjo', serif; font-weight: bold;}
                             <div class="row">
                           	  <div class="col-lg-3 col-md-3 col-6">
 			                                    <div class="listing__details__amenities__item">
-			                                        <p id="tagImg1"><img src="${pageContext.request.contextPath}/save/place/hashtag.png" style="width: 30px; height: 30px;"></p>
+			                                        <p id="tagImg1"><img src="${pageContext.request.contextPath}/resources/hashtag.png" style="width: 30px; height: 30px;"></p>
 														<h5><input type="text" id="hashTag1" name="hashTag1" value="${tagStr[0]}"></h5>
 			                                    </div>
 			                                </div>
 			                                 <div class="col-lg-3 col-md-3 col-6">
 			                                    <div class="listing__details__amenities__item">
-			                                        <p id="tagImg1"><img src="${pageContext.request.contextPath}/save/place/hashtag.png" style="width: 30px; height: 30px;"></p>
+			                                        <p id="tagImg1"><img src="${pageContext.request.contextPath}/resources/hashtag.png" style="width: 30px; height: 30px;"></p>
 														<h5><input type="text" id="hashTag2" name="hashTag2" value="${tagStr[1]}"></h5>
 			                                    </div>
 			                                </div>
 			                                 <div class="col-lg-3 col-md-3 col-6">
 			                                    <div class="listing__details__amenities__item">
-			                                        <p id="tagImg1"><img src="${pageContext.request.contextPath}/save/place/hashtag.png" style="width: 30px; height: 30px;"></p>
+			                                        <p id="tagImg1"><img src="${pageContext.request.contextPath}/resources/hashtag.png" style="width: 30px; height: 30px;"></p>
 														<h5><input type="text" id="hashTag3" name="hashTag3" value="${tagStr[2]}"></h5>
 			                                    </div>
 			                                </div>
 			                                 <div class="col-lg-3 col-md-3 col-6">
 			                                    <div class="listing__details__amenities__item">
-			                                        <p id="tagImg1"><img src="${pageContext.request.contextPath}/save/place/hashtag.png" style="width: 30px; height: 30px;"></p>
+			                                        <p id="tagImg1"><img src="${pageContext.request.contextPath}/resources/hashtag.png" style="width: 30px; height: 30px;"></p>
 														<h5><input type="text" id="hashTag4" name="hashTag4" value="${tagStr[3]}"></h5>
 			                                    </div>
 			                                </div>
 			                                 <div class="col-lg-3 col-md-3 col-6">
 			                                    <div class="listing__details__amenities__item">
-			                                        <p id="tagImg1"><img src="${pageContext.request.contextPath}/save/place/hashtag.png" style="width: 30px; height: 30px;"></p>
+			                                        <p id="tagImg1"><img src="${pageContext.request.contextPath}/resources/hashtag.png" style="width: 30px; height: 30px;"></p>
 														<h5><input type="text" id="hashTag5" name="hashTag5" value="${tagStr[4]}"></h5>
 			                                    </div>
 			                                </div>
 			                                 <div class="col-lg-3 col-md-3 col-6">
 			                                    <div class="listing__details__amenities__item">
-			                                        <p id="tagImg1"><img src="${pageContext.request.contextPath}/save/place/hashtag.png" style="width: 30px; height: 30px;"></p>
+			                                        <p id="tagImg1"><img src="${pageContext.request.contextPath}/resources/hashtag.png" style="width: 30px; height: 30px;"></p>
 														<h5><input type="text" id="hashTag6" name="hashTag6" value="${tagStr[5]}"></h5>
 			                                    </div>
 			                                </div>
 			                                 <div class="col-lg-3 col-md-3 col-6">
 			                                    <div class="listing__details__amenities__item">
-			                                        <p id="tagImg1"><img src="${pageContext.request.contextPath}/save/place/hashtag.png" style="width: 30px; height: 30px;"></p>
+			                                        <p id="tagImg1"><img src="${pageContext.request.contextPath}/resources/hashtag.png" style="width: 30px; height: 30px;"></p>
 														<h5><input type="text" id="hashTag7" name="hashTag7" value="${tagStr[6]}"></h5>
 			                                    </div>
 			                                </div>
 			                                 <div class="col-lg-3 col-md-3 col-6">
 			                                    <div class="listing__details__amenities__item">
-			                                        <p id="tagImg1"><img src="${pageContext.request.contextPath}/save/place/hashtag.png" style="width: 30px; height: 30px;"></p>
+			                                        <p id="tagImg1"><img src="${pageContext.request.contextPath}/resources/hashtag.png" style="width: 30px; height: 30px;"></p>
 														<h5><input type="text" id="hashTag8" name="hashTag8" value="${tagStr[7]}"></h5>
 			                                    </div>
 			                                </div>

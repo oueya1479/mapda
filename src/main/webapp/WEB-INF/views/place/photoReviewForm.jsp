@@ -82,7 +82,7 @@ $(function(){
                          	<div class="col-md-10 col-md-offset-3" style="margin-left: 100px;">   
                              <div class="blog__item">
                                     <div class="blog__item__text">
-										<img src="${pageContext.request.contextPath}/save/place/dadadadada.png" style="float:left; width: 100px; height: 100px; margin-right: 10px;" >
+										<img src="${pageContext.request.contextPath}/resources/dadadadada.png" style="float:left; width: 100px; height: 100px; margin-right: 10px;" >
 										  <span style="margin-top:20px;font-size:18px;" >
 										  <span style="color: red;">포토리뷰는 (포인트/쿠폰)와 관련되어 있는 부분으로 관리자의 주요 관리 항목 입니다.</span><p>
                                        	포토리뷰에서 <span style="color: red;">사진첨부는 필수</span> 입니다. 또한 포토리뷰는 등록하신 이후 사진을 수정하기 위해서는

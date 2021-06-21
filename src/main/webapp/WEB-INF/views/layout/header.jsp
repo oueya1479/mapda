@@ -54,7 +54,7 @@ a {
 										href="${pageContext.request.contextPath}/map/subMaps">Subscribed
 											Maps</a></li>
 									<li><a
-										href="${pageContext.request.contextPath}/place/likePlace">Like
+										href="${pageContext.request.contextPath}/place/likePlace">Liked
 											Places</a></li>
 
 								</ul></li>

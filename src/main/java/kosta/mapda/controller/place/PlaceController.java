@@ -59,8 +59,16 @@ public class PlaceController {
 		int starAvgPer=0;
 		
 		// hidden place 인지 확인
-		Member mem = (Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		System.out.println("mem.getMemPaystatus() = " + mem.getMemPaystatus());
+		Member mem = new Member();
+		if (!SecurityContextHolder.getContext()	.getAuthentication()	.getPrincipal().equals("anonymousUser")) {
+			    Member member = (Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			    mem = member;
+			    
+		        } else {
+	        	String memb = "anonymousUser";
+			}
+		//Member mem = (Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		//System.out.println("mem.getMemPaystatus() = " + mem.getMemPaystatus());
 		
 		Place place = placeService.selectBy(placeNo);
 		System.out.println("place.getPlaceHidden() = " +place.getPlaceHidden());
@@ -198,7 +206,7 @@ public class PlaceController {
 		List<PlacePhotoReviewPhoto> pprpList = new ArrayList<PlacePhotoReviewPhoto>();
 		
 		ServletContext application = session.getServletContext();
-		String path = application.getRealPath("/WEB-INF/save");
+		String path = application.getRealPath("/resources");	//src=pageContext / resources/파일 이름
 		for(MultipartFile mf : fileList) {
 			if(mf.getSize()>0) {
 				PlacePhotoReviewPhoto photo = new PlacePhotoReviewPhoto();
@@ -301,7 +309,7 @@ public class PlaceController {
 		List<PlacePhoto> photoList = new ArrayList<PlacePhoto>();
 		
 		ServletContext application = session.getServletContext();
-		String path = application.getRealPath("/WEB-INF/save");
+		String path = application.getRealPath("/resources");
 		
 		for(MultipartFile mf : fileList) {
 			if(mf.getSize()>0) {
@@ -384,7 +392,7 @@ public class PlaceController {
 		List<PlacePhoto> photoList = new ArrayList<PlacePhoto>();
 		
 		ServletContext application = session.getServletContext();
-		String path = application.getRealPath("/WEB-INF/save");
+		String path = application.getRealPath("/resources");
 		
 		for(MultipartFile mf : fileList) {
 			if(mf.getSize()>0) {

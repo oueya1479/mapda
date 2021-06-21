@@ -6,12 +6,14 @@
 
 <head>
 <style>
-@import url('https://fonts.googleapis.com/css?family=Nanum+Myeongjo&display=swap');
+@import
+	url('https://fonts.googleapis.com/css?family=Nanum+Myeongjo&display=swap')
+	;
 
-
-h1,h2,h3,h4,h5,h6,p,a{font-family: 'Nanum Myeongjo', serif; font-weight: bold;}
-
-
+h1, h2, h3, h4, h5, h6, p, a {
+	font-family: 'Nanum Myeongjo', serif;
+	font-weight: bold;
+}
 </style>
 </head>
 
@@ -25,37 +27,45 @@ h1,h2,h3,h4,h5,h6,p,a{font-family: 'Nanum Myeongjo', serif; font-weight: bold;}
 				<div class="col-lg-12">
 					<div class="hero__text">
 						<div class="section-title">
-							<h1 style="color:white;">Make Your Own Maps In Mapda</h1>
-							<p style="color:black;">1.118.940.376 places are waiting for you</p><p><br><p><p>
+							<h1 style="color: white;">Make Your Own Maps In Mapda</h1>
+							<p style="color: black;">1.118.940.376 places are waiting for
+								you</p>
+							<p>
+								<br>
+							<p>
+							<p>
 						</div>
 						<div class="hero__search__form">
-							<form action="${pageContext.request.contextPath}/map/selectedMaps" method="post">
-								<input type="text" name="keyWord" style="width:685px">
+							<form
+								action="${pageContext.request.contextPath}/map/selectedMaps"
+								method="post">
+								<input type="text" name="keyWord" style="width: 685px">
 								<div class="select__option">
-								<div class="nice-select" >
-									<select name="categoryNo">
-										<option value="0">Choose Categories</option>
-										<option value="1">맛집</option>
-										<option value="2">여행</option>
-										<option value="3">카페</option>
-										<option value="4">힐링</option>
-										<option value="5">자연</option>
-										<option value="6">액티비티</option>
-										<option value="7">쇼핑</option>
-										<option value="8">문화</option>
-										<option value="9">산책</option>
-										<option value="10">야경</option>
-										<option value="11">명소</option>
-										<option value="12">반려동물</option>
-										<option value="13">데이트</option>
-										<option value="14">드라이브</option>
-									</select>
+									<div class="nice-select">
+										<select name="categoryNo">
+											<option value="0">Choose Categories</option>
+											<option value="1">맛집</option>
+											<option value="2">여행</option>
+											<option value="3">카페</option>
+											<option value="4">힐링</option>
+											<option value="5">자연</option>
+											<option value="6">액티비티</option>
+											<option value="7">쇼핑</option>
+											<option value="8">문화</option>
+											<option value="9">산책</option>
+											<option value="10">야경</option>
+											<option value="11">명소</option>
+											<option value="12">반려동물</option>
+											<option value="13">데이트</option>
+											<option value="14">드라이브</option>
+										</select>
 									</div>
 								</div>
-								
+
 								<button type="submit">Explore Now</button>
 							</form>
-						</div><%-- 
+						</div>
+						<%-- 
 						<ul class="hero__categories__tags">
 							<li><a href="#"><img
 									src="${pageContext.request.contextPath}/img/hero/cat-1.png"
@@ -84,56 +94,7 @@ h1,h2,h3,h4,h5,h6,p,a{font-family: 'Nanum Myeongjo', serif; font-weight: bold;}
 	<!-- Hero Section End -->
 
 	<!-- Categories Section Begin -->
-	<section class="categories spad">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-12">
-					<div class="section-title">
-						<h2>Popular Categories</h2>
-						<p>Mapda empowers travelers who are giving back on their trips
-							in ways big and small</p>
-					</div>
-					<div class="categories__item__list">
-						<div class="categories__item">
-							<img
-								src="${pageContext.request.contextPath}/img/categories/cat-1.png"
-								alt="">
-							<h5>Food & Drink</h5>
-							<span>78 Listings</span>
-						</div>
-						<div class="categories__item">
-							<img
-								src="${pageContext.request.contextPath}/img/categories/cat-2.png"
-								alt="">
-							<h5>Restaurent</h5>
-							<span>32 Listings</span>
-						</div>
-						<div class="categories__item">
-							<img
-								src="${pageContext.request.contextPath}/img/categories/cat-3.png"
-								alt="">
-							<h5>Hotels</h5>
-							<span>16 Listings</span>
-						</div>
-						<div class="categories__item">
-							<img
-								src="${pageContext.request.contextPath}/img/categories/cat-4.png"
-								alt="">
-							<h5>Beauty & Spa</h5>
-							<span>55 Listings</span>
-						</div>
-						<div class="categories__item">
-							<img
-								src="${pageContext.request.contextPath}/img/categories/cat-5.png"
-								alt="">
-							<h5>Shopping</h5>
-							<span>23 Listings</span>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
+
 	<!-- Categories Section End -->
 
 	<!-- Most Search Section Begin -->
@@ -158,7 +119,7 @@ h1,h2,h3,h4,h5,h6,p,a{font-family: 'Nanum Myeongjo', serif; font-weight: bold;}
 							</a></li>
 							<li class="nav-item"><a class="nav-link" data-toggle="tab"
 								href="#tabs-2" role="tab"> <span class="flaticon-030-kebab"></span>
-									Shopping
+									Cafe
 							</a></li>
 							<li class="nav-item"><a class="nav-link" data-toggle="tab"
 								href="#tabs-3" role="tab"> <span
@@ -172,10 +133,7 @@ h1,h2,h3,h4,h5,h6,p,a{font-family: 'Nanum Myeongjo', serif; font-weight: bold;}
 								href="#tabs-5" role="tab"> <span
 									class="flaticon-038-take-away"></span> Event
 							</a></li>
-							<li class="nav-item"><a class="nav-link" data-toggle="tab"
-								href="#tabs-6" role="tab"> <span
-									class="flaticon-031-delivery"></span> Rental
-							</a></li>
+
 						</ul>
 					</div>
 					<div class="tab-content">
@@ -184,11 +142,9 @@ h1,h2,h3,h4,h5,h6,p,a{font-family: 'Nanum Myeongjo', serif; font-weight: bold;}
 								<div class="col-lg-4 col-md-6">
 									<div class="listing__item">
 										<div class="listing__item__pic set-bg"
-											data-setbg="${pageContext.request.contextPath}/img/listing/list-1.jpg">
-											<img
-												src="${pageContext.request.contextPath}/img/listing/list_icon-1.png"
-												alt="">
-											<div class="listing__item__pic__tag">Popular</div>
+											data-setbg="${pageContext.request.contextPath}/resources/psdf.jpg">
+											
+											<div class="listing__item__pic__tag">맛집</div>
 											<div class="listing__item__pic__btns">
 												<a href="#"><span class="icon_zoom-in_alt"></span></a> <a
 													href="#"><span class="icon_heart_alt"></span></a>
@@ -196,28 +152,30 @@ h1,h2,h3,h4,h5,h6,p,a{font-family: 'Nanum Myeongjo', serif; font-weight: bold;}
 										</div>
 										<div class="listing__item__text">
 											<div class="listing__item__text__inside">
-												<h5>Chinese Sausage Restaurant</h5>
+												<h5>미슐랭 맛집 in 서울</h5>
 												<div class="listing__item__text__rating">
-													<div class="listing__item__rating__star">
-														<span class="icon_star"></span> <span class="icon_star"></span>
-														<span class="icon_star"></span> <span class="icon_star"></span>
-														<span class="icon_star-half_alt"></span>
-													</div>
-													<h6>$40 - $70</h6>
+													
+													<h6> </h6>
 												</div>
 												<ul>
-													<li><span class="icon_pin_alt"></span> 236 Littleton
+													<li><span></span> 236 Littleton
 														St. New Philadelphia, Ohio, United States</li>
-													<li><span class="icon_phone"></span> (+12) 345-678-910</li>
+													<li>  </span> (+12) 345-678-910</li>
 												</ul>
 											</div>
 											<div class="listing__item__text__info">
 												<div class="listing__item__text__info__left">
 													<img
-														src="${pageContext.request.contextPath}/img/listing/list_small_icon-1.png"
-														alt=""> <span>Restaurant</span>
+														src="${pageContext.request.contextPath}/img/map/heart.png"
+														alt=""> 123<span></span>
 												</div>
-												<div class="listing__item__text__info__right">Open Now</div>
+												<div class="listing__item__text__info__right">
+													<p style="text-align: right;">
+														<img
+															src="${pageContext.request.contextPath}/img/map/view.png"
+															alt="" style="height: 20px; width: 20px;"> 455
+												</div>
+
 											</div>
 										</div>
 									</div>
@@ -225,11 +183,9 @@ h1,h2,h3,h4,h5,h6,p,a{font-family: 'Nanum Myeongjo', serif; font-weight: bold;}
 								<div class="col-lg-4 col-md-6">
 									<div class="listing__item">
 										<div class="listing__item__pic set-bg"
-											data-setbg="${pageContext.request.contextPath}/img/listing/list-2.jpg">
-											<img
-												src="${pageContext.request.contextPath}/img/listing/list_icon-2.png"
-												alt="">
-											<div class="listing__item__pic__tag top_rate">Top Rate</div>
+											data-setbg="${pageContext.request.contextPath}/resources/coff.png">
+											
+											<div class="listing__item__pic__tag">카페</div>
 											<div class="listing__item__pic__btns">
 												<a href="#"><span class="icon_zoom-in_alt"></span></a> <a
 													href="#"><span class="icon_heart_alt"></span></a>
@@ -237,151 +193,30 @@ h1,h2,h3,h4,h5,h6,p,a{font-family: 'Nanum Myeongjo', serif; font-weight: bold;}
 										</div>
 										<div class="listing__item__text">
 											<div class="listing__item__text__inside">
-												<h5>Shrimp floured and fried</h5>
+												<h5>인생샷 남기기 좋은 카페</h5>
 												<div class="listing__item__text__rating">
-													<div class="listing__item__rating__star">
-														<span class="icon_star"></span> <span class="icon_star"></span>
-														<span class="icon_star"></span> <span class="icon_star"></span>
-														<span class="icon_star-half_alt"></span>
-													</div>
-													<h6>$40 - $70</h6>
+													
+													<h6> </h6>
 												</div>
 												<ul>
-													<li><span class="icon_pin_alt"></span> 1012 Vesper Dr.
-														Columbus, Georgia(GA), United States</li>
-													<li><span class="icon_phone"></span> (+12) 345-678-910</li>
-												</ul>
-											</div>
-											<div class="listing__item__text__info">
-												<div class="listing__item__text__info__left">
-													<img
-														src="${pageContext.request.contextPath}/img/listing/list_small_icon-2.png"
-														alt=""> <span>Food & Drink</span>
-												</div>
-												<div class="listing__item__text__info__right closed">Closed</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-lg-4 col-md-6">
-									<div class="listing__item">
-										<div class="listing__item__pic set-bg"
-											data-setbg="${pageContext.request.contextPath}/img/listing/list-3.jpg">
-											<img
-												src="${pageContext.request.contextPath}/img/listing/list_icon-3.png"
-												alt="">
-											<div class="listing__item__pic__tag">Popular</div>
-											<div class="listing__item__pic__btns">
-												<a href="#"><span class="icon_zoom-in_alt"></span></a> <a
-													href="#"><span class="icon_heart_alt"></span></a>
-											</div>
-										</div>
-										<div class="listing__item__text">
-											<div class="listing__item__text__inside">
-												<h5>Sweet and sour pork ribs</h5>
-												<div class="listing__item__text__rating">
-													<div class="listing__item__rating__star">
-														<span class="icon_star"></span> <span class="icon_star"></span>
-														<span class="icon_star"></span> <span class="icon_star"></span>
-														<span class="icon_star-half_alt"></span>
-													</div>
-													<h6>$40 - $70</h6>
-												</div>
-												<ul>
-													<li><span class="icon_pin_alt"></span> 251 Wiley St.
-														Forks, Washington(WA), United States</li>
-													<li><span class="icon_phone"></span> (+12) 345-678-910</li>
-												</ul>
-											</div>
-											<div class="listing__item__text__info">
-												<div class="listing__item__text__info__left">
-													<img
-														src="${pageContext.request.contextPath}/img/listing/list_small_icon-1.png"
-														alt=""> <span>Restaurant</span>
-												</div>
-												<div class="listing__item__text__info__right">Open Now</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-lg-4 col-md-6">
-									<div class="listing__item">
-										<div class="listing__item__pic set-bg"
-											data-setbg="${pageContext.request.contextPath}/img/listing/list-4.jpg">
-											<img
-												src="${pageContext.request.contextPath}/img/listing/list_icon-4.png"
-												alt="">
-											<div class="listing__item__pic__tag">Popular</div>
-											<div class="listing__item__pic__btns">
-												<a href="#"><span class="icon_zoom-in_alt"></span></a> <a
-													href="#"><span class="icon_heart_alt"></span></a>
-											</div>
-										</div>
-										<div class="listing__item__text">
-											<div class="listing__item__text__inside">
-												<h5>Crab fried with tamarind</h5>
-												<div class="listing__item__text__rating">
-													<div class="listing__item__rating__star">
-														<span class="icon_star"></span> <span class="icon_star"></span>
-														<span class="icon_star"></span> <span class="icon_star"></span>
-														<span class="icon_star-half_alt"></span>
-													</div>
-													<h6>$40 - $70</h6>
-												</div>
-												<ul>
-													<li><span class="icon_pin_alt"></span> 14320 Keenes
-														Mill Rd. Cottondale, Alabama(AL), United States</li>
-													<li><span class="icon_phone"></span> (+12) 345-678-910</li>
-												</ul>
-											</div>
-											<div class="listing__item__text__info">
-												<div class="listing__item__text__info__left">
-													<img
-														src="${pageContext.request.contextPath}/img/listing/list_small_icon-3.png"
-														alt=""> <span>Hotel</span>
-												</div>
-												<div class="listing__item__text__info__right closed">Closed</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-lg-4 col-md-6">
-									<div class="listing__item">
-										<div class="listing__item__pic set-bg"
-											data-setbg="${pageContext.request.contextPath}/img/listing/list-5.jpg">
-											<img
-												src="${pageContext.request.contextPath}/img/listing/list_icon-5.png"
-												alt="">
-											<div class="listing__item__pic__tag hot_deal">Hot Deal</div>
-											<div class="listing__item__pic__btns">
-												<a href="#"><span class="icon_zoom-in_alt"></span></a> <a
-													href="#"><span class="icon_heart_alt"></span></a>
-											</div>
-										</div>
-										<div class="listing__item__text">
-											<div class="listing__item__text__inside">
-												<h5>Tortoise grilled on salt</h5>
-												<div class="listing__item__text__rating">
-													<div class="listing__item__rating__star">
-														<span class="icon_star"></span> <span class="icon_star"></span>
-														<span class="icon_star"></span> <span class="icon_star"></span>
-														<span class="icon_star-half_alt"></span>
-													</div>
-													<h6>$40 - $70</h6>
-												</div>
-												<ul>
-													<li><span class="icon_pin_alt"></span> 236 Littleton
+													<li> </span> 236 Littleton
 														St. New Philadelphia, Ohio, United States</li>
-													<li><span class="icon_phone"></span> (+12) 345-678-910</li>
+													<li>  </span> (+12) 345-678-910</li>
 												</ul>
 											</div>
 											<div class="listing__item__text__info">
 												<div class="listing__item__text__info__left">
 													<img
-														src="${pageContext.request.contextPath}/img/listing/list_small_icon-4.png"
-														alt=""> <span>Shopping</span>
+														src="${pageContext.request.contextPath}/img/map/heart.png"
+														alt=""> <span></span>342
 												</div>
-												<div class="listing__item__text__info__right">Open Now</div>
+												<div class="listing__item__text__info__right">
+													<p style="text-align: right;">
+														<img
+															src="${pageContext.request.contextPath}/img/map/view.png"
+															alt="" style="height: 20px; width: 20px;"> 356
+												</div>
+
 											</div>
 										</div>
 									</div>
@@ -389,11 +224,9 @@ h1,h2,h3,h4,h5,h6,p,a{font-family: 'Nanum Myeongjo', serif; font-weight: bold;}
 								<div class="col-lg-4 col-md-6">
 									<div class="listing__item">
 										<div class="listing__item__pic set-bg"
-											data-setbg="${pageContext.request.contextPath}/img/listing/list-6.jpg">
-											<img
-												src="${pageContext.request.contextPath}/img/listing/list_icon-6.png"
-												alt="">
-											<div class="listing__item__pic__tag">Popular</div>
+											data-setbg="${pageContext.request.contextPath}/resources/nigh.jpg">
+											
+											<div class="listing__item__pic__tag">야경</div>
 											<div class="listing__item__pic__btns">
 												<a href="#"><span class="icon_zoom-in_alt"></span></a> <a
 													href="#"><span class="icon_heart_alt"></span></a>
@@ -401,73 +234,30 @@ h1,h2,h3,h4,h5,h6,p,a{font-family: 'Nanum Myeongjo', serif; font-weight: bold;}
 										</div>
 										<div class="listing__item__text">
 											<div class="listing__item__text__inside">
-												<h5>Fish cooked with fishsauce</h5>
+												<h5>서울 야경명소 모아모아</h5>
 												<div class="listing__item__text__rating">
-													<div class="listing__item__rating__star">
-														<span class="icon_star"></span> <span class="icon_star"></span>
-														<span class="icon_star"></span> <span class="icon_star"></span>
-														<span class="icon_star-half_alt"></span>
-													</div>
-													<h6>$40 - $70</h6>
+													
+													<h6> </h6>
 												</div>
 												<ul>
-													<li><span class="icon_pin_alt"></span> 2604 E Drachman
+													<li> </span> 2604 E Drachman
 														St. Tucson, Arizona, United States</li>
-													<li><span class="icon_phone"></span> (+12) 345-678-910</li>
+													<li>  </span> (+12) 345-678-910</li>
 												</ul>
 											</div>
 											<div class="listing__item__text__info">
 												<div class="listing__item__text__info__left">
 													<img
-														src="${pageContext.request.contextPath}/img/listing/list_small_icon-3.png"
-														alt=""> <span>Hotel</span>
+														src="${pageContext.request.contextPath}/img/map/heart.png"
+														alt=""> <span></span>342
 												</div>
-												<div class="listing__item__text__info__right">Open Now</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="tab-pane" id="tabs-2" role="tabpanel">
-							<div class="row">
-								<div class="col-lg-4 col-md-6">
-									<div class="listing__item">
-										<div class="listing__item__pic set-bg"
-											data-setbg="${pageContext.request.contextPath}/img/listing/list-1.jpg">
-											<img
-												src="${pageContext.request.contextPath}/img/listing/list_icon-1.png"
-												alt="">
-											<div class="listing__item__pic__tag">Popular</div>
-											<div class="listing__item__pic__btns">
-												<a href="#"><span class="icon_zoom-in_alt"></span></a> <a
-													href="#"><span class="icon_heart_alt"></span></a>
-											</div>
-										</div>
-										<div class="listing__item__text">
-											<div class="listing__item__text__inside">
-												<h5>Chinese Sausage Restaurant</h5>
-												<div class="listing__item__text__rating">
-													<div class="listing__item__rating__star">
-														<span class="icon_star"></span> <span class="icon_star"></span>
-														<span class="icon_star"></span> <span class="icon_star"></span>
-														<span class="icon_star-half_alt"></span>
-													</div>
-													<h6>$40 - $70</h6>
+												<div class="listing__item__text__info__right">
+													<p style="text-align: right;">
+														<img
+															src="${pageContext.request.contextPath}/img/map/view.png"
+															alt="" style="height: 20px; width: 20px;"> 443
 												</div>
-												<ul>
-													<li><span class="icon_pin_alt"></span> 236 Littleton
-														St. New Philadelphia, Ohio, United States</li>
-													<li><span class="icon_phone"></span> (+12) 345-678-910</li>
-												</ul>
-											</div>
-											<div class="listing__item__text__info">
-												<div class="listing__item__text__info__left">
-													<img
-														src="${pageContext.request.contextPath}/img/listing/list_small_icon-1.png"
-														alt=""> <span>Restaurant</span>
-												</div>
-												<div class="listing__item__text__info__right">Open Now</div>
+
 											</div>
 										</div>
 									</div>
@@ -475,93 +265,9 @@ h1,h2,h3,h4,h5,h6,p,a{font-family: 'Nanum Myeongjo', serif; font-weight: bold;}
 								<div class="col-lg-4 col-md-6">
 									<div class="listing__item">
 										<div class="listing__item__pic set-bg"
-											data-setbg="${pageContext.request.contextPath}/img/listing/list-2.jpg">
-											<img
-												src="${pageContext.request.contextPath}/img/listing/list_icon-2.png"
-												alt="">
-											<div class="listing__item__pic__tag top_rate">Top Rate</div>
-											<div class="listing__item__pic__btns">
-												<a href="#"><span class="icon_zoom-in_alt"></span></a> <a
-													href="#"><span class="icon_heart_alt"></span></a>
-											</div>
-										</div>
-										<div class="listing__item__text">
-											<div class="listing__item__text__inside">
-												<h5>Shrimp floured and fried</h5>
-												<div class="listing__item__text__rating">
-													<div class="listing__item__rating__star">
-														<span class="icon_star"></span> <span class="icon_star"></span>
-														<span class="icon_star"></span> <span class="icon_star"></span>
-														<span class="icon_star-half_alt"></span>
-													</div>
-													<h6>$40 - $70</h6>
-												</div>
-												<ul>
-													<li><span class="icon_pin_alt"></span> 1012 Vesper Dr.
-														Columbus, Georgia(GA), United States</li>
-													<li><span class="icon_phone"></span> (+12) 345-678-910</li>
-												</ul>
-											</div>
-											<div class="listing__item__text__info">
-												<div class="listing__item__text__info__left">
-													<img
-														src="${pageContext.request.contextPath}/img/listing/list_small_icon-2.png"
-														alt=""> <span>Food & Drink</span>
-												</div>
-												<div class="listing__item__text__info__right closed">Closed</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-lg-4 col-md-6">
-									<div class="listing__item">
-										<div class="listing__item__pic set-bg"
-											data-setbg="${pageContext.request.contextPath}/img/listing/list-3.jpg">
-											<img
-												src="${pageContext.request.contextPath}/img/listing/list_icon-3.png"
-												alt="">
-											<div class="listing__item__pic__tag">Popular</div>
-											<div class="listing__item__pic__btns">
-												<a href="#"><span class="icon_zoom-in_alt"></span></a> <a
-													href="#"><span class="icon_heart_alt"></span></a>
-											</div>
-										</div>
-										<div class="listing__item__text">
-											<div class="listing__item__text__inside">
-												<h5>Sweet and sour pork ribs</h5>
-												<div class="listing__item__text__rating">
-													<div class="listing__item__rating__star">
-														<span class="icon_star"></span> <span class="icon_star"></span>
-														<span class="icon_star"></span> <span class="icon_star"></span>
-														<span class="icon_star-half_alt"></span>
-													</div>
-													<h6>$40 - $70</h6>
-												</div>
-												<ul>
-													<li><span class="icon_pin_alt"></span> 251 Wiley St.
-														Forks, Washington(WA), United States</li>
-													<li><span class="icon_phone"></span> (+12) 345-678-910</li>
-												</ul>
-											</div>
-											<div class="listing__item__text__info">
-												<div class="listing__item__text__info__left">
-													<img
-														src="${pageContext.request.contextPath}/img/listing/list_small_icon-1.png"
-														alt=""> <span>Restaurant</span>
-												</div>
-												<div class="listing__item__text__info__right">Open Now</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-lg-4 col-md-6">
-									<div class="listing__item">
-										<div class="listing__item__pic set-bg"
-											data-setbg="${pageContext.request.contextPath}/img/listing/list-4.jpg">
-											<img
-												src="${pageContext.request.contextPath}/img/listing/list_icon-4.png"
-												alt="">
-											<div class="listing__item__pic__tag">Popular</div>
+											data-setbg="${pageContext.request.contextPath}/resources/summ.jpg">
+											
+											<div class="listing__item__pic__tag">여행</div>
 											<div class="listing__item__pic__btns">
 												<a href="#"><span class="icon_zoom-in_alt"></span></a> <a
 													href="#"><span class="icon_heart_alt"></span></a>
@@ -571,26 +277,28 @@ h1,h2,h3,h4,h5,h6,p,a{font-family: 'Nanum Myeongjo', serif; font-weight: bold;}
 											<div class="listing__item__text__inside">
 												<h5>Crab fried with tamarind</h5>
 												<div class="listing__item__text__rating">
-													<div class="listing__item__rating__star">
-														<span class="icon_star"></span> <span class="icon_star"></span>
-														<span class="icon_star"></span> <span class="icon_star"></span>
-														<span class="icon_star-half_alt"></span>
-													</div>
-													<h6>$40 - $70</h6>
+													
+													<h6> </h6>
 												</div>
 												<ul>
-													<li><span class="icon_pin_alt"></span> 14320 Keenes
+													<li> </span> 14320 Keenes
 														Mill Rd. Cottondale, Alabama(AL), United States</li>
-													<li><span class="icon_phone"></span> (+12) 345-678-910</li>
+													<li>  </span> (+12) 345-678-910</li>
 												</ul>
 											</div>
 											<div class="listing__item__text__info">
 												<div class="listing__item__text__info__left">
 													<img
-														src="${pageContext.request.contextPath}/img/listing/list_small_icon-3.png"
-														alt=""> <span>Hotel</span>
+														src="${pageContext.request.contextPath}/img/map/heart.png"
+														alt=""> <span></span> 934
 												</div>
-												<div class="listing__item__text__info__right closed">Closed</div>
+												<div class="listing__item__text__info__right">
+													<p style="text-align: right;">
+														<img
+															src="${pageContext.request.contextPath}/img/map/view.png"
+															alt="" style="height: 20px; width: 20px;"> 1023
+												</div>
+
 											</div>
 										</div>
 									</div>
@@ -598,11 +306,9 @@ h1,h2,h3,h4,h5,h6,p,a{font-family: 'Nanum Myeongjo', serif; font-weight: bold;}
 								<div class="col-lg-4 col-md-6">
 									<div class="listing__item">
 										<div class="listing__item__pic set-bg"
-											data-setbg="${pageContext.request.contextPath}/img/listing/list-5.jpg">
-											<img
-												src="${pageContext.request.contextPath}/img/listing/list_icon-5.png"
-												alt="">
-											<div class="listing__item__pic__tag hot_deal">Hot Deal</div>
+											data-setbg="${pageContext.request.contextPath}/resources/fl.jpg">
+											
+											<div class="listing__item__pic__tag">힐링</div>
 											<div class="listing__item__pic__btns">
 												<a href="#"><span class="icon_zoom-in_alt"></span></a> <a
 													href="#"><span class="icon_heart_alt"></span></a>
@@ -610,44 +316,41 @@ h1,h2,h3,h4,h5,h6,p,a{font-family: 'Nanum Myeongjo', serif; font-weight: bold;}
 										</div>
 										<div class="listing__item__text">
 											<div class="listing__item__text__inside">
-												<h5>Tortoise grilled on salt</h5>
+												<h5>지금 떠나고 싶은 제주</h5>
 												<div class="listing__item__text__rating">
-													<div class="listing__item__rating__star">
-														<span class="icon_star"></span> <span class="icon_star"></span>
-														<span class="icon_star"></span> <span class="icon_star"></span>
-														<span class="icon_star-half_alt"></span>
-													</div>
-													<h6>$40 - $70</h6>
+													
+													<h6> </h6>
 												</div>
 												<ul>
-													<li><span class="icon_pin_alt"></span> 236 Littleton
+													<li> </span> 236 Littleton
 														St. New Philadelphia, Ohio, United States</li>
-													<li><span class="icon_phone"></span> (+12) 345-678-910</li>
+													<li>  </span> (+12) 345-678-910</li>
 												</ul>
 											</div>
 											<div class="listing__item__text__info">
 												<div class="listing__item__text__info__left">
 													<img
-														src="${pageContext.request.contextPath}/img/listing/list_small_icon-4.png"
-														alt=""> <span>Shopping</span>
+														src="${pageContext.request.contextPath}/img/map/heart.png"
+														alt=""> <span></span> 232
 												</div>
-												<div class="listing__item__text__info__right">Open Now</div>
+												<div class="listing__item__text__info__right">
+													<p style="text-align: right;">
+														<img
+															src="${pageContext.request.contextPath}/img/map/view.png"
+															alt="" style="height: 20px; width: 20px;"> 453
+												</div>
+
 											</div>
 										</div>
 									</div>
 								</div>
-							</div>
-						</div>
-						<div class="tab-pane" id="tabs-3" role="tabpanel">
-							<div class="row">
+								
 								<div class="col-lg-4 col-md-6">
 									<div class="listing__item">
 										<div class="listing__item__pic set-bg"
-											data-setbg="${pageContext.request.contextPath}/img/listing/list-3.jpg">
-											<img
-												src="${pageContext.request.contextPath}/img/listing/list_icon-3.png"
-												alt="">
-											<div class="listing__item__pic__tag">Popular</div>
+											data-setbg="${pageContext.request.contextPath}/resources/cupl.png">
+											
+											<div class="listing__item__pic__tag">데이트</div>
 											<div class="listing__item__pic__btns">
 												<a href="#"><span class="icon_zoom-in_alt"></span></a> <a
 													href="#"><span class="icon_heart_alt"></span></a>
@@ -655,702 +358,37 @@ h1,h2,h3,h4,h5,h6,p,a{font-family: 'Nanum Myeongjo', serif; font-weight: bold;}
 										</div>
 										<div class="listing__item__text">
 											<div class="listing__item__text__inside">
-												<h5>Sweet and sour pork ribs</h5>
+												<h5>솔로가 알려주는 데이트 코스 모음</h5>
 												<div class="listing__item__text__rating">
-													<div class="listing__item__rating__star">
-														<span class="icon_star"></span> <span class="icon_star"></span>
-														<span class="icon_star"></span> <span class="icon_star"></span>
-														<span class="icon_star-half_alt"></span>
-													</div>
-													<h6>$40 - $70</h6>
+													
+													<h6> </h6>
 												</div>
 												<ul>
-													<li><span class="icon_pin_alt"></span> 251 Wiley St.
+													<li> </span> 251 Wiley St.
 														Forks, Washington(WA), United States</li>
-													<li><span class="icon_phone"></span> (+12) 345-678-910</li>
+													<li>  </span> (+12) 345-678-910</li>
 												</ul>
 											</div>
 											<div class="listing__item__text__info">
 												<div class="listing__item__text__info__left">
 													<img
-														src="${pageContext.request.contextPath}/img/listing/list_small_icon-1.png"
-														alt=""> <span>Restaurant</span>
+														src="${pageContext.request.contextPath}/img/map/heart.png"
+														alt=""> <span></span>453
 												</div>
-												<div class="listing__item__text__info__right">Open Now</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-lg-4 col-md-6">
-									<div class="listing__item">
-										<div class="listing__item__pic set-bg"
-											data-setbg="${pageContext.request.contextPath}/img/listing/list-4.jpg">
-											<img
-												src="${pageContext.request.contextPath}/img/listing/list_icon-4.png"
-												alt="">
-											<div class="listing__item__pic__tag">Popular</div>
-											<div class="listing__item__pic__btns">
-												<a href="#"><span class="icon_zoom-in_alt"></span></a> <a
-													href="#"><span class="icon_heart_alt"></span></a>
-											</div>
-										</div>
-										<div class="listing__item__text">
-											<div class="listing__item__text__inside">
-												<h5>Crab fried with tamarind</h5>
-												<div class="listing__item__text__rating">
-													<div class="listing__item__rating__star">
-														<span class="icon_star"></span> <span class="icon_star"></span>
-														<span class="icon_star"></span> <span class="icon_star"></span>
-														<span class="icon_star-half_alt"></span>
-													</div>
-													<h6>$40 - $70</h6>
+												<div class="listing__item__text__info__right">
+													<p style="text-align: right;">
+														<img
+															src="${pageContext.request.contextPath}/img/map/view.png"
+															alt="" style="height: 20px; width: 20px;"> 899
 												</div>
-												<ul>
-													<li><span class="icon_pin_alt"></span> 14320 Keenes
-														Mill Rd. Cottondale, Alabama(AL), United States</li>
-													<li><span class="icon_phone"></span> (+12) 345-678-910</li>
-												</ul>
-											</div>
-											<div class="listing__item__text__info">
-												<div class="listing__item__text__info__left">
-													<img
-														src="${pageContext.request.contextPath}/img/listing/list_small_icon-3.png"
-														alt=""> <span>Hotel</span>
-												</div>
-												<div class="listing__item__text__info__right closed">Closed</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-lg-4 col-md-6">
-									<div class="listing__item">
-										<div class="listing__item__pic set-bg"
-											data-setbg="${pageContext.request.contextPath}/img/listing/list-5.jpg">
-											<img
-												src="${pageContext.request.contextPath}/img/listing/list_icon-5.png"
-												alt="">
-											<div class="listing__item__pic__tag hot_deal">Hot Deal</div>
-											<div class="listing__item__pic__btns">
-												<a href="#"><span class="icon_zoom-in_alt"></span></a> <a
-													href="#"><span class="icon_heart_alt"></span></a>
-											</div>
-										</div>
-										<div class="listing__item__text">
-											<div class="listing__item__text__inside">
-												<h5>Tortoise grilled on salt</h5>
-												<div class="listing__item__text__rating">
-													<div class="listing__item__rating__star">
-														<span class="icon_star"></span> <span class="icon_star"></span>
-														<span class="icon_star"></span> <span class="icon_star"></span>
-														<span class="icon_star-half_alt"></span>
-													</div>
-													<h6>$40 - $70</h6>
-												</div>
-												<ul>
-													<li><span class="icon_pin_alt"></span> 236 Littleton
-														St. New Philadelphia, Ohio, United States</li>
-													<li><span class="icon_phone"></span> (+12) 345-678-910</li>
-												</ul>
-											</div>
-											<div class="listing__item__text__info">
-												<div class="listing__item__text__info__left">
-													<img
-														src="${pageContext.request.contextPath}/img/listing/list_small_icon-4.png"
-														alt=""> <span>Shopping</span>
-												</div>
-												<div class="listing__item__text__info__right">Open Now</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-lg-4 col-md-6">
-									<div class="listing__item">
-										<div class="listing__item__pic set-bg"
-											data-setbg="${pageContext.request.contextPath}/img/listing/list-6.jpg">
-											<img
-												src="${pageContext.request.contextPath}/img/listing/list_icon-6.png"
-												alt="">
-											<div class="listing__item__pic__tag">Popular</div>
-											<div class="listing__item__pic__btns">
-												<a href="#"><span class="icon_zoom-in_alt"></span></a> <a
-													href="#"><span class="icon_heart_alt"></span></a>
-											</div>
-										</div>
-										<div class="listing__item__text">
-											<div class="listing__item__text__inside">
-												<h5>Fish cooked with fishsauce</h5>
-												<div class="listing__item__text__rating">
-													<div class="listing__item__rating__star">
-														<span class="icon_star"></span> <span class="icon_star"></span>
-														<span class="icon_star"></span> <span class="icon_star"></span>
-														<span class="icon_star-half_alt"></span>
-													</div>
-													<h6>$40 - $70</h6>
-												</div>
-												<ul>
-													<li><span class="icon_pin_alt"></span> 2604 E Drachman
-														St. Tucson, Arizona, United States</li>
-													<li><span class="icon_phone"></span> (+12) 345-678-910</li>
-												</ul>
-											</div>
-											<div class="listing__item__text__info">
-												<div class="listing__item__text__info__left">
-													<img
-														src="${pageContext.request.contextPath}/img/listing/list_small_icon-3.png"
-														alt=""> <span>Hotel</span>
-												</div>
-												<div class="listing__item__text__info__right">Open Now</div>
+
 											</div>
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-						<div class="tab-pane" id="tabs-4" role="tabpanel">
-							<div class="row">
-								<div class="col-lg-4 col-md-6">
-									<div class="listing__item">
-										<div class="listing__item__pic set-bg"
-											data-setbg="${pageContext.request.contextPath}/img/listing/list-1.jpg">
-											<img
-												src="${pageContext.request.contextPath}/img/listing/list_icon-1.png"
-												alt="">
-											<div class="listing__item__pic__tag">Popular</div>
-											<div class="listing__item__pic__btns">
-												<a href="#"><span class="icon_zoom-in_alt"></span></a> <a
-													href="#"><span class="icon_heart_alt"></span></a>
-											</div>
-										</div>
-										<div class="listing__item__text">
-											<div class="listing__item__text__inside">
-												<h5>Chinese Sausage Restaurant</h5>
-												<div class="listing__item__text__rating">
-													<div class="listing__item__rating__star">
-														<span class="icon_star"></span> <span class="icon_star"></span>
-														<span class="icon_star"></span> <span class="icon_star"></span>
-														<span class="icon_star-half_alt"></span>
-													</div>
-													<h6>$40 - $70</h6>
-												</div>
-												<ul>
-													<li><span class="icon_pin_alt"></span> 236 Littleton
-														St. New Philadelphia, Ohio, United States</li>
-													<li><span class="icon_phone"></span> (+12) 345-678-910</li>
-												</ul>
-											</div>
-											<div class="listing__item__text__info">
-												<div class="listing__item__text__info__left">
-													<img
-														src="${pageContext.request.contextPath}/img/listing/list_small_icon-1.png"
-														alt=""> <span>Restaurant</span>
-												</div>
-												<div class="listing__item__text__info__right">Open Now</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-lg-4 col-md-6">
-									<div class="listing__item">
-										<div class="listing__item__pic set-bg"
-											data-setbg="${pageContext.request.contextPath}/img/listing/list-2.jpg">
-											<img
-												src="${pageContext.request.contextPath}/img/listing/list_icon-2.png"
-												alt="">
-											<div class="listing__item__pic__tag top_rate">Top Rate</div>
-											<div class="listing__item__pic__btns">
-												<a href="#"><span class="icon_zoom-in_alt"></span></a> <a
-													href="#"><span class="icon_heart_alt"></span></a>
-											</div>
-										</div>
-										<div class="listing__item__text">
-											<div class="listing__item__text__inside">
-												<h5>Shrimp floured and fried</h5>
-												<div class="listing__item__text__rating">
-													<div class="listing__item__rating__star">
-														<span class="icon_star"></span> <span class="icon_star"></span>
-														<span class="icon_star"></span> <span class="icon_star"></span>
-														<span class="icon_star-half_alt"></span>
-													</div>
-													<h6>$40 - $70</h6>
-												</div>
-												<ul>
-													<li><span class="icon_pin_alt"></span> 1012 Vesper Dr.
-														Columbus, Georgia(GA), United States</li>
-													<li><span class="icon_phone"></span> (+12) 345-678-910</li>
-												</ul>
-											</div>
-											<div class="listing__item__text__info">
-												<div class="listing__item__text__info__left">
-													<img
-														src="${pageContext.request.contextPath}/img/listing/list_small_icon-2.png"
-														alt=""> <span>Food & Drink</span>
-												</div>
-												<div class="listing__item__text__info__right closed">Closed</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-lg-4 col-md-6">
-									<div class="listing__item">
-										<div class="listing__item__pic set-bg"
-											data-setbg="${pageContext.request.contextPath}/img/listing/list-3.jpg">
-											<img
-												src="${pageContext.request.contextPath}/img/listing/list_icon-3.png"
-												alt="">
-											<div class="listing__item__pic__tag">Popular</div>
-											<div class="listing__item__pic__btns">
-												<a href="#"><span class="icon_zoom-in_alt"></span></a> <a
-													href="#"><span class="icon_heart_alt"></span></a>
-											</div>
-										</div>
-										<div class="listing__item__text">
-											<div class="listing__item__text__inside">
-												<h5>Sweet and sour pork ribs</h5>
-												<div class="listing__item__text__rating">
-													<div class="listing__item__rating__star">
-														<span class="icon_star"></span> <span class="icon_star"></span>
-														<span class="icon_star"></span> <span class="icon_star"></span>
-														<span class="icon_star-half_alt"></span>
-													</div>
-													<h6>$40 - $70</h6>
-												</div>
-												<ul>
-													<li><span class="icon_pin_alt"></span> 251 Wiley St.
-														Forks, Washington(WA), United States</li>
-													<li><span class="icon_phone"></span> (+12) 345-678-910</li>
-												</ul>
-											</div>
-											<div class="listing__item__text__info">
-												<div class="listing__item__text__info__left">
-													<img
-														src="${pageContext.request.contextPath}/img/listing/list_small_icon-1.png"
-														alt=""> <span>Restaurant</span>
-												</div>
-												<div class="listing__item__text__info__right">Open Now</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-lg-4 col-md-6">
-									<div class="listing__item">
-										<div class="listing__item__pic set-bg"
-											data-setbg="${pageContext.request.contextPath}/img/listing/list-6.jpg">
-											<img
-												src="${pageContext.request.contextPath}/img/listing/list_icon-6.png"
-												alt="">
-											<div class="listing__item__pic__tag">Popular</div>
-											<div class="listing__item__pic__btns">
-												<a href="#"><span class="icon_zoom-in_alt"></span></a> <a
-													href="#"><span class="icon_heart_alt"></span></a>
-											</div>
-										</div>
-										<div class="listing__item__text">
-											<div class="listing__item__text__inside">
-												<h5>Fish cooked with fishsauce</h5>
-												<div class="listing__item__text__rating">
-													<div class="listing__item__rating__star">
-														<span class="icon_star"></span> <span class="icon_star"></span>
-														<span class="icon_star"></span> <span class="icon_star"></span>
-														<span class="icon_star-half_alt"></span>
-													</div>
-													<h6>$40 - $70</h6>
-												</div>
-												<ul>
-													<li><span class="icon_pin_alt"></span> 2604 E Drachman
-														St. Tucson, Arizona, United States</li>
-													<li><span class="icon_phone"></span> (+12) 345-678-910</li>
-												</ul>
-											</div>
-											<div class="listing__item__text__info">
-												<div class="listing__item__text__info__left">
-													<img
-														src="${pageContext.request.contextPath}/img/listing/list_small_icon-3.png"
-														alt=""> <span>Hotel</span>
-												</div>
-												<div class="listing__item__text__info__right">Open Now</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="tab-pane" id="tabs-5" role="tabpanel">
-							<div class="row">
-								<div class="col-lg-4 col-md-6">
-									<div class="listing__item">
-										<div class="listing__item__pic set-bg"
-											data-setbg="${pageContext.request.contextPath}/img/listing/list-1.jpg">
-											<img
-												src="${pageContext.request.contextPath}/img/listing/list_icon-1.png"
-												alt="">
-											<div class="listing__item__pic__tag">Popular</div>
-											<div class="listing__item__pic__btns">
-												<a href="#"><span class="icon_zoom-in_alt"></span></a> <a
-													href="#"><span class="icon_heart_alt"></span></a>
-											</div>
-										</div>
-										<div class="listing__item__text">
-											<div class="listing__item__text__inside">
-												<h5>Chinese Sausage Restaurant</h5>
-												<div class="listing__item__text__rating">
-													<div class="listing__item__rating__star">
-														<span class="icon_star"></span> <span class="icon_star"></span>
-														<span class="icon_star"></span> <span class="icon_star"></span>
-														<span class="icon_star-half_alt"></span>
-													</div>
-													<h6>$40 - $70</h6>
-												</div>
-												<ul>
-													<li><span class="icon_pin_alt"></span> 236 Littleton
-														St. New Philadelphia, Ohio, United States</li>
-													<li><span class="icon_phone"></span> (+12) 345-678-910</li>
-												</ul>
-											</div>
-											<div class="listing__item__text__info">
-												<div class="listing__item__text__info__left">
-													<img
-														src="${pageContext.request.contextPath}/img/listing/list_small_icon-1.png"
-														alt=""> <span>Restaurant</span>
-												</div>
-												<div class="listing__item__text__info__right">Open Now</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-lg-4 col-md-6">
-									<div class="listing__item">
-										<div class="listing__item__pic set-bg"
-											data-setbg="${pageContext.request.contextPath}/img/listing/list-2.jpg">
-											<img
-												src="${pageContext.request.contextPath}/img/listing/list_icon-2.png"
-												alt="">
-											<div class="listing__item__pic__tag top_rate">Top Rate</div>
-											<div class="listing__item__pic__btns">
-												<a href="#"><span class="icon_zoom-in_alt"></span></a> <a
-													href="#"><span class="icon_heart_alt"></span></a>
-											</div>
-										</div>
-										<div class="listing__item__text">
-											<div class="listing__item__text__inside">
-												<h5>Shrimp floured and fried</h5>
-												<div class="listing__item__text__rating">
-													<div class="listing__item__rating__star">
-														<span class="icon_star"></span> <span class="icon_star"></span>
-														<span class="icon_star"></span> <span class="icon_star"></span>
-														<span class="icon_star-half_alt"></span>
-													</div>
-													<h6>$40 - $70</h6>
-												</div>
-												<ul>
-													<li><span class="icon_pin_alt"></span> 1012 Vesper Dr.
-														Columbus, Georgia(GA), United States</li>
-													<li><span class="icon_phone"></span> (+12) 345-678-910</li>
-												</ul>
-											</div>
-											<div class="listing__item__text__info">
-												<div class="listing__item__text__info__left">
-													<img
-														src="${pageContext.request.contextPath}/img/listing/list_small_icon-2.png"
-														alt=""> <span>Food & Drink</span>
-												</div>
-												<div class="listing__item__text__info__right closed">Closed</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-lg-4 col-md-6">
-									<div class="listing__item">
-										<div class="listing__item__pic set-bg"
-											data-setbg="${pageContext.request.contextPath}/img/listing/list-3.jpg">
-											<img
-												src="${pageContext.request.contextPath}/img/listing/list_icon-3.png"
-												alt="">
-											<div class="listing__item__pic__tag">Popular</div>
-											<div class="listing__item__pic__btns">
-												<a href="#"><span class="icon_zoom-in_alt"></span></a> <a
-													href="#"><span class="icon_heart_alt"></span></a>
-											</div>
-										</div>
-										<div class="listing__item__text">
-											<div class="listing__item__text__inside">
-												<h5>Sweet and sour pork ribs</h5>
-												<div class="listing__item__text__rating">
-													<div class="listing__item__rating__star">
-														<span class="icon_star"></span> <span class="icon_star"></span>
-														<span class="icon_star"></span> <span class="icon_star"></span>
-														<span class="icon_star-half_alt"></span>
-													</div>
-													<h6>$40 - $70</h6>
-												</div>
-												<ul>
-													<li><span class="icon_pin_alt"></span> 251 Wiley St.
-														Forks, Washington(WA), United States</li>
-													<li><span class="icon_phone"></span> (+12) 345-678-910</li>
-												</ul>
-											</div>
-											<div class="listing__item__text__info">
-												<div class="listing__item__text__info__left">
-													<img
-														src="${pageContext.request.contextPath}/img/listing/list_small_icon-1.png"
-														alt=""> <span>Restaurant</span>
-												</div>
-												<div class="listing__item__text__info__right">Open Now</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-lg-4 col-md-6">
-									<div class="listing__item">
-										<div class="listing__item__pic set-bg"
-											data-setbg="${pageContext.request.contextPath}/img/listing/list-4.jpg">
-											<img
-												src="${pageContext.request.contextPath}/img/listing/list_icon-4.png"
-												alt="">
-											<div class="listing__item__pic__tag">Popular</div>
-											<div class="listing__item__pic__btns">
-												<a href="#"><span class="icon_zoom-in_alt"></span></a> <a
-													href="#"><span class="icon_heart_alt"></span></a>
-											</div>
-										</div>
-										<div class="listing__item__text">
-											<div class="listing__item__text__inside">
-												<h5>Crab fried with tamarind</h5>
-												<div class="listing__item__text__rating">
-													<div class="listing__item__rating__star">
-														<span class="icon_star"></span> <span class="icon_star"></span>
-														<span class="icon_star"></span> <span class="icon_star"></span>
-														<span class="icon_star-half_alt"></span>
-													</div>
-													<h6>$40 - $70</h6>
-												</div>
-												<ul>
-													<li><span class="icon_pin_alt"></span> 14320 Keenes
-														Mill Rd. Cottondale, Alabama(AL), United States</li>
-													<li><span class="icon_phone"></span> (+12) 345-678-910</li>
-												</ul>
-											</div>
-											<div class="listing__item__text__info">
-												<div class="listing__item__text__info__left">
-													<img
-														src="${pageContext.request.contextPath}/img/listing/list_small_icon-3.png"
-														alt=""> <span>Hotel</span>
-												</div>
-												<div class="listing__item__text__info__right closed">Closed</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-lg-4 col-md-6">
-									<div class="listing__item">
-										<div class="listing__item__pic set-bg"
-											data-setbg="${pageContext.request.contextPath}/img/listing/list-6.jpg">
-											<img
-												src="${pageContext.request.contextPath}/img/listing/list_icon-6.png"
-												alt="">
-											<div class="listing__item__pic__tag">Popular</div>
-											<div class="listing__item__pic__btns">
-												<a href="#"><span class="icon_zoom-in_alt"></span></a> <a
-													href="#"><span class="icon_heart_alt"></span></a>
-											</div>
-										</div>
-										<div class="listing__item__text">
-											<div class="listing__item__text__inside">
-												<h5>Fish cooked with fishsauce</h5>
-												<div class="listing__item__text__rating">
-													<div class="listing__item__rating__star">
-														<span class="icon_star"></span> <span class="icon_star"></span>
-														<span class="icon_star"></span> <span class="icon_star"></span>
-														<span class="icon_star-half_alt"></span>
-													</div>
-													<h6>$40 - $70</h6>
-												</div>
-												<ul>
-													<li><span class="icon_pin_alt"></span> 2604 E Drachman
-														St. Tucson, Arizona, United States</li>
-													<li><span class="icon_phone"></span> (+12) 345-678-910</li>
-												</ul>
-											</div>
-											<div class="listing__item__text__info">
-												<div class="listing__item__text__info__left">
-													<img
-														src="${pageContext.request.contextPath}/img/listing/list_small_icon-3.png"
-														alt=""> <span>Hotel</span>
-												</div>
-												<div class="listing__item__text__info__right">Open Now</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="tab-pane" id="tabs-6" role="tabpanel">
-							<div class="row">
-								<div class="col-lg-4 col-md-6">
-									<div class="listing__item">
-										<div class="listing__item__pic set-bg"
-											data-setbg="${pageContext.request.contextPath}/img/listing/list-1.jpg">
-											<img
-												src="${pageContext.request.contextPath}/img/listing/list_icon-1.png"
-												alt="">
-											<div class="listing__item__pic__tag">Popular</div>
-											<div class="listing__item__pic__btns">
-												<a href="#"><span class="icon_zoom-in_alt"></span></a> <a
-													href="#"><span class="icon_heart_alt"></span></a>
-											</div>
-										</div>
-										<div class="listing__item__text">
-											<div class="listing__item__text__inside">
-												<h5>Chinese Sausage Restaurant</h5>
-												<div class="listing__item__text__rating">
-													<div class="listing__item__rating__star">
-														<span class="icon_star"></span> <span class="icon_star"></span>
-														<span class="icon_star"></span> <span class="icon_star"></span>
-														<span class="icon_star-half_alt"></span>
-													</div>
-													<h6>$40 - $70</h6>
-												</div>
-												<ul>
-													<li><span class="icon_pin_alt"></span> 236 Littleton
-														St. New Philadelphia, Ohio, United States</li>
-													<li><span class="icon_phone"></span> (+12) 345-678-910</li>
-												</ul>
-											</div>
-											<div class="listing__item__text__info">
-												<div class="listing__item__text__info__left">
-													<img
-														src="${pageContext.request.contextPath}/img/listing/list_small_icon-1.png"
-														alt=""> <span>Restaurant</span>
-												</div>
-												<div class="listing__item__text__info__right">Open Now</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-lg-4 col-md-6">
-									<div class="listing__item">
-										<div class="listing__item__pic set-bg"
-											data-setbg="${pageContext.request.contextPath}/img/listing/list-2.jpg">
-											<img
-												src="${pageContext.request.contextPath}/img/listing/list_icon-2.png"
-												alt="">
-											<div class="listing__item__pic__tag top_rate">Top Rate</div>
-											<div class="listing__item__pic__btns">
-												<a href="#"><span class="icon_zoom-in_alt"></span></a> <a
-													href="#"><span class="icon_heart_alt"></span></a>
-											</div>
-										</div>
-										<div class="listing__item__text">
-											<div class="listing__item__text__inside">
-												<h5>Shrimp floured and fried</h5>
-												<div class="listing__item__text__rating">
-													<div class="listing__item__rating__star">
-														<span class="icon_star"></span> <span class="icon_star"></span>
-														<span class="icon_star"></span> <span class="icon_star"></span>
-														<span class="icon_star-half_alt"></span>
-													</div>
-													<h6>$40 - $70</h6>
-												</div>
-												<ul>
-													<li><span class="icon_pin_alt"></span> 1012 Vesper Dr.
-														Columbus, Georgia(GA), United States</li>
-													<li><span class="icon_phone"></span> (+12) 345-678-910</li>
-												</ul>
-											</div>
-											<div class="listing__item__text__info">
-												<div class="listing__item__text__info__left">
-													<img
-														src="${pageContext.request.contextPath}/img/listing/list_small_icon-2.png"
-														alt=""> <span>Food & Drink</span>
-												</div>
-												<div class="listing__item__text__info__right closed">Closed</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-lg-4 col-md-6">
-									<div class="listing__item">
-										<div class="listing__item__pic set-bg"
-											data-setbg="${pageContext.request.contextPath}/img/listing/list-4.jpg">
-											<img
-												src="${pageContext.request.contextPath}/img/listing/list_icon-4.png"
-												alt="">
-											<div class="listing__item__pic__tag">Popular</div>
-											<div class="listing__item__pic__btns">
-												<a href="#"><span class="icon_zoom-in_alt"></span></a> <a
-													href="#"><span class="icon_heart_alt"></span></a>
-											</div>
-										</div>
-										<div class="listing__item__text">
-											<div class="listing__item__text__inside">
-												<h5>Crab fried with tamarind</h5>
-												<div class="listing__item__text__rating">
-													<div class="listing__item__rating__star">
-														<span class="icon_star"></span> <span class="icon_star"></span>
-														<span class="icon_star"></span> <span class="icon_star"></span>
-														<span class="icon_star-half_alt"></span>
-													</div>
-													<h6>$40 - $70</h6>
-												</div>
-												<ul>
-													<li><span class="icon_pin_alt"></span> 14320 Keenes
-														Mill Rd. Cottondale, Alabama(AL), United States</li>
-													<li><span class="icon_phone"></span> (+12) 345-678-910</li>
-												</ul>
-											</div>
-											<div class="listing__item__text__info">
-												<div class="listing__item__text__info__left">
-													<img
-														src="${pageContext.request.contextPath}/img/listing/list_small_icon-3.png"
-														alt=""> <span>Hotel</span>
-												</div>
-												<div class="listing__item__text__info__right closed">Closed</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-lg-4 col-md-6">
-									<div class="listing__item">
-										<div class="listing__item__pic set-bg"
-											data-setbg="${pageContext.request.contextPath}/img/listing/list-5.jpg">
-											<img
-												src="${pageContext.request.contextPath}/img/listing/list_icon-5.png"
-												alt="">
-											<div class="listing__item__pic__tag hot_deal">Hot Deal</div>
-											<div class="listing__item__pic__btns">
-												<a href="#"><span class="icon_zoom-in_alt"></span></a> <a
-													href="#"><span class="icon_heart_alt"></span></a>
-											</div>
-										</div>
-										<div class="listing__item__text">
-											<div class="listing__item__text__inside">
-												<h5>Tortoise grilled on salt</h5>
-												<div class="listing__item__text__rating">
-													<div class="listing__item__rating__star">
-														<span class="icon_star"></span> <span class="icon_star"></span>
-														<span class="icon_star"></span> <span class="icon_star"></span>
-														<span class="icon_star-half_alt"></span>
-													</div>
-													<h6>$40 - $70</h6>
-												</div>
-												<ul>
-													<li><span class="icon_pin_alt"></span> 236 Littleton
-														St. New Philadelphia, Ohio, United States</li>
-													<li><span class="icon_phone"></span> (+12) 345-678-910</li>
-												</ul>
-											</div>
-											<div class="listing__item__text__info">
-												<div class="listing__item__text__info__left">
-													<img
-														src="${pageContext.request.contextPath}/img/listing/list_small_icon-4.png"
-														alt=""> <span>Shopping</span>
-												</div>
-												<div class="listing__item__text__info__right">Open Now</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
+
 					</div>
 				</div>
 			</div>
@@ -1507,80 +545,7 @@ h1,h2,h3,h4,h5,h6,p,a{font-family: 'Nanum Myeongjo', serif; font-weight: bold;}
 	<!-- Testimonial Section End -->
 
 	<!-- Blog Section Begin -->
-	<section class="news-post spad">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-12">
-					<div class="section-title">
-						<h2>News Post</h2>
-						<p>Checkout Latest News And Articles From Our Blog</p>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-lg-4 col-md-6">
-					<div class="blog__item">
-						<div class="blog__item__pic set-bg"
-							data-setbg="${pageContext.request.contextPath}/img/blog/blog-1.jpg">
-							<a href="https://www.youtube.com/watch?v=8EJ3zbKTWQ8"
-								class="play-btn video-popup"><i class="fa fa-play"></i></a>
-						</div>
-						<div class="blog__item__text">
-							<ul class="blog__item__tags">
-								<li><i class="fa fa-tags"></i> Travel</li>
-								<li>Videos</li>
-							</ul>
-							<h5>
-								<a href="#">Internet Banner Advertising Most Reliable</a>
-							</h5>
-							<ul class="blog__item__widget">
-								<li><i class="fa fa-clock-o"></i> 19th March, 2019</li>
-								<li><i class="fa fa-user"></i> John Smith</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6">
-					<div class="blog__item">
-						<div class="blog__item__pic set-bg"
-							data-setbg="${pageContext.request.contextPath}/img/blog/blog-2.jpg"></div>
-						<div class="blog__item__text">
-							<ul class="blog__item__tags">
-								<li><i class="fa fa-tags"></i> Travel</li>
-								<li>Restaurant</li>
-							</ul>
-							<h5>
-								<a href="#">Internet Banner Advertising Most Reliable</a>
-							</h5>
-							<ul class="blog__item__widget">
-								<li><i class="fa fa-clock-o"></i> 19th March, 2019</li>
-								<li><i class="fa fa-user"></i> John Smith</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6">
-					<div class="blog__item">
-						<div class="blog__item__pic set-bg"
-							data-setbg="${pageContext.request.contextPath}/img/blog/blog-3.jpg"></div>
-						<div class="blog__item__text">
-							<ul class="blog__item__tags">
-								<li><i class="fa fa-tags"></i> Travel</li>
-								<li>Restaurant</li>
-							</ul>
-							<h5>
-								<a href="#">Internet Banner Advertising Most Reliable</a>
-							</h5>
-							<ul class="blog__item__widget">
-								<li><i class="fa fa-clock-o"></i> 19th March, 2019</li>
-								<li><i class="fa fa-user"></i> John Smith</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
+
 	<!-- Blog Section End -->
 
 
