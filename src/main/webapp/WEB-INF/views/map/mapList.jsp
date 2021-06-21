@@ -49,7 +49,7 @@ h2{font-family: 'Nanum Myeongjo', serif; font-weight: bold;}
 										.attr("action",
 												"${pageContext.request.contextPath}/map/deleteMap");
 										$("#requestForm").submit();
-									}else{
+									}else if(data=='fail'){
 										alert("비밀번호가 일치하지 않습니다. 다시 확인해주세요")
 									}
 								},	

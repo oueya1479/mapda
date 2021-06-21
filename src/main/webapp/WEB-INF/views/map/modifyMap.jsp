@@ -178,12 +178,12 @@
 
 					Theme Name<input type="text" name="mapTitle" value="${theme.mapTitle}">
 					Description<textarea name="mapContent" >${theme.mapContent}</textarea>
-					Cover Image <input type="file" name="file" /> 
 					Category
 					&nbsp;&nbsp;&nbsp;
 					<p>
 					<div class="nice-select" style="padding: 0px; width: 0px; width: 0px;">
 						<select name="categoryNo" >
+							<option >쇼핑</option>
 							<option value="1">맛집</option>
 							<option value="2">여행</option>
 							<option value="3">카페</option>
@@ -204,8 +204,8 @@
 						Accessibility &nbsp;&nbsp;&nbsp;
 						<p><div class="nice-select" style="padding: 0px; width: 0px; width: 0px;">
 							<select name="mapIsopen">
-								<option value="0">Private</option>
-								<option value="1">Public</option>
+								<option value="0">Public</option>
+								<option value="1">Private</option>
 							</select>
 							</div>
 					</div>
