@@ -103,25 +103,7 @@
 					}	
 					)
 				})
-				//비밀번호 일치 체크
-				 $("#pw").keyup(function() {
-					if($(this).val()==""){
-						$("#pwCheck").html("");
-						return;
-					}
-					/*	$.ajax({
-						url:"member/pwCheck",
-						datatype:"text",
-						type:"post",
-						data:{pwc:$(this).val(),pw:$("#pw").val()},
-						success:function(result){$("#pwCheck").text(result)},
-						error:function(err){
-							alert(err+"비밀번 조회 에러.")
-						}
-					}	
-					)
-				})
-    	 	})				 */
+    	 	})				 
 				
 		
     	 
