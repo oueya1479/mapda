@@ -128,14 +128,14 @@ $(function(){
 												class="sep">/</span><br>등록일 : ${event.evRegdate}
 										</small></span>
 									</div>
-									<c:choose>
-									<c:when test="${event.evStatus eq '1'}"> 
+									<%-- <c:choose>
+									<c:when test="${event.evStatus eq '1'}">  --%>
 									<button  id ="participate" value="${event.evNo}" type="submit" style="border-color: #bbbbff; color: #4444ff">참여하기</button>
-									</c:when>
-									<c:otherwise test != "${event.evStatus eq '1'}">
+									<%-- </c:when>
+									<c:otherwise>
 										<button  id ="participate" disabled="disabled" value="${event.evNo}" type="submit" style="border-color: #bbbbff; color: #4444ff">참여불가</button>
 									</c:otherwise>
-									</c:choose>
+									</c:choose> --%>
 								</div>
 							</div>
 						</c:forEach>
