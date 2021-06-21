@@ -58,7 +58,7 @@
 							<div class="listing__details__gallery__pic">
 								<div class="listing__details__gallery__item">
 									<img class="listing__details__gallery__item__large"
-										src="${pageContext.request.contextPath}/img/map/${storage.theme.mapImg}"
+										src="${pageContext.request.contextPath}/resources/${storage.theme.mapImg}"
 										alt="" style="height:750px"> <span><i class="fa fa-camera"></i> </span>
 								</div>
 								

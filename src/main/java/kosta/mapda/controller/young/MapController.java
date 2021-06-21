@@ -96,7 +96,7 @@ public class MapController {
 //			File saveFile = new File(realPath);
 			
 			ServletContext application =session.getServletContext();
-			String path = application.getRealPath("/WEB-INF/save");
+			String path = application.getRealPath("/resources");
 			file.transferTo(new File(path+"/"+fileName));
 		}
 		
