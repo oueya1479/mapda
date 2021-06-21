@@ -10,6 +10,15 @@
 <html lang="zxx">
 
 <head>
+
+<style>
+@import url('https://fonts.googleapis.com/css?family=Nanum+Myeongjo&display=swap');
+
+
+h2{font-family: 'Nanum Myeongjo', serif; font-weight: bold;}
+
+
+</style>
 </head>
 
 <body>

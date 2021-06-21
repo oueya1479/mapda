@@ -36,6 +36,12 @@
   opacity: 0.8;
 }
 
+@import url('https://fonts.googleapis.com/css?family=Nanum+Myeongjo&display=swap');
+
+
+h2{font-family: 'Nanum Myeongjo', serif; font-weight: bold;}
+
+
 </style>
 
 <script type="text/javascript">
