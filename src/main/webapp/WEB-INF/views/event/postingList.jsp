@@ -254,7 +254,7 @@
 					</div>
 
 					<div class="nk-footer-text">
-						<p>2016 &copy; Design by Unvab. Code by nK</p>
+						<p>2021 &copy; Design by mapd</p>
 					</div>
 				</div>
 			</div>

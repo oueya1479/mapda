@@ -20,7 +20,7 @@
 </head>
 <body>
 
-alert('<sec:authentication property="principal.memName"/>');
+<!-- alert('<sec:authentication property="principal.memName"/>'); -->
 
 	<script>
 		$(function() {

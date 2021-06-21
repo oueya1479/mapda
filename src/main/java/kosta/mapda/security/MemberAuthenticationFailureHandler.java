@@ -21,8 +21,6 @@ public class MemberAuthenticationFailureHandler implements AuthenticationFailure
 	public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
 			AuthenticationException exception) throws IOException, ServletException {
 		
-		  System.out.println("MemberAuthenticationFailureHandler ȣ���...............");
-		  
 		request.setAttribute("errorMessage", exception.getMessage());
 		request.getRequestDispatcher("/WEB-INF/views/member/loginForm.jsp").forward(request, response);
 		

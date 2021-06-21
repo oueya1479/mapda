@@ -78,8 +78,6 @@ public class MemberServiceImpl implements MemberService {
 		String encodedPassword = passwordEncoder.encode(member.getMemPw());
 		member.setMemPw(encodedPassword);
 		Member m = memRepository.save(member);
-		//가입시 마이포인트 테이블 생성
-		//pointService.createMyPoint(member);
 		
 		// 권한등록
 		/*

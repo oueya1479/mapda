@@ -4,6 +4,16 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+<style>
+@import url('https://fonts.googleapis.com/css?family=Nanum+Myeongjo&display=swap');
+
+
+h2{font-family: 'Nanum Myeongjo', serif; font-weight: bold;}
+
+
+</style>
+
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 <link
 	href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
@@ -386,7 +396,7 @@
 
 						<div class="cardbox-item">
 							<img class="img-fluid"
-								src="${eventPost.evpImg }"
+								src="/resources/${eventPost.evpImg}"
 								alt="Image">
 						</div>
 						<div style="margin : 20px">${eventPost.evpContent }</div>

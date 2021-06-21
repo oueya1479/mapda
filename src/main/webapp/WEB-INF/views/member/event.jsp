@@ -4,7 +4,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <style type="text/css">
+
+@import url('https://fonts.googleapis.com/css?family=Nanum+Myeongjo&display=swap');
+
+
+h2{font-family: 'Nanum Myeongjo', serif; font-weight: bold;}
+
 </style>
 <title>Podcast &mdash; Colorlib Website Template</title>
 <meta charset="utf-8">

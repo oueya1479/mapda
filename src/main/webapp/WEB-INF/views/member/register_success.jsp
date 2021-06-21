@@ -10,7 +10,7 @@
 
 <br><br><br><br><br><br><br><br><br><br><br>
 <div class=".login" style="margin:auto;text-align:center;">
-회원가입 ok!  <P>
+회원가입이 완료되었습니다  <P>
 
 <p>
 <h2><a href="${pageContext.request.contextPath}/main/index">Home</a></h2>
