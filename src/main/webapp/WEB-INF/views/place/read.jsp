@@ -10,6 +10,12 @@
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=dedf9592b51a78be2b5d3ec39a2a2199"></script>
 <style type="text/css">
 .mySlides {display:none;}
+
+@import url('https://fonts.googleapis.com/css?family=Nanum+Myeongjo&display=swap');
+
+
+h2{font-family: 'Nanum Myeongjo', serif; font-weight: bold;}
+
 </style>
 
 <sec:authorize access="isAuthenticated()">
@@ -187,7 +193,7 @@
                             <h2>${requestScope.place.placeTitle}</h2>
                             <div class="listing__hero__widget">
                                 <div class="listing__details__rating__star"></div>
-                                <div>&nbsp;&nbsp; Rate : ${starAvg}</div>
+                                <div>&nbsp;&nbsp; 포토후기평점 : ${starAvg}</div>
                                 <br> <div>${totalReviewCount} &nbsp;&nbsp;&nbsp;Total Reviews</div>
                             </div>
                             <p><span class="icon_pin_alt"></span> ${requestScope.place.placeAddr}</p>

@@ -8,7 +8,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import kosta.mapda.domain.map.MapStorage;
-import kosta.mapda.domain.map.Theme;
 import kosta.mapda.domain.member.Member;
 
 public interface MemberRepository extends JpaRepository<Member, Long> {

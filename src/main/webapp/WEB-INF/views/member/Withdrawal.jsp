@@ -78,7 +78,7 @@
 	><br><br><br><br>
 <div style="margin:auto;text-align:center;">
 <br><br><br><br><br>
-        <h2>Update Infomation</h2><p>
+        <h2>Withdrawal</h2><p>
         <br><br><br>
  <form method="post" action="${pageContext.request.contextPath}/member/updateMemberAction">
 		<input type="hidden" name="command" value="update">

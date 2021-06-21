@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import kosta.mapda.domain.map.MapStorage;
+import kosta.mapda.domain.map.PlaceReview;
 import kosta.mapda.domain.map.Theme;
 import kosta.mapda.domain.member.Member;
 
@@ -16,13 +17,7 @@ public interface MemberService {
 	
 	ModelAndView findMember(HttpServletRequest request);
 	
-//	List<String> getAddressList();
-//
-//	List<Member> findMemberListByAddress(String address);
-
 	Member login(Member member);
-
-//	int getMemberCount();
 
 	void updateMember(Member member);
 
@@ -31,11 +26,12 @@ public interface MemberService {
 	String idcheck(String memId);
 	
 	void delete(Member member);
-	
+	/**
+	 * 로그인된 사용자의 지도를 날짜 기준으로 내림차순 정렬
+	 * */
 	List<Theme> myRecenMaps(Long memNo);
 	
-//	List<AuthorityVO> selectAuthorityByUsername(String username);
-
+	List<PlaceReview> myRecenPlaceReviews(Long memNo);
 	
 	
 /**

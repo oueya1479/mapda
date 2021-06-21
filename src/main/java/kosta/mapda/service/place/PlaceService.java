@@ -33,7 +33,7 @@ public interface PlaceService {
 	/**
 	 * 		수정하기
 	 * */
-	Place update(Place place);
+	Place update(Place place, List<PlacePhoto> ppList);
 	
 	/**
 	 * 		삭제하기
@@ -69,6 +69,11 @@ public interface PlaceService {
 	 * 		PlaceStorage page 처리
 	 * */
 	Page<PlaceStorage> selectAllPagePS(Long memNo, Pageable pageable);
+	
+	/**
+	 * 		PlaceStorage delete
+	 * */
+	void psDelete(Long psNo);
 	
 	/**
 	 * 		좋아요 체크

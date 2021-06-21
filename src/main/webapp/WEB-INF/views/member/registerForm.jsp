@@ -101,94 +101,32 @@
 					}	
 					)
 				})
+				//비밀번호 일치 체크
+				$("#pw").keyup(function() {
+					if($(this).val()==""){
+						$("#pwCheck").html("");
+						return;
+					}
+					$.ajax({
+						url:"member/pwCheck",
+						datatype:"text",
+						type:"post",
+						data:{pwc:$(this).val(),pw:$("#pw").val()},
+						success:function(result){$("#pwCheck").text(result)},
+						error:function(err){
+							alert(err+"비밀번 조회 에러.")
+						}
+					}	
+					)
+				})
+    	 	})				
 				
 		
     	 
-    	 	function goUrl(url) {
-				location.href=url;
-			}
-    	 	
-    	 	function goPopup(){
-    	 		// 주소검색을 수행할 팝업 페이지를 호출합니다.
-    	 		// 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrLinkUrl.do)를 호출하게 됩니다.
-    	 		var pop = window.open("<%=request.getContextPath()%>/popup/jusoPopup.jsp", "pop",
-    	 					"width=570,height=420, scrollbars=yes, resizable=yes");
-    	 			// 	pageContext.getServletContext().getRealPath("/");
-    	 			// 모바일 웹인 경우, 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrMobileLinkUrl.do)를 호출하게 됩니다.
-    	 			//var pop = window.open("/popup/jusoPopup.jsp","pop","scrollbars=yes, resizable=yes"); 
-    	 		}
-
-    	 		function jusoCallBack(roadFullAddr) {
-    	 			// 팝업페이지에서 주소입력한 정보를 받아서, 현 페이지에 정보를 등록합니다.	
-    	 			document.joinForm.addr1.value = roadFullAddr;
-    	 		}
+    	 	 
     	 </script> 
     	 
-    	 <script>
-	    	 function validate() {
-	    	       var id = document.getElementById("memId");
-	    	       var pw = document.getElementById("memPw");
-	    	       /* var pwc = document.getElementById("pwc"); */
-	    	       var name = document.getElementById("memName");
-	    	       var accounNum = document.getElementById("memAccount");
-	    	       var addr = document.getElementById("memAddr");
-	    	       var age = document.getElementById("memAge");
-	    	       var user = document.getElementById("memGrade");
-	    	   
-	    	       
-	    	       if(id.value=="") {
-	    	           alert("아이디를 입력해주세요");
-	    	           id.focus();
-	    	           return false;
-	    	       }else if(pw.value=="") {
-	    	           alert("비밀번호를 입력해주세요");
-	    	           pw.focus();
-	    	           return false;
-	    	       }else if(pwc.value=="") {
-	    	           alert("비밀번호를 확인해주세요 입력해주세요");
-	    	           pwc.focus();
-	    	           return false;
-	    	       }else if(name.value=="") {
-	    	           alert("이름을 입력해주세요");
-	    	           name.focus();
-	    	           return false;
-	    	       }else if(addr1.value=="") {
-	    	           alert("주소를 입력해주세요");
-	    	           addr1.focus();
-	    	           return false;
-	    	       }else if(accountNum.value=="") {
-	    	           alert("계좌 정보를 입력해주세요");
-	    	           accountNum.focus();
-	    	           return false;
-	    	       /* }else if(con1.value=="") {
-	    	           alert("올바른 연락처 형식이 아닙니다.");
-	    	           con1.focus();
-	    	           return false;
-	    	       }else if(con2.value=="") {
-	    	           alert("계좌 정보를 입력해주세요");
-	    	           con2.focus();
-	    	           return false;
-	    	       }else if(con3.value=="") {
-	    	           alert("계좌 정보를 입력해주세요");
-	    	           con3.focus();
-	    	           return false;
-	    	       }else if(email1.value=="") {
-	    	           alert("이메일을 입력해주세요");
-	    	           email1.focus();
-	    	           return false;
-	    	       }else if(email2.value=="") {
-	    	           alert("도메인 주소를 입력해주세요");
-	    	           email2.focus();
-	    	           return false;
-	    	       }  */
-	    	       alert("회원가입 완료.");
-	    	    return true;
-	    			
-	    	    }
-	    	 
-    	 
-    	 
-    	 </script>
+    	
     	 
     	 <script >
     	 $(document).ready(function() {
@@ -216,7 +154,7 @@
 
         <div style="margin:auto;text-align:center;">
         <h2>Member Register Form</h2><p>
-        	<form name="joinForm" style="display:inline-block;" action="${pageContext.request.contextPath}/member/registerMember" accept-charset="UTF-8">
+        	<form name="joinForm" style="display:inline-block;" action="${pageContext.request.contextPath}/member/registerMember" method=post onsubmit="return validate();" accept-charset="UTF-8">
 				<br><br><br>
 				<input type="text" class="underline"  placeholder="ID" id="id" name="memId"><span id="idCheckAjax"></span><br><br>
 				<input type="password" class="underline" placeholder="PASSWORD" id="pw" name="memPw"> <br><br>

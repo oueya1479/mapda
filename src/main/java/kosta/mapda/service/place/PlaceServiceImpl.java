@@ -81,17 +81,25 @@ public class PlaceServiceImpl implements PlaceService {
 	}
 
 	@Override
-	public Place update(Place place) {
-		System.out.println("PlaceService update place = " + place +" ,  "+ place.getPlaceNo());
+	public Place update(Place place, List<PlacePhoto> ppList) {
 		Place dbPlace = placeRepository.findById(place.getPlaceNo()).orElse(null);
-		
-		System.out.println("PlaceService update dbPlace = " + dbPlace);
-		if(dbPlace == null) {
+		List<PlacePhoto> dbPlacePhoto = placePhotoRepository.selectPlacePhotoByPlaceNo(place.getPlaceNo());
+		if(dbPlace == null || dbPlacePhoto ==null) {
 			throw new RuntimeException("플레이스 번호가 일치하지 않아 수정될 수 없습니다.");
 		}
 		
 		dbPlace.setPlaceContent(place.getPlaceContent().replace("<", "&lt;"));
+		dbPlace.setPlaceStar(place.getPlaceStar());
+		dbPlace.setPlaceTag(place.getPlaceTag());
+		dbPlace.setPlaceIconName(place.getPlaceIconName());
+		dbPlace.setPlaceIconPath(place.getPlaceIconPath());
 		
+		//dbPlacePhoto   ppList
+		for(PlacePhoto pp : dbPlacePhoto) {
+			for(PlacePhoto ppp : ppList) {
+				pp.setPpPath(ppp.getPpPath());
+			}
+		}
 		return dbPlace;
 	}
 
@@ -165,9 +173,15 @@ public class PlaceServiceImpl implements PlaceService {
 		placeStorageRepository.deleteSub(placeNo, memNo);
 	}
 
+	@Override
+	public void psDelete(Long psNo) {
+		placeStorageRepository.deleteById(psNo);
+	}
+
 //	@Override
 //	public void insertPlacePhoto(List<PlacePhoto> photoList) {
 //		placePhotoRepository.saveAll(photoList);
 //	}
+	
 	
 }
