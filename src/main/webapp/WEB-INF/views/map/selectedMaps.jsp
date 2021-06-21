@@ -18,7 +18,12 @@
 
 
 <style>
-/* #this(overflow     : hidden;) */
+@import url('https://fonts.googleapis.com/css?family=Nanum+Myeongjo&display=swap');
+
+
+h2{font-family: 'Nanum Myeongjo', serif; font-weight: bold;}
+
+
 </style>
 <script src="${pageContext.request.contextPath}/js/jquery-3.3.1.min.js"></script>
 <script>
@@ -94,12 +99,12 @@ $(function() {
 
 
 	<div class="breadcrumb-area set-bg"
-		data-setbg="/img/breadcrumb/breadcrumb-blog.jpg">
+		data-setbg="${pageContext.request.contextPath}/resources/ss2314.png">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12 text-center">
 					<div class="breadcrumb__text">
-						<h2>Our All Maps</h2>
+						<h2>Perfects Maps For You</h2>
 					</div>
 				</div>
 			</div>
@@ -113,39 +118,15 @@ $(function() {
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="section-title">
-						<h2>All our Maps in here!</h2>
-						<p>You can find fanciest places with Mapda's various Maps~</p>
+						<h2></h2>
+						<p></p>
 					</div>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="most__search__tab">
-						<ul class="nav nav-tabs" role="tablist">
-							<li class="nav-item"><a class="nav-link active"
-								data-toggle="tab" href="#tabs-1" role="tab"> <span
-									class="flaticon-039-fork"></span> Restaurent
-							</a></li>
-							<li class="nav-item"><a class="nav-link" data-toggle="tab"
-								href="#tabs-2" role="tab"> <span class="flaticon-030-kebab"></span>
-									Shopping
-							</a></li>
-							<li class="nav-item"><a class="nav-link" data-toggle="tab"
-								href="#tabs-3" role="tab"> <span
-									class="flaticon-032-food-truck"></span> Travel
-							</a></li>
-							<li class="nav-item"><a class="nav-link" data-toggle="tab"
-								href="#tabs-4" role="tab"> <span
-									class="flaticon-017-croissant"></span> Beauty
-							</a></li>
-							<li class="nav-item"><a class="nav-link" data-toggle="tab"
-								href="#tabs-5" role="tab"> <span
-									class="flaticon-038-take-away"></span> Event
-							</a></li>
-							<li class="nav-item"><a class="nav-link" data-toggle="tab"
-								href="#tabs-6" role="tab"> <span
-									class="flaticon-031-delivery"></span> Rental
-							</a></li>
+						
 						</ul>
 					</div>
 

@@ -275,7 +275,7 @@ h1, h2, h3, h4, h5, h6, p, a {
 										</div>
 										<div class="listing__item__text">
 											<div class="listing__item__text__inside">
-												<h5>Crab fried with tamarind</h5>
+												<h5>올 여름, 여유로운 휴가를 위한 장소들</h5>
 												<div class="listing__item__text__rating">
 													
 													<h6> </h6>

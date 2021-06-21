@@ -17,7 +17,13 @@
 </sec:authorize>
 
 
-<style>
+<<style>
+@import url('https://fonts.googleapis.com/css?family=Nanum+Myeongjo&display=swap');
+
+
+h2{font-family: 'Nanum Myeongjo', serif; font-weight: bold;}
+
+
 </style>
 <script src="${pageContext.request.contextPath}/js/jquery-3.3.1.min.js"></script>
 <script>
@@ -93,7 +99,7 @@
 
 
 	<div class="breadcrumb-area set-bg"
-		data-setbg="/img/breadcrumb/breadcrumb-blog.jpg">
+		data-setbg="${pageContext.request.contextPath}/resources/oopsdf.png">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12 text-center">

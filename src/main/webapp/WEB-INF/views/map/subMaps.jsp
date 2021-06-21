@@ -10,24 +10,32 @@
 <html lang="zxx">
 
 <head>
+
+<style>
+@import url('https://fonts.googleapis.com/css?family=Nanum+Myeongjo&display=swap');
+
+
+h2{font-family: 'Nanum Myeongjo', serif; font-weight: bold;}
+
+
+</style>
 </head>
 
 <body>
 
 	<!-- Listing Section Begin -->
 	<section class="listing-hero set-bg"
-		data-setbg="${pageContext.request.contextPath}/img/listing/details/listing-hero.jpg">
+		data-setbg="${pageContext.request.contextPath}/resources/fuklo.png">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-8">
 					<div class="listing__hero__option">
 						<div class="listing__hero__icon"></div>
 						<div class="listing__hero__text">
-							<h2>${memId}'s Following List</h2>
-							<div class="listing__hero__widget"></div>
+							<h2 style="text-align: center">${memId}'s Following Maps</h2>
+							
 							<p>
-								<span class="icon_pin_alt"></span> 1012 Vesper Dr. Columbus,
-								Georgia, United States
+								
 							</p>
 						</div>
 					</div>
@@ -35,8 +43,8 @@
 				<div class="col-lg-4">
 					<div class="listing__hero__btns">
 
-						<a href="#" class="primary-btn"><i class="fa fa-bookmark"></i>
-							Subscribed</a>
+						
+							
 					</div>
 				</div>
 			</div>
