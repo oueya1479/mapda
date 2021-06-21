@@ -86,8 +86,12 @@ public class Member implements UserDetails{
 		} else if (this.memGrade.equals("Enterprise")) {
 			auth.add(new SimpleGrantedAuthority("ROLE_USER"));
 			auth.add(new SimpleGrantedAuthority("ROLE_ENTERPRISE"));
-		} else {
+		} else if(this.memGrade.equals("Influencer")) {
 			auth.add(new SimpleGrantedAuthority("ROLE_USER"));
+			auth.add(new SimpleGrantedAuthority("ROLE_INFLUENCER"));
+		} else if(this.memGrade.equals("Admin")) {
+			auth.add(new SimpleGrantedAuthority("ROLE_USER"));
+			auth.add(new SimpleGrantedAuthority("ROLE_INFLUENCER"));
 			auth.add(new SimpleGrantedAuthority("ROLE_ENTERPRISE"));
 			auth.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
 		}

@@ -38,6 +38,11 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter{
 	protected void configure(HttpSecurity http) throws Exception {
 		http
 		.authorizeRequests()
+		.antMatchers("/admin/**").hasRole("ADMIN")
+		.antMatchers("/enterprise/writeForm").hasRole("ENTERPRISE")
+		.antMatchers("/enterprise/**").permitAll()
+		.antMatchers("/map/**").authenticated()
+		.antMatchers("/place/**").authenticated()
 		.antMatchers("/**").permitAll()
 		.and()
 		.csrf().disable() //csrf 중지
