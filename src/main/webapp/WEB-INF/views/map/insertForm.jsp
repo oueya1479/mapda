@@ -11,9 +11,12 @@
 <sec:authentication property="principal.memNo" var="mno" />
 
 <style>
-#submitbt {
-	
-}
+@import url('https://fonts.googleapis.com/css?family=Nanum+Myeongjo&display=swap');
+
+
+h2{font-family: 'Nanum Myeongjo', serif; font-weight: bold;}
+
+
 </style>
 </head>
 
@@ -21,12 +24,14 @@
 
 	<!-- Breadcrumb Begin -->
 	<div class="breadcrumb-area set-bg"
-		data-setbg="${pageContext.request.contextPath}/img/breadcrumb/breadcrumb-normal.jpg">
+		data-setbg="${pageContext.request.contextPath}/img/map/ss.png">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12 text-center">
 					<div class="breadcrumb__text">
-						<h2>Make new Map!</h2>
+						<h2>
+						&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+						Make new Map!</h2>
 					</div>
 				</div>
 			</div>

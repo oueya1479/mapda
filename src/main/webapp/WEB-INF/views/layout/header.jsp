@@ -18,12 +18,20 @@
 </sec:authorize>
 <!-- Header Section Begin -->
 <header class="header header--normal">
+<style>
+@import url('https://fonts.googleapis.com/css?family=Nanum+Myeongjo&display=swap');
+
+
+a{font-family: 'Nanum Myeongjo', serif; font-weight: bold;}
+
+
+</style>
    <div class="container-fluid">
       <div class="row">
          <div class="col-lg-3 col-md-3">
             <div class="header__logo">
                <a href="${pageContext.request.contextPath}/main/index"><img
-                  src="/img/footer-logo.png" alt="" style="height: 50px;"></a>
+                  src="/img/map/mapda.png" alt="" style="height: 90px; width:90px;"></a>
             </div>
          </div>
          <div class="col-lg-9 col-md-9">
