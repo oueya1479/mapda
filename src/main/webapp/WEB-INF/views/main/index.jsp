@@ -400,7 +400,7 @@ h1, h2, h3, h4, h5, h6, p, a {
 
 
 	<!-- Feature Location Section Begin -->
-	<section class="feature-location spad">
+	<%-- <section class="feature-location spad">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12">
@@ -451,7 +451,7 @@ h1, h2, h3, h4, h5, h6, p, a {
 				</div>
 			</div>
 		</div>
-	</section>
+	</section> --%>
 	<!-- Feature Location Section End -->
 
 	<!-- Testimonial Section Begin -->
@@ -461,81 +461,135 @@ h1, h2, h3, h4, h5, h6, p, a {
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="section-title">
-						<h2>Trusted By Over 5000+ User</h2>
-						<p>What people say about us</p>
+						<h2>Mapda : Stories of our lives</h2>
+						<p>How people live their own lives</p>
 					</div>
 					<div class="testimonial__slider owl-carousel">
 						<div class="testimonial__item" data-hash="review-1">
-							<p>" We worked with Consultant. Our representative was very
-								knowledgeable and helpful. Consultant made a number of
-								suggestions to help improve our systems. Consultant explained
-								how things work and why it would help."</p>
+							<p>" We show our own value to users. Each map we create shares awesome stories and
+							delightful memories. Developers made a number of
+								suggestions to help improve our systems.<p> 
+								Seven of us are always ready to 
+						    communicate with user's opinions."</p>
 							<div class="testimonial__item__author">
-								<a href="#review-3"><img
-									src="${pageContext.request.contextPath}/img/testimonial/author-3.png"
-									alt=""></a> <a href="#review-1" class="active"><img
-									src="${pageContext.request.contextPath}/img/testimonial/author-1.png"
-									alt=""></a> <a href="#review-2"><img
-									src="${pageContext.request.contextPath}/img/testimonial/author-2.png"
+								<a href="#review-3" class="active"><img
+									src="${pageContext.request.contextPath}/img/testimonial/mapda1.png"
+									alt=""></a> 
+									<a href="#review-1" class="active"><img
+									src="${pageContext.request.contextPath}/img/testimonial/mapda5.png"
+									alt="" onmouseover=""></a>
+									<a href="#review-2" class="active"><img
+									src="${pageContext.request.contextPath}/img/testimonial/mapda4.png"
+									alt="">
+									</a>
+									<a href="#review-3" class="active"><img
+									src="${pageContext.request.contextPath}/img/testimonial/mapda3.png"
 									alt=""></a>
+									<a href="#review-1" class="active"><img
+									src="${pageContext.request.contextPath}/img/testimonial/mapda2.png"
+									alt=""></a>
+									<a href="#review-2" class="active"><img
+									src="${pageContext.request.contextPath}/img/testimonial/mapda6.png"
+									alt="">
+									</a>
+									<a href="#review-2" class="active"><img
+									src="${pageContext.request.contextPath}/img/testimonial/mapda7.png"
+									alt="">
+									</a>
 							</div>
 							<div class="testimonial__item__author__text">
-								<h5>John Smith -</h5>
+								<h5>1등 1조 -</h5>
 								<div class="testimonial__item__author__rating">
 									<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
 										class="fa fa-star"></i> <i class="fa fa-star"></i> <i
 										class="fa fa-star"></i>
 								</div>
 							</div>
-							<span>CEO Colorlib</span>
+							<span>Mapda</span>
 						</div>
 						<div class="testimonial__item" data-hash="review-2">
-							<p>" We worked with Consultant. Our representative was very
-								knowledgeable and helpful. Consultant made a number of
-								suggestions to help improve our systems. Consultant explained
-								how things work and why it would help."</p>
+							<p> 우리는 우리의 가치를 공유합니다. <br>
+							우리가 공유하는 모든 지도에는 멋진 이야기와
+							값진 추억들이 담겨있습니다. 
+							
+							<p> 
+								" 맵다 : 맵多 - 우리의 지향점 "</p>
 							<div class="testimonial__item__author">
-								<a href="#review-1"><img
-									src="${pageContext.request.contextPath}/img/testimonial/author-1.png"
-									alt=""></a> <a href="#review-2" class="active"><img
-									src="${pageContext.request.contextPath}/img/testimonial/author-2.png"
-									alt=""></a> <a href="#review-3"><img
-									src="${pageContext.request.contextPath}/img/testimonial/author-3.png"
+								<a href="#review-3" class="active"><img
+									src="${pageContext.request.contextPath}/img/testimonial/mapda1.png"
+									alt=""></a> 
+									<a href="#review-1" class="active"><img
+									src="${pageContext.request.contextPath}/img/testimonial/mapda5.png"
+									alt="" onmouseover=""></a>
+									<a href="#review-2" class="active"><img
+									src="${pageContext.request.contextPath}/img/testimonial/mapda4.png"
+									alt="">
+									</a>
+									<a href="#review-3" class="active"><img
+									src="${pageContext.request.contextPath}/img/testimonial/mapda3.png"
 									alt=""></a>
+									<a href="#review-1" class="active"><img
+									src="${pageContext.request.contextPath}/img/testimonial/mapda2.png"
+									alt=""></a>
+									<a href="#review-2" class="active"><img
+									src="${pageContext.request.contextPath}/img/testimonial/mapda6.png"
+									alt="">
+									</a>
+									<a href="#review-2" class="active"><img
+									src="${pageContext.request.contextPath}/img/testimonial/mapda7.png"
+									alt="">
+									</a>
 							</div>
 							<div class="testimonial__item__author__text">
-								<h5>John Smith -</h5>
+								<h5>1등 1조 -</h5>
 								<div class="testimonial__item__author__rating">
 									<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
 										class="fa fa-star"></i> <i class="fa fa-star"></i> <i
 										class="fa fa-star"></i>
 								</div>
 							</div>
-							<span>CEO Colorlib</span>
+							<span>Mapda</span>
 						</div>
 						<div class="testimonial__item" data-hash="review-3">
-							<p>" We worked with Consultant. Our representative was very
-								knowledgeable and helpful. Consultant made a number of
-								suggestions to help improve our systems. Consultant explained
-								how things work and why it would help."</p>
+							<p>
+								바보는 방황을 하고, 현명한 사람은 여행을 한다.
+								<p>-Thomas Fuller
+							</p>
 							<div class="testimonial__item__author">
-								<a href="#review-2"><img
-									src="${pageContext.request.contextPath}/img/testimonial/author-2.png"
-									alt=""></a> <a href="#review-3" class="active"><img
-									src="${pageContext.request.contextPath}/img/testimonial/author-3.png"
-									alt=""></a> <a href="#review-1"><img
-									src="${pageContext.request.contextPath}/img/testimonial/author-1.png"
+								<a href="#review-3" class="active"><img
+									src="${pageContext.request.contextPath}/img/testimonial/mapda1.png"
+									alt=""></a> 
+									<a href="#review-1" class="active"><img
+									src="${pageContext.request.contextPath}/img/testimonial/mapda5.png"
+									alt="" onmouseover=""></a>
+									<a href="#review-2" class="active"><img
+									src="${pageContext.request.contextPath}/img/testimonial/mapda4.png"
+									alt="">
+									</a>
+									<a href="#review-3" class="active"><img
+									src="${pageContext.request.contextPath}/img/testimonial/mapda3.png"
 									alt=""></a>
+									<a href="#review-1" class="active"><img
+									src="${pageContext.request.contextPath}/img/testimonial/mapda2.png"
+									alt=""></a>
+									<a href="#review-2" class="active"><img
+									src="${pageContext.request.contextPath}/img/testimonial/mapda6.png"
+									alt="">
+									</a>
+									<a href="#review-2" class="active"><img
+									src="${pageContext.request.contextPath}/img/testimonial/mapda7.png"
+									alt="">
+									</a>
 							</div>
 							<div class="testimonial__item__author__text">
-								<h5>John Smith -</h5>
+								<h5>1등 1조 -</h5>
 								<div class="testimonial__item__author__rating">
 									<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
 										class="fa fa-star"></i> <i class="fa fa-star"></i> <i
 										class="fa fa-star"></i>
 								</div>
 							</div>
-							<span>CEO Colorlib</span>
+							<span>Mapda</span>
 						</div>
 					</div>
 				</div>

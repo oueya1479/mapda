@@ -69,7 +69,7 @@ a {
 							<li><a href="#">Coupon</a>
 								<ul class="dropdown">
 									<li><a href="/coupon/list">All Coupons</a></li>
-									<li><a href="/coupon/admin">Manage Coupons</a></li>
+								<!-- 	<li><a href="/coupon/admin">Manage Coupons</a></li> -->
 
 								</ul></li>
 							<li><a href="#">Event</a>
