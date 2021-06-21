@@ -115,6 +115,19 @@
                                     </ul>
                                 </li>
                             </ul>
+                            <div class="pcoded-navigation-label" data-i18n="nav.category.forms">쿠폰 관리</div>
+                            <ul class="pcoded-item pcoded-left-item">
+                                <li>
+                                    <a href="${pageContext.request.contextPath}/coupon/admin" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">쿠폰 조회</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+                              
+                            </ul>
+                            
+                            
                             <div class="pcoded-navigation-label" data-i18n="nav.category.other">문의 관리</div>
                             <ul class="pcoded-item pcoded-left-item">
                                 <li>

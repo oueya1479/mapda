@@ -42,6 +42,9 @@ public class MemberController {
 	@Autowired
 	private  MapService mapService;
 	
+	@Autowired
+	private PointService pointService;
+	
 	//새로 추가
 	@RequestMapping("/index")
 	public String index() {

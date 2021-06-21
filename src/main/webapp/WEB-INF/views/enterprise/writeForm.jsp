@@ -1,16 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="${pageContext.request.contextPath}/js/jquery-3.3.1.min.js"></script>
-<script type="text/javascript">
-	$(function() {
-		$()
-	});
-</script>
+ <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script>
 	function resize(obj) {
 		obj.style.height = "1px";
@@ -33,10 +32,24 @@
 							<form method="post"
 								action="${pageContext.request.contextPath}/enterprise/write"
 								enctype="multipart/form-data">
-
+								
+								<div class="nice-select">
+									<select  name="cgNo">
+										<c:forEach items="${categories}" var="c">
+											<option value="${c.cgNo}">${c.category}</option>
+										</c:forEach>
+									</select>
+								</div><br><br><br>
+								
 								<label for="exampleInputFile">파일 업로드</label>
 								<div class="col-lg-4" style="margin: 0; padding: 0">
 									<input type="file" id="exampleInputFile" name="files"
+										multiple="multiple" style="margin-top: 10px; padding-top: 10px">
+								</div>
+								
+								<label for="exampleInputFile">로고 업로드</label>
+								<div class="col-lg-4" style="margin: 0; padding: 0">
+									<input type="file" id="exampleInputFile" name="file"
 										multiple="multiple" style="margin-top: 10px; padding-top: 10px">
 								</div>
 

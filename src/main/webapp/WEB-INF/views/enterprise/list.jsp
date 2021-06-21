@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt"%>
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -16,7 +17,7 @@ a:hover {
   
 
     <!-- Breadcrumb Begin -->
-    <div class="breadcrumb-area set-bg" data-setbg="img/breadcrumb/breadcrumb-blog.jpg">
+    <div class="breadcrumb-area set-bg" data-setbg="${pageContext.request.contextPath}/img/breadcrumb/breadcrumb-blog.jpg">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
@@ -42,14 +43,17 @@ a:hover {
                     	<c:forEach items="${enterprisePostList.content}" var="ent">
 	                        <div class="col-lg-6 col-md-6">
 	                            <div class="blog__item">
-	                                <div class="blog__item__pic set-bg" data-setbg="${ent.epLogo}"></div>
+	                                <div class="blog__item__pic set-bg" data-setbg="/resources/${ent.epLogo}"></div>
 	                                <div class="blog__item__text">
 	                                    <ul class="blog__item__tags">
 	                                        <li>${ent.epTag}</li>
 	                                    </ul>
 	                                    <h5><a href="${pageContext.request.contextPath}/enterprise/post/${ent.epNo}">${ent.epTitle}</a></h5>
 	                                    <ul class="blog__item__widget">
-	                                        <li><i class="fa fa-clock-o"></i>${ent.epRegdate}</li>
+	                                        <li><i class="fa fa-clock-o"></i>
+	                                        <fmt:parseDate value="${ent.epRegdate}" pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime" type="both"/>        
+	                        	    		<fmt:formatDate value="${parsedDateTime}" pattern="yyyy.MM.dd"/>
+											</li>
 	                                        <li><a href="${pageContext.request.contextPath}/enterprise/profile/${ent.enterprise.member.memNo}"><i class="fa fa-user"></i> ${ent.enterprise.entName}</a></li>
 	                                    </ul>
 	                                </div>

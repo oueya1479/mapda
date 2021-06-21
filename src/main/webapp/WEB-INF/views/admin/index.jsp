@@ -147,8 +147,8 @@ $(function() {
                                                     <div class="card-block">
                                                         <div class="row align-items-center">
                                                             <div class="col-8">
-                                                                <h4 class="text-c-purple">$30200</h4>
-                                                                <h6 class="text-muted m-b-0">All Member</h6>
+                                                                <h4 class="text-c-purple">${memberCount }</h4>
+                                                                <h6 class="text-muted m-b-0">All member</h6>
                                                             </div>
                                                             <div class="col-4 text-right">
                                                                 <i class="fa fa-bar-chart f-28"></i>
@@ -158,7 +158,7 @@ $(function() {
                                                     <div class="card-footer bg-c-purple">
                                                         <div class="row align-items-center">
                                                             <div class="col-9">
-                                                                <p class="text-white m-b-0">All Post</p>
+                                                                <p class="text-white m-b-0">All member</p>
                                                             </div>
                                                             <div class="col-3 text-right">
                                                                 <i class="fa fa-line-chart text-white f-16"></i>
@@ -173,8 +173,8 @@ $(function() {
                                                     <div class="card-block">
                                                         <div class="row align-items-center">
                                                             <div class="col-8">
-                                                                <h4 class="text-c-green">290+</h4>
-                                                                <h6 class="text-muted m-b-0">Page Views</h6>
+                                                                <h4 class="text-c-green">${postCount}</h4>
+                                                                <h6 class="text-muted m-b-0">All post</h6>
                                                             </div>
                                                             <div class="col-4 text-right">
                                                                 <i class="fa fa-file-text-o f-28"></i>
@@ -184,7 +184,7 @@ $(function() {
                                                     <div class="card-footer bg-c-green">
                                                         <div class="row align-items-center">
                                                             <div class="col-9">
-                                                                <p class="text-white m-b-0">% change</p>
+                                                                <p class="text-white m-b-0">All post</p>
                                                             </div>
                                                             <div class="col-3 text-right">
                                                                 <i class="fa fa-line-chart text-white f-16"></i>
@@ -198,8 +198,8 @@ $(function() {
                                                     <div class="card-block">
                                                         <div class="row align-items-center">
                                                             <div class="col-8">
-                                                                <h4 class="text-c-red">145</h4>
-                                                                <h6 class="text-muted m-b-0">Task Completed</h6>
+                                                                <h4 class="text-c-red">${replyCount}</h4>
+                                                                <h6 class="text-muted m-b-0">All reply</h6>
                                                             </div>
                                                             <div class="col-4 text-right">
                                                                 <i class="fa fa-calendar-check-o f-28"></i>
@@ -209,7 +209,7 @@ $(function() {
                                                     <div class="card-footer bg-c-red">
                                                         <div class="row align-items-center">
                                                             <div class="col-9">
-                                                                <p class="text-white m-b-0">% change</p>
+                                                                <p class="text-white m-b-0">All reply</p>
                                                             </div>
                                                             <div class="col-3 text-right">
                                                                 <i class="fa fa-line-chart text-white f-16"></i>
@@ -218,31 +218,7 @@ $(function() {
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-xl-3 col-md-6">
-                                                <div class="card">
-                                                    <div class="card-block">
-                                                        <div class="row align-items-center">
-                                                            <div class="col-8">
-                                                                <h4 class="text-c-blue">500</h4>
-                                                                <h6 class="text-muted m-b-0">Downloads</h6>
-                                                            </div>
-                                                            <div class="col-4 text-right">
-                                                                <i class="fa fa-hand-o-down f-28"></i>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="card-footer bg-c-blue">
-                                                        <div class="row align-items-center">
-                                                            <div class="col-9">
-                                                                <p class="text-white m-b-0">% change</p>
-                                                            </div>
-                                                            <div class="col-3 text-right">
-                                                                <i class="fa fa-line-chart text-white f-16"></i>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            
                                             <!-- task, page, download counter  end -->
     
                                             <!--  sale analytics start -->

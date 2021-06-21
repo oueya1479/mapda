@@ -66,10 +66,13 @@ public class EnterprisePostController {
 	}
 	
 	@RequestMapping("/writeForm")
-	public void writeForm() {}
+	public void writeForm(Model model) {
+		List<EnterpriseCategory> categories = postService.getCategory();
+		model.addAttribute("categories", categories);
+	}
 	
 	@RequestMapping("/write")
-	public ModelAndView write(HttpSession session, EnterprisePost post, EnterprisePostImage image) throws IllegalStateException, IOException {
+	public ModelAndView write(HttpSession session, EnterprisePost post, EnterprisePostImage image, EnterpriseCategory category) throws IllegalStateException, IOException {
 		
 		Member mem = (Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		Long memNo = mem.getMemNo();
@@ -77,15 +80,13 @@ public class EnterprisePostController {
 		enterprise.setMemNo(memNo);
 		post.setEnterprise(enterprise);
 		
-		EnterpriseCategory category = new EnterpriseCategory();
-		category.setCgNo(1L);
 		Management management = new Management();
 		management.setMngNo(1L);
 		post.setCategory(category);
 		post.setManagement(management);
 		
 		ServletContext application = session.getServletContext();
-		String path = application.getRealPath("/WEB-INF/save");
+		String path = application.getRealPath("/resources");
 		List<MultipartFile> file = image.getFiles();
 		List<EnterprisePostImage> imageList = new ArrayList<EnterprisePostImage>();
 		
@@ -94,24 +95,44 @@ public class EnterprisePostController {
 				EnterprisePostImage test = new EnterprisePostImage();
 				test.setEnterprisePost(post);
 				String fileName = m.getOriginalFilename();
-				test.setImageSource(path + "/" + fileName);
+				test.setImageSource(fileName);
 				m.transferTo(new File(path+"/"+fileName));
 				imageList.add(test);
 			}
 		}
 		
+		MultipartFile f = post.getFile();
+		String fileName = f.getOriginalFilename();
+		post.setEpLogo(fileName);
+		f.transferTo(new File(path + "/" + fileName));
+		
 		postService.insertPostImage(imageList);
+		postService.insertPost(post);
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("redirect:/enterprise/list");
 		return mv;
 	}
 	
 	@RequestMapping("/post/{epNo}")
-	public String post(Model model, @PathVariable Long epNo) {
+	public String post(Model model, @PathVariable Long epNo, @RequestParam(defaultValue = "0") int nowpage) {
 		EnterprisePost post = postService.getPost(epNo);
+		Member member = (Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		List<EnterpriseReply> replyList = replyService.getReply(epNo);
+		Pageable pageable = PageRequest.of(nowpage, 10, Direction.DESC, "epNo");
+		Page<EnterprisePost> enterprisePostList = postService.selectAll(pageable);
+		List<EnterpriseCategory> categories = postService.getCategory();
 		model.addAttribute("post", post);
 		model.addAttribute("replyList", replyList);
+		model.addAttribute("enterprisePostList", enterprisePostList);
+		model.addAttribute("name", member.getMemName());
+		model.addAttribute("categories", categories);
 		return "enterprise/post";
+	}
+	
+	@RequestMapping("/addReply/{epNo}")
+	public String addReply(@PathVariable Long epNo, EnterpriseReply enterpriseReply) {
+		Member member = (Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		replyService.addReply(epNo, enterpriseReply, member);
+		return "redirect:/enterprise/post/" + epNo;
 	}
 }

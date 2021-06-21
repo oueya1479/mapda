@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -20,14 +22,7 @@
                         <div class="listing__hero__text">
                             <h2>${enterprise.entName}</h2>
                             <div class="listing__hero__widget">
-                                <div class="listing__hero__widget__rating">
-                                    <span class="icon_star"></span>
-                                    <span class="icon_star"></span>
-                                    <span class="icon_star"></span>
-                                    <span class="icon_star"></span>
-                                    <span class="icon_star-half_alt"></span>
-                                </div>
-                                <div>120 Review</div>
+                                <div>${fn:length(enterprise.enterprisePostList)} Review</div>
                             </div>
                             <p><span class="icon_pin_alt"></span> 1012 Vesper Dr. Columbus, Georgia, United States</p>
                         </div>
@@ -59,49 +54,22 @@
                               <c:forEach items="${enterprise.enterprisePostList}" var="post">
 	                            <div class="listing__details__comment__item">
 		                            <div style="float: left; margin-right: 25px">
-		                                <img src="${post.epLogo}" alt="" style="width: 150px; height: 150px;">
+		                                <img src="/resources/${post.epLogo}" alt="" style="height: 150px; object-fit: cover; max-width: 150px">
 		                            </div>
 	                                <div class="listing__details__comment__item__text">
-	                                    <div class="listing__details__comment__item__rating">
-	                                        <i class="fa fa-star"></i>
-	                                        <i class="fa fa-star"></i>
-	                                        <i class="fa fa-star"></i>
-	                                        <i class="fa fa-star"></i>
-	                                        <i class="fa fa-star"></i>
-	                                    </div>
-	                                    <span>${post.epRegdate}</span>
-	                                    <h5>${post.enterprise.entName}</h5>
+	                                    <span>
+	                                    	<fmt:parseDate value="${post.epRegdate}" pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime" type="both"/>        
+	                        	    		<fmt:formatDate value="${parsedDateTime}" pattern="yyyy.MM.dd"/>	
+										</span>
+	                                    <a href="${pageContext.request.contextPath}/enterprise/post/${post.epNo}"><h5>${post.epTitle}</h5></a>
 	                                    ${post.epContent}
 	                                    <p>
-	                                    <ul>
-	                                        <li><i class="fa fa-hand-o-right"></i> Like</li>
-	                                        <li><i class="fa fa-share-square-o"></i> Reply</li>
-	                                    </ul>
 	                                </div>
 	                            </div>
                             </c:forEach>
                         </div>
-                    </div>
-                    <div class="listing__details__gallery">
-                            <h4>Gallery</h4>
-                            <div class="listing__details__gallery__pic">
-                                <div class="listing__details__gallery__item">
-                                    <img class="listing__details__gallery__item__large"
-                                        src="img/listing/details/listing-details-1.jpg" alt="">
-                                    <span><i class="fa fa-camera"></i> 170 Image</span>
-                                </div>
-                                <div class="listing__details__gallery__slider owl-carousel">
-                                    <img data-imgbigurl="img/listing/details/listing-details-1.jpg"
-                                        src="img/listing/details/thumb-1.jpg" alt="">
-                                    <img data-imgbigurl="img/listing/details/listing-details-1.jpg"
-                                        src="img/listing/details/thumb-2.jpg" alt="">
-                                    <img data-imgbigurl="img/listing/details/listing-details-1.jpg"
-                                        src="img/listing/details/thumb-3.jpg" alt="">
-                                    <img data-imgbigurl="img/listing/details/listing-details-1.jpg"
-                                        src="img/listing/details/thumb-4.jpg" alt="">
-                                </div>
-                            </div>
-                        </div>
+                    </div><br><br>
+                    
                 </div>
                 <div class="col-lg-4">
                     <div class="listing__sidebar">
@@ -129,18 +97,6 @@
                                     <a href="#" class="google"><i class="fa fa-google"></i></a>
                                 </div>
                             </div>
-                        </div>
-                        <div class="listing__sidebar__working__hours">
-                            <h4>Working Hours</h4>
-                            <ul>
-                                <li>Monday <span>09:00 AM - 20:00 PM</span></li>
-                                <li>Tuesday <span>09:00 AM - 20:00 PM</span></li>
-                                <li>Wednesday <span>09:00 AM - 20:00 PM</span></li>
-                                <li>Thursday <span>09:00 AM - 20:00 PM</span></li>
-                                <li>Friday <span class="opening">Opening</span></li>
-                                <li>Saturday <span>09:00 AM - 20:00 PM</span></li>
-                                <li>Saturday <span class="closed">Closed</span></li>
-                            </ul>
                         </div>
                     </div>
                 </div>

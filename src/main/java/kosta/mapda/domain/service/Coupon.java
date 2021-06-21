@@ -12,6 +12,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Transient;
+
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
+import org.springframework.web.multipart.MultipartFile;
 
 import kosta.mapda.domain.enterprise.Enterprise;
 import kosta.mapda.domain.member.Member;
@@ -27,6 +32,9 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Coupon {
+	
+	@Transient
+	private MultipartFile file;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "cp_no_seq")
@@ -43,6 +51,7 @@ public class Coupon {
 	
 	@ManyToOne
 	@JoinColumn(name = "mem_no") //회원번호
+	@NotFound(action=NotFoundAction.IGNORE)
 	private Enterprise member;
 	
 	@ManyToOne

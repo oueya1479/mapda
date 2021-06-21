@@ -25,4 +25,7 @@ public interface PlacePhotoReviewRepository extends JpaRepository<PlacePhotoRevi
 
 	@Query("select count(p) from PlacePhotoReview p where pprRegdate between ?1 and ?2")
 	int getPhotoDateBetween(LocalDateTime startDatetime, LocalDateTime endDatetime);
+
+	@Query("select count(p) from PlacePhotoReview p where p.member.memNo = ?1 and p.pprPoint = 1 and p.pprRegdate between ?2 and ?3")
+	int getInfoBetween(Long memNo, LocalDateTime startDatetime, LocalDateTime endDatetime);
 }
