@@ -214,5 +214,15 @@ public class AdminServiceImpl implements AdminService {
 		placeRepository.save(place);
 	}
 
+	@Override
+	public Long getPostCount() {
+		return placeRepository.count() + enterprisePostRepository.count() + mapRepository.count();
+	}
+
+	@Override
+	public Long getReplyCount() {
+		return reviewRepository.count() + photoReviewRepository.count();
+	}
+
 }
 

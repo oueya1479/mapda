@@ -56,9 +56,14 @@ public class AdminController {
 	@RequestMapping("index")
 	public void index(Model model) {
 		Long memberCount = adminService.getMemberCount();
+		Long postCount = adminService.getPostCount();
+		Long replyCount = adminService.getReplyCount();
 		List<Integer> memberCountList = adminService.getMemberCountList();
 		List<Integer> postCountList = adminService.getPostCountList();
 		List<Integer> replyCountList = adminService.getReplyCountList();
+		model.addAttribute("memberCount", memberCount);
+		model.addAttribute("postCount", postCount);
+		model.addAttribute("replyCount", replyCount);
 		model.addAttribute("memberCountList", memberCountList);
 		model.addAttribute("postCountList", postCountList);
 		model.addAttribute("replyCountList", replyCountList);
