@@ -31,8 +31,6 @@ import lombok.Setter;
 @NoArgsConstructor       
 public class MyPoint{
 	
-	
-
 	@Id
 	private Long memNo;
 	

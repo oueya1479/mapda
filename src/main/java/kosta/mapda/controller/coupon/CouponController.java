@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -152,14 +153,15 @@ public class CouponController {
 		
 		MultipartFile file = coupon.getFile();
 		
+		ServletContext application = session.getServletContext();
+		String path = application.getRealPath("/resources");
+		
 		if(file.getSize()>0) {
 			
-			String path = session.getServletContext().getRealPath("/WEB-INF/static");
-			
 			String fileName = file.getOriginalFilename();
-			coupon.setCpImgpath(path+"/"+fileName);
-			
+			coupon.setCpImgpath(fileName);
 			file.transferTo(new File(path+"/"+fileName));
+			
 		} else {
 			Coupon dbCoupon = service.selectCoupon(coupon.getCpNo());
 			if(dbCoupon!=null) {
