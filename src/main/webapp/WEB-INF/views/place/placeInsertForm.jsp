@@ -342,46 +342,46 @@ h2{font-family: 'Nanum Myeongjo', serif; font-weight: bold;}
 							
 						<div id="allForms" style="margin-left: 130px">
 										<div style="display: none;">
-											<img src="${pageContext.request.contextPath}/resources/food1.png" style="width: 120px; height: 120px; background-color: black;">
+											<img src="${pageContext.request.contextPath}/resources/placeicon/food1.png" style="width: 120px; height: 120px; background-color: black;">
 										</div>
 										<div style="display: none;">
-											<img src="${pageContext.request.contextPath}/resources/travel1.png" style="width: 120px; height: 120px; background-color: black;">
+											<img src="${pageContext.request.contextPath}/resources/placeicon/travel1.png" style="width: 120px; height: 120px; background-color: black;">
 										</div>
 										<div style="display: none;">
-											<img src="${pageContext.request.contextPath}/resources/cafe1.png" style="width: 120px; height: 120px; background-color: black;">
+											<img src="${pageContext.request.contextPath}/resources/placeicon/cafe1.png" style="width: 120px; height: 120px; background-color: black;">
 										</div>
 										<div style="display: none;">
-											<img src="${pageContext.request.contextPath}/resources/healing1.png" style="width: 120px; height: 120px; background-color: black;">
+											<img src="${pageContext.request.contextPath}/resources/placeicon/healing1.png" style="width: 120px; height: 120px; background-color: black;">
 										</div>
 										<div style="display: none;">
-											<img src="${pageContext.request.contextPath}/resources/nature1.png" style="width: 120px; height: 120px; background-color: black;">
+											<img src="${pageContext.request.contextPath}/resources/placeicon/nature1.png" style="width: 120px; height: 120px; background-color: black;">
 										</div>
 										<div style="display: none;">
-											<img src="${pageContext.request.contextPath}/resources/activity1.png" style="width: 120px; height: 120px; background-color: black;">
+											<img src="${pageContext.request.contextPath}/resources/placeicon/activity1.png" style="width: 120px; height: 120px; background-color: black;">
 										</div>
 										<div style="display: none;">
-											<img src="${pageContext.request.contextPath}/resources/shopping1.png" style="width: 120px; height: 120px; background-color: black;">
+											<img src="${pageContext.request.contextPath}/resources/placeicon/shopping1.png" style="width: 120px; height: 120px; background-color: black;">
 										</div>
 										<div style="display: none;">
-											<img src="${pageContext.request.contextPath}/resources/culture1.png" style="width: 120px; height: 120px; background-color: black;">
+											<img src="${pageContext.request.contextPath}/resources/placeicon/culture1.png" style="width: 120px; height: 120px; background-color: black;">
 										</div>
 										<div style="display: none;">
-											<img src="${pageContext.request.contextPath}/resources/walking1.png" style="width: 120px; height: 120px; background-color: black;">
+											<img src="${pageContext.request.contextPath}/resources/placeicon/walking1.png" style="width: 120px; height: 120px; background-color: black;">
 										</div>
 										<div style="display: none;">
-											<img src="${pageContext.request.contextPath}/resources/night1.png" style="width: 120px; height: 120px; background-color: black;">
+											<img src="${pageContext.request.contextPath}/resources/placeicon/night1.png" style="width: 120px; height: 120px; background-color: black;">
 										</div>
 										<div style="display: none;">
-											<img src="${pageContext.request.contextPath}/resources/attraction1.png" style="width: 120px; height: 120px; background-color: black;">
+											<img src="${pageContext.request.contextPath}/resources/placeicon/attraction1.png" style="width: 120px; height: 120px; background-color: black;">
 										</div>
 										<div style="display: none;">
-											<img src="${pageContext.request.contextPath}/resources/pet1.png" style="width: 120px; height: 120px; background-color: black;">
+											<img src="${pageContext.request.contextPath}/resources/placeicon/pet1.png" style="width: 120px; height: 120px; background-color: black;">
 										</div>
 										<div style="display: none;">
-											<img src="${pageContext.request.contextPath}/resources/date1.png" style="width: 120px; height: 120px; background-color: black;">
+											<img src="${pageContext.request.contextPath}/resources/placeicon/date1.png" style="width: 120px; height: 120px; background-color: black;">
 										</div>
 										<div style="display: none;">
-											<img src="${pageContext.request.contextPath}/resources/drive1.png" style="width: 120px; height: 120px; background-color: black;">
+											<img src="${pageContext.request.contextPath}/resources/placeicon/drive1.png" style="width: 120px; height: 120px; background-color: black;">
 										</div>
 									</div>
 								</div>
