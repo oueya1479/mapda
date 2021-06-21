@@ -117,7 +117,20 @@ public class MapController {
 		Pageable pageable = PageRequest.of(nowPage, 9, Direction.DESC, "mapNo");
 		Page<Theme> mapList = mapService.selectAll(pageable);
 		
-		Member mem = (Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Member mem = new Member();
+		//System.out.println("1111MapController list mem = " + mem);
+		if (!SecurityContextHolder.getContext()	.getAuthentication()	.getPrincipal().equals("anonymousUser")) {
+		    Member member = (Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		    mem = member;
+		  //  System.out.println("22222MapController list mem = " + mem);
+		    
+	        } else {
+        	String memb = "anonymousUser";
+		}
+		
+		//System.out.println("3333MapController list mem = " + mem);
+		
+		//Member mem = (Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		Long memNo = mem.getMemNo();
 		
 		List<MapStorage> mapStorage = mapService.selectByMapNo(memNo);

@@ -59,8 +59,16 @@ public class PlaceController {
 		int starAvgPer=0;
 		
 		// hidden place 인지 확인
-		Member mem = (Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		System.out.println("mem.getMemPaystatus() = " + mem.getMemPaystatus());
+		Member mem = new Member();
+		if (!SecurityContextHolder.getContext()	.getAuthentication()	.getPrincipal().equals("anonymousUser")) {
+			    Member member = (Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			    mem = member;
+			    
+		        } else {
+	        	String memb = "anonymousUser";
+			}
+		//Member mem = (Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		//System.out.println("mem.getMemPaystatus() = " + mem.getMemPaystatus());
 		
 		Place place = placeService.selectBy(placeNo);
 		System.out.println("place.getPlaceHidden() = " +place.getPlaceHidden());
