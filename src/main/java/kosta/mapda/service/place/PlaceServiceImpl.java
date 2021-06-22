@@ -3,6 +3,7 @@ package kosta.mapda.service.place;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.UnaryOperator;
 
 import javax.transaction.Transactional;
 
@@ -85,6 +86,7 @@ public class PlaceServiceImpl implements PlaceService {
 	public Place update(Place place, List<PlacePhoto> ppList) {
 		Place dbPlace = placeRepository.findById(place.getPlaceNo()).orElse(null);
 		List<PlacePhoto> dbPlacePhoto = placePhotoRepository.selectPlacePhotoByPlaceNo(place.getPlaceNo());
+	
 		if(dbPlace == null || dbPlacePhoto ==null) {
 			throw new RuntimeException("플레이스 번호가 일치하지 않아 수정될 수 없습니다.");
 		}
@@ -94,11 +96,27 @@ public class PlaceServiceImpl implements PlaceService {
 		dbPlace.setPlaceTag(place.getPlaceTag());
 		dbPlace.setPlaceIconName(place.getPlaceIconName());
 		dbPlace.setPlaceIconPath(place.getPlaceIconPath());
-	
-		//dbPlacePhoto   ppList
+		
+		
 		for(PlacePhoto db : dbPlacePhoto) {
-			//db.setPpPath();
+			for(PlacePhoto pp : ppList) {
+				db.setPpPath(pp.getPpPath());
+			}
 		}
+		
+//		//dbPlacePhoto   ppList
+//		List<String> ppPath = new ArrayList<String>();
+//		List<String> dbPath = new ArrayList<String>();
+//		for(PlacePhoto pp : ppList) {
+//			ppPath.add(pp.getPpPath());	//1 2 3 4 5
+//		}//수정할 때 들어온것
+//
+//		for(PlacePhoto db : dbPlacePhoto) {
+//			dbPath.add(db.getPpPath());
+//		}// db에 저장되어 있던것
+//		
+//		dbPath =ppPath;
+		
 		
 		return dbPlace;
 	}
