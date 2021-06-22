@@ -17,7 +17,13 @@
 </sec:authorize>
 
 
-<style>
+<<style>
+@import url('https://fonts.googleapis.com/css?family=Nanum+Myeongjo&display=swap');
+
+
+h2{font-family: 'Nanum Myeongjo', serif; font-weight: bold;}
+
+
 </style>
 <script src="${pageContext.request.contextPath}/js/jquery-3.3.1.min.js"></script>
 <script>
@@ -43,7 +49,7 @@
 										.attr("action",
 												"${pageContext.request.contextPath}/map/deleteMap");
 										$("#requestForm").submit();
-									}else{
+									}else if(data=='fail'){
 										alert("비밀번호가 일치하지 않습니다. 다시 확인해주세요")
 									}
 								},	
@@ -93,7 +99,7 @@
 
 
 	<div class="breadcrumb-area set-bg"
-		data-setbg="/img/breadcrumb/breadcrumb-blog.jpg">
+		data-setbg="${pageContext.request.contextPath}/resources/oopsdf.png">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12 text-center">

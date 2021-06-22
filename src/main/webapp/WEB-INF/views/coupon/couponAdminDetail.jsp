@@ -65,7 +65,7 @@
                 <div class="col-lg-8">
                     <div class="blog__item__large">
                         <div class="blog__item__pic set-bg">
-                           <img src="${coupon.cpImgpath}">
+                           <img src="${pageContext.request.contextPath}/resources/${coupon.cpImgpath}" style="height: 300px; width: 300px;">
                         </div>
                         <div class="blog__item__text" style = "text-align : center;">
                             <ul class="blog__item__tags">
@@ -82,7 +82,7 @@
                            
                            		<h5><i class="fa fa-sliders" aria-hidden="true"></i>&nbsp;<span>카테고리 : </span> ${coupon.couponCategory.cpcaName}</h5>  
                             
-                                <hr><button type="button" class="site-btn" style="background-color:#3498DB" id="updateBtn" onclick="update(${coupon.cpNo});">수정</button>
+                                <%-- <hr><button type="button" class="site-btn" style="background-color:#3498DB" id="updateBtn" onclick="update(${coupon.cpNo});">수정</button> --%>
                                 	&nbsp;&nbsp;&nbsp;
                         </div>
                     </div>

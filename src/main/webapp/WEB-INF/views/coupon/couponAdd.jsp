@@ -63,6 +63,7 @@
 		formData.append('cpPlace',cpPlaceVal);
 		formData.append('cpPrice',cpPriceVal);
 		formData.append('cpDetail',cpDetailVal);
+		formData.append('cpUsingDetail',cpUsingDetailVal);
 		
 		$.ajax({
 			type: "post",
@@ -150,14 +151,17 @@
 		                 			<li>
 	                 				사용처  : &nbsp;&nbsp;&nbsp;<input type="text" name="cpPlace"/> <br>
 	                 				</li>
-	                 				<input type="hidden" name="cpImgpath" value="1"/>
+	                 				
 		                 			<li>
 	                 				쿠폰가격 : <input type="text" name="cpPrice"/> <br>
 	                 				</li>
 		                 			<li>
 	                 				쿠폰설명 : <input type="text" name="cpDetail"/>
 	                 				</li>
-	                 				<input type="hidden" name="cpUsingdetail" value=""/>
+	                 				<li>
+	                 				쿠폰사용 유의사항 : <input type="text" name="cpUsingDetail"/>
+	                 				</li>
+	                 
 	                 				<input type="hidden" name="cpState" value="1"/>
 	                 				<input type="hidden" name="cpImg" value=""/>
 	                 				<li>

@@ -1,5 +1,6 @@
 package kosta.mapda.domain.service;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -10,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
@@ -26,19 +28,19 @@ import lombok.Setter;
 @Setter
 @Getter
 @AllArgsConstructor
-@NoArgsConstructor
-public class MyPoint {
-
+@NoArgsConstructor       
+public class MyPoint{
+	
 	@Id
-	@GeneratedValue
-	@Column(name = "mem_no")
 	private Long memNo;
-	private int myPoint;
 	
+	@MapsId
 	@OneToOne
-	@JoinColumn(name = "mem_no")
+	@JoinColumn(name="mem_no")
 	private Member member;
-	
+
+	private int myPoint;
+		
 	@OneToMany(mappedBy = "myPoint")
 	private List<MyPoint> myPointList;
 	

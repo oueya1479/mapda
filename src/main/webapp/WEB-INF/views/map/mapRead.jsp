@@ -161,7 +161,7 @@ $(function(){
 			<c:forEach items="${nohidden}" var="nohidden" 	varStatus="state">
 				<div class="listing__item">
 					<div class="listing__item__pic set-bg"
-						data-setbg="${pageContext.request.contextPath}/img/map/${nohidden.ppList[0].ppPath}">
+						data-setbg="${pageContext.request.contextPath}/resources/${nohidden.ppList[0].ppPath}">
 						<%-- <img
 								src="${pageContext.request.contextPath}/img/placeicon/${place.placeIconPath}" style="width:60px; height:60px"
 								alt=""> --%>

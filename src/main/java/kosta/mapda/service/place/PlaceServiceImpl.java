@@ -1,6 +1,7 @@
 package kosta.mapda.service.place;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -93,27 +94,33 @@ public class PlaceServiceImpl implements PlaceService {
 		dbPlace.setPlaceTag(place.getPlaceTag());
 		dbPlace.setPlaceIconName(place.getPlaceIconName());
 		dbPlace.setPlaceIconPath(place.getPlaceIconPath());
-		
+	
 		//dbPlacePhoto   ppList
-		for(PlacePhoto pp : dbPlacePhoto) {
-			for(PlacePhoto ppp : ppList) {
-				pp.setPpPath(ppp.getPpPath());
-			}
+		for(PlacePhoto db : dbPlacePhoto) {
+			//db.setPpPath();
 		}
+		
 		return dbPlace;
 	}
 
 	@Override
 	public void delete(Long placeNo) {
 		Place dbPlace = placeRepository.findById(placeNo).orElse(null);
-		LocalDateTime validRegdate = dbPlace.getPlaceRegdate().plusDays(30);
-		LocalDateTime nowRegdate = dbPlace.getPlaceRegdate();
-		if(nowRegdate.isBefore(validRegdate)) {
-			throw new RuntimeException("30일 이후에 삭제가 가능합니다.");
-		}else {
+		
+		LocalDateTime regDate = dbPlace.getPlaceRegdate();//등록일
+		System.out.println(regDate);
+		LocalDateTime plusRegDate = regDate.plusDays(30);	//등록일에 30일 이후 (삭제 가능 날짜)
+		System.out.println(plusRegDate);
+		LocalDateTime nowDate = LocalDateTime.now();	//삭제 당일
+		
+		System.out.println(nowDate.isBefore(plusRegDate));
+		
+		if(plusRegDate.isBefore(nowDate)) {
 			placeRepository.deleteById(placeNo);
+		}else {
+			throw new RuntimeException("30일 이후에 삭제가 가능합니다.");
 		}
-		placeRepository.deleteById(placeNo);
+		
 	}
 
 	@Override
