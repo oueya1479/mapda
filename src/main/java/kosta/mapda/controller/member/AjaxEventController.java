@@ -58,14 +58,15 @@ public class AjaxEventController {
 	 * 이벤트 참여 1회 제한
 	 */
 	@RequestMapping("event/isDuplicate")
-	public void isDuplicate(Long evNo) throws Exception {
+	public int isDuplicate(Long evNo) throws Exception {
 		Event event = eventRepository.findById(evNo).orElse(null);
 		Member member = (Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		Long memNo = member.getMemNo();
 		for(int i = 0; i < event.getPostList().size();i++) {
 			if (event.getPostList().get(i).getMember().getMemNo().equals(memNo)) {
-				throw new Exception("이미 참여했습니다. ");
+				return 0;
 			}
 		}
+		return 1;
 	}
 }

@@ -1,9 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<style>
+@import url('https://fonts.googleapis.com/css?family=Nanum+Myeongjo&display=swap');
+
+
+h2{font-family: 'Nanum Myeongjo', serif; font-weight: bold;}
+
+</style>
+
 <script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery-3.3.1.min.js">  </script>
 <script type="text/javascript">
 $(function(){
@@ -13,11 +22,17 @@ $(function(){
 	            url: '${pageContext.request.contextPath}/event/isDuplicate',
 	            dataType:'text',
 	            data: {"evNo" : evNo},
-	            success:function(){
-	            	location.href='${pageContext.request.contextPath}/event/posting/'+evNo;
+	            success:function(data){
+	            	if(data == 1) {
+		            	location.href='${pageContext.request.contextPath}/event/posting/'+evNo;
+	            	} else if(data == 0){
+	            		alert("이미 참여하셨습니다.");
+	            	} else {
+		            	location.href='${pageContext.request.contextPath}/event/posting/'+evNo;
+	            	}
 	            },
 	            error: function(err) {
-	            	alert("이미 참여하셨습니다.");
+	            	
 	            }
 	        })
 	});
@@ -124,18 +139,23 @@ $(function(){
 									</h3>
 									<div class="mb-3">
 										<span class="text-black-opacity-05"><small>By
-												Mike Smith <span class="sep">/</span> ${event.evStartDate} ~ ${event.evEndDate}<span
-												class="sep">/</span><br>등록일 : ${event.evRegdate}
+												Mike Smith <span class="sep">/</span> 
+												
+												<fmt:parseDate value="${event.evStartDate} " pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime" type="both"/>        
+	                        	    			<fmt:formatDate value="${parsedDateTime}" pattern="yyyy.MM.dd"/>
+												~ 
+												<fmt:parseDate value="${event.evEndDate} " pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime" type="both"/>        
+	                        	    			<fmt:formatDate value="${parsedDateTime}" pattern="yyyy.MM.dd"/>
+												
+												<span
+												class="sep">/</span><br>등록일 : 
+												
+												<fmt:parseDate value="${event.evRegdate}" pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime" type="both"/>        
+	                        	    			<fmt:formatDate value="${parsedDateTime}" pattern="yyyy.MM.dd"/>
+												
 										</small></span>
 									</div>
-									<%-- <c:choose>
-									<c:when test="${event.evStatus eq '1'}">  --%>
-									<button  id ="participate" value="${event.evNo}" type="submit" style="border-color: #bbbbff; color: #4444ff">참여하기</button>
-									<%-- </c:when>
-									<c:otherwise>
-										<button  id ="participate" disabled="disabled" value="${event.evNo}" type="submit" style="border-color: #bbbbff; color: #4444ff">참여불가</button>
-									</c:otherwise>
-									</c:choose> --%>
+									<button  class="btn btn-default" id ="participate" value="${event.evNo}" type="submit" style="border-color: #bbbbff; color: #4444ff">참여하기</button>
 								</div>
 							</div>
 						</c:forEach>
@@ -151,6 +171,10 @@ $(function(){
 					<div class="col-md-12 text-center">
 						<h2 class="font-weight-bold text-black">최근 당첨자</h2>
 					</div>
+					<br>
+					<br>
+					<br>
+					
 				</div>
 				<div class="nonloop-block-13 owl-carousel">
 
@@ -161,7 +185,7 @@ $(function(){
 								alt="Image" class="w-50 mx-auto img-fluid rounded-circle">
 						</div>
 						<div class="">
-							<h3 class="font-weight-light h5">스미스</h3>
+							<h3 class="font-weight-light h5">스미숙</h3>
 							<p>(베스트포토) 경복궁에 다녀왔어요~ 미국에는 이런 문화를 찾아볼 수 없는데 너무 좋은여행하고갑니다.</p>
 						</div>
 					</div>
@@ -197,7 +221,7 @@ $(function(){
 								alt="Image" class="w-50 mx-auto img-fluid rounded-circle">
 						</div>
 						<div class="">
-							<h3 class="font-weight-light h5">Steven Ericson</h3>
+							<h3 class="font-weight-light h5">스티브 손</h3>
 							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
 								Et, iusto. Aliquam illo, cum sed ea? Ducimus quos, ea?</p>
 						</div>
@@ -232,7 +256,7 @@ $(function(){
 				</div>
 			</div>
 		</div>
-
+<!-- 
 		<div class="site-blocks-cover overlay inner-page-cover"
 			style="background-image: url(images/hero_bg_1.jpg);" data-aos="fade"
 			data-stellar-background-ratio="0.5">
@@ -297,7 +321,7 @@ $(function(){
 					<div class="col-md-12">
 						<p>
 							<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-							Copyright &copy;
+						<!-- 	Copyright &copy;
 							<script data-cfasync="false"
 								src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
 							<script>

@@ -13,7 +13,7 @@ h2{font-family: 'Nanum Myeongjo', serif; font-weight: bold;}
 
 
 </style>
-
+<link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 <link
 	href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
@@ -401,10 +401,10 @@ h2{font-family: 'Nanum Myeongjo', serif; font-weight: bold;}
 						</div>
 						<div style="margin : 20px">${eventPost.evpContent }</div>
 						<!--/ cardbox-item -->
-						<div class="cardbox-base">
+						<div class="cardbox-base" style="margin: 20px">
 						<c:choose>
 								<c:when test="${requestScope.curLike eq '0'}">
-									<a class="icon_btn" id="like-button"><i class="lnr lnr lnr-heart">like</i></a>
+									<a class="icon_btn" id="like-button"><i class="lnr lnr lnr-heart"></i></a>
 									<span id="like-total">${eventPost.evpLikes}</span>
 								</c:when>
 								<c:otherwise>

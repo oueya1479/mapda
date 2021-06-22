@@ -180,7 +180,7 @@ h2{font-family: 'Nanum Myeongjo', serif; font-weight: bold;}
 										<div class="mu-pricing-single">
 
 											<div class="mu-pricing-single-head"><br>
-												<h4>Q. 일반회원과 무엇이 다른가요?</h4>
+												<h4>Q. 일반회원 무엇이 다른가요?</h4>
 												<br><br>
 												
 												<!--  

@@ -43,6 +43,8 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter{
 		.antMatchers("/enterprise/**").permitAll()
 		.antMatchers("/map/**").authenticated()
 		.antMatchers("/place/**").authenticated()
+		.antMatchers("/event/list").permitAll()
+		.antMatchers("/event/**").authenticated()
 		.antMatchers("/**").permitAll()
 		.and()
 		.csrf().disable() //csrf 중지

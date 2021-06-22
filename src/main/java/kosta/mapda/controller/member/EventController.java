@@ -4,6 +4,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -59,19 +62,21 @@ public class EventController {
 	 *  이벤트 글 등록하기 
 	 * */
 		@RequestMapping("/insertPosting/{evNo}")
-		public String insert(EventPost eventPost, @PathVariable Long evNo, Long evpNo, Model model)throws IOException {
+		public String insert(HttpSession session, EventPost eventPost, @PathVariable Long evNo, Long evpNo, Model model)throws IOException {
 			
 			Member mem = (Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 			Event event = eventService.getEvent(evNo);
 			
 			eventPost.setEvent(event);
 			eventPost.setMember(mem);
+			ServletContext application = session.getServletContext();
+			String path = application.getRealPath("/resources");
 			
 			MultipartFile file = eventPost.getFile();
 			if(file.getSize() > 0 ) {
 				String fileName = file.getOriginalFilename();
 				eventPost.setEvpImg(fileName);
-			    file.transferTo(new File(SAVE_PATH + "/" + fileName));
+			    file.transferTo(new File(path + "/" + fileName));
 			}
 			//Event dbEvent = new Event(file, null, event.getEvTitle(), event.getEvContent(), event.getEvStartDate(), event.getEvEndDate(), null, 0, null, null);
 			String content = eventPost.getEvpContent().replace("<","&lt;");
