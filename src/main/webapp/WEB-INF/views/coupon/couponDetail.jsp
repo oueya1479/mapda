@@ -74,7 +74,7 @@
                 <div class="col-lg-8">
                     <div class="blog__item__large">
                         <div class="blog__item__pic set-bg">
-                           <img src="${coupon.cpImgpath}" style="width: 300px; height: 300px;">
+                           <img src="${pageContext.request.contextPath}/resources/${coupon.cpImgpath}" style="width: 300px; height: 300px;">
                         </div>
                         <div class="blog__item__text" style = "text-align : center;">
                             <ul class="blog__item__tags">

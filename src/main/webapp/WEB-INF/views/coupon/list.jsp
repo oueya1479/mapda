@@ -98,7 +98,7 @@
 	                        <div class="col-lg-6 col-md-6">
 	                            <div class="blog__item" style="width: 300px; height: 400px; ">
 	                                <div class="blog__item__pic set-bg">
-	                                	<img src="${coup.cpImgpath}" alt="" style="width: 200px; height: 200px;">
+	                                	<img src="${pageContext.request.contextPath}/resources/${coup.cpImgpath}" alt="" style="width: 200px; height: 200px;">
 	                                </div>
 	                               
 	                                
