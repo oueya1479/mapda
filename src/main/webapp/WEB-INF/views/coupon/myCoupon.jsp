@@ -124,7 +124,7 @@ $(document).mouseup(function (e){
 	                            <div class="blog__item" style="width: 300px; height: 400px; text-align: center;">
 	                                <div class="blog__item__pic set-bg" name="pop_bt">
 	                              
-	                                	<img src="${myCoup.coupon.cpImgpath}" alt="" style="width: 200px; height: 200px;">
+	                                	<img src="${pageContext.request.contextPath}/resources/${myCoup.coupon.cpImgpath}" alt="" style="width: 200px; height: 200px;">
 	                                </div>
 	                                
 	                                <div name="pop" style="display:none;">
