@@ -1,5 +1,6 @@
 package kosta.mapda.service.young;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -85,21 +86,26 @@ public class MapServiceImpl implements MapService {
 	 */
 	@Override
 	public void deleteMap(Long mapNo) {
-		Theme themeMap = maprepository.findById(mapNo).orElse(null);
-		if(themeMap==null) {
-			throw new RuntimeException("지도 삭제 오류. 다시 시도해주세요");
-		}
-		maprepository.deleteById(mapNo);
 //		Theme themeMap = maprepository.findById(mapNo).orElse(null);
-//		LocalDateTime validRegdate = themeMap.getMapRegdate();//등록일
-//		LocalDateTime nowRegdate = themeMap.getMapRegdate();//현재날짜
-//		//현재날짜 - 등록일이 < 30 이면 삭제 불가
-//		if(validRegdate.minusDays(30).isAfter(nowRegdate)) {
-//			throw new RuntimeException("30일 이후에 삭제가 가능합니다.");
-//		}else {
-//			maprepository.deleteById(mapNo);
+//		if(themeMap==null) {
+//			throw new RuntimeException("지도 삭제 오류. 다시 시도해주세요");
 //		}
 //		maprepository.deleteById(mapNo);
+		Theme themeMap = maprepository.findById(mapNo).orElse(null);
+		LocalDateTime validRegdate = themeMap.getMapRegdate();//등록일
+		LocalDateTime nowRegdate = themeMap.getMapRegdate();//현재날짜
+		
+		LocalDateTime plus = validRegdate.plusDays(30);//등록일 + 30
+		
+		//현재날짜 - 등록일이 < 30 이면 삭제 불가
+		if(plus.isBefore(nowRegdate)) {
+			maprepository.deleteById(mapNo);
+			
+		}else {
+			throw new RuntimeException("30일 이후에 삭제가 가능합니다.");
+		}
+		
+		//maprepository.deleteById(mapNo);
 	}
 	/**
 	 * 멤버 정보 받아오기 위한 메소드
