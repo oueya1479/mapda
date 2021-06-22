@@ -186,7 +186,7 @@
                             <ul style="font-size: 25px;">
                                 <li><a href="/coupon/list">전체</a></li>
                                 <c:forEach items="${requestScope.categoryList}" var="cate">
-                                <li><a href="/coupon/list/?cetegory=${cate.cpcaNo}">${cate.cpcaName}<span></span></a></li>
+                                <li><a href="/coupon/list/?category=${cate.cpcaNo}">${cate.cpcaName}<span></span></a></li>
                                 </c:forEach>
                                 
                             </ul>

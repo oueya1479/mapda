@@ -49,6 +49,7 @@ public class CouponServiceImpl implements CouponService {
 	@Override
 	public Page<Coupon> selectAll(Pageable pageable, String couponName, Long category) {
 		Page<Coupon> couponResult;
+		System.out.println("와우 " + category);
 		if(couponName.isEmpty()==true && category==null) {
 			couponResult = couponRepository.findAll(pageable);
 		}else if(couponName.isEmpty()!=true && category==null){
